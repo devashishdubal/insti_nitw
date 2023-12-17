@@ -6,7 +6,27 @@ const Topbar = () => {
   const [buttonSelect, setButtonSelect] = useState(0);
   // button select 1: for student, 2: clubs, 3 : food, 0: nothing (default value)
 
+  const buttonGroup = document.querySelectorAll(".buttonGroup a");
 
+  const handleClick = (event) => {
+    const btn = event.target;
+    btn.classList.add('selected');
+
+    console.log(btn.className);
+    if (btn.className == 'student selected') {
+      setButtonSelect(1);
+    } else if (btn.className == 'club selected') {
+      setButtonSelect(2);
+    } else if (btn.className == 'food selected') {
+      setButtonSelect(3);
+    }
+
+    buttonGroup.forEach(btn => {
+      btn.addEventListener('click', handleClick);
+    });
+
+
+/*
   useEffect(() => {
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
 
@@ -27,6 +47,7 @@ const Topbar = () => {
 
       if (currentButton) {
         currentButton.classList.remove('selected');
+        setButtonSelect(0);
       }
 
       setCurrentButton(btn);
@@ -42,7 +63,7 @@ const Topbar = () => {
       });
     };
   }, [currentButton, buttonSelect]);
-
+*/
   return (
     <div className="navBar">
       <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />

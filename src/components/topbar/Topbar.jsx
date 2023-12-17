@@ -1,55 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import "./topbar.css"; 
 
-const Topbar = () => {
-  const [currentButton, setCurrentButton] = useState(null);
-  const [buttonSelect, setButtonSelect] = useState(0);
+const Topbar = ({buttonSelect,clickFunction,currentButton}) => {
+  /*const [currentButton, setCurrentButton] = useState(null);*/
+  
   // button select 1: for student, 2: clubs, 3 : food, 0: nothing (default value)
 
+  
+  const buttonGroup = document.querySelectorAll(".buttonGroup a");
+  /*
+  buttonGroup.forEach(btn => {
+    btn.addEventListener('click', handleClick);
+  });
+  */
 
+  
+
+
+  
   useEffect(() => {
+    
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
+    
+    console.log(buttonSelect);
 
-    const handleClick = (event) => {
-      const btn = event.target;
-      btn.classList.add('selected');
-
-      console.log(btn.className);
-      if (btn.className == 'student selected') {
-        setButtonSelect(1);
-      } else if (btn.className == 'club selected') {
-        setButtonSelect(2);
-      } else if (btn.className == 'food selected') {
-        setButtonSelect(3);
-      }
-
-      console.log(buttonSelect);
-
-      if (currentButton) {
-        currentButton.classList.remove('selected');
-      }
-
-      setCurrentButton(btn);
-    };
-
-    buttonGroup.forEach(btn => {
-      btn.addEventListener('click', handleClick);
-    });
 
     return () => {
       buttonGroup.forEach(btn => {
-        btn.removeEventListener('click', handleClick);
+        btn.removeEventListener('click', clickFunction);
       });
     };
   }, [currentButton, buttonSelect]);
+  
 
   return (
     <div className="navBar">
       <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />
       <div className="buttonGroup">
-        <a className="student">Student</a>
-        <a className="club">Clubs</a>
-        <a className="food">Food</a>
+        <a className="student" onClick={clickFunction}>Student</a>
+        <a className="club" onClick={clickFunction}>Clubs</a>
+        <a className="food" onClick={clickFunction}>Food</a>
       </div>
       <div className="signUp">
         <button className="login">Login</button>

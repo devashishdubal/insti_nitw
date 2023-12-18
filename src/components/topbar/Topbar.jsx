@@ -4,16 +4,6 @@ import "./topbar.css";
 const Topbar = ({buttonSelect,clickFunction,currentButton}) => {
   /*const [currentButton, setCurrentButton] = useState(null);*/
   const buttonGroup = document.querySelectorAll(".buttonGroup a");
-  useEffect(() => {
-    const buttonGroup = document.querySelectorAll(".buttonGroup a");
-    console.log(buttonSelect);
-
-    return () => {
-      buttonGroup.forEach(btn => {
-        btn.removeEventListener('click', clickFunction);
-      });
-    };
-  }, [currentButton, buttonSelect]);
 
   return (
     <div className="navBar">

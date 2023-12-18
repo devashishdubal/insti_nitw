@@ -6,7 +6,7 @@ const Topbar = ({buttonSelect,clickFunction,currentButton}) => {
     <div className="navBar">
       <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />
       <div className="buttonGroup">
-        <a className="student" onClick={clickFunction}>Student</a>
+        <a className="student selected" onClick={clickFunction}>Student</a>
         <a className="club" onClick={clickFunction}>Clubs</a>
         <a className="food" onClick={clickFunction}>Food</a>
       </div>

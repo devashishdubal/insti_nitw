@@ -9,8 +9,14 @@ import "./home.css"
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);
   const [currentButton, setCurrentButton] = useState(null);
+
   
   const handleClick = (event) => {
+    
+    const buttonGroup = document.querySelectorAll(".buttonGroup a");
+    buttonGroup.forEach(btn => {
+      btn.classList.remove('selected');
+    });
     const btn = event.target;
     btn.classList.add('selected');
 
@@ -24,10 +30,11 @@ export default function Home() {
     }
 
     
-
+    /*
     if (currentButton) {
       currentButton.classList.remove('selected');
     }
+    */
 
     setCurrentButton(btn);
   };

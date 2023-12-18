@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 
 .navBar {
-    width: 100%;
+    width: 80%;
     border-radius: 60px;
     display: flex;
     flex-direction: row;

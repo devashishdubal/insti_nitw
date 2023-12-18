@@ -4,7 +4,10 @@ import "./sidebar.css"
 const StudentSidebar = () => {
     return (
         <div className="sidebar">
-            <h1>Student</h1>
+            <button>Feed</button>
+            <button>Calendar</button>
+            <button>Forum</button>
+            <button>Academic</button>
         </div>
     );
 }

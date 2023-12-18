@@ -4,7 +4,10 @@ import "./sidebar.css"
 const ClubsSidebar = () => {
     return (
         <div className="sidebar">
-            <h1>Clubs</h1>
+            <button>All NITW Clubs</button>
+            <button>CSES</button>
+            <button>Recent events</button>
+            <button>Upcoming events</button>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import FoodSidebar from "../components/sidebar/food_sidebar"
 import StudentSidebar from "../components/sidebar/student_sidebar"
 import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 
-import "./home.css"
+import "./Home.css"
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);

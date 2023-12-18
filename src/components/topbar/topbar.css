@@ -59,12 +59,12 @@
     color: white;
     border-radius: 25px;
     background-color: #4886A2;
+    box-shadow: 5px 5px 5px #6ba1b0;
 }
 
 .signUp > button:hover {
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 5px 5px 5px #6ba1b0;
     transform: scale(1.05);
     transition: 0.2s;
 }

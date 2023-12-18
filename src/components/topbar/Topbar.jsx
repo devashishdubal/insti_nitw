@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 import "./topbar.css"; 
 
 const Topbar = ({buttonSelect,clickFunction,currentButton}) => {
-  /*const [currentButton, setCurrentButton] = useState(null);*/
-  const buttonGroup = document.querySelectorAll(".buttonGroup a");
-
   return (
     <div className="navBar">
       <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />

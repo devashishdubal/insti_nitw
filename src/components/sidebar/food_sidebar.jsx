@@ -3,7 +3,8 @@ import "./sidebar.css"
 const FoodSidebar = () => {
     return (
         <div className="sidebar">
-            <h1>Food</h1>
+            <button>Places to Eat</button>
+            <button>Mess</button>
         </div>
     );
 }

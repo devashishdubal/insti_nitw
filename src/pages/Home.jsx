@@ -51,9 +51,7 @@ export default function Home() {
   return (
     <>
     <div className="full_app">
-      <div className="top">
-        <Topbar buttonSelect={buttonSelect} clickFunction={handleClick} currentButton={currentButton}/>
-      </div>
+      <Topbar buttonSelect={buttonSelect} clickFunction={handleClick} currentButton={currentButton}/>
       <div className="main">
         <div className="side">
           

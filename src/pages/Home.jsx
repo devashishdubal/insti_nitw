@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import FoodSidebar from "../components/sidebar/food_sidebar"
 import StudentSidebar from "../components/sidebar/student_sidebar"
 import ClubsSidebar from "../components/sidebar/clubs_sidebar"
+import Menu from "../components/food/mess/menu";
 
 import "./Home.css"
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);
   const [sidebarButtonSelect, setSidebarButtonSelect] = useState(null);
+  const [centerContent, setCenterContent] = useState(null);
 
   
   const handleClick = (event) => {
@@ -39,11 +41,16 @@ export default function Home() {
 
     // setCurrentButton(btn);
   };
-
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
+    if (buttonName == 'mess') {
+      setCenterContent(<Menu/>)
+    } else {
+      setCenterContent(null)
+    }
   }
   let sidebar;
+
   if (buttonSelect === 1){
     sidebar = <StudentSidebar onButtonClick={handleButtonClick} />
   }
@@ -55,7 +62,7 @@ export default function Home() {
   }
   return (
     <>
-      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={<h1>{sidebarButtonSelect ? `${sidebarButtonSelect}` : `this is the details of that particular part`}</h1>} />
+      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={sidebarButtonSelect ? centerContent : "this is the details of that particular part"} />
     </>
   )
 }

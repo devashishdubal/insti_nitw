@@ -5,6 +5,16 @@ const Menu = () => {
         <div className="mess_menu">
             <div className="mess_name">
                 <p className="mess_heading"><b>IFC-A</b></p>
+                <select id="mess_day" name="mess_day">
+                       <option value="mon">Monday</option>
+                       <option value="tue">Tuesday</option>
+                       <option value="wed">Wednesday</option>
+                       <option value="thu">Thursday</option>
+                       <option value="fri">Friday</option>
+                       <option value="sat">Saturday</option>
+                       <option value="sun">Sunday</option>    
+                    </select>
+                    
                 <table class="menu">
                     <tr>
                         <th>Breakfast</th>
@@ -20,6 +30,15 @@ const Menu = () => {
             </div>
             <div className="mess_name">
                 <p className="mess_heading"><b>IFC-B</b></p>
+                <select id="mess_day" name="mess_day">
+                       <option value="mon">Monday</option>
+                       <option value="tue">Tuesday</option>
+                       <option value="wed">Wednesday</option>
+                       <option value="thu">Thursday</option>
+                       <option value="fri">Friday</option>
+                       <option value="sat">Saturday</option>
+                       <option value="sun">Sunday</option>    
+                    </select>
                 <table class="menu">
                     <tr>
                         <th>Breakfast</th>
@@ -35,6 +54,15 @@ const Menu = () => {
             </div>
             <div className="mess_name">
                 <p className="mess_heading"><b>IFC-C</b></p>
+                <select id="mess_day" name="mess_day">
+                       <option value="mon">Monday</option>
+                       <option value="tue">Tuesday</option>
+                       <option value="wed">Wednesday</option>
+                       <option value="thu">Thursday</option>
+                       <option value="fri">Friday</option>
+                       <option value="sat">Saturday</option>
+                       <option value="sun">Sunday</option>    
+                    </select>
                 <table class="menu">
                     <tr>
                         <th>Breakfast</th>
@@ -50,6 +78,15 @@ const Menu = () => {
             </div>
             <div className="mess_name">
                 <p className="mess_heading"><b>LH</b>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <select id="mess_day" name="mess_day">
+                       <option value="mon">Monday</option>
+                       <option value="tue">Tuesday</option>
+                       <option value="wed">Wednesday</option>
+                       <option value="thu">Thursday</option>
+                       <option value="fri">Friday</option>
+                       <option value="sat">Saturday</option>
+                       <option value="sun">Sunday</option>    
+                    </select>
                 <table class="menu">
                     <tr>
                         <th>Breakfast</th>

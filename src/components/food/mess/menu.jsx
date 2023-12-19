@@ -4,19 +4,19 @@ import jsonData from './menuData.json' // Import your JSON data
 
 
 function Menu() {
-
     const today = new Date();
     const dayOfWeek = today.getDay(); // Returns a number from 0 (Sunday) to 6 (Saturday)
 
     // You might want to convert it to a string for better readability
     const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    let currentDay = daysOfWeek[dayOfWeek];
+    const [currentDay, setCurrentDay] = useState(daysOfWeek[dayOfWeek]);
 
-    console.log(currentDay)
+    //console.log(currentDay)
 
     const changeDay = (e) => {
         if (e.target.id == "mon") {
-            currentDay = "mon";
+            //currentDay = "mon";
+            setCurrentDay("mon")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Mon["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Mon["IFC-B"].breakfast
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Mon["IFC-C"].breakfast
@@ -33,7 +33,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Mon["LH"].dinner;
             //e.target.style.backgroundColor = "darkgreen";
         } else if (e.target.id == "tue" ) {
-            currentDay = "tue"
+            setCurrentDay("tue")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Tue["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Tue["IFC-B"].breakfast
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Tue["IFC-C"].breakfast
@@ -49,7 +49,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Tue["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Tue["LH"].dinner;
         } else if (e.target.id == "wed") {
-            currentDay = "wed"
+            setCurrentDay("wed")
             // Change the day to Wednesday (replace "Tue" with "Wed")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Wed["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Wed["IFC-B"].breakfast;
@@ -68,7 +68,7 @@ function Menu() {
 
         } else if (e.target.id == "thu") {
             // Thursday
-            currentDay = "thu"
+            setCurrentDay("thu")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Thu["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Thu["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Thu["IFC-C"].breakfast;
@@ -86,7 +86,7 @@ function Menu() {
 
         } else if (e.target.id == "fri") {
             // Friday
-            currentDay = "fri"
+            setCurrentDay("fri")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Fri["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Fri["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Fri["IFC-C"].breakfast;
@@ -104,7 +104,7 @@ function Menu() {
 
         } else if (e.target.id == "sat") {
             // Saturday
-            currentDay = "sat"
+            setCurrentDay("sat")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sat["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Sat["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Sat["IFC-C"].breakfast;
@@ -122,7 +122,7 @@ function Menu() {
 
         } else if (e.target.id == "sun") {
             // Sunday
-            currentDay = "sun"
+            setCurrentDay("sun")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sun["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Sun["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Sun["IFC-C"].breakfast;
@@ -291,7 +291,6 @@ function Menu() {
 
       ///////////////////
     return (
-        
         <div className="mess_menu">
             <div className="days">
                 <button id="mon" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("mon") }}>Mon</button>

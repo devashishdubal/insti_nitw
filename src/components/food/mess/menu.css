@@ -20,8 +20,34 @@ table {
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 5px;
-    padding-bottom: 75px;
+}
 
+.days {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 8px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.days button {
+    margin-left: auto;
+    background-color: green;
+    padding: 5px 10px;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.days button:hover {
+    background-color: rgb(1, 185, 1);
+
+}
+
+.info {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .mess_heading {

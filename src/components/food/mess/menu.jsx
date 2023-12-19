@@ -1,5 +1,5 @@
 import "./menu.css"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jsonData from './menuData.json' // Import your JSON data
 
 
@@ -9,17 +9,14 @@ function Menu() {
     const dayOfWeek = today.getDay(); // Returns a number from 0 (Sunday) to 6 (Saturday)
 
     // You might want to convert it to a string for better readability
-    const daysOfWeek = [ "mon", "tue", "wed", "thu", "fri", "sat" , "sun"];
-    const currentDay = daysOfWeek[dayOfWeek];
+    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    let currentDay = daysOfWeek[dayOfWeek];
 
-
-    // istg im not writing that day shit again
-    // tell
-
+    console.log(currentDay)
 
     const changeDay = (e) => {
-        if (e.target.id == "mon"  ) {
-            console.log("Mon"); 
+        if (e.target.id == "mon") {
+            currentDay = "mon";
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Mon["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Mon["IFC-B"].breakfast
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Mon["IFC-C"].breakfast
@@ -36,8 +33,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Mon["LH"].dinner;
             //e.target.style.backgroundColor = "darkgreen";
         } else if (e.target.id == "tue" ) {
-            console.log("Tue");
-
+            currentDay = "tue"
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Tue["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Tue["IFC-B"].breakfast
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Tue["IFC-C"].breakfast
@@ -53,7 +49,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Tue["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Tue["LH"].dinner;
         } else if (e.target.id == "wed") {
-            console.log("Wed");
+            currentDay = "wed"
             // Change the day to Wednesday (replace "Tue" with "Wed")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Wed["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Wed["IFC-B"].breakfast;
@@ -71,9 +67,8 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Wed["LH"].dinner;
 
         } else if (e.target.id == "thu") {
-            console.log("Thu");
-
             // Thursday
+            currentDay = "thu"
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Thu["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Thu["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Thu["IFC-C"].breakfast;
@@ -90,9 +85,8 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Thu["LH"].dinner;
 
         } else if (e.target.id == "fri") {
-            console.log("Fri");
-
             // Friday
+            currentDay = "fri"
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Fri["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Fri["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Fri["IFC-C"].breakfast;
@@ -109,9 +103,8 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Fri["LH"].dinner;
 
         } else if (e.target.id == "sat") {
-            console.log("Sat");
-
             // Saturday
+            currentDay = "sat"
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sat["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Sat["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Sat["IFC-C"].breakfast;
@@ -128,9 +121,8 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Sat["LH"].dinner;
 
         } else if (e.target.id == "sun") {
-            console.log("Sun");
-
             // Sunday
+            currentDay = "sun"
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sun["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Sun["IFC-B"].breakfast;
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Sun["IFC-C"].breakfast;
@@ -145,15 +137,13 @@ function Menu() {
             document.getElementsByClassName("dinner")[1].innerHTML = jsonData.Sun["IFC-B"].dinner;
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Sun["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Sun["LH"].dinner;
-
         }
-
     };
 
     //////////////////////
 
     const defaultDay = () => {
-        if (currentDay == "mon"  ) {
+        if (currentDay == "mon") {
             console.log("Mon"); 
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Mon["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Mon["IFC-B"].breakfast
@@ -285,24 +275,32 @@ function Menu() {
 
     };
 
+    const getBackgroundColor = (day) => {
+        if (day == currentDay) {
+            return "orange"
+        } else {
+            return "green"
+        }
+    }
+
     ///////////////////
     
-    window.onload = function() {
+    useEffect(() => {
         defaultDay();
-      };
+    }, []);
 
       ///////////////////
     return (
         
         <div className="mess_menu">
             <div className="days">
-                <button id="mon" onClick={changeDay}>Mon</button>
-                <button id="tue" onClick={changeDay}>Tue</button>
-                <button id="wed" onClick={changeDay}>Wed</button>
-                <button id="thu" onClick={changeDay}>Thu</button>
-                <button id="fri" onClick={changeDay}>Fri</button>
-                <button id="sat" onClick={changeDay}>Sat</button>
-                <button id="sun" onClick={changeDay}>Sun</button>
+                <button id="mon" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("mon") }}>Mon</button>
+                <button id="tue" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("tue") }}>Tue</button>
+                <button id="wed" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("wed") }}>Wed</button>
+                <button id="thu" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("thu") }}>Thu</button>
+                <button id="fri" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("fri") }}>Fri</button>
+                <button id="sat" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("sat") }}>Sat</button>
+                <button id="sun" onClick={changeDay} style={{ backgroundColor: getBackgroundColor("sun") }}>Sun</button>
             </div>
             <div className="mess_name">
                 <div className="info">

@@ -1,0 +1,162 @@
+
+  {
+    "Mon": {
+      "IFC-A": {
+        "breakfast": "Menu for Monday - IFC-A Breakfast",
+        "lunch": "Menu for Monday - IFC-A Lunch",
+        "dinner": "Menu for Monday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Monday - IFC-B Breakfast",
+        "lunch": "Menu for Monday - IFC-B Lunch",
+        "dinner": "Menu for Monday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Monday - IFC-C Breakfast",
+        "lunch": "Menu for Monday - IFC-C Lunch",
+        "dinner": "Menu for Monday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Monday - LH Breakfast",
+        "lunch": "Menu for Monday - LH Lunch",
+        "dinner": "Menu for Monday - LH Dinner"
+      }
+    },
+    "Tue": {
+      "IFC-A": {
+        "breakfast": "Menu for Tuesday - IFC-A Breakfast",
+        "lunch": "Menu for Tuesday - IFC-A Lunch",
+        "dinner": "Menu for Tuesday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Tuesday - IFC-B Breakfast",
+        "lunch": "Menu for Tuesday - IFC-B Lunch",
+        "dinner": "Menu for Tuesday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Tuesday - IFC-C Breakfast",
+        "lunch": "Menu for Tuesday - IFC-C Lunch",
+        "dinner": "Menu for Tuesday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Tuesday - LH Breakfast",
+        "lunch": "Menu for Tuesday - LH Lunch",
+        "dinner": "Menu for Tuesday - LH Dinner"
+      }
+    },
+    "Wed": {
+      "IFC-A": {
+        "breakfast": "Menu for Wednesday - IFC-A Breakfast",
+        "lunch": "Menu for Wednesday - IFC-A Lunch",
+        "dinner": "Menu for Wednesday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Wednesday - IFC-B Breakfast",
+        "lunch": "Menu for Wednesday - IFC-B Lunch",
+        "dinner": "Menu for Wednesday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Wednesday - IFC-C Breakfast",
+        "lunch": "Menu for Wednesday - IFC-C Lunch",
+        "dinner": "Menu for Wednesday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Wednesday - LH Breakfast",
+        "lunch": "Menu for Wednesday - LH Lunch",
+        "dinner": "Menu for Wednesday - LH Dinner"
+      }
+    },
+    "Thu": {
+      "IFC-A": {
+        "breakfast": "Menu for Thursday - IFC-A Breakfast",
+        "lunch": "Menu for Thursday - IFC-A Lunch",
+        "dinner": "Menu for Thursday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Thursday - IFC-B Breakfast",
+        "lunch": "Menu for Thursday - IFC-B Lunch",
+        "dinner": "Menu for Thursday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Thursday - IFC-C Breakfast",
+        "lunch": "Menu for Thursday - IFC-C Lunch",
+        "dinner": "Menu for Thursday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Thursday - LH Breakfast",
+        "lunch": "Menu for Thursday - LH Lunch",
+        "dinner": "Menu for Thursday - LH Dinner"
+      }
+    },
+    "Fri": {
+      "IFC-A": {
+        "breakfast": "Menu for Friday - IFC-A Breakfast",
+        "lunch": "Menu for Friday - IFC-A Lunch",
+        "dinner": "Menu for Friday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Friday - IFC-B Breakfast",
+        "lunch": "Menu for Friday - IFC-B Lunch",
+        "dinner": "Menu for Friday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Friday - IFC-C Breakfast",
+        "lunch": "Menu for Friday - IFC-C Lunch",
+        "dinner": "Menu for Friday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Friday - LH Breakfast",
+        "lunch": "Menu for Friday - LH Lunch",
+        "dinner": "Menu for Friday - LH Dinner"
+      }
+    },
+    "Sat": {
+      "IFC-A": {
+        "breakfast": "Menu for Saturday - IFC-A Breakfast",
+        "lunch": "Menu for Saturday - IFC-A Lunch",
+        "dinner": "Menu for Saturday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Saturday - IFC-B Breakfast",
+        "lunch": "Menu for Saturday - IFC-B Lunch",
+        "dinner": "Menu for Saturday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Saturday - IFC-C Breakfast",
+        "lunch": "Menu for Saturday - IFC-C Lunch",
+        "dinner": "Menu for Saturday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Saturday - LH Breakfast",
+        "lunch": "Menu for Saturday - LH Lunch",
+        "dinner": "Menu for Saturday - LH Dinner"
+      }
+    },
+    "Sun": {
+      "IFC-A": {
+        "breakfast": "Menu for Sunday - IFC-A Breakfast",
+        "lunch": "Menu for Sunday - IFC-A Lunch",
+        "dinner": "Menu for Sunday - IFC-A Dinner"
+      },
+      "IFC-B": {
+        "breakfast": "Menu for Sunday - IFC-B Breakfast",
+        "lunch": "Menu for Sunday - IFC-B Lunch",
+        "dinner": "Menu for Sunday - IFC-B Dinner"
+      },
+      "IFC-C": {
+        "breakfast": "Menu for Sunday - IFC-C Breakfast",
+        "lunch": "Menu for Sunday - IFC-C Lunch",
+        "dinner": "Menu for Sunday - IFC-C Dinner"
+      },
+      "LH": {
+        "breakfast": "Menu for Sunday - LH Breakfast",
+        "lunch": "Menu for Sunday - LH Lunch",
+        "dinner": "Menu for Sunday - LH Dinner"
+      }
+    }
+  }
+  
+
+
+   
+  

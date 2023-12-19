@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "./sidebar.css";
-
+/*
 const StudentSidebar = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [showSpans, setShowSpans] = useState(false);
@@ -63,7 +63,14 @@ const StudentSidebar = () => {
                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 </svg>
                 {showSpans && <span>Academic</span>}
-            </button>
+            </button>*/
+const StudentSidebar = ({onButtonClick}) => {
+    return (
+        <div className="sidebar">
+            <button onClick={()=> onButtonClick("Feed")}>Feed</button>
+            <button onClick={()=> onButtonClick("Calendar")}>Calendar</button>
+            <button onClick={()=> onButtonClick("Forum")}>Forum</button>
+            <button onClick={()=> onButtonClick("Academic")}>Academic</button>
         </div>
     );
 }

@@ -1,4 +1,5 @@
-import Topbar from "../components/topbar/Topbar"
+import HomeLayout from "../layout/HomeLayout";
+// import Topbar from "../components/topbar/Topbar"
 import React, { useEffect, useState } from 'react';
 import FoodSidebar from "../components/sidebar/food_sidebar"
 import StudentSidebar from "../components/sidebar/student_sidebar"
@@ -8,7 +9,7 @@ import "./Home.css"
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);
-  const [currentButton, setCurrentButton] = useState(null);
+  const [sidebarButtonSelect, setSidebarButtonSelect] = useState(null);
 
   
   const handleClick = (event) => {
@@ -28,7 +29,7 @@ export default function Home() {
     } else if (btn.className === 'food selected') {
       setButtonSelect(3);
     }
-
+    setSidebarButtonSelect(null);
     
     /*
     if (currentButton) {
@@ -36,32 +37,25 @@ export default function Home() {
     }
     */
 
-    setCurrentButton(btn);
+    // setCurrentButton(btn);
   };
+
+  const handleButtonClick = (buttonName) => {
+    setSidebarButtonSelect(buttonName);
+  }
   let sidebar;
-  if (buttonSelect == 1){
-    sidebar = <StudentSidebar/>
+  if (buttonSelect === 1){
+    sidebar = <StudentSidebar onButtonClick={handleButtonClick} />
   }
-  else if (buttonSelect == 2){
-    sidebar = <ClubsSidebar/>
+  else if (buttonSelect === 2){
+    sidebar = <ClubsSidebar onButtonClick={handleButtonClick} />
   }
-  else if (buttonSelect == 3){
-    sidebar = <FoodSidebar/>
+  else if (buttonSelect === 3){
+    sidebar = <FoodSidebar onButtonClick={handleButtonClick} />
   }
   return (
     <>
-    <div className="full_app">
-      <Topbar buttonSelect={buttonSelect} clickFunction={handleClick} currentButton={currentButton}/>
-      <div className="main">
-        <div className="side">
-          
-          {sidebar}
-        </div>
-        <div className="center">
-          <h1>Main area</h1>
-        </div>
-      </div>
-    </div>
+      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={<h1>{sidebarButtonSelect ? `${sidebarButtonSelect}` : `this is the details of that particular part`}</h1>} />
     </>
   )
 }

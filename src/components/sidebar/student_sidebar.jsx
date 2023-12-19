@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./sidebar.css"
 
-const StudentSidebar = () => {
+const StudentSidebar = ({onButtonClick}) => {
     return (
         <div className="sidebar">
-            <button>Feed</button>
-            <button>Calendar</button>
-            <button>Forum</button>
-            <button>Academic</button>
+            <button onClick={()=> onButtonClick("Feed")}>Feed</button>
+            <button onClick={()=> onButtonClick("Calendar")}>Calendar</button>
+            <button onClick={()=> onButtonClick("Forum")}>Forum</button>
+            <button onClick={()=> onButtonClick("Academic")}>Academic</button>
         </div>
     );
 }

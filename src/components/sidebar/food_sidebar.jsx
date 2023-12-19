@@ -1,10 +1,10 @@
 import "./sidebar.css"
 
-const FoodSidebar = () => {
+const FoodSidebar = ({onButtonClick}) => {
     return (
         <div className="sidebar">
-            <button>Places to Eat</button>
-            <button>Mess</button>
+            <button onClick={()=> onButtonClick("places to eat")}>Places to Eat</button>
+            <button onClick={()=> onButtonClick("")}>Mess</button>
         </div>
     );
 }

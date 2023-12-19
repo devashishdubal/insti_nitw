@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import "./Topbar.css"; 
 
-const Topbar = ({buttonSelect,clickFunction,currentButton}) => {
+const Topbar = ({buttonSelect,clickFunction}) => {
   return (
     <div className="navBar">
       <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />

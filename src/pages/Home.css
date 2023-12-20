@@ -24,7 +24,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    gap: 8px;
+    gap: 12px;
 }
 
 .side {

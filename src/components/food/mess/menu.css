@@ -37,7 +37,7 @@ table {
     margin-left: auto;
     /*background-color: green;*/
     padding: 5px 10px;
-    color: white;
+    color: black;
     border: 0px;
     border-radius: 5px;
 }
@@ -56,8 +56,10 @@ table {
     white-space: nowrap;
 }
 
+/*#1f8abc*/
 th {
-    background-color: rgb(5, 193, 5);
+    /*background-color: rgb(5, 193, 5);*/
+    background-color: #1f8abc;
     color: white;
 }
 

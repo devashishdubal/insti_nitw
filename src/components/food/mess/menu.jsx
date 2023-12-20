@@ -277,9 +277,9 @@ function Menu() {
 
     const getBackgroundColor = (day) => {
         if (day == currentDay) {
-            return "orange"
+            return "#0a8ecb"
         } else {
-            return "green"
+            return "#1777a3"
         }
     }
 

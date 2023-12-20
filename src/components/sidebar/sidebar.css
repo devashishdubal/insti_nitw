@@ -1,43 +1,59 @@
-.sidebar{
-    padding: 4px 6px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    width: 25%;
+.sidebar {
+  width: max-content;
     display: flex;
-    justify-content: space-around;
-    height: 60%;
+    gap: 16px;
     flex-direction: column;
-    border-radius: 18px;
-    background-color: #72acbc95;
-}
-
-.sidebar:hover {
-    width: 60%;
-    transition: 0.6s;
-    transition-delay: 0.6s;
+    height: min-content;
 }
 
 svg {
     width: 35px;
+    height: 35px;
 }
 
 .sidebar button {
-    border: 2px solid black;
+    box-shadow: #5C99AF 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     font-family: 'ABeeZee', sans-serif;
     font-size: 18px;
-    padding: 6px;
-    height: 70px;
+    padding: 12px 10px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: min-content;
+    flex-direction: row;
     align-items: center;
     gap: 8px;
     background-color: rgba(255, 255, 255, 0);
-    border-radius: 50px;
+    border-radius: 15px;
+    border: 0px;
 }
 
 .sidebar button:hover {
+    box-shadow: #92C6CE 0px 5px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     font-weight: bold;
-    flex-direction: row;
+    border-radius: 22px;
+    transition: font-weight 0s, border-radius 0.4s;
     background-image: linear-gradient(to right bottom, #44829f, #5895ac, #6da8b9);
     cursor: pointer;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+span {
+  flex: 1;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px); 
+  }
+}
+  
+.arrow {
+  cursor: pointer;
+  animation: shake 1s infinite; 
+  transition: transform 0.3s ease-in-out;
 }

@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    padding: 20px 30px;
+    padding: 20px 20px;
 }
 
 .full_app {
@@ -16,26 +16,24 @@ body {
     align-items: center;
 }
 
-.top {
-    width: 80%;
-    flex: 1;
-}
-
 .main {
-    width: 80%;
-    flex: 2;
+    padding: 0px 60px;
+    align-self: stretch;
+    flex: 1;
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     flex-direction: row;
-    gap: 10px;
+    gap: 8px;
 }
 
 .side {
-    flex: 1;
-    height: 100vh;
-    /*background-color: red;*/
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0;
 }
 
 .center {
-    flex: 3;
-    /*background-color: green;*/
+    flex: 1;
 }

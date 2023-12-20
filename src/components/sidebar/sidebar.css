@@ -6,7 +6,7 @@
     height: min-content;
 }
 
-svg {
+.sidebar button svg {
     width: 35px;
     height: 35px;
 }

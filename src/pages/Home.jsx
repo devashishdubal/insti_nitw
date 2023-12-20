@@ -46,7 +46,7 @@ export default function Home() {
     if (buttonName == 'mess') {
       setCenterContent(<Menu/>)
     } else {
-      setCenterContent(null)
+      setCenterContent(<h1>{buttonName}</h1>)
     }
   }
   let sidebar;

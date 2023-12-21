@@ -21,9 +21,9 @@ const Questions = () => {
         <div>
             <div className='intro'>
                 <div className='intro_left'>
-                    {ask ? (<button onClick={changeContents}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M12 5l-7 7 7 7"/></svg></button>) 
+                    {ask ? (<button onClick={changeContents} id='back'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M12 5l-7 7 7 7"/></svg></button>) 
                     : (null)}
-                    {ask ? (<h3>Ask your question</h3>):(<h3>Welcome to NITW Forum</h3>)}
+                    {ask ? (<b><p className='intro_text'>Ask your question</p></b>):(<b><p className='welcome'>Welcome to NITW Forum</p></b>)}
                     {ask ? (null) :(
                     <select id='selectTag'>
                         <option value="0">Filter by tag:</option>

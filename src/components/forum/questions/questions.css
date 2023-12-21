@@ -14,11 +14,15 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.individual_question {
+    padding: 10px 0px;
+}
+
 .question_form {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    padding: 10px 10px;
+    width: 80%;
+    padding: 10px 65px;
     gap: 5px;
 }
 
@@ -49,20 +53,36 @@
     color: white;
     height: 30px;
     border: none;
+    width: 50%;
+}
+
+.intro_text {
+    font-size: 30px;
+    padding: 0px 60px;
+}
+
+.welcome {
+    font-size: 30px;
 }
 
 .intro_left {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
+    flex-direction: column;
+}
+
+#back {
+    width: 50px;
 }
 
 .intro_right button {
+    position: relative;
+    top:-10px;
     background-color: DodgerBlue;
     color: white;
     border: none;
-    height: 30px;
+    /*height: 60px;*/
+    padding: 15px 15px;
+    font-size: 20px;
 }
 
 .intro_left button {
@@ -82,12 +102,14 @@
     border-radius: 0px 10px 10px 0px;
     width: 80%;
     padding:0px 10px;
+    background-color: #067e992a;
 }
 
 .username {
     border: 2px solid grey;
     border-radius: 0px 2px 2px 0px;
     padding: 0px 5px;
+    background-color: #067e992a;
 }
 
 .tags {
@@ -103,8 +125,16 @@
     justify-content: space-between;
 }
 
+#selectTagAns {
+    background-color: DodgerBlue;
+    color: white;
+    height: 30px;
+    border: none;
+    width: 100%;
+}
+
 .individual_tag {
-    background-color: red;
+    background-color: rgb(17, 0, 255);
     color: white;
     padding: 0px 5px;
 }
@@ -112,6 +142,7 @@
 .likes {
     display: flex;
     flex-direction: row;
+    gap: 5px;
 }
 
 .like_button {
@@ -131,7 +162,7 @@
 
 .dislike_button {
     display: flex;
-    background-color: #1e688a;
+    background-color: #0c9ee2;
     color: white;
     border: none;
     align-items: center;

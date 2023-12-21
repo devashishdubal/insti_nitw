@@ -22,6 +22,10 @@
     gap: 5px;
 }
 
+.question_form input {
+    padding: 15px;
+}
+
 
 .question_form button {
     padding: 20px;
@@ -105,10 +109,19 @@
     padding: 0px 5px;
 }
 
+.likes {
+    display: flex;
+    flex-direction: row;
+}
+
 .like_button {
+    display: flex;
     background-color: #0c9ee2;
     color: white;
     border: none;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .like_button:hover {
@@ -117,9 +130,13 @@
 }
 
 .dislike_button {
+    display: flex;
     background-color: #1e688a;
     color: white;
     border: none;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .dislike_button:hover {

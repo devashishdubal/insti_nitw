@@ -88,6 +88,12 @@
       "title": "Wireless Communication Technologies",
       "description": "Interested in learning about the latest advancements in wireless communication. Any recommended resources?",
       "tags": ["ECE"]
+    },
+    {
+      "id":16,
+      "title": "Can you do backend without frontend",
+      "description": "I want to do end but not back and front. Please guide",
+      "tags": ["CSE", "BT"]
     }
   ]
   

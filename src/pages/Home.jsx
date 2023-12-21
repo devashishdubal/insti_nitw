@@ -10,40 +10,17 @@ import Places from "../components/food/places_to_eat/Places";
 import "./Home.css"
 
 export default function Home() {
-  const [buttonSelect, setButtonSelect] = useState(1);
-  const [sidebarButtonSelect, setSidebarButtonSelect] = useState(null);
-  const [centerContent, setCenterContent] = useState(null);
-  /*
-  useEffect(() => {
-    if (localStorage.getItem('buttonSelect') == null) {
-      console.log("Initial load")
-      setButtonSelect(1);
-      setSidebarButtonSelect(null);
-      setCenterContent(null);
+  const [buttonSelect, setButtonSelect] = useState(
+    isNaN(parseInt(localStorage.getItem('buttonSelect'))) ? 1 : parseInt(localStorage.getItem('buttonSelect')) 
+  );
+  const [sidebarButtonSelect, setSidebarButtonSelect] = useState(
+    localStorage.getItem('sidebarButtonSelect') || null
+  );
 
-      if (localStorage.getItem('buttonSelect') == 'mess') {
-        setCenterContent(<Menu/>)
-      } else if (localStorage.getItem('buttonSelect') == 'places to eat') {
-        setCenterContent(<Places/>)
-      } else {
-        setCenterContent(<h1>{localStorage.getItem('buttonSelect')}</h1>)
-      }
-
-    } else {
-      setButtonSelect(localStorage.getItem('buttonSelect'))
-      setSidebarButtonSelect(localStorage.getItem('sidebarButtonSelect'))
-      setCenterContent(localStorage.getItem('centerContent'))
-
-        if (localStorage.getItem('buttonSelect') == 'mess') {
-          setCenterContent(<Menu/>)
-        } else if (localStorage.getItem('buttonSelect') == 'places to eat') {
-          setCenterContent(<Places/>)
-        } else {
-          setCenterContent(<h1>{localStorage.getItem('buttonSelect')}</h1>)
-        }
-        }
-  }, [])
-  */
+  const [centerContent, setCenterContent] = useState(
+    null
+  );
+  
   const handleClick = (event) => {
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
     buttonGroup.forEach(btn => {
@@ -62,12 +39,6 @@ export default function Home() {
     }
     setSidebarButtonSelect(null);
     
-    /*
-    if (currentButton) {
-      currentButton.classList.remove('selected');
-    }
-    */
-
     // setCurrentButton(btn);
   };
 
@@ -77,7 +48,27 @@ export default function Home() {
       localStorage.setItem('centerContent', centerContent);
   }
 
-  //window.addEventListener('beforeunload', storeConfigData);
+  useEffect(() => {
+    //console.log(buttonSelect)
+    if (buttonSelect == 1) {
+      document.getElementsByClassName("student")[0].classList.add('selected')
+    } else if (buttonSelect == 2) {
+      document.getElementsByClassName("club")[0].classList.add('selected')
+    } else {
+      document.getElementsByClassName("food")[0].classList.add('selected')
+    }
+    
+    if (sidebarButtonSelect == 'mess') {
+      setCenterContent(<Menu/>)
+    } else if (sidebarButtonSelect == 'places to eat') {
+      setCenterContent(<Places/>)
+    } else {
+      setCenterContent(<h1>{sidebarButtonSelect}</h1>)
+    }
+    
+    
+    storeConfigData();
+  }, [buttonSelect, sidebarButtonSelect]);
 
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);

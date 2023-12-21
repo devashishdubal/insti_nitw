@@ -12,27 +12,47 @@ const Calendar = () => {
     ];
   
     const renderCalendar = () => {
-      const firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
-      const lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
-      const lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay();
-      const lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
-      let liTag = [];
-  
-      for (let i = firstDayofMonth; i > 0; i--) {
-        liTag.push(<li key={`inactive-${i}`} className="days-item inactive">{lastDateofLastMonth - i + 1}</li>);
-      }
-  
-      for (let i = 1; i <= lastDateofMonth; i++) {
-        const isToday = i === currDate.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "active" : "";
-        liTag.push(<li key={`active-${i}`} className={`days-item ${isToday}`}>{i}</li>);
-      }
-  
-      for (let i = lastDayofMonth; i < 6; i++) {
-        liTag.push(<li key={`inactive-last-${i}`} className="days-item inactive">{i - lastDayofMonth + 1}</li>);
-      }
-  
-      return liTag;
-    };
+        const firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
+        const lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
+        const lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay();
+        const lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
+        let liTag = [];
+      
+        // Render days from the previous month
+        for (let i = firstDayofMonth; i > 0; i--) {
+          liTag.push(
+            <li key={`inactive-prev-${i}`} className="days-item inactive">
+              {lastDateofLastMonth - i + 1}
+            </li>
+          );
+        }
+      
+        // Render days for the current month
+        for (let i = 1; i <= lastDateofMonth; i++) {
+          const isToday =
+            i === currDate.getDate() &&
+            currMonth === new Date().getMonth() &&
+            currYear === new Date().getFullYear()
+              ? "active"
+              : "";
+          liTag.push(
+            <li key={`active-${i}`} className={`days-item ${isToday}`}>
+              {i}
+            </li>
+          );
+        }
+      
+        // Render days from the next month
+        for (let i = lastDayofMonth + 1; i < 6; i++) {
+          liTag.push(
+            <li key={`inactive-next-${i}`} className="days-item inactive">
+              {i - lastDayofMonth}
+            </li>
+          );
+        }
+      
+        return liTag;
+      };
   
     useEffect(() => {
       renderCalendar();
@@ -46,7 +66,7 @@ const Calendar = () => {
         setCurrYear(currDate.getFullYear());
         setCurrMonth(currDate.getMonth());
       } else {
-        setCurrDate(new Date());
+        setCurrDate(new Date(currYear+1, 0, new Date().getDate()));
       }
     };
   

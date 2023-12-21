@@ -1,82 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import './Calendar.css';
 
 const Calendar = () => {
-    const [currDate, setCurrDate] = useState(new Date());
-    const [currYear, setCurrYear] = useState(currDate.getFullYear());
-    const [currMonth, setCurrMonth] = useState(currDate.getMonth());
-  
-    const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
-  
-    const renderCalendar = () => {
-        const firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
-        const lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
-        const lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay();
-        const lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
-        let liTag = [];
-      
-        // Render days from the previous month
-        for (let i = firstDayofMonth; i > 0; i--) {
-          liTag.push(
-            <li key={`inactive-prev-${i}`} className="days-item inactive">
-              {lastDateofLastMonth - i + 1}
-            </li>
-          );
+    const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
+    let date = new Date();
+    let currentYear = date.getFullYear();
+    let currentMonth = date.getMonth();
+    const dispMonthYear = useRef(null);
+    const dispDates = useRef(null);
+    const renderCalender = () => {
+        const lastDateofMonth = new Date(currentYear,currentMonth+1,0).getDate();
+        const lastDayofMonth = new Date(currentYear,currentMonth,lastDateofMonth).getDay();
+        const startDayofMonth = new Date(currentYear,currentMonth,1).getDay();
+        const lastDateofLastMonth = new Date(currentYear,currentMonth,0).getDate();
+        let liTag = "";
+
+        dispMonthYear.current.textContent = `${months[currentMonth]} ${currentYear}`;
+        for(let i = startDayofMonth;i>0;i--){
+          liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
         }
-      
-        // Render days for the current month
-        for (let i = 1; i <= lastDateofMonth; i++) {
-          const isToday =
-            i === currDate.getDate() &&
-            currMonth === new Date().getMonth() &&
-            currYear === new Date().getFullYear()
-              ? "active"
-              : "";
-          liTag.push(
-            <li key={`active-${i}`} className={`days-item ${isToday}`}>
-              {i}
-            </li>
-          );
+        for(let i = 1;i<=lastDateofMonth;i++){
+            let isToday = i === new Date().getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()
+                            ? "active":"";
+            liTag += `<li class="${isToday}">${i}</li>`;
         }
-      
-        // Render days from the next month
-        for (let i = lastDayofMonth + 1; i < 6; i++) {
-          liTag.push(
-            <li key={`inactive-next-${i}`} className="days-item inactive">
-              {i - lastDayofMonth}
-            </li>
-          );
+        for(let i = 1;i<=6-lastDayofMonth;i++){
+            liTag += `<li class="inactive">${i}</li>`;
         }
-      
-        return liTag;
-      };
-  
-    useEffect(() => {
-      renderCalendar();
-    }, [currMonth, currYear]);
-  
-    const handleIconClick = (direction) => {
-      setCurrMonth(direction === "prev" ? currMonth - 1 : currMonth + 1);
-  
-      if (currMonth < 0 || currMonth > 11) {
-        setCurrDate(new Date(currYear, currMonth, new Date().getDate()));
-        setCurrYear(currDate.getFullYear());
-        setCurrMonth(currDate.getMonth());
-      } else {
-        setCurrDate(new Date(currYear+1, 0, new Date().getDate()));
-      }
+        dispDates.current.innerHTML = liTag;
     };
+
+    const handleArrowClick = (id) => {
+      currentMonth = id === "prev"? currentMonth - 1:currentMonth+1;
+      if (currentMonth <0 || currentMonth > 11){
+          date = new Date(currentYear,currentMonth);
+          currentMonth = date.getMonth();
+          currentYear = date.getFullYear();
+      }
+      renderCalender();
+    };
+
+    useEffect(() =>{
+      renderCalender();
+    },[]);
+    
   
     return (
-      <div className="calendar-wrapper">
+      <div className="wrapper">
         <header>
-          <p className="current-date">{`${months[currMonth]} ${currYear}`}</p>
+          <p ref={dispMonthYear} className="current-date"></p>
           <div className="icons">
-            <span id="prev" className="material-symbols-rounded" onClick={() => handleIconClick("prev")}>chevron_left</span>
-            <span id="next" className="material-symbols-rounded" onClick={() => handleIconClick("next")}>chevron_right</span>
+            <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>l</span>
+            <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>r</span>
           </div>
         </header>
         <div className="calendar">
@@ -89,11 +64,7 @@ const Calendar = () => {
             <li>Fri</li>
             <li>Sat</li>
           </ul>
-          <ul className="days">
-            {renderCalendar().map((item, index) => (
-              <React.Fragment key={index}>{item}</React.Fragment>
-            ))}
-          </ul>
+          <ul ref={dispDates} className="days"></ul>
         </div>
       </div>
     );

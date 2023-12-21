@@ -7,6 +7,8 @@ import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
 
 import "./Home.css"
+// import Recenteventcard from "../components/recent-events/recenteventcard";
+import Recentevent from "../components/recent-events/Recentevent";
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);
@@ -45,7 +47,11 @@ export default function Home() {
     setSidebarButtonSelect(buttonName);
     if (buttonName == 'mess') {
       setCenterContent(<Menu/>)
-    } else {
+    } 
+    else if(buttonName === 'Recent events'){
+      // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
+      setCenterContent(<Recentevent />)
+    }else {
       setCenterContent(<h1>{buttonName}</h1>)
     }
   }

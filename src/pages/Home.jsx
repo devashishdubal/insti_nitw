@@ -13,10 +13,38 @@ export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(1);
   const [sidebarButtonSelect, setSidebarButtonSelect] = useState(null);
   const [centerContent, setCenterContent] = useState(null);
+  /*
+  useEffect(() => {
+    if (localStorage.getItem('buttonSelect') == null) {
+      console.log("Initial load")
+      setButtonSelect(1);
+      setSidebarButtonSelect(null);
+      setCenterContent(null);
 
-  
+      if (localStorage.getItem('buttonSelect') == 'mess') {
+        setCenterContent(<Menu/>)
+      } else if (localStorage.getItem('buttonSelect') == 'places to eat') {
+        setCenterContent(<Places/>)
+      } else {
+        setCenterContent(<h1>{localStorage.getItem('buttonSelect')}</h1>)
+      }
+
+    } else {
+      setButtonSelect(localStorage.getItem('buttonSelect'))
+      setSidebarButtonSelect(localStorage.getItem('sidebarButtonSelect'))
+      setCenterContent(localStorage.getItem('centerContent'))
+
+        if (localStorage.getItem('buttonSelect') == 'mess') {
+          setCenterContent(<Menu/>)
+        } else if (localStorage.getItem('buttonSelect') == 'places to eat') {
+          setCenterContent(<Places/>)
+        } else {
+          setCenterContent(<h1>{localStorage.getItem('buttonSelect')}</h1>)
+        }
+        }
+  }, [])
+  */
   const handleClick = (event) => {
-    
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
     buttonGroup.forEach(btn => {
       btn.classList.remove('selected');
@@ -42,6 +70,15 @@ export default function Home() {
 
     // setCurrentButton(btn);
   };
+
+  const storeConfigData = () => {
+      localStorage.setItem('buttonSelect', buttonSelect);
+      localStorage.setItem('sidebarButtonSelect', sidebarButtonSelect);
+      localStorage.setItem('centerContent', centerContent);
+  }
+
+  //window.addEventListener('beforeunload', storeConfigData);
+
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
     if (buttonName == 'mess') {

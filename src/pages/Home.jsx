@@ -48,28 +48,6 @@ export default function Home() {
       localStorage.setItem('centerContent', centerContent);
   }
 
-  useEffect(() => {
-    //console.log(buttonSelect)
-    if (buttonSelect == 1) {
-      document.getElementsByClassName("student")[0].classList.add('selected')
-    } else if (buttonSelect == 2) {
-      document.getElementsByClassName("club")[0].classList.add('selected')
-    } else {
-      document.getElementsByClassName("food")[0].classList.add('selected')
-    }
-    
-    if (sidebarButtonSelect == 'mess') {
-      setCenterContent(<Menu/>)
-    } else if (sidebarButtonSelect == 'places to eat') {
-      setCenterContent(<Places/>)
-    } else {
-      setCenterContent(<h1>{sidebarButtonSelect}</h1>)
-    }
-    
-    
-    storeConfigData();
-  }, [buttonSelect, sidebarButtonSelect]);
-
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
     if (buttonName == 'mess') {
@@ -80,6 +58,33 @@ export default function Home() {
       setCenterContent(<h1>{buttonName}</h1>)
     }
   }
+
+  useEffect(() => {
+    //console.log(buttonSelect)
+    if (buttonSelect == 1) {
+      document.getElementsByClassName("student")[0].classList.add('selected')
+    } else if (buttonSelect == 2) {
+      document.getElementsByClassName("club")[0].classList.add('selected')
+    } else {
+      document.getElementsByClassName("food")[0].classList.add('selected')
+    }
+    
+    /*
+    if (sidebarButtonSelect == 'mess') {
+      setCenterContent(<Menu/>)
+    } else if (sidebarButtonSelect == 'places to eat') {
+      setCenterContent(<Places/>)
+    } else {
+      setCenterContent(<h1>{sidebarButtonSelect}</h1>)
+    }
+    */
+
+    handleButtonClick(sidebarButtonSelect);
+    
+    
+    storeConfigData();
+  }, [buttonSelect, sidebarButtonSelect]);
+
   let sidebar;
 
   if (buttonSelect === 1){

@@ -79,7 +79,20 @@ export default function Home() {
     }
     */
 
-    handleButtonClick(sidebarButtonSelect);
+    if (sidebarButtonSelect != "null" && sidebarButtonSelect != null) {
+      console.log(sidebarButtonSelect)
+      handleButtonClick(sidebarButtonSelect);
+    } else {
+      if (buttonSelect == 1) {
+        setCenterContent(<h1>This is the student section</h1>); // we can make a componenent for the default section of student
+      } else if (buttonSelect == 2) {                           // club and food.
+        setCenterContent(<h1>This is the club section</h1>)
+      } else if (buttonSelect == 3) {
+        setCenterContent(<h1>This is the Food section</h1>)
+      } else {
+        setCenterContent(null);
+      }
+    }
     
     
     storeConfigData();
@@ -98,7 +111,7 @@ export default function Home() {
   }
   return (
     <>
-      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={sidebarButtonSelect ? centerContent : "this is the details of that particular part"} />
+      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={centerContent} />
     </>
   )
 }

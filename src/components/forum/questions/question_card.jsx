@@ -1,21 +1,19 @@
 import "./questions.css"
 
-const QuestionCard = () => {
+const QuestionCard = ({title, description, tags}) => {
     return (
         <div className="individual_question">
             <span className="username"><i>u/username</i></span>
             <div className="content">
-                <p className="text"><b>Q. This is a question card; for testing purposes</b></p>
+                <p className="text"><b>{title}</b></p>
                 <p className="description">
-                    This is a question description.This is a question description.
-                    This is a question description.This is a question description.
-                    This is a question description.This is a question description.
-                    This is a question description.This is a question description.This is a question description.This is a question description.
+                    {description}
                 </p>
                 <div className="question_controls">
                     <div className="tags">
-                        <p className="individual_tag">ECE</p>
-                        <p className="individual_tag">CSE</p>
+                    {tags.map((tag, index) => (
+                        <p key={index} className="individual_tag">{tag}</p>
+                    ))}  
                     </div>
                     <div className="likes">
                         <button className="like_button">

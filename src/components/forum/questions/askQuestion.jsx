@@ -1,7 +1,7 @@
 const AskQuestionForm = () => {
     return (
         <div className="question_form">
-            <input type="text" placeholder="Title"/>
+            <input type="text" placeholder="Question title"/>
             <textarea rows="7" cols="50" placeholder="Max: 100 characters. Be concise in your question and refrain from profanity.">
             </textarea>
             <select id='selectTag'>

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
+import Data from "./dummyData.json"
 
 const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
     const [ask, setAsk] = useState(false);
 
     useEffect(() => {
-        setAllQuestions([...Array(25)].map((_, index) => ({ id: index + 1, card: <QuestionCard /> })));
+        //console.log(Data)
+        setAllQuestions([...Array(Data.length)].map((_, index) => ({ id: index + 1, card: <QuestionCard title={Data[index].title} description={Data[index].description} tags={Data[index].tags}/> })));
     }, []);
 
     const changeContents = () => {

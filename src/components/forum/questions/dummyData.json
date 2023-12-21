@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "title": "Introduction to Machine Learning",
+      "description": "Can someone provide a brief overview of the fundamental concepts in machine learning?",
+      "tags": ["CSE"]
+    },
+    {
+      "id": 2,
+      "title": "Basic Electronics Circuits",
+      "description": "I need help understanding the working of basic electronic circuits. Any resources or explanations?",
+      "tags": ["ECE"]
+    },
+    {
+      "id": 3,
+      "title": "Data Structures and Algorithms Practice",
+      "description": "Looking for coding challenges to improve my skills in data structures and algorithms.",
+      "tags": ["CSE"]
+    },
+    {
+      "id": 4,
+      "title": "Bioinformatics Research Opportunities",
+      "description": "Interested in exploring research opportunities in bioinformatics. Any guidance?",
+      "tags": ["BT"]
+    },
+    {
+      "id": 5,
+      "title": "Introduction to Control Systems",
+      "description": "Seeking recommendations for online courses or textbooks on control systems for beginners.",
+      "tags": ["EE"]
+    },
+    {
+      "id": 6,
+      "title": "Web Development Project Ideas",
+      "description": "Any interesting project ideas for a beginner in web development? Open to suggestions!",
+      "tags": ["CSE"]
+    },
+    {
+      "id": 7,
+      "title": "Digital Signal Processing Concepts",
+      "description": "Need clarification on some concepts in digital signal processing. Can anyone help?",
+      "tags": ["ECE"]
+    },
+    {
+      "id": 8,
+      "title": "Internship Opportunities in Electrical Engineering",
+      "description": "Looking for internship opportunities in the field of electrical engineering. Any leads?",
+      "tags": ["EE"]
+    },
+    {
+      "id": 9,
+      "title": "Biotechnology Research Journals",
+      "description": "Recommendations for reputable journals in biotechnology research? Interested in recent publications.",
+      "tags": ["BT"]
+    },
+    {
+      "id": 10,
+      "title": "Best Practices for Code Documentation",
+      "description": "What are the best practices for documenting code? Share your insights and recommendations.",
+      "tags": ["CSE"]
+    },
+    {
+      "id": 11,
+      "title": "Analog Electronics Troubleshooting",
+      "description": "Encountering issues with analog electronic circuits. Seeking troubleshooting tips and advice.",
+      "tags": ["ECE"]
+    },
+    {
+      "id": 12,
+      "title": "Renewable Energy Projects",
+      "description": "Exploring DIY projects related to renewable energy. Any interesting ideas or guides?",
+      "tags": ["EE"]
+    },
+    {
+      "id": 13,
+      "title": "Genetic Engineering Ethics",
+      "description": "Discussion on the ethical considerations in genetic engineering. Share your perspectives.",
+      "tags": ["BT"]
+    },
+    {
+      "id": 14,
+      "title": "Career Paths in Computer Science",
+      "description": "Seeking advice on various career paths within the field of computer science. Any experiences to share?",
+      "tags": ["CSE"]
+    },
+    {
+      "id": 15,
+      "title": "Wireless Communication Technologies",
+      "description": "Interested in learning about the latest advancements in wireless communication. Any recommended resources?",
+      "tags": ["ECE"]
+    }
+  ]
+  

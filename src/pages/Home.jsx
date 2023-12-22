@@ -5,7 +5,7 @@ import FoodSidebar from "../components/sidebar/food_sidebar"
 import StudentSidebar from "../components/sidebar/student_sidebar"
 import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
-import Calendar from "../components/students/calendar/Calendar";
+import CalendarPage from "../components/students/calendar/CalenderPage";
 import Places from "../components/food/places_to_eat/Places";
 
 import "./Home.css"
@@ -48,7 +48,7 @@ export default function Home() {
     if (buttonName == 'mess') {
       setCenterContent(<Menu/>)
     } else if (buttonName == 'Calendar') {
-      setCenterContent(<Calendar/>)
+      setCenterContent(<CalendarPage/>)
     } else if (buttonName == 'places to eat') {
       setCenterContent(<Places/>)
     } else {

@@ -1,0 +1,12 @@
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.calender{
+    flex: 1;
+}
+
+.event{
+    flex: 1;
+}

@@ -6,6 +6,7 @@ import StudentSidebar from "../components/sidebar/student_sidebar"
 import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
 import Places from "../components/food/places_to_eat/Places";
+import ClubList from "../components/clubs/NITW-clubs/clubList";
 
 import "./Home.css"
 // import Recenteventcard from "../components/recent-events/recenteventcard";
@@ -61,6 +62,8 @@ export default function Home() {
     } 
     else if (buttonName == 'places to eat') {
       setCenterContent(<Places/>)
+    } else if (buttonName == 'NITW Clubs') {
+      setCenterContent(<ClubList/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

@@ -1,6 +1,6 @@
 import Recenteventcard from './recenteventcard';
 import React, { useEffect, useState } from 'react';
-import { recentEvents } from '../../dummydata/recenteventsdata';
+import { recentEvents } from '../../../dummydata/recenteventsdata';
 import "./recentevent.css"
 
 export default function Recentevent() {

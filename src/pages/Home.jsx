@@ -9,7 +9,7 @@ import Places from "../components/food/places_to_eat/Places";
 
 import "./Home.css"
 // import Recenteventcard from "../components/recent-events/recenteventcard";
-import Recentevent from "../components/recent-events/Recentevent";
+import Recentevent from "../components/clubs/recent-events/Recentevent";
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(

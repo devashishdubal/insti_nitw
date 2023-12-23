@@ -1,0 +1,54 @@
+.Header{
+    display: flex;
+    
+}
+
+#Back{
+    width: 75px;
+    height: 50px;
+    align-self: center;
+}
+
+#qn{
+    margin-left: 10px;
+}
+
+.Answer_card{
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding : 10px;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.text{
+    padding : 10px;
+    border: 2px solid #000;
+    margin-bottom: 5px;
+}
+.Buttons{
+   display:flex;
+   justify-content: end;
+}
+
+.Input{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+}
+
+.Input button{
+    width : 75px;
+    height:25px;
+    align-self: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    
+}
+
+.Input textarea{
+    height: 50px;
+    border-radius: 5px;
+}

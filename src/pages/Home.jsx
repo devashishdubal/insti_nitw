@@ -7,6 +7,7 @@ import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
 import Places from "../components/food/places_to_eat/Places";
 import Questions from "../components/forum/questions/questions";
+import Answers from "../components/forum/answers/answers";
 
 import "./Home.css"
 
@@ -50,7 +51,7 @@ export default function Home() {
     } else if (buttonName == 'places to eat') {
       setCenterContent(<Places/>)
     } else if (buttonName == "Forum") {
-      setCenterContent(<Questions/>)
+      setCenterContent(<Answers/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

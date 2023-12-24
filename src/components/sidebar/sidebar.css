@@ -22,18 +22,18 @@
     gap: 6px;
     align-items: center;
     background-color: rgba(255, 255, 255, 0);
-    border-radius: 15px;
+    border-radius: 22px;
     border: 0px;
-    transition: font-size 0.3s ease-in, border-radius 0.3s ease-in;
+    transition: font-size 0.3s ease-in, border-radius 0.1s ease-in;
 }
 
 .sidebar button:hover {
     box-shadow: #92C6CE 0px 5px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     font-weight: bold;
-    border-radius: 22px;
+    border-radius: 15px;
     background-image: linear-gradient(to right bottom, #44829f, #5895ac, #6da8b9);
     cursor: pointer;
-    transition: font-size 0.3s ease-in, border-radius 0.3s ease-in;
+    transition: font-size 0.3s ease-in, border-radius 0.1s ease-in;
 }
 
 .arrow {

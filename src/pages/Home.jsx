@@ -7,7 +7,10 @@ import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
 import CalendarPage from "../components/students/calendar/CalenderPage";
 import Places from "../components/food/places_to_eat/Places";
+import Questions from "../components/forum/questions/questions";
+import Answers from "../components/forum/answers/answers";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
+
 
 import "./Home.css"
 // import Recenteventcard from "../components/recent-events/recenteventcard";
@@ -65,6 +68,8 @@ export default function Home() {
     } 
     else if (buttonName == 'places to eat') {
       setCenterContent(<Places/>)
+    } else if (buttonName == "Forum") {
+      setCenterContent(<Questions/>)
     } else if (buttonName == 'NITW Clubs') {
       setCenterContent(<ClubList/>)
     } else {

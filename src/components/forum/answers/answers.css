@@ -1,0 +1,112 @@
+.Header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 150px;
+}
+
+.header_top {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#Back{
+    width: 50px;
+    height: 30px;
+    align-self: center;
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+}
+
+#qn{
+    margin-left: 10px;
+}
+
+.Answer_card{
+    border-radius: 10px;
+    width: 60%;
+    border: 2px solid #000;
+    padding: 15px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+    background-color: #067e992a;
+}
+
+.user_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+
+.text{
+    padding : 10px;
+    margin-bottom: 5px;
+}
+
+.Buttons{
+   display:flex;
+   justify-content: end;
+}
+
+.Input{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 20px;
+    border-top: 1px solid black;
+    gap: 10px;
+}
+
+.Input button {
+    width : 100%;
+    padding: 20px;
+    align-self: center;
+    border-radius: 5px;
+    background-color: dodgerblue;
+    color: white;
+    border: none; 
+    font-size: 25px;
+}
+
+.Input textarea{
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.All {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Section::-webkit-scrollbar {
+    display: none; /*scroller*/
+}
+
+.Section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: scroll; /*scroller*/
+    height: calc(100vh - 150px);/*scroller*/
+    gap: 15px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.each_answer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Buttons {
+    gap: 10px;
+}

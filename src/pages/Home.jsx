@@ -5,6 +5,7 @@ import FoodSidebar from "../components/sidebar/food_sidebar"
 import StudentSidebar from "../components/sidebar/student_sidebar"
 import ClubsSidebar from "../components/sidebar/clubs_sidebar"
 import Menu from "../components/food/mess/menu";
+import CalendarPage from "../components/students/calendar/CalenderPage";
 import Places from "../components/food/places_to_eat/Places";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
 
@@ -55,6 +56,8 @@ export default function Home() {
     setSidebarButtonSelect(buttonName);
     if (buttonName == 'mess') {
       setCenterContent(<Menu/>)
+    } else if (buttonName == 'Calendar') {
+      setCenterContent(<CalendarPage/>)
     } 
     else if(buttonName === 'Recent events'){
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);

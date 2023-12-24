@@ -1,0 +1,54 @@
+.club_card {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    padding: 30px;
+    background-color: rgb(255, 241, 241);
+    box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease-in-out;
+    border: 1px dotted;
+    border-radius: 15px;
+}
+
+.club_card:hover {
+    transform: scale(1.02);
+}
+
+.club_card .club_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.club_name {
+    font-size: 25px;
+}
+
+.allClubs::-webkit-scrollbar {
+    display: none;
+}
+
+.allClubs {
+    display: flex;
+    flex-wrap: wrap; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}

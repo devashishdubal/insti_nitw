@@ -2,7 +2,7 @@
   /* background-color: white; */
   width: max-content;
   display: flex;
-  gap: 16px;
+  /* gap: 16px; */
   flex-direction: column;
   height: min-content;
 }

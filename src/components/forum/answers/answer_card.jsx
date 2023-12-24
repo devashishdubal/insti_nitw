@@ -4,7 +4,8 @@ const AnswerCard = () =>{
     return(
        <div className="Answer_card">
          <div className="user_info">
-                <p className="info"> <i>Answered by: u/username  24/12/2023</i> </p>
+                <h4 className="info"> <i>u/username</i> </h4>
+                <h4> <i>24/12/2023</i> </h4>
         </div>
 
         <div className="text">

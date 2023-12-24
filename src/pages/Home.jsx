@@ -51,7 +51,7 @@ export default function Home() {
     } else if (buttonName == 'places to eat') {
       setCenterContent(<Places/>)
     } else if (buttonName == "Forum") {
-      setCenterContent(<Answers/>)
+      setCenterContent(<Questions/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

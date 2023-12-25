@@ -14,7 +14,7 @@ const CustomEvents = () => {
                 <input type="text" id="title" name="title" />
             </div>
             <div className="datetime-container">
-                <label for="datetime" className="datetime-desc">Title:</label>
+                <label for="datetime" className="datetime-desc">Date & Time:</label>
                 <input type="datetime-local" id="datetime" name="datetime" />
             </div>
         </div>

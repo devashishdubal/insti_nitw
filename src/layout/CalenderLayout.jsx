@@ -2,11 +2,11 @@ import Calendar from "../components/students/calendar/Calendar";
 import CustomEvents from "../components/students/calendar/CustomEvents";
 import "./CalenderLayout.css";
 
-const CalendarLayout = ({dateSelected, setDateSelected}) => {
+const CalendarLayout = ({dateSelected,setDateSelected}) => {
     return (
         <div className="calendar-wrapper">
             <div className="calender">
-                <Calendar />
+                <Calendar dateSelected={dateSelected} setDateSelected={setDateSelected}/>
             </div>
             <div className="event">
                 <CustomEvents />

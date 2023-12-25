@@ -1,4 +1,5 @@
 import Calendar from "../components/students/calendar/Calendar";
+import CustomEvents from "../components/students/calendar/CustomEvents";
 
 const CalendarLayout = () => {
 
@@ -8,7 +9,7 @@ const CalendarLayout = () => {
                 <Calendar />
             </div>
             <div className="event">
-                This is where the event description will be.
+                <CustomEvents />
             </div>
         </div>
     );

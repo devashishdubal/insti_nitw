@@ -99,7 +99,6 @@ header .current-date {
 .days li.active {
     color: #fff;
 }
-
 .days li::before {
     position: absolute;
     content: "";

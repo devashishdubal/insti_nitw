@@ -1,11 +1,11 @@
 import Calendar from "../components/students/calendar/Calendar";
 
-const CalendarLayout = () => {
+const CalendarLayout = ({dateSelected,setDateSelected}) => {
 
     return (
         <div className="main">
             <div className="calender">
-                <Calendar />
+                <Calendar dateSelected={dateSelected} setDateSelected={setDateSelected}/>
             </div>
             <div className="event">
                 This is where the event description will be.

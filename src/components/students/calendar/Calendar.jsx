@@ -1,13 +1,28 @@
 import React, { useState, useEffect ,useRef} from 'react';
 import './Calendar.css';
 
-const Calendar = () => {
+const Calendar = ({dateSelected,setDateSelected}) => {
     const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
     let date = new Date();
     let currentYear = date.getFullYear();
     let currentMonth = date.getMonth();
     const dispMonthYear = useRef(null);
     const dispDates = useRef(null);
+
+    const handleDateClick = (event) => {
+      const litag = event.target;
+      const textInElement = litag.textContent;
+      setDateSelected(new Date(currentYear,currentMonth,parseInt(textInElement)));
+      // Remove "selected" class from previously selected element, if any
+      const previouslySelected = document.querySelector('.selected');
+      if (previouslySelected) {
+        previouslySelected.classList.remove('selected');
+      }
+
+      // Add "selected" class to the clicked element
+      litag.classList.add('selected');
+    };
+
     const renderCalender = () => {
         const lastDateofMonth = new Date(currentYear,currentMonth+1,0).getDate();
         const lastDayofMonth = new Date(currentYear,currentMonth,lastDateofMonth).getDay();
@@ -28,6 +43,11 @@ const Calendar = () => {
             liTag += `<li class="inactive">${i}</li>`;
         }
         dispDates.current.innerHTML = liTag;
+        dispDates.current.addEventListener('click', (event) => {
+          if (event.target.tagName === 'LI') {
+            handleDateClick(event); // Call your function when an <li> is clicked
+          }
+        });
     };
 
     const handleArrowClick = (id) => {

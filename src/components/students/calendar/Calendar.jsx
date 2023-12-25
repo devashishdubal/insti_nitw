@@ -9,7 +9,6 @@ const Calendar = ({dateSelected,setDateSelected,CustomButtonSelected,setButtonSe
     let currentMonth = date.getMonth();
     const dispMonthYear = useRef(null);
     const dispDates = useRef(null);
-    const customEventButton = useRef(null);
 
     const handleDateClick = (event) => {
       const litag = event.target;
@@ -62,11 +61,8 @@ const Calendar = ({dateSelected,setDateSelected,CustomButtonSelected,setButtonSe
       renderCalender();
     };
 
+
     useEffect(() =>{
-      customEventButton.current.addEventListener('click', () => {
-        if (CustomButtonSelected == 0) setButtonSelect(1);
-        else setButtonSelect(0);
-      })
       renderCalender();
     },[]);
 
@@ -76,7 +72,7 @@ const Calendar = ({dateSelected,setDateSelected,CustomButtonSelected,setButtonSe
         <header>
           <p ref={dispMonthYear} className="current-date"></p>
           <div className="icons">
-            <span ref={customEventButton}>+</span>
+            <span onClick={setButtonSelect}>+</span>
             <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>l</span>
             <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>r</span>
           </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect ,useRef} from 'react';
 import CustomEvents from './CustomEvents';
 import './Calendar.css';
 
-const Calendar = ({dateSelected,setDateSelected,eventPage,setEventPage}) => {
+const Calendar = ({dateSelected,setDateSelected,CustomButtonSelected,setButtonSelect}) => {
     const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
     let date = new Date();
     let currentYear = date.getFullYear();
@@ -64,11 +64,12 @@ const Calendar = ({dateSelected,setDateSelected,eventPage,setEventPage}) => {
 
     useEffect(() =>{
       customEventButton.current.addEventListener('click', () => {
-        setEventPage(<CustomEvents />);
+        if (CustomButtonSelected == 0) setButtonSelect(1);
+        else setButtonSelect(0);
       })
       renderCalender();
     },[]);
-    
+
   
     return (
       <div className="wrapper">

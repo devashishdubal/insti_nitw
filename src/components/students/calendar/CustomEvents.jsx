@@ -1,6 +1,15 @@
 import "./CustomEvents.css";
+import { useEffect, useRef } from "react";
 
-const CustomEvents = () => {
+const CustomEvents = ({dateSelected}) => {
+    const dateComp = useRef(null);
+    const setDate = () => {
+        dateComp.current.innerHTML = `${dateSelected.getDate()} / ${dateSelected.getMonth() + 1} / ${dateSelected.getFullYear()}`;
+    };
+    useEffect(() => {
+      setDate();    
+    }, [dateSelected])
+    
     return (
         <div className="custom-wrapper">
             <div className="custom-desc"> Add Custom Event</div>
@@ -12,12 +21,14 @@ const CustomEvents = () => {
                 <div className="label-color custom"></div>
             </div>
             <div className="title-container">
-                <label for="title" className="title-desc">Title:</label>
+                <label for="title" className="title-desc">Title: </label>
                 <input type="text" id="title" name="title" />
             </div>
             <div className="datetime-container">
-                <label for="datetime" className="datetime-desc">Date & Time:</label>
-                <input type="time" id="datetime" name="datetime" />
+                <label  for="date" className="datetime-desc">Date: </label>
+                <div ref={dateComp} id="date"></div>
+                <label for="time" className="datetime-desc">Time: </label>
+                <input type="time" id="time" name="time" />
             </div>
         </div>
     )

@@ -1,14 +1,15 @@
 import Calendar from "../components/students/calendar/Calendar";
+import CustomEvents from "../components/students/calendar/CustomEvents";
+import "./CalenderLayout.css";
 
-const CalendarLayout = ({dateSelected,setDateSelected}) => {
-
+const CalendarLayout = () => {
     return (
-        <div className="main">
+        <div className="calendar-wrapper">
             <div className="calender">
-                <Calendar dateSelected={dateSelected} setDateSelected={setDateSelected}/>
+                <Calendar />
             </div>
             <div className="event">
-                This is where the event description will be.
+                <CustomEvents />
             </div>
         </div>
     );

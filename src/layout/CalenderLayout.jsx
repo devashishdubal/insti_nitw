@@ -2,7 +2,7 @@ import Calendar from "../components/students/calendar/Calendar";
 import CustomEvents from "../components/students/calendar/CustomEvents";
 import "./CalenderLayout.css";
 
-const CalendarLayout = () => {
+const CalendarLayout = ({dateSelected, setDateSelected}) => {
     return (
         <div className="calendar-wrapper">
             <div className="calender">

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.custom-wrapper {
+    font-family: "Ubuntu";
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.74);
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-desc {
+    font-weight: bold;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 30px;
+    background-color: #000000;
+}

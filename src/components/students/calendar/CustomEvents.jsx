@@ -1,3 +1,5 @@
+import "./CustomEvents.css";
+
 const CustomEvents = () => {
     return (
         <div className="custom-wrapper">
@@ -15,7 +17,7 @@ const CustomEvents = () => {
             </div>
             <div className="datetime-container">
                 <label for="datetime" className="datetime-desc">Date & Time:</label>
-                <input type="datetime-local" id="datetime" name="datetime" />
+                <input type="time" id="datetime" name="datetime" />
             </div>
         </div>
     )

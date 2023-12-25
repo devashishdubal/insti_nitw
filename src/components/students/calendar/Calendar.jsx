@@ -2,14 +2,13 @@ import React, { useState, useEffect ,useRef} from 'react';
 import CustomEvents from './CustomEvents';
 import './Calendar.css';
 
-const Calendar = ({dateSelected,setDateSelected,eventPage,setEventPage}) => {
+const Calendar = ({dateSelected,setDateSelected,CustomButtonSelected,setButtonSelect}) => {
     const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
     let date = new Date();
     let currentYear = date.getFullYear();
     let currentMonth = date.getMonth();
     const dispMonthYear = useRef(null);
     const dispDates = useRef(null);
-    const customEventButton = useRef(null);
 
     const handleDateClick = (event) => {
       const litag = event.target;
@@ -62,20 +61,18 @@ const Calendar = ({dateSelected,setDateSelected,eventPage,setEventPage}) => {
       renderCalender();
     };
 
+
     useEffect(() =>{
-      customEventButton.current.addEventListener('click', () => {
-        setEventPage(<CustomEvents />);
-      })
       renderCalender();
     },[]);
-    
+
   
     return (
       <div className="wrapper">
         <header>
           <p ref={dispMonthYear} className="current-date"></p>
           <div className="icons">
-            <span ref={customEventButton}>+</span>
+            <span onClick={setButtonSelect}>+</span>
             <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>l</span>
             <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>r</span>
           </div>

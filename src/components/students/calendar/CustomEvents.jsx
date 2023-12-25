@@ -1,6 +1,15 @@
 import "./CustomEvents.css";
+import { useEffect, useRef } from "react";
 
-const CustomEvents = () => {
+const CustomEvents = ({ dateSelected }) => {
+    const dateComp = useRef(null);
+    const setDate = () => {
+        dateComp.current.value = `${dateSelected.getDate()} / ${dateSelected.getMonth() + 1} / ${dateSelected.getFullYear()}`;
+    };
+    useEffect(() => {
+        setDate();
+    }, [dateSelected])
+
     return (
         <>
             <form action="https://httpbin.org/post" method="post">
@@ -18,6 +27,10 @@ const CustomEvents = () => {
                     <div className="title-container custom-wrapper-inner-container">
                         <label for="title" className="desc">Title:</label>
                         <input type="text" id="title" name="title" />
+                    </div>
+                    <div className="custom-wrapper-inner-container">
+                        <label for="date" className="datetime-desc">Date: </label>
+                        <input type="text" ref={dateComp} id="date" readOnly name="date"/>
                     </div>
                     <div className="time-submit-container custom-wrapper-inner-container">
                         <div className="time-container">

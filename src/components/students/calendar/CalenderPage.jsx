@@ -21,7 +21,7 @@ const CalendarPage = () => {
     }, [dateSelected]);
     
     return(
-        <CalendarLayout dateSelected={dateSelected} setDateSelected={handleClick} eventPage={eventPage}/>
+        <CalendarLayout dateSelected={dateSelected} setDateSelected={handleClick} eventPage={eventPage} setEventPage={setEventPage}/>
     );
 };
 

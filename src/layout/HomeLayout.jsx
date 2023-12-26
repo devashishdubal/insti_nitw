@@ -10,7 +10,7 @@ const HomeLayout = ({ buttonSelect, clickFunction, left, right }) => {
         <Topbar buttonSelect={buttonSelect} clickFunction={clickFunction} />
         <div className="center scrollbar scrollbar-primary">
           {right}
-          <div class="force-overflow"></div> {/*scrollbar*/}
+          <div className="force-overflow"></div> {/*scrollbar*/}
         </div>
       </div>
     </div>

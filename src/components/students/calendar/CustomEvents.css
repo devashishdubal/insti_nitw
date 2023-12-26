@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.custom-wrapper {
+    gap: 12px;
+    font-family: "Ubuntu", sans-serif;
+    padding: 15px;
+    border: 1px solid grey;
+    background-color: rgba(255, 255, 255, 0.74);
+    border-radius: 12px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-desc {
+    align-self: center;
+    font-weight: bold;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 30px;
+    background-color: #000000;
+}
+/* 
+.custom-wrapper .desc {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+} */
+
+.custom-wrapper-inner-container {
+    height: 25px;
+    display: flex;
+    gap: 8px;
+}
+
+.label-color-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+input[type="text"], input[type="time"]{
+    padding: 0px 8px;
+}
+
+.label-color {
+    border-radius: 4px;
+    width: 30px;
+}
+
+#label-color-purple {
+    width: 30px;
+    background-color: rgb(187, 80, 197);
+}
+
+#label-color-green {
+    width: 30px;
+    background-color: rgb(148, 203, 114);
+}
+
+#label-color-blue {
+    width: 30px;
+    background-color: rgb(114, 195, 215);
+}
+
+.title-container #title {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.time-submit-container {
+    justify-content: space-between;
+}
+
+.time-submit-container #time {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.time-container {
+    display: flex;
+    gap: 8px;
+}
+
+.custom-wrapper .submit {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+    padding: 10px 10px;
+    border-radius: 50px;
+    border: 0;
+}
+
+.custom-wrapper .submit:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.729);
+    transform: scale(1.05);
+    transition: 0.2s;
+}

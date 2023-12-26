@@ -1,0 +1,8 @@
+.calendar-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.calender {}
+
+.event {}

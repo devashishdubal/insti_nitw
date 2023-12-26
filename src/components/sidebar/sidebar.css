@@ -1,69 +1,66 @@
 .sidebar {
-  /* background-color: white; */
-  width: max-content;
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  height: min-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.sidebar button svg {
-  width: 35px;
-  height: 35px;
+.sidebar img[alt="logo"] {
+    margin-bottom: 12px;
+    height: 100px;
+    align-self: center;
+}
+
+.sidebar-top, .sidebar-end {
+    padding: 5px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar svg {
+    height: 30px;
+    width: 30px;
+    stroke: black;
 }
 
 .sidebar button {
-  box-shadow: #5C99AF 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  font-family: 'ABeeZee', sans-serif;
-  font-size: 0px;
-  padding: 12px 10px;
-  height: min-content;
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 22px;
-  border: 0px;
-  transition: font-size 0.3s ease-in, border-radius 0.1s ease-in;
+    border-radius: 8px;
+    height: 50px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+    display: flex;
+    gap: 14px;
+    background-color: white;
+    border: 0;
 }
 
-.sidebar button:hover {
-  box-shadow: #92C6CE 0px 5px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  font-weight: bold;
-  border-radius: 15px;
-  background-image: linear-gradient(to right bottom, #44829f, #5895ac, #6da8b9);
-  cursor: pointer;
-  transition: font-size 0.3s ease-in, border-radius 0.1s ease-in;
+.sidebar button:hover:not(.selected){
+    transition: 0.1s;
+    background-color: rgba(240, 240, 240, 0.841);
 }
 
-.arrow {
-  cursor: pointer;
+.sidebar button:hover{
+    cursor: pointer;
 }
 
-span {
-  flex: 1;
+.sidebar-end {
+    padding: 8px;
+    border-top: 1px solid rgb(197, 196, 196)
 }
 
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(-4px);
-  }
+.sidebar .selected {
+    color: white;
+    font-weight: 500;
+    transition: 0.15s;
+    background-color: #4684A0;
 }
 
-.arrow {
-  cursor: pointer;
-  animation: shake 1s infinite;
-  transition: transform 0.3s ease-in-out;
+.sidebar .selected svg{
+    stroke: white;
 }
 
-.sidebar .expanded {
-  font-size: 18px;
-  transition: all 0.3s ease-in;
+.sidebar .selected svg[fill=""]{
+    fill: white;
 }

@@ -1,17 +1,14 @@
 .navBar {
+    box-sizing: border-box;
     width: 100%;
-    /* border-radius: 60px; */
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    gap: 360px;
-    /* position: sticky; */
-    /* top: 0; */
+    justify-content: space-between;
     align-items: center;
     padding: 12px 30px;
     background-image: linear-gradient(to right, #44829f, #5895ac, #6da8b9, #84bbc6, #9bced4);
-    height: 70px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 85px;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
 
 .navBar img {
@@ -26,7 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'ABeeZee', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .buttonGroup {
@@ -41,7 +38,7 @@
     transition: 0.2s;
 }
 
-.selected {
+.navBar .selected {
     font-weight: bold;
     text-decoration: underline white 4px;
     text-underline-offset: 6px;
@@ -60,7 +57,7 @@
     color: white;
     border-radius: 25px;
     background-color: #4886A2;
-    box-shadow: 5px 5px 5px #6ba1b0;
+    /* box-shadow: 5px 5px 5px #6ba1b0; */
 }
 
 .signUp > button:hover {

@@ -63,6 +63,8 @@ export default function Home() {
     else if (buttonName === 'Recent Events') {
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
       setCenterContent(<Recentevent />)
+    } else if (buttonName == 'Forum') {
+      setCenterContent(<Questions/>)
     }
     else if (buttonName == 'Places To Eat') {
       setCenterContent(<Places />)

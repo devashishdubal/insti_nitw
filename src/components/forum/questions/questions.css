@@ -1,17 +1,9 @@
-.questions::-webkit-scrollbar {
-    display: none;
-}
 
 .questions {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 0px 10px;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    height: 100vh;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 .individual_question {

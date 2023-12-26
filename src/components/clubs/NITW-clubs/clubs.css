@@ -24,10 +24,6 @@
     font-size: 25px;
 }
 
-.allClubs::-webkit-scrollbar {
-    display: none;
-}
-
 .allClubs {
     display: flex;
     flex-wrap: wrap; 
@@ -36,9 +32,6 @@
     justify-content: space-evenly;
     width: 100%;
     gap: 15px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 .logo {

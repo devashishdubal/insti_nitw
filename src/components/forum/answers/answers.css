@@ -85,20 +85,12 @@
     gap: 10px;
 }
 
-.Section::-webkit-scrollbar {
-    display: none; /*scroller*/
-}
-
 .Section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow-y: scroll; /*scroller*/
-    height: calc(100vh - 150px);/*scroller*/
     gap: 15px;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 .each_answer {

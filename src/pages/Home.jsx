@@ -42,8 +42,6 @@ export default function Home() {
       setButtonSelect(3);
     }
     setSidebarButtonSelect(null);
-
-    // setCurrentButton(btn);
   };
 
   const storeConfigData = () => {
@@ -54,7 +52,7 @@ export default function Home() {
 
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
-    if (buttonName == 'mess') {
+    if (buttonName == 'Mess') {
       setCenterContent(<Menu />)
     } else if (buttonName == 'Calendar') {
       setCenterContent(<CalendarPage />)
@@ -63,7 +61,7 @@ export default function Home() {
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
       setCenterContent(<Recentevent />)
     }
-    else if (buttonName == 'places to eat') {
+    else if (buttonName == 'Places To Eat') {
       setCenterContent(<Places />)
     } else if (buttonName == 'NITW Clubs') {
       setCenterContent(<ClubList />)
@@ -81,16 +79,6 @@ export default function Home() {
     } else {
       document.getElementsByClassName("food")[0].classList.add('selected')
     }
-
-    /*
-    if (sidebarButtonSelect == 'mess') {
-      setCenterContent(<Menu/>)
-    } else if (sidebarButtonSelect == 'places to eat') {
-      setCenterContent(<Places/>)
-    } else {
-      setCenterContent(<h1>{sidebarButtonSelect}</h1>)
-    }
-    */
 
     if (sidebarButtonSelect != "null" && sidebarButtonSelect != null) {
       console.log(sidebarButtonSelect)
@@ -120,7 +108,7 @@ export default function Home() {
     sidebar = <ClubsSidebar onButtonClick={handleButtonClick} sidebarButtonSelect={sidebarButtonSelect} />
   }
   else if (buttonSelect === 3) {
-    sidebar = <FoodSidebar onButtonClick={handleButtonClick} />
+    sidebar = <FoodSidebar onButtonClick={handleButtonClick} sidebarButtonSelect={sidebarButtonSelect} />
   }
   return (
     <>

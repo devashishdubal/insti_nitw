@@ -8,7 +8,7 @@ import Menu from "../components/food/mess/menu";
 import CalendarPage from "../components/students/calendar/CalenderPage";
 import Places from "../components/food/places_to_eat/Places";
 import Questions from "../components/forum/questions/questions";
-import Answers from "../components/forum/answers/answers";
+// import Answers from "../components/forum/answers/answers";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
 
 
@@ -57,20 +57,20 @@ export default function Home() {
 
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
-    if (buttonName == 'mess') {
+    if (buttonName === 'mess') {
       setCenterContent(<Menu/>)
-    } else if (buttonName == 'Calendar') {
+    } else if (buttonName === 'Calendar') {
       setCenterContent(<CalendarPage/>)
     } 
     else if(buttonName === 'Recent events'){
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
       setCenterContent(<Recentevent />)
     } 
-    else if (buttonName == 'places to eat') {
+    else if (buttonName === 'places to eat') {
       setCenterContent(<Places/>)
-    } else if (buttonName == "Forum") {
+    } else if (buttonName === "Forum") {
       setCenterContent(<Questions/>)
-    } else if (buttonName == 'NITW Clubs') {
+    } else if (buttonName === 'NITW Clubs') {
       setCenterContent(<ClubList/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
@@ -79,9 +79,9 @@ export default function Home() {
 
   useEffect(() => {
     //console.log(buttonSelect)
-    if (buttonSelect == 1) {
+    if (buttonSelect === 1) {
       document.getElementsByClassName("student")[0].classList.add('selected')
-    } else if (buttonSelect == 2) {
+    } else if (buttonSelect === 2) {
       document.getElementsByClassName("club")[0].classList.add('selected')
     } else {
       document.getElementsByClassName("food")[0].classList.add('selected')
@@ -97,15 +97,15 @@ export default function Home() {
     }
     */
 
-    if (sidebarButtonSelect != "null" && sidebarButtonSelect != null) {
+    if (sidebarButtonSelect !== "null" && sidebarButtonSelect != null) {
       console.log(sidebarButtonSelect)
       handleButtonClick(sidebarButtonSelect);
     } else {
-      if (buttonSelect == 1) {
+      if (buttonSelect === 1) {
         setCenterContent(<h1>This is the student section</h1>); // we can make a componenent for the default section of student
-      } else if (buttonSelect == 2) {                           // club and food.
+      } else if (buttonSelect === 2) {                           // club and food.
         setCenterContent(<h1>This is the club section</h1>)
-      } else if (buttonSelect == 3) {
+      } else if (buttonSelect === 3) {
         setCenterContent(<h1>This is the Food section</h1>)
       } else {
         setCenterContent(null);

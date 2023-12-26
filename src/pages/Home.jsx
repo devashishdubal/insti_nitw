@@ -15,7 +15,7 @@ import Recentevent from "../components/clubs/recent-events/Recentevent";
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(
-    isNaN(parseInt(localStorage.getItem('buttonSelect'))) ? 1 : parseInt(localStorage.getItem('buttonSelect')) 
+    isNaN(parseInt(localStorage.getItem('buttonSelect'))) ? 1 : parseInt(localStorage.getItem('buttonSelect'))
   );
   const [sidebarButtonSelect, setSidebarButtonSelect] = useState(
     localStorage.getItem('sidebarButtonSelect') || null
@@ -24,7 +24,7 @@ export default function Home() {
   const [centerContent, setCenterContent] = useState(
     null
   );
-  
+
   const handleClick = (event) => {
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
     buttonGroup.forEach(btn => {
@@ -42,31 +42,31 @@ export default function Home() {
       setButtonSelect(3);
     }
     setSidebarButtonSelect(null);
-    
+
     // setCurrentButton(btn);
   };
 
   const storeConfigData = () => {
-      localStorage.setItem('buttonSelect', buttonSelect);
-      localStorage.setItem('sidebarButtonSelect', sidebarButtonSelect);
-      localStorage.setItem('centerContent', centerContent);
+    localStorage.setItem('buttonSelect', buttonSelect);
+    localStorage.setItem('sidebarButtonSelect', sidebarButtonSelect);
+    localStorage.setItem('centerContent', centerContent);
   }
 
   const handleButtonClick = (buttonName) => {
     setSidebarButtonSelect(buttonName);
     if (buttonName == 'mess') {
-      setCenterContent(<Menu/>)
+      setCenterContent(<Menu />)
     } else if (buttonName == 'Calendar') {
-      setCenterContent(<CalendarPage/>)
-    } 
-    else if(buttonName === 'Recent events'){
+      setCenterContent(<CalendarPage />)
+    }
+    else if (buttonName === 'Recent Events') {
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
       setCenterContent(<Recentevent />)
-    } 
+    }
     else if (buttonName == 'places to eat') {
-      setCenterContent(<Places/>)
+      setCenterContent(<Places />)
     } else if (buttonName == 'NITW Clubs') {
-      setCenterContent(<ClubList/>)
+      setCenterContent(<ClubList />)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }
@@ -81,7 +81,7 @@ export default function Home() {
     } else {
       document.getElementsByClassName("food")[0].classList.add('selected')
     }
-    
+
     /*
     if (sidebarButtonSelect == 'mess') {
       setCenterContent(<Menu/>)
@@ -106,25 +106,25 @@ export default function Home() {
         setCenterContent(null);
       }
     }
-    
-    
+
+
     storeConfigData();
   }, [buttonSelect, sidebarButtonSelect]);
 
   let sidebar;
 
-  if (buttonSelect === 1){
-    sidebar = <StudentSidebar onButtonClick={handleButtonClick} />
+  if (buttonSelect === 1) {
+    sidebar = <StudentSidebar onButtonClick={handleButtonClick} sidebarButtonSelect={sidebarButtonSelect} />
   }
-  else if (buttonSelect === 2){
-    sidebar = <ClubsSidebar onButtonClick={handleButtonClick} />
+  else if (buttonSelect === 2) {
+    sidebar = <ClubsSidebar onButtonClick={handleButtonClick} sidebarButtonSelect={sidebarButtonSelect} />
   }
-  else if (buttonSelect === 3){
+  else if (buttonSelect === 3) {
     sidebar = <FoodSidebar onButtonClick={handleButtonClick} />
   }
   return (
     <>
-      <HomeLayout buttonSelect={buttonSelect} clickFunction = {handleClick} left={sidebar} right={centerContent} />
+      <HomeLayout buttonSelect={buttonSelect} clickFunction={handleClick} left={sidebar} right={centerContent} />
     </>
   )
 }

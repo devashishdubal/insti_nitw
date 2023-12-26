@@ -15,10 +15,11 @@ const Calendar = ({ dateSelected, setDateSelected, CustomButtonSelected, setButt
     const textInElement = litag.textContent;
     setDateSelected(new Date(currentYear, currentMonth, parseInt(textInElement)));
     // Remove "selected" class from previously selected element, if any
-    const previouslySelected = document.querySelector('.selected');
-    if (previouslySelected) {
-      // previouslySelected.classList.remove('selected');
-    }
+    const prev = dispDates.current.querySelectorAll('li');
+    prev.forEach(element => {
+      if (element.classList.contains('selected'))
+        element.classList.remove('selected');
+    });
 
     // Add "selected" class to the clicked element
     litag.classList.add('selected');

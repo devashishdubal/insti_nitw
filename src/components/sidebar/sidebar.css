@@ -36,6 +36,7 @@
 }
 
 .sidebar button:hover:not(.selected){
+    transition: 0.1s;
     background-color: rgba(240, 240, 240, 0.841);
 }
 
@@ -51,6 +52,7 @@
 .sidebar .selected {
     color: white;
     font-weight: 500;
+    transition: 0.15s;
     background-color: #4684A0;
 }
 

@@ -1,0 +1,15 @@
+{
+  "name": "nexus_backend",
+  "version": "1.0.0",
+  "description": "The backend for NITW Nexus application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "CHETAN KAR",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.3"
+  }
+}

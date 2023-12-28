@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
 
+dotenv.config();
+
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.use(express.json());
@@ -17,6 +19,6 @@ app.get("/", (req, res) => {
     }
 })
 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Backend server is running!");
 });

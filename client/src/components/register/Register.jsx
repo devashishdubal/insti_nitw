@@ -22,6 +22,10 @@ const Register = () => {
                     <div class="mand">*All fields are mandatory</div>
                     <form action="./home.html" method="POST">
                         <div class="form_element">
+                            <label for="username">USERNAME</label>
+                            <input type="text" id="username" name="username" required />
+                        </div>
+                        <div class="form_element">
                             <label for="first_name">FIRST NAME</label>
                             <input type="text" id="first_name" name="first_name" required />
                         </div>
@@ -34,8 +38,8 @@ const Register = () => {
                             <input type="email" id="email" name="email" required />
                         </div>
                         <div class="form_element">
-                            <label for="phone">PHONE NUMBER</label>
-                            <input type="tel" id="phone" name="phone" required />
+                            <label for="roll">ROLL NUMBER</label>
+                            <input type="text" id="roll" name="roll" required />
                         </div>
                         <div class="form_element">
                             <label for="pass_1">PASSWORD</label>

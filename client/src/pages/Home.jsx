@@ -49,7 +49,7 @@ export default function Home() {
         setButtonSelect(3);
       }
     }
-      setSidebarButtonSelect(null);
+      setSidebarButtonSelect(null); //t
   };
 
   const storeConfigData = () => {

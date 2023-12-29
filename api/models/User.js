@@ -20,10 +20,12 @@ const userSchema = new mongoose.Schema({
     },
     email: {
          type: String, 
-         required: true 
+         required: true,
+         unique:true
         },
     rollNo: { 
-        type: String 
+        type: String ,
+        unique: true
     },
     subscribedTo: [{ 
         type: mongoose.Schema.Types.ObjectId, 

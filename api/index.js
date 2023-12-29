@@ -9,6 +9,7 @@ const path = require("path");
 
 const authRoute = require("./routes/auth")
 const clubRoute = require("./routes/clubs")
+const userRoute = require("./routes/users")
 
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -28,6 +29,8 @@ app.get("/", (req, res) => {
 //routes
 app.use("/api/auth", authRoute);
 app.use("/api/clubs", clubRoute);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/users" , userRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Backend server is running!");

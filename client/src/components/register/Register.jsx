@@ -1,13 +1,14 @@
 import React from 'react'
+import './Register.css'
 
 const Register = () => {
     return (
         <div class="register-container">
             <div class="image-bar">
-                <img src="./images/sidebar.jpg" />
-                    <div class="card-body">
-                        <img src="./images/csea-logo.png" />
-                    </div>
+                {/* <img src="./images/sidebar.jpg" />
+                <div class="card-body">
+                    <img src="./images/csea-logo.png" />
+                </div> */}
             </div>
             <div class="content">
                 <div class="text-1">

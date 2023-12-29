@@ -1,0 +1,237 @@
+const router = require('express').Router();
+const Club = require('../models/Clubs');
+const User = require('../models/User');
+
+// make an endpoint to create a club and assign club owners (not for public)
+// owner can change permission settings for admin and members
+// admins can change permission settings for members only
+router.post("/createclub", async (req, res) => {
+    try {
+        const newClub = new Club({
+            clubId: req.body.clubId,
+            clubName: req.body.clubName,
+            clubLogo: req.body.clubLogo,
+            clubOwners: req.body.clubOwners,
+            clubAdmins: req.body.clubAdmins,
+            clubPosts: req.body.clubPosts,
+            clubMembers: req.body.clubMembers
+        });
+
+        const club = await newClub.save();
+        res.status(200).json("New club is created");
+    } catch (error) {
+        res.status(500).json(error);
+        console.log(error);
+    }
+})
+
+router.put("/addAdmin", async (req, res) => {
+    // only owner can add admin
+    // add admin provided the person is already in the members list
+    try {
+        // one more stage of verification (check if user doing this is owner)
+        // if not, throw an error
+        const newAdminData = req.body.newClubAdmin;
+        const clubIdToUpdate = req.body.clubId;
+        const userId = req.body.userId // this will be stored in login session
+
+        const adminExists = await User.findOne({
+            userId: newAdminData
+        });
+
+        if (!adminExists) {
+            throw "The user you have entered does not exist"
+        }
+
+        const isClubOwner = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubOwners: { $in: [userId] }
+        });
+
+        if (!isClubOwner) {
+            throw "The current user does not have permission to add an admin";
+        }
+
+        const result = await Club.updateOne(
+            { clubId: clubIdToUpdate },
+            { $addToSet : {clubAdmins: newAdminData}}
+        );
+        
+        if (result.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (result.modifiedCount > 0) {
+                //console.log('Document updated successfully');
+                res.status(200).send("A new admin has been added to the club.")
+            } else {
+                //console.log('Document found but no changes made');
+                // Handle the case where the document was found, but no changes were made
+                res.status(200).send("Admin already exists in the club.")
+            }
+        } else {
+            console.log('Document not found');
+            throw "Document was not found";
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+router.put("/addMember", async (req, res) => {
+    // owner or admin can add members
+    try {
+        // one more stage of verification (check if user doing this is owner)
+        // if not, throw an error
+        const newMemberData = req.body.newClubMember;
+        const clubIdToUpdate = req.body.clubId;
+        const userId = req.body.userId // this will be stored in login session 
+
+        const memberExists = await User.findOne({
+            userId: newMemberData
+        });
+
+
+        if (!memberExists) {
+            throw "The user you have entered does not exist"
+        }
+
+        const isClubAdmin = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubAdmins: { $in: [userId] }
+        });
+
+        const isClubOwner = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubOwners: { $in: [userId] }
+        });
+
+        if (!isClubAdmin && !isClubOwner) {
+            throw "The current user does not have permission to add a member";
+        }
+
+        const result = await Club.updateOne(
+            { clubId: clubIdToUpdate },
+            { $addToSet: {clubMembers: newMemberData}}
+        );
+
+        if (result.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (result.modifiedCount > 0) {
+                //console.log('Document updated successfully');
+                res.status(200).send("A new member has been added to the club.")
+            } else {
+                //console.log('Document found but no changes made');
+                // Handle the case where the document was found, but no changes were made
+                res.status(200).send("Member already exists in the club.")
+            }
+        } else {
+            throw "Document was not found";
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+// remove admin
+// remove member
+
+router.put("/removeAdmin", async(req, res) => {
+    try {
+        const removeAdminData = req.body.removeClubAdmin;
+        const clubIdToUpdate = req.body.clubId;
+        const userId = req.body.userId // this will be stored in login session
+
+        const adminExists = await User.findOne({
+            userId: removeAdminData
+        });
+
+        if (!adminExists) {
+            throw "The user you have entered does not exist"
+        }
+
+        const isClubOwner = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubOwners: { $in: [userId] }
+        });
+
+        if (!isClubOwner) {
+            throw "The current user does not have permission to add an admin";
+        }
+
+        const result = await Club.updateOne(
+            { clubId: clubIdToUpdate },
+            { $pull: { clubAdmins: removeAdminData }}
+        );
+        
+
+        if (result.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (result.modifiedCount > 0) {
+                //console.log('Document updated successfully');
+                res.status(200).send("Removed member from the club")
+            } else {
+                //console.log('Document found but no changes made');
+                // Handle the case where the document was found, but no changes were made
+                res.status(200).send("Member is not in the club.")
+            }
+        } else {
+            throw "Document was not found";
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+router.put("/removeMember", async(req, res) => {
+    try {
+        // one more stage of verification (check if user doing this is owner)
+        // if not, throw an error
+        const removeMemberData = req.body.removeClubMember;
+        const clubIdToUpdate = req.body.clubId;
+        const userId = req.body.userId // this will be stored in login session 
+
+        const memberExists = await User.findOne({
+            userId: removeMemberData
+        });
+
+        if (!memberExists) {
+            throw "The user you have entered does not exist"
+        }
+
+        const isClubAdmin = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubAdmins: { $in: [userId] }
+        });
+
+        const isClubOwner = await Club.findOne({
+            clubId: clubIdToUpdate,
+            clubOwners: { $in: [userId] }
+        });
+
+        if (!isClubAdmin && !isClubOwner) {
+            throw "The current user does not have permission to add a member";
+        }
+
+        const result = await Club.updateOne(
+            { clubId: clubIdToUpdate },
+            { $pull: {clubMembers: removeMemberData}}
+        );
+
+        if (result.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (result.modifiedCount > 0) {
+                //console.log('Document updated successfully');
+                res.status(200).send("Member has been removed")
+            } else {
+                //console.log('Document found but no changes made');
+                // Handle the case where the document was found, but no changes were made
+                res.status(200).send("Member is not in the club.")
+            }
+        } else {
+            throw "Document was not found";
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+module.exports = router;

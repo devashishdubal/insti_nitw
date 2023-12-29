@@ -8,6 +8,7 @@ const path = require("path");
 // const User = require("./models/User");
 
 const authRoute = require("./routes/auth")
+const clubRoute = require("./routes/clubs")
 
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -15,8 +16,6 @@ dotenv.config();
 
 mongoose.connect(process.env.mongo_link,{useNewUrlParser: true});
 app.use(express.json());
-
-
 
 app.get("/", (req, res) => {
     try {
@@ -28,6 +27,7 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/api/auth", authRoute);
+app.use("/api/clubs", clubRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Backend server is running!");

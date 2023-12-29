@@ -1,0 +1,84 @@
+// Make new users
+{
+  "userId": "1",
+  "firstName": "John",
+  "lastName": "Doe",
+  "password": "securePassword1",
+  "email": "john.doe@example.com",
+  "rollNo": "A12345"
+}
+
+{
+  "userId": "2",
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "password": "strongPass123",
+  "email": "alice.smith@example.com",
+  "rollNo": "B67890"
+}
+
+{
+  "userId": "3",
+  "firstName": "Bob",
+  "lastName": "Johnson",
+  "password": "safePass456",
+  "email": "bob.johnson@example.com",
+  "rollNo": "C54321"
+}
+
+{
+  "userId": "4",
+  "firstName": "Eva",
+  "lastName": "Miller",
+  "password": "secretPass789",
+  "email": "eva.miller@example.com",
+  "rollNo": "D98765"
+}
+
+{
+  "userId": "5",
+  "firstName": "Sam",
+  "lastName": "Brown",
+  "password": "password123",
+  "email": "sam.brown@example.com",
+  "rollNo": "E13579"
+}
+
+/// Make a new club
+
+// let club owner be john
+{
+    clubId: "CSES-234",
+    clubName: "CSES",
+    clubLogo: "some image link",
+    clubOwners: ["jdoe"],
+    clubAdmins: [],
+    clubPosts: [],
+    clubMembers: []
+}
+
+//// test the club endpoints such as addAdmin and addMember
+
+// we can add Admin only if we are an owner ourself
+// User ID - John, adding Alice as admin
+{
+    "newClubAdmin": "asmith",
+    "clubId": "CSES-234",
+    "userId": "jdoe"
+}
+
+// wrong userId - Current user does not have permission to add an admin
+
+//////// add new clubMembers
+{
+    "newClubMember": "bjohnson",
+    "clubId": "CSES-234",
+    "userId": "jdoe"
+}
+
+// remove clubAdmin
+{
+    "removeClubAdmin": "bjohnson",
+    "clubId": "CSES-234",
+    "userId": "jdoe"
+}

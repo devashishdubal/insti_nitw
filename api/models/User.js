@@ -25,7 +25,8 @@ const userSchema = new mongoose.Schema({
         },
     rollNo: { 
         type: String ,
-        unique: true
+        unique: true,
+        required : true
     },
     subscribedTo: [{ 
         type: mongoose.Schema.Types.ObjectId, 

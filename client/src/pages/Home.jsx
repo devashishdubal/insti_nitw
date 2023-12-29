@@ -10,6 +10,7 @@ import Places from "../components/food/places_to_eat/Places";
 import Questions from "../components/forum/questions/questions";
 // import Answers from "../components/forum/answers/answers";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
+import Register from "../components/register/Register";
 
 
 import "./Home.css"

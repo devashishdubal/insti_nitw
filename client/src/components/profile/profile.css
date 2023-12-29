@@ -1,0 +1,58 @@
+.user_info{
+   display: flex;
+   flex-direction: row;
+   justify-content:left;
+   align-items: center;
+   border: 1px black solid;
+   padding: 15px;
+}
+
+.information , .buttons{
+    padding-left: 10px;
+}
+h4,textarea,button,p{
+    margin: 5px;
+}
+
+textarea{
+    border-radius: 5px;
+    background-color: white;
+}
+
+textarea{
+    width: 200px;
+    height: 50px;
+}
+
+ #savebutton {
+    font-size: 17px;
+    padding: 22px 17px;
+    border: 0px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    border-radius: 25px;
+    background-color: #4886A2;
+    
+    
+}
+
+#savebutton:hover {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.circle-container {
+    width: 200px; /* Set the desired width */
+    height: 200px; /* Set the desired height */
+    overflow: hidden;
+    border-radius: 50%; /* Make it a circle */
+  }
+  
+  .circle-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire circle without stretching */
+  }

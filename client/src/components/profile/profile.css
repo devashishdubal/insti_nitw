@@ -1,4 +1,4 @@
-.user_info{
+.user_profile{
    display: flex;
    flex-direction: row;
    justify-content:left;
@@ -10,21 +10,28 @@
 .information , .buttons{
     padding-left: 10px;
 }
-h4,textarea,button,p{
+.user_profile h4,textarea,button,p{
     margin: 5px;
 }
 
-textarea{
+.user_profile textarea{
     border-radius: 5px;
     background-color: white;
 }
 
-textarea{
+.user_profile textarea{
     width: 200px;
     height: 50px;
 }
 
- #savebutton {
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+ .savebutton {
+    display: flex;
+    align-items: center;
     font-size: 17px;
     padding: 22px 17px;
     border: 0px;
@@ -33,11 +40,9 @@ textarea{
     color: white;
     border-radius: 25px;
     background-color: #4886A2;
-    
-    
 }
 
-#savebutton:hover {
+.savebutton:hover {
     font-weight: bold;
     cursor: pointer;
     transform: scale(1.05);

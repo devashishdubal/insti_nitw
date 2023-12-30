@@ -4,9 +4,7 @@ import React from 'react';
 const Profile = () =>{
     return(
         <div className="profile_page">
-
-          <div className="user_info">
-
+          <div className="user_profile">
                         <div className="circle-container">
                             <img
                                 src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg"
@@ -25,8 +23,8 @@ const Profile = () =>{
                             </div>
 
                             <div className = "buttons">
-                             <button id = "savebutton">Edit</button> 
-                             <button id = "savebutton">Share</button> 
+                             <button className = "savebutton">Edit</button> 
+                             <button className = "savebutton">Share</button> 
                             </div>
                                             
            </div>

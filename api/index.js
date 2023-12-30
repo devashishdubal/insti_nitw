@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
+
+app.use(cors())
 
 // const User = require("./models/User");
 

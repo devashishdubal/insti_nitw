@@ -40,7 +40,8 @@ router.put("/addAdmin", async (req, res) => {
         });
 
         if (!adminExists) {
-            throw "The user you have entered does not exist"
+            //throw "The user you have entered does not exist"
+            throw {status: 404, message: "The user you have entered does not exist"}
         }
 
         const isClubOwner = await Club.findOne({
@@ -49,7 +50,8 @@ router.put("/addAdmin", async (req, res) => {
         });
 
         if (!isClubOwner) {
-            throw "The current user does not have permission to add an admin";
+            //throw "The current user does not have permission to add an admin";
+            throw {status: 403, message: "The user does not have permission to add an admin"}
         }
 
         const result = await Club.updateOne(
@@ -69,10 +71,11 @@ router.put("/addAdmin", async (req, res) => {
             }
         } else {
             console.log('Document not found');
-            throw "Document was not found";
+            //throw "Document was not found";
+            throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(500).send(error);
+        res.status(error.status).send(error.message);
     }
 })
 
@@ -91,7 +94,7 @@ router.put("/addMember", async (req, res) => {
 
 
         if (!memberExists) {
-            throw "The user you have entered does not exist"
+            throw {status: 404, message: "The user you have entered does not exist"}
         }
 
         const isClubAdmin = await Club.findOne({
@@ -105,7 +108,7 @@ router.put("/addMember", async (req, res) => {
         });
 
         if (!isClubAdmin && !isClubOwner) {
-            throw "The current user does not have permission to add a member";
+            throw {status: 403, message: "The user does not have permission to add an member"}
         }
 
         const result = await Club.updateOne(
@@ -124,10 +127,10 @@ router.put("/addMember", async (req, res) => {
                 res.status(200).send("Member already exists in the club.")
             }
         } else {
-            throw "Document was not found";
+            throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(500).send(error);
+        res.status(error.status).send(error.message);
     }
 })
 
@@ -145,7 +148,7 @@ router.put("/removeAdmin", async(req, res) => {
         });
 
         if (!adminExists) {
-            throw "The user you have entered does not exist"
+            throw {status: 404, message: "The user you have entered does not exist"}
         }
 
         const isClubOwner = await Club.findOne({
@@ -154,7 +157,7 @@ router.put("/removeAdmin", async(req, res) => {
         });
 
         if (!isClubOwner) {
-            throw "The current user does not have permission to add an admin";
+            throw {status: 403, message: "The user does not have permission to remove an admin"}
         }
 
         const result = await Club.updateOne(
@@ -174,10 +177,10 @@ router.put("/removeAdmin", async(req, res) => {
                 res.status(200).send("Member is not in the club.")
             }
         } else {
-            throw "Document was not found";
+            throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(500).send(error);
+        res.status(error.status).send(error.message);
     }
 })
 
@@ -194,7 +197,7 @@ router.put("/removeMember", async(req, res) => {
         });
 
         if (!memberExists) {
-            throw "The user you have entered does not exist"
+            throw {status: 404, message: "The user you have entered does not exist"}
         }
 
         const isClubAdmin = await Club.findOne({
@@ -208,7 +211,7 @@ router.put("/removeMember", async(req, res) => {
         });
 
         if (!isClubAdmin && !isClubOwner) {
-            throw "The current user does not have permission to add a member";
+            throw {status: 403, message: "The user does not have permission to remove a member"}
         }
 
         const result = await Club.updateOne(
@@ -227,10 +230,10 @@ router.put("/removeMember", async(req, res) => {
                 res.status(200).send("Member is not in the club.")
             }
         } else {
-            throw "Document was not found";
+            throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(500).send(error);
+        res.status(error.status).send(error.message);
     }
 })
 

@@ -19,7 +19,7 @@
     display: flex;
 }
 
-.navBar button, a {
+.navBar button, .navBar a {
     display: flex;
     justify-content: center;
     align-items: center;

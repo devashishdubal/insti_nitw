@@ -178,10 +178,12 @@
 
 .register-container .instead a {
     color: black;
+    text-decoration: underline;
     text-decoration-style: wavy;
 }
 
 .register-container .instead a:hover {
+    cursor: pointer;
     color:rgb(83, 83, 130);
     transition: 0.3s;
 }

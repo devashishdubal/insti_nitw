@@ -64,3 +64,7 @@
 .sidebar .selected svg[fill=""]{
     fill: white;
 }
+
+.sidebar .sidebar-top button:active {
+    background-color: rgba(197, 197, 197, 0.841);
+}

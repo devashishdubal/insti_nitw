@@ -53,7 +53,7 @@
 .sidebar .selected {
     color: white;
     font-weight: 500;
-    transition: 0.15s;
+    transition: 0.2s;
     background-color: #4684A0;
 }
 
@@ -65,6 +65,6 @@
     fill: white;
 }
 
-.sidebar .sidebar-top button:active {
+.sidebar .sidebar-top button:active:not(.selected) {
     background-color: rgba(197, 197, 197, 0.841);
 }

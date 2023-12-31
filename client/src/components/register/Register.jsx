@@ -23,7 +23,7 @@ const Register = () => {
             rollNo
         };
         axios
-            .post('http://localhost:8000/api/auth/register',data)
+            .post('http://localhost:8000/api/v1/auth/register',data)
             .then(() => {
                 console.log("Account added");
                 console.log(data);

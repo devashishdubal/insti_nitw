@@ -74,6 +74,10 @@ router.put("/addAdmin", async (req, res) => {
             throw {status: 403, message: "The user does not have permission to add an admin"}
         }
 
+        if (isClubOwner.clubAdmins.length === 2) {
+            throw {status: 403, message: "Cannot add more than 2 admins"}
+        }
+
         const result = await Club.updateOne(
             { clubId: clubIdToUpdate },
             { $addToSet : {clubAdmins: newAdminData}}

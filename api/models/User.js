@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     subscribedTo: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Club'
     }],
     likedQuestions: [{

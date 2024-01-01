@@ -13,6 +13,9 @@ const clubSchema = new mongoose.Schema({
     clubLogo: { 
         type: String 
     }, // Assuming the logo is stored as a file path or URL
+    clubDescription: {
+        type: String
+    },
     clubOwners: [{
         type: String, 
         ref: 'User' }],
@@ -25,7 +28,11 @@ const clubSchema = new mongoose.Schema({
     clubMembers: [{
         type: String, 
         ref: 'User' }],
-    // owner
+    clubSubscribers: [{
+        type: String,
+        ref: 'User'
+        }
+    ] // a list of all the subscribers of the club
 });
 
 module.exports = mongoose.model("Club", clubSchema);

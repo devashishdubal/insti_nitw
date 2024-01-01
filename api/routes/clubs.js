@@ -14,7 +14,9 @@ router.post("/createclub", async (req, res) => {
             clubOwners: req.body.clubOwners,
             clubAdmins: req.body.clubAdmins,
             clubPosts: req.body.clubPosts,
-            clubMembers: req.body.clubMembers
+            clubMembers: req.body.clubMembers,
+            clubDescription: req.body.clubDescription,
+            clubSubscribers: req.body.clubSubscribers
         });
 
         const club = await newClub.save();
@@ -24,6 +26,24 @@ router.post("/createclub", async (req, res) => {
         console.log(error);
     }
 })
+router.get("/getclubdetails/:id", async (req, res) => {
+    try {
+        const clubId = req.params.id;
+
+        const clubDetails = await Club.findOne({ clubId: clubId });
+
+        if (!clubDetails) {
+            return res.status(404).send("Club with this ID does not exist");
+        }
+
+        console.log(clubDetails);
+
+        return res.status(200).send(clubDetails);
+    } catch (error) {
+        return res.status(error.status || 500).send(error.message || "Internal Server Error");
+    }
+});
+
 
 router.put("/addAdmin", async (req, res) => {
     // only owner can add admin
@@ -75,7 +95,7 @@ router.put("/addAdmin", async (req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(error.status).send(error.message);
+        res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })
 
@@ -130,7 +150,7 @@ router.put("/addMember", async (req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(error.status).send(error.message);
+        res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })
 
@@ -180,7 +200,7 @@ router.put("/removeAdmin", async(req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(error.status).send(error.message);
+        res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })
 
@@ -233,8 +253,99 @@ router.put("/removeMember", async(req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
-        res.status(error.status).send(error.message);
+        res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })
+
+// user subscribe to club
+router.put("/handleSubscribe", async (req, res) => {
+    try {
+        const clubId = req.body.clubId;
+        const user_to_subscribe = req.body.userId;
+
+        const userExists = await User.findOne({
+            userId: user_to_subscribe
+        });
+
+        if (!userExists) {
+            return res.status(404).send("User does not exist");
+        }
+
+        const clubExists = await Club.findOne({
+            clubId: clubId
+        });
+
+        if (!clubExists) {
+            return res.status(404).send("Club does not exist");
+        }
+
+        const clubResult = await Club.updateOne(
+            { clubId: clubId },
+            { $addToSet: { clubSubscribers: user_to_subscribe } }
+        );
+
+        const userResult = await User.updateOne(
+            { userId: user_to_subscribe },
+            { $addToSet: { subscribedTo: clubId } }
+        );
+
+        if (clubResult.matchedCount > 0 && userResult.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (clubResult.modifiedCount > 0 && userResult.modifiedCount > 0) {
+                return res.status(200).send("Subscription has been added");
+            } else {
+                return res.status(200).send("User was already subscribed");
+            }
+        } else {
+            return res.status(404).send("Club not found");
+        }
+
+    } catch (error) {
+        return res.status(500).send("Internal Server Error");
+    }
+});
+
+
+router.put("/handleUnsubscribe", async (req, res) => {
+    try {
+        const clubId = req.body.clubId;
+        const user_to_unsubscribe = req.body.userId;
+
+        const userExists = await User.findOne({ userId: user_to_unsubscribe });
+        const clubExists = await Club.findOne({ clubId: clubId });
+
+        if (!userExists) {
+            return res.status(404).send("User does not exist");
+        }
+
+        if (!clubExists) {
+            return res.status(404).send("Club does not exist");
+        }
+
+        const clubResult = await Club.updateOne(
+            { clubId: clubId },
+            { $pull: { clubSubscribers: user_to_unsubscribe } }
+        );
+
+        const userResult = await User.updateOne(
+            { userId: user_to_unsubscribe },
+            { $pull: { subscribedTo: clubId } }
+        );
+
+        if (clubResult.matchedCount > 0 && userResult.matchedCount > 0) {
+            // Check if the document was actually modified
+            if (clubResult.modifiedCount > 0 && userResult.modifiedCount > 0) {
+                return res.status(200).send("Subscription has been removed");
+            } else {
+                return res.status(200).send("User was already unsubscribed");
+            }
+        } else {
+            return res.status(404).send("Club not found");
+        }
+
+    } catch (error) {
+        return res.status(error.status || 500).send(error.message || "Internal Server Error");
+    }
+});
 
 module.exports = router;

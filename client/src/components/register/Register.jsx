@@ -1,6 +1,7 @@
 import React from 'react'
 import './Register.css'
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
+import Typed from 'typed.js';
 import axios from 'axios';
 
 const Register = () => {
@@ -11,6 +12,23 @@ const Register = () => {
     const [rollNo,setRollNumber] = useState(null);
     const [password,setPassword] = useState(null);
     const [confirmPassword,setConfirmPassword] = useState(null);
+
+    const el = React.useRef(null);
+
+    React.useEffect(() => {
+        const typed = new Typed(el.current, {
+          strings: ['By The Students', 'For The Students'],
+          typeSpeed: 100,
+          backSpeed: 50,
+          loop: true,
+          showCursor: false
+        });
+    
+        return () => {
+          // Destroy Typed instance during cleanup to stop animation
+          typed.destroy();
+        };
+      }, []);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -43,11 +61,11 @@ const Register = () => {
                     </div>
                 </div>
                 <div className="content">
-                    <div className="text-1">
-                        TO ITERATE IS HUMAN, RECURSION IS DIVINE.
+                    <div ref={el} className="text-1">
+                        {/* TO ITERATE IS HUMAN, RECURSION IS DIVINE. */}
                     </div>
                     <div className="text-2">
-                        Sign up now and recurse with us.
+                        Sign up now and join nexus.
                     </div>
                     <div className="form-container">
                         <div className="form-subtext">Let's do this!</div>

@@ -61,6 +61,7 @@
 
 .register-container .text-1 {
     text-align: center;
+    height:50px;
     font-size: 38px;
     font-family: "Russo One", sans-serif;
     font-weight: bold;

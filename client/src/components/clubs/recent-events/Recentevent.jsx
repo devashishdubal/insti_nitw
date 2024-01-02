@@ -10,7 +10,6 @@ export default function Recentevent() {
 
   useEffect(() => {
     const fetchData = async () => {
-        console.log("Fetching")
         try {
             const response = await axios.get('http://localhost:8000/api/v1/events/recentEvents/');
             setData(response.data);

@@ -1,0 +1,26 @@
+.recent-events-container{
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.no-events {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.msg1 {
+    color: grey;
+    font-size: 70px;
+}
+
+.msg2 {
+    color: grey;
+    font-size: 30px;
+}
+
+.no-events img {
+    width: 300px;
+    height: 300px;
+}

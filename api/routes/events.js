@@ -74,6 +74,30 @@ router.put("/updateEventDetails/:id",async (req,res)=>{
     }
 })
 
+router.get("/recentEvents", async (req, res) => {
+    try {
+        const currentDate = new Date();
+        const recentEvents = await Event.find({
+            eventDateTime: { $lt: currentDate },
+        });
 
+        return res.status(200).send(recentEvents);
+    } catch (error) {
+        return res.status(500).send("Internal server error")
+    }
+})
+
+router.get("/upcomingEvents", async (req, res) => {
+    try {
+        const currentDate = new Date();
+        const upcomingEvents = await Event.find({
+            eventDateTime: { $gt: currentDate },
+        });
+
+        return res.status(200).send(upcomingEvents);
+    } catch (error) {
+        return res.status(500).send("Internal server error")
+    }
+}) 
 
 module.exports = router;

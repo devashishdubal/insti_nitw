@@ -2,17 +2,40 @@ import Recenteventcard from './recenteventcard';
 import React, { useEffect, useState } from 'react';
 import { recentEvents } from '../../../dummydata/recenteventsdata';
 import "./recentevent.css"
+import axios from "axios";
 
 export default function Recentevent() {
-//   const [recentEvents,setRecentEvents] = useState([]);
+  const [allCards, setAllCards] = useState([]);
+  const [data, setData] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+        console.log("Fetching")
+        try {
+            const response = await axios.get('http://localhost:8000/api/v1/events/recentEvents/');
+            setData(response.data);
 
+            const cards = response.data.map((event, index) => ({
+                id: index + 1,
+                card: (
+                  <Recenteventcard key={index} recenteventdata={event} />
+                ),
+            }));
+            setAllCards(cards);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
-    <h1>Recent Events</h1>
     <div className='recent-events-container'>
-        {recentEvents.map(r=>(
-            <Recenteventcard key={r.id} recenteventdata={r} />
+        {allCards.map((card) => (
+            <div key={card.id}>
+              {card.card}
+            </div>
         ))}
     </div>
     </>

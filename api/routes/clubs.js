@@ -26,6 +26,18 @@ router.post("/createclub", async (req, res) => {
         console.log(error);
     }
 })
+
+router.get("/getAllClubs", async (req, res) => {
+    try {
+        const clubDetails = await Club.find({});
+        
+        return res.status(200).send(clubDetails);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send("Internal Server Error");
+    }
+})
+
 router.get("/getclubdetails/:id", async (req, res) => {
     try {
         const clubId = req.params.id;

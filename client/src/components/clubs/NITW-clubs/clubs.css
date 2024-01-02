@@ -1,6 +1,12 @@
+.card_outside_container {
+    width: 100%;
+}
+
 .club_card {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 20%;
     padding: 30px;
     background-color: rgb(255, 241, 241);
@@ -8,7 +14,7 @@
     transition: transform 0.3s ease-in-out;
     border: 1px dotted;
     border-radius: 15px;
-    gap: 7px;
+    gap: 10px;
 }
 
 .club_card:hover {
@@ -23,6 +29,7 @@
 
 .club_name {
     font-size: 25px;
+    font-weight: bold
 }
 
 .allClubs {

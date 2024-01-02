@@ -1,45 +1,32 @@
-.user_profile{
+/*Comments are there for better understanding for me*/
+.user_info{
    display: flex;
-   flex-direction: row;
-   justify-content:left;
+   flex-direction: column;
+   justify-content:center;
    align-items: center;
    border: 1px black solid;
-   padding: 15px;
+   padding: 10px;
 }
 
-.information , .buttons{
-    padding-left: 10px;
+.information {
+    padding-top: 80px;
+    text-align: center;
+    font-size: 24px;
 }
-.user_profile h4,textarea,button,p{
+
+h4,textarea,p{
     margin: 5px;
 }
 
-.user_profile textarea{
-    border-radius: 5px;
-    background-color: white;
-}
-
-.user_profile textarea{
-    width: 200px;
-    height: 50px;
-}
-
-.buttons {
-    display: flex;
-    align-items: center;
-}
-
- .savebutton {
-    display: flex;
-    align-items: center;
-    font-size: 17px;
-    padding: 22px 17px;
-    border: 0px;
-    height: 40px;
-    border-radius: 5px;
-    color: white;
+#savebutton {
+    font-size: 12px;
+    margin: 10px;
+    padding: 15px 15px;
     border-radius: 25px;
-    background-color: #4886A2;
+    color: white;
+    background-color:rgb(99, 101, 209);
+    text-align: center;
+    vertical-align: middle;  
 }
 
 .savebutton:hover {
@@ -49,15 +36,53 @@
     transition: 0.2s;
 }
 
+.banner-container{
+    position: relative;
+}
+
+.banner{
+   max-height: 200px;
+   border-radius: 15px;
+   overflow: hidden;
+}
+
 .circle-container {
     width: 200px; /* Set the desired width */
     height: 200px; /* Set the desired height */
     overflow: hidden;
     border-radius: 50%; /* Make it a circle */
-  }
+}
   
-  .circle-photo {
+.circle-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire circle without stretching */
-  }
+}
+
+.circle-container {
+    position: absolute; /* Position the div absolutely within its closest positioned ancestor */
+    top: 75px; /* Adjust the top position to overlap with the banner */
+    left: calc(50% - 100px); /* Adjust the left position to overlap with the banner */
+    z-index: 2; /* Ensure the overlapping div is above the image */
+}
+
+.logo-button {
+    margin: 10px;
+    border: 0px;
+    background-color: #ECECF0;
+    border-radius: 25px;
+}
+
+.logo-button:hover {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.logo-img {
+    width: 35px; /* Adjust the width as needed */
+    height: 35px;
+}
+ 
+  
+  

@@ -67,4 +67,5 @@
 
 .sidebar .sidebar-top button:active:not(.selected) {
     background-color: rgba(197, 197, 197, 0.841);
+    transition-delay: 50ms;
 }

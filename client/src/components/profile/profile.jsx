@@ -1,9 +1,26 @@
 import "./profile.css"
-import React from 'react';
+import { useState,useEffect } from "react";
+import axios from "axios";
 
 const Profile = () =>{
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+      axios
+        .get('http://localhost:8000/api/v1/users/jdoe')
+        .then(response => {
+          setUserData(response.data);
+        //   console.log(response.data);
+        })
+        .catch(error => {
+          alert('Error! Please check input fields');
+        });
+    }, []);
+    
     return(
         <div className="profile_page">
+            {userData && (
           <div className="user_profile">
                         <div className="circle-container">
                             <img
@@ -15,10 +32,10 @@ const Profile = () =>{
 
                 
                             <div className = "information">
-                                    <h4>Username: rashwinmusuku </h4>
+                                    <h4>{userData.userId} </h4>
                                     <h4> Roll Number: 22CSB0F07 </h4>
                                     <h4> Branch: Computer Science and Engineering </h4>
-                                    <h4> Email: rm22csb0f07@student.nitw.ac.in </h4>
+                                    <h4> Email: {userData.email} </h4>
                                     <p> About: Kabhi Kabhi lagta hai apun hi Bhagwan hai </p> 
                             </div>
 
@@ -28,7 +45,7 @@ const Profile = () =>{
                             </div>
                                             
            </div>
-         
+            )}
         </div>
          
     );

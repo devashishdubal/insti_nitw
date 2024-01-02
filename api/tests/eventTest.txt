@@ -1,0 +1,65 @@
+Dummy Data for events:
+
+// Event 1
+{
+  "eventName": "Workshop on Web Development",
+  "eventDescription": "Learn the latest trends in web development.",
+  "eventDateTime": "2023-06-15T18:00:00Z",
+  "eventOrganizer": "ORG123", // Assuming "ORG123" is a valid Club ObjectId
+  "registerable": true,
+  "registrationLink": "https://example.com/web-development-workshop",
+  "eventImage": "https://example.com/images/web-development.jpg",
+  "eventVenue": "Tech Hall",
+  "targetYear": 2
+}
+
+// Event 2
+{
+  "eventName": "Networking Night",
+  "eventDescription": "Connect with professionals in your field.",
+  "eventDateTime": "2023-07-20T19:30:00Z",
+  "eventOrganizer": "ORG456", // Assuming "ORG456" is a valid Club ObjectId
+  "registerable": true,
+  "registrationLink": "https://example.com/networking-night",
+  "eventImage": "https://example.com/images/networking-night.jpg",
+  "eventVenue": "Business Center",
+  "targetYear": 3
+}
+
+// Event 3
+{
+  "eventName": "Hackathon Challenge",
+  "eventDescription": "Showcase your coding skills in a 24-hour hackathon.",
+  "eventDateTime": "2023-08-10T12:00:00Z",
+  "eventOrganizer": "ORG789", // Assuming "ORG789" is a valid Club ObjectId
+  "registerable": true,
+  "registrationLink": "https://example.com/hackathon-challenge",
+  "eventImage": "https://example.com/images/hackathon.jpg",
+  "eventVenue": "Innovation Lab",
+  "targetYear": 4
+}
+
+// Event 4
+{
+  "eventName": "Art Exhibition",
+  "eventDescription": "Explore creativity through various art forms.",
+  "eventDateTime": "2023-09-05T15:00:00Z",
+  "eventOrganizer": "ORG123", // Assuming "ORG123" is a valid Club ObjectId
+  "registerable": false,
+  "eventImage": "https://example.com/images/art-exhibition.jpg",
+  "eventVenue": "Art Gallery",
+  "targetYear": 2
+}
+
+// Event 5
+{
+  "eventName": "Career Fair",
+  "eventDescription": "Discover career opportunities with leading companies.",
+  "eventDateTime": "2023-10-15T10:00:00Z",
+  "eventOrganizer": "ORG456", // Assuming "ORG456" is a valid Club ObjectId
+  "registerable": true,
+  "registrationLink": "https://example.com/career-fair",
+  "eventImage": "https://example.com/images/career-fair.jpg",
+  "eventVenue": "Convention Center",
+  "targetYear": 3
+}

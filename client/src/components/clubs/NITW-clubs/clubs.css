@@ -9,7 +9,7 @@
     justify-content: center;
     width: 20%;
     padding: 30px;
-    background-color: rgb(255, 241, 241);
+    background-color: rgb(255, 255, 255);
     box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease-in-out;
     border: 1px dotted;
@@ -52,6 +52,7 @@
     width: 110px;
     height: 110px;
     object-fit: cover;
+    border: 2px solid black;
     border-radius: 50%;
 }
 

@@ -10,6 +10,7 @@ import Places from "../components/food/places_to_eat/Places";
 import Questions from "../components/forum/questions/questions";
 // import Answers from "../components/forum/answers/answers";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
+import Register from "../components/register/Register";
 import Profile from "../components/profile/profile";
 
 
@@ -30,22 +31,26 @@ export default function Home() {
   );
 
   const handleClick = (event) => {
+    const regButton = document.querySelector(".register");
     const buttonGroup = document.querySelectorAll(".buttonGroup a");
     buttonGroup.forEach(btn => {
       btn.classList.remove('selected');
     });
     const btn = event.target;
-    btn.classList.add('selected');
+    if (btn === regButton) setCenterContent(<Register />);
+    else {
+      btn.classList.add('selected');
 
-    console.log(btn.className);
-    if (btn.className === 'student selected') {
-      setButtonSelect(1);
-    } else if (btn.className === 'club selected') {
-      setButtonSelect(2);
-    } else if (btn.className === 'food selected') {
-      setButtonSelect(3);
+      console.log(btn.className);
+      if (btn.className === 'student selected') {
+        setButtonSelect(1);
+      } else if (btn.className === 'club selected') {
+        setButtonSelect(2);
+      } else if (btn.className === 'food selected') {
+        setButtonSelect(3);
+      }
     }
-    setSidebarButtonSelect(null);
+      setSidebarButtonSelect(null); //t
   };
 
   const storeConfigData = () => {

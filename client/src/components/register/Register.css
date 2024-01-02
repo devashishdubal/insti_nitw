@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Autour+One&family=Schoolbell&display=swap');
+
+.register-container-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.register-container {
+    display: flex;
+    align-self: center;
+    border-radius: 15px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.register-container .image-bar {
+    padding: 0px;
+    position: relative;
+    max-width: 280px;
+}
+
+.register-container .card-body {
+    padding: 0px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 11.5rem;
+    width: 100%;
+    height: 160px;
+    background-color:rgba(0, 0, 0, 0.355);
+}
+
+.register-container .card-body img {
+    width: 145px;
+    height: auto;
+    border-radius: 50px;
+    position: absolute;
+}
+
+.register-container .image-bar > img {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-bottom: -4.5px;
+    height: 550px;
+}
+
+.register-container .content {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    align-items: center;
+    gap: 1em;
+}
+
+.register-container .text-1 {
+    text-align: center;
+    font-size: 38px;
+    font-family: "Russo One", sans-serif;
+    font-weight: bold;
+    background: -webkit-linear-gradient(0deg, #5087a5 0%, black 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.register-container .text-2 {
+    font-family: 'ABeeZee', sans-serif;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.register-container .form-container {
+    padding: 1em 3.5em;
+    background-color: #dadada7a;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: flex-start;
+}
+
+.register-container .mand {
+    margin-top: -8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-style: italic;
+    align-self: flex-end;
+}
+
+.register-container .form-subtext {
+    font-family: 'Autour One', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.register-container form {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.register-container .form_element {
+    gap: 0.1em;
+    display: flex;
+    flex-direction: column;
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.register-container label {
+    font-size: 12px;
+}
+
+.register-container button[type="submit"] {
+    margin: auto;
+}
+
+.register-container .login,
+.register-container button[type="submit"] {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'ABeeZee', sans-serif;
+    padding: 0.8em 1em;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 0px;
+    background-color: black;
+    color: white;
+    box-shadow: 5px 5px 5px white;
+}
+
+.register-container button[type="submit"] {
+    box-shadow: 5px 5px 2px #92a7e5;
+}
+
+.register-container .login:hover,
+.register-container button[type="submit"]:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.796);
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.register-container input {
+    padding: 3px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1.5px solid #cecfd1;
+}
+
+.register-container input:focus {
+    border: 1.5px solid rgb(136, 136, 242);
+    outline: none;
+    box-shadow: 5px 5px 6px rgba(128, 128, 128, 0.524);
+}
+
+.register-container .error {
+    border: 1.5px solid red;
+    background-color: rgba(255, 0, 0, 0.127);
+    transition: 0.3s;
+}
+
+.register-container .error:focus {
+    border: 1.5px solid red;
+    background-color: white;
+    outline: none;
+    box-shadow: 5px 5px 6px rgba(128, 128, 128, 0.524);
+}
+
+.register-container .instead {
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.register-container .instead a {
+    color: black;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+}
+
+.register-container .instead a:hover {
+    cursor: pointer;
+    color:rgb(83, 83, 130);
+    transition: 0.3s;
+}

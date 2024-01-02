@@ -11,7 +11,7 @@ const Topbar = ({ buttonSelect, clickFunction }) => {
       </div>
       <div className="signUp">
         <button className="login">Login</button>
-        <button className="register">Register</button>
+        <button className="register" onClick={clickFunction}>Register</button>
       </div>
     </div>
   );

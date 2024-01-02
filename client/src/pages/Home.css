@@ -42,7 +42,7 @@ body {
 }
 
 .force-overflow {
-    min-height: 100px;
+    min-height: 1px;
 }
 
 .scrollbar-primary::-webkit-scrollbar {

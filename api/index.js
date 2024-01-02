@@ -31,7 +31,6 @@ app.get("/", (req, res) => {
 })
 
 //routes
-app.use("/api/auth", authRoute);
 app.use("/api/v1/clubs", clubRoute);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users" , userRoute);

@@ -13,6 +13,7 @@ app.use(cors())
 const authRoute = require("./routes/auth")
 const clubRoute = require("./routes/clubs")
 const userRoute = require("./routes/users")
+const eventRoute = require("./routes/events")
 
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -30,10 +31,11 @@ app.get("/", (req, res) => {
 })
 
 //routes
-app.use("/api/auth", authRoute); //this is not needed (because line 35 refers to the same thing) and if you are seeing this just leave it alone with the comment i will correct it when this branch is merged but you should use the other authroute v1 one in the axios command
-app.use("/api/clubs", clubRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/v1/clubs", clubRoute);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users" , userRoute);
+app.use("/api/v1/events",eventRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Backend server is running!");

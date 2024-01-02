@@ -7,13 +7,13 @@ const Profile = () => {
 
     useEffect(() => {
       axios
-        .get('http://localhost:8000/api/v1/users/jdoe')
+        .get('http://localhost:8000/api/v1/users/asmith')
         .then(response => {
           setUserData(response.data);
         //   console.log(response.data);
         })
         .catch(error => {
-          alert('Error! Please check input fields');
+          console.log('Error! Please check input fields');
         });
     }, []);
 
@@ -23,6 +23,7 @@ const Profile = () => {
 
   return (
     <div className="profile_page">
+        {userData && (
       <div className="user_info">
         <div className="banner-container">
           <div className="banner">
@@ -43,10 +44,11 @@ const Profile = () => {
         </div>
 
         <div className="information">
-          <h4>Username: rashwinmusuku</h4>
-          <h4>Roll Number: 22CSB0F07</h4>
+          <h2>{userData.firstName} {userData.lastName} </h2>
+          <h4>Username: {userData.userId}</h4>
+          <h4>Roll Number: {userData.rollNo}</h4>
           <h4>Branch: Computer Science and Engineering</h4>
-          <h4>Email: rm22csb0f07@student.nitw.ac.in</h4>
+          <h4>Email: {userData.email}</h4>
           <p>About: Kabhi Kabhi lagta hai apun hi Bhagwan hai</p>
         </div>
 
@@ -69,7 +71,7 @@ const Profile = () => {
             />
           </button>
           
-          <button className="logo-button" onClick={() => redirectToUrl('mailto:your.email@example.com')}>
+          <button className="logo-button" onClick={() => redirectToUrl('mailto:{your.email@example.com}')}>
             <img
               className="logo-img"
               src="https://clipground.com/images/email-logo-png-19.png"
@@ -100,6 +102,7 @@ const Profile = () => {
           <button id="savebutton">Share</button>
         </div>
       </div>
+        )}
     </div>
   );
 }

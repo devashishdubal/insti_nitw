@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
-import Data from "./dummyData.json";
+// import Data from "./dummyData.json";
 import Answers from '../answers/answers';
+import axios from 'axios';
 
 const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
     const [ask, setAsk] = useState(false);
     const [answer, setAnswer] = useState(false);
     const [index, setIndex] = useState(null);
+    //
+    const [Data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/v1/forum/getQuestions`)
+            .then((response) => {
+                setData(response.data.Data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const showAnswersPage = (index) => {
         setAsk(false);
@@ -23,13 +37,13 @@ const Questions = () => {
 
     useEffect(() => {
         //console.log(Data)
-        setAllQuestions([...Array(Data.length)].map((_, index) => 
-        ({ id: index + 1, card: <QuestionCard title={Data[index].title} description={Data[index].description} tags={Data[index].tags} showAnswers={showAnswersPage} index={index}/> })));
-    }, []);
+        setAllQuestions([...Array(Data.length)].map((_, index) =>
+            ({ id: index + 1, card: <QuestionCard title={Data[index].questionTitle} description={Data[index].questionBody} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} /> })));
+    }, [Data]);
 
     const changeContents = () => {
         setAsk(!ask);
-        setAnswer(false); 
+        setAnswer(false);
     };
 
     return (
@@ -39,7 +53,7 @@ const Questions = () => {
                     {(!answer && ask) && (
                         <button onClick={changeContents} id='back'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M19 12H6M12 5l-7 7 7 7"/>
+                                <path d="M19 12H6M12 5l-7 7 7 7" />
                             </svg>
                         </button>
                     )}
@@ -67,7 +81,7 @@ const Questions = () => {
             {ask ? (
                 <AskQuestionForm />
             ) : answer ? (
-                <Answers hideAnswers = {hideAnswerPage} Data = {Data[index]}/> 
+                <Answers hideAnswers={hideAnswerPage} Data={Data[index]} />
             ) : (
                 <div className='questions scroller'>
                     {allQuestions.map((question, index) => (

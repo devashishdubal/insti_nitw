@@ -11,6 +11,7 @@ import Questions from "../components/forum/questions/questions";
 // import Answers from "../components/forum/answers/answers";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
 import Register from "../components/register/Register";
+import Profile from "../components/profile/profile";
 
 
 import "./Home.css"
@@ -65,16 +66,18 @@ export default function Home() {
     } else if (buttonName == 'Calendar') {
       setCenterContent(<CalendarPage />)
     }
-    else if (buttonName === 'Recent Events') {
+      else if (buttonName === 'Recent Events') {
       // setCenterContent(<><Recenteventcard img="" title="Event 1" description="this is the event that has passed some days ago is this a good representation" author="Arjun Khare"/></>);
       setCenterContent(<Recentevent />)
     } else if (buttonName == 'Forum') {
       setCenterContent(<Questions/>)
     }
-    else if (buttonName == 'Places To Eat') {
+      else if (buttonName == 'Places To Eat') {
       setCenterContent(<Places />)
     } else if (buttonName == 'NITW Clubs') {
       setCenterContent(<ClubList />)
+    } else if (buttonName == 'Profile') {
+      setCenterContent(<Profile />)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

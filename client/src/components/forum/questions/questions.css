@@ -87,7 +87,7 @@
     background-color: rgb(12, 104, 196);
 }
 
-.content {
+.individual_question .content {
     box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.4);
     border: 2px solid grey;
     border-radius: 0px 10px 10px 0px;

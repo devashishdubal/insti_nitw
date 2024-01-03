@@ -10,19 +10,24 @@ const Questions = () => {
     const [ask, setAsk] = useState(false);
     const [answer, setAnswer] = useState(false);
     const [index, setIndex] = useState(null);
+    const [filter, setFilter] = useState("0");
     //
     const [Data, setData] = useState([]);
 
-    useEffect(() => {
+    const fetchData = () => {
         axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions`)
+            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}`)
             .then((response) => {
                 setData(response.data.Data);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [filter]);
 
     const showAnswersPage = (index) => {
         setAsk(false);
@@ -38,7 +43,7 @@ const Questions = () => {
     useEffect(() => {
         //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
-            ({ id: index + 1, card: <QuestionCard title={Data[index].questionTitle} description={Data[index].questionBody} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} /> })));
+            ({ id: index + 1, card: <QuestionCard fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /> })));
     }, [Data]);
 
     const changeContents = () => {
@@ -63,12 +68,15 @@ const Questions = () => {
                         <b><p className='welcome'>Welcome to NITW Forum</p></b>
                     )}
                     {answer ? (null) : ask ? null : (
-                        <select id='selectTag'>
+                        <select id='selectTag' onChange={(e) => {
+                            // console.log(e.target.value);
+                            setFilter(e.target.value)
+                        }}>
                             <option value="0">Filter by tag:</option>
-                            <option value="1">CSE</option>
-                            <option value="2">ECE</option>
-                            <option value="3">EEE</option>
-                            <option value="4">BT</option>
+                            <option value="CSE">CSE</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="BT">BT</option>
                         </select>
                     )}
                 </div>
@@ -79,7 +87,7 @@ const Questions = () => {
                 </div>
             </div>
             {ask ? (
-                <AskQuestionForm />
+                <AskQuestionForm fetch={fetchData} />
             ) : answer ? (
                 <Answers hideAnswers={hideAnswerPage} Data={Data[index]} />
             ) : (

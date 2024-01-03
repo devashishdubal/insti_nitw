@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 
 const answerSchema = new mongoose.Schema({
-    answerId: { 
+    userId: { 
         type: String, 
+        default: "dummyUserId",
         required: true 
+    },
+    date: { 
+        type: Date, 
+        default: Date.now 
     },
     answerDescription: { 
         type: String 

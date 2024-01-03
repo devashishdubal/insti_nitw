@@ -44,7 +44,7 @@ const Questions = () => {
     useEffect(() => {
         //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
-            ({ id: index + 1, card: <QuestionCard fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /> })));
+            ({ id: index + 1, card: <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /> })));
     }, [Data]);
 
     const changeContents = () => {
@@ -53,27 +53,27 @@ const Questions = () => {
     };
 
     return (
-        <div>
+        <div className="forum-wrapper">
             <div className='intro'>
                 <div className='intro_left'>
                     {(!answer && ask) && (
-                        <button onClick={changeContents} id='back'>
+                        <button onClick={changeContents}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 12H6M12 5l-7 7 7 7" />
                             </svg>
                         </button>
                     )}
                     {answer ? (null) : ask ? (
-                        <b><p className='intro_text'>Ask your question</p></b>
+                        <b><p className='intro_text'>Ask Your Question</p></b>
                     ) : (
-                        <b><p className='welcome'>Welcome to NITW Forum</p></b>
+                        <b><p className='welcome'>Welcome To NITW Forum</p></b>
                     )}
                     {answer ? (null) : ask ? null : (
-                        <select id='selectTag' onChange={(e) => {
+                        <select onChange={(e) => {
                             // console.log(e.target.value);
                             setFilter(e.target.value)
                         }}>
-                            <option value="0">Filter by tag:</option>
+                            <option value="0">Filter By Tag:</option>
                             <option value="CSE">CSE</option>
                             <option value="ECE">ECE</option>
                             <option value="EEE">EEE</option>
@@ -83,18 +83,18 @@ const Questions = () => {
                 </div>
                 <div className='intro_right'>
                     {answer ? (null) : ask ? null : (
-                        <button onClick={changeContents}>Ask question</button>
+                        <button onClick={changeContents}>Ask Question</button>
                     )}
                 </div>
             </div>
             {ask ? (
                 <AskQuestionForm fetch={fetchData} />
             ) : answer ? (
-                <Answers hideAnswers={hideAnswerPage} Data={Data[index]} />
+                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} />
             ) : (
                 <div className='questions scroller'>
                     {allQuestions.map((question, index) => (
-                        <div key={index}>{question.card}</div>
+                        <div className="individual_question" key={index}>{question.card}</div>
                     ))}
                 </div>
             )}

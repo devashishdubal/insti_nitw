@@ -1,89 +1,87 @@
-/*Comments are there for better understanding for me*/
-.user_info{
-   display: flex;
-   flex-direction: column;
-   justify-content:center;
-   align-items: center;
-   border: 1px black solid;
-   padding: 10px;
+.profile_page .user_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    padding: 10px;
 }
 
-.information {
+.profile_page .information {
     padding-top: 80px;
     text-align: center;
     font-size: 24px;
 }
 
-h4,textarea,p{
+.profile_page h4,
+.profile_page textarea,
+.profile_page p {
     margin: 5px;
 }
 
-#savebutton {
+.profile_page #savebutton {
     font-size: 12px;
     margin: 10px;
     padding: 15px 15px;
     border-radius: 25px;
     color: white;
     border: 0px;
-    background-color:rgb(99, 101, 209);
+    background-color: rgb(99, 101, 209);
     text-align: center;
-    vertical-align: middle;  
+    vertical-align: middle;
 }
 
-#savebutton:hover {
+.profile_page #savebutton:hover {
     font-weight: bold;
     cursor: pointer;
     transform: scale(1.05);
     transition: 0.2s;
 }
 
-.banner-container{
+.profile_page .banner-container {
     position: relative;
 }
 
-.banner{
-   max-height: 200px;
-   border-radius: 15px;
-   overflow: hidden;
+.profile_page .banner {
+    max-height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-.circle-container {
-    width: 200px; /* Set the desired width */
-    height: 200px; /* Set the desired height */
+.profile_page .circle-container {
+    width: 200px;
+    height: 200px;
     overflow: hidden;
-    border-radius: 50%; /* Make it a circle */
+    border-radius: 50%;
 }
-  
-.circle-photo {
+
+.profile_page .circle-photo {
     width: 100%;
     height: 100%;
 }
 
-.circle-container {
-    position: absolute; /* Position the div absolutely within its closest positioned ancestor */
-    top: 75px; /* Adjust the top position to overlap with the banner */
-    left: calc(50% - 100px); /* Adjust the left position to overlap with the banner */
-    z-index: 2; /* Ensure the overlapping div is above the image */
+.profile_page .circle-container {
+    position: absolute;
+    top: 75px;
+    left: calc(50% - 100px);
+    z-index: 2;
 }
 
-.logo-button {
+.profile_page .logo-button {
     margin: 10px;
     border: 0px;
     background-color: #ECECF0;
     border-radius: 25px;
 }
 
-.logo-button:hover {
+.profile_page .logo-button:hover {
     font-weight: bold;
     cursor: pointer;
     transform: scale(1.05);
     transition: 0.2s;
 }
 
-        .logo-img {
-                        width: 35px; /* Adjust the width as needed */
-        height: 35px;
-        }
- 
-  
-  
+.profile_page .logo-img {
+    width: 35px;
+    height: 35px;
+}

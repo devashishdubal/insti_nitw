@@ -30,11 +30,11 @@ const AskQuestionForm = ({fetch}) => {
     };
     return (
         <div className="question_form">
-            <input value={questionTitle} required type="text" placeholder="Question title" onChange={(e) => setTitle(e.target.value)} />
-            <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="7" cols="50" placeholder="Max: 100 characters. Be concise in your question and refrain from profanity.">
+            <input value={questionTitle} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
+            <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Text (optional)">
             </textarea>
-            <select value={questionTag} required onChange={(e) => setTag(e.target.value)} id='selectTagAns'>
-                <option>Add a tag:</option>
+            <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>
+                <option>Add Tag:</option>
                 <option value="CSE">CSE</option>
                 <option value="ECE">ECE</option>
                 <option value="EEE">EEE</option>

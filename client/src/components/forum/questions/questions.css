@@ -5,6 +5,12 @@
     padding: 0px 10px;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .individual_question {
     padding: 10px 0px;
 }

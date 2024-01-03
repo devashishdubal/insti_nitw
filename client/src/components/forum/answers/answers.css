@@ -36,7 +36,7 @@
     background-color: #067e992a;
 }
 
-.user_info {
+.user_info_card {
     display: flex;
     justify-content: space-between;
     padding: 0px 10px;

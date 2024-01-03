@@ -3,7 +3,7 @@ import "./answers.css"
 const AnswerCard = () =>{
     return(
        <div className="Answer_card">
-         <div className="user_info">
+         <div className="user_info_card">
                 <h4 className="info"> <i>u/username</i> </h4>
                 <h4> <i>24/12/2023</i> </h4>
         </div>

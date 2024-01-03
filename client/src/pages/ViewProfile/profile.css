@@ -1,5 +1,5 @@
 /*Comments are there for better understanding for me*/
-.profile_page .user_info{
+.user_info{
    display: flex;
    flex-direction: column;
    justify-content:center;
@@ -14,8 +14,20 @@
     font-size: 24px;
 }
 
-.information h4,textarea,p{
+.profile_page h4,textarea,p{
     margin: 5px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 #savebutton {
@@ -80,10 +92,10 @@
     transition: 0.2s;
 }
 
-.logo-img {
-    width: 35px; /* Adjust the width as needed */
-    height: 35px;
-}
+        .logo-img {
+                        width: 35px; /* Adjust the width as needed */
+        height: 35px;
+        }
  
   
   

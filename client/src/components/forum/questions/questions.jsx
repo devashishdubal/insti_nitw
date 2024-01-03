@@ -18,6 +18,7 @@ const Questions = () => {
         axios
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}`)
             .then((response) => {
+                // console.log(response.d)
                 setData(response.data.Data);
             })
             .catch((error) => {

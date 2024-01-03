@@ -24,13 +24,16 @@ const AskQuestionForm = ({fetch}) => {
                 console.log(error)
                 alert("Error! Please check input fields");
             });
+            setTag("");
+            setBody("");
+            setTitle("");
     };
     return (
         <div className="question_form">
-            <input required type="text" placeholder="Question title" onChange={(e) => setTitle(e.target.value)} />
-            <textarea onChange={(e) => setBody(e.target.value)} rows="7" cols="50" placeholder="Max: 100 characters. Be concise in your question and refrain from profanity.">
+            <input value={questionTitle} required type="text" placeholder="Question title" onChange={(e) => setTitle(e.target.value)} />
+            <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="7" cols="50" placeholder="Max: 100 characters. Be concise in your question and refrain from profanity.">
             </textarea>
-            <select required onChange={(e) => setTag(e.target.value)} id='selectTagAns'>
+            <select value={questionTag} required onChange={(e) => setTag(e.target.value)} id='selectTagAns'>
                 <option>Add a tag:</option>
                 <option value="CSE">CSE</option>
                 <option value="ECE">ECE</option>

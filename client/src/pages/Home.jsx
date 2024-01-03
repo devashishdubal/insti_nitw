@@ -24,7 +24,7 @@ export default function Home() {
     isNaN(parseInt(localStorage.getItem('buttonSelect'))) ? 1 : parseInt(localStorage.getItem('buttonSelect'))
   );
   const [sidebarButtonSelect, setSidebarButtonSelect] = useState(
-    localStorage.getItem('sidebarButtonSelect') || "feed"
+    localStorage.getItem('sidebarButtonSelect') || "Feed"
   );
 
   const [centerContent, setCenterContent] = useState(
@@ -45,7 +45,7 @@ export default function Home() {
       console.log(btn.className);
       if (btn.className === 'student selected') {
         setButtonSelect(1);
-        setSidebarButtonSelect("feed");
+        setSidebarButtonSelect("Feed");
       } else if (btn.className === 'club selected') {
         setButtonSelect(2);
         setSidebarButtonSelect("NITW Clubs");

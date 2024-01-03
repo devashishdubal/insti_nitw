@@ -3,6 +3,8 @@ import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
 import Data from "./dummyData.json";
 import Answers from '../answers/answers';
+import "./questions.css"
+
 
 const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);

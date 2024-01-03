@@ -1,19 +1,22 @@
 import "./profile.css"
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import {useParams, Link} from 'react-router-dom'
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
+    const {userId} = useParams();
     const [link, setLink] = useState("");
 
     useEffect(() => {
     // Fetch user data and set the link
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:8000/api/v1/users/jdoe");
+          let getReqLink = "http://localhost:8000/api/v1/users/" + userId;
+          const response = await axios.get(getReqLink);
           setUserData(response.data);
-          setLink("http://localhost:3000/profile/jdoe"); // Set the link from the response URL
+          setLink("http://localhost:3000/profile/" + userId); // Set the link from the response URL
         } catch (error) {
           console.log('Error! Please check input fields');
         }
@@ -128,9 +131,8 @@ const Profile = () => {
         </div>
 
         <div className="buttons">
-          <button id="savebutton">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-            Edit</button>
+        <Link to="/" style={{ textDecoration: 'none' }}><button id="savebutton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/></svg> 
+        Home</button></Link>
           <button id="savebutton" onClick={handleCopyLink}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
             Share</button>

@@ -77,13 +77,13 @@ const Profile = () => {
           <h2>{userData.firstName} {userData.lastName} </h2>
           <h4>Username: {userData.userId}</h4>
           <h4>Roll Number: {userData.rollNo}</h4>
-          <h4>Branch: Computer Science and Engineering</h4>
+          <h4>Branch: {userData.branch}</h4>
           <h4>Email: {userData.email}</h4>
-          <p>About: Kabhi Kabhi lagta hai apun hi Bhagwan hai</p>
+          <p>About: {userData.aboutMe}</p>
         </div>
 
         <div className="social_buttons">
-          <button className="logo-button" onClick={() => redirectToUrl('https://www.instagram.com/?hl=en')}>
+          <button className="logo-button" onClick={() => redirectToUrl(userData.instagramLink)}>
             <img
               className="logo-img"
               src="https://1.bp.blogspot.com/-8iUAoBlaDXs/XydkeTuLe3I/AAAAAAAAAG8/0hBkKsURAKQTM8FQ6DBEvHQS5_zjkYHrwCLcBGAsYHQ/s2048/logo%2Binstagram%2Bhitam%2Byogiancreative.png"
@@ -93,7 +93,7 @@ const Profile = () => {
 
           {/* Add similar blocks for other social buttons */}
           
-          <button className="logo-button" onClick={() => redirectToUrl('https://www.linkedin.com')}>
+          <button className="logo-button" onClick={() => redirectToUrl(userData.linkedInLink)}>
             <img
               className="logo-img"
               src="https://th.bing.com/th/id/R.c5c502876072b029777af952de544fa2?rik=4ZzmtGhxDHoMWg&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2013%2f04%2flinkedin-logo-transparent_371228.png&ehk=dJYm07mzFlEA2Ygv3E2Z7u%2bYgIpw5iewUm6vHledgok%3d&risl=&pid=ImgRaw&r=0"
@@ -109,7 +109,7 @@ const Profile = () => {
             />
           </button>
           
-          <button className="logo-button" onClick={() => redirectToUrl('https://www.github.com')}>
+          <button className="logo-button" onClick={() => redirectToUrl(userData.githubLink)}>
             <img
               className="logo-img"
               src="https://th.bing.com/th/id/R.7a864f07681f187fb572468bfc949977?rik=EyUQGBjtSbMjVw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fgithub%2fgithub_PNG80.png&ehk=sCQlSHnb7Wc8WNPgOilokXbf8jL4g20yv7QFEFpl6ko%3d&risl=&pid=ImgRaw&r=0"
@@ -117,7 +117,7 @@ const Profile = () => {
             />
           </button>
           
-          <button className="logo-button" onClick={() => redirectToUrl('https://www.twitter.com')}>
+          <button className="logo-button" onClick={() => redirectToUrl(userData.twitterLink)}>
             <img
               className="logo-img"
               src="https://clipartcraft.com/images/twitter-logo-high-quality-5.png"

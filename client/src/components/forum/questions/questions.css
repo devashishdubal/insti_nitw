@@ -165,6 +165,7 @@
 }
 
 .forum-wrapper .individual_question .content {
+    cursor: pointer;
     border-radius: 0px 10px 10px 0px;
     display: flex;
     flex-direction: column;

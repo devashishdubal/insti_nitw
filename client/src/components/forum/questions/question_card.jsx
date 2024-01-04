@@ -26,7 +26,7 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
     return (
         <>
             <div className="username"><i>u/{user}</i> • {date}</div>
-            <div className="content">
+            <div className="content" onClick={() => showAnswers(index)}>
                 <p className="text">{title}</p>
                 <p className="description">
                     {description}

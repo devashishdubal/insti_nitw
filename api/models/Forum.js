@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
-const Answer = require('./answerModel');
+const Answer = require('./Answer');
 
 const forumSchema = new mongoose.Schema({
-    questionId: { 
-        type: String, 
-        unique: true, 
-        required: true 
-    },
     questionTitle: { 
         type: String, 
         required: true 
@@ -14,9 +9,13 @@ const forumSchema = new mongoose.Schema({
     questionDescription: { 
         type: String 
     },
+    questionTag: { 
+        type: String,
+        required: true 
+    },
     userId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', 
+        type: String, 
+        default: "dummyUserId",
         required: true 
     },
     date: { 

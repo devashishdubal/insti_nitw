@@ -1,17 +1,46 @@
-const AskQuestionForm = () => {
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+const AskQuestionForm = ({fetch}) => {
+    const [questionTitle, setTitle] = useState("");
+    const [questionDescription, setBody] = useState("");
+    const [questionTag, setTag] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            questionTitle,
+            questionDescription,
+            questionTag
+        };
+        axios
+            .post('http://localhost:8000/api/v1/forum/postQuestion', data)
+            .then(() => {
+                console.log(data);
+                fetch();
+            })
+            .catch((error) => {
+                console.log(data);
+                console.log(error)
+                alert("Error! Please check input fields");
+            });
+            setTag("");
+            setBody("");
+            setTitle("");
+    };
     return (
         <div className="question_form">
-            <input type="text" placeholder="Question title"/>
-            <textarea rows="7" cols="50" placeholder="Max: 100 characters. Be concise in your question and refrain from profanity.">
+            <input value={questionTitle} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
+            <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Text (optional)">
             </textarea>
-            <select id='selectTagAns'>
-                <option value="0">Add a tag:</option>
-                <option value="1">CSE</option>
-                <option value="2">ECE</option>
-                <option value="3">EEE</option>
-                <option value="4">BT</option>
+            <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>
+                <option>Add Tag:</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="BT">BT</option>
             </select>
-            <button>Submit</button>
+            <button className="submit" onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

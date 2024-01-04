@@ -1,172 +1,249 @@
-.questions {
+.forum-wrapper p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.forum-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 0px 10px;
+    gap: 12px;
+    font-family: "Poppins", sans-serif;
 }
 
-.content {
+.forum-wrapper .questions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.forum-wrapper .individual_question {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.individual_question {
-    padding: 10px 0px;
-}
-
-.question_form {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    padding: 10px 65px;
-    gap: 5px;
-}
-
-.question_form input {
-    padding: 15px;
-}
-
-
-.question_form button {
-    padding: 20px;
-    background-color: #0c9ee2;
-    color: white;
-    border: none;
-    font-size: 20px;
-}
-
-.intro {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    width: 80%;
-    padding: 0px 10px;
-}
-
-#selectTag {
-    background-color: DodgerBlue;
-    color: white;
-    height: 30px;
-    border: none;
-    width: 50%;
-}
-
-.intro_text {
-    font-size: 30px;
-    padding: 0px 60px;
-}
-
-.welcome {
-    font-size: 30px;
-}
-
-.intro_left {
-    display: flex;
-    flex-direction: column;
-}
-
-#back {
-    width: 50px;
-}
-
-.intro_right button {
-    position: relative;
-    top:-10px;
-    background-color: DodgerBlue;
-    color: white;
-    border: none;
-    /*height: 60px;*/
-    padding: 15px 15px;
-    font-size: 20px;
-}
-
-.intro_left button {
-    background-color: DodgerBlue;
-    color: white;
-    border: none;
-    height: 30px;
-}
-
-.intro_right button:hover {
-    background-color: rgb(12, 104, 196);
-}
-
-.individual_question .content {
-    box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.4);
-    border: 2px solid grey;
-    border-radius: 0px 10px 10px 0px;
-    width: 80%;
-    padding:0px 10px;
-    background-color: #067e992a;
-}
-
-.username {
-    border: 2px solid grey;
-    border-radius: 0px 2px 2px 0px;
-    padding: 0px 5px;
-    background-color: #067e992a;
-}
-
-.tags {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
-.question_controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#selectTagAns {
-    background-color: DodgerBlue;
-    color: white;
-    height: 30px;
-    border: none;
+    border: 1px solid silver;
+    border-radius: 16px;
+    gap: 2px;
+    padding: 6px 12px;
+    background-color: white;
     width: 100%;
 }
 
-.individual_tag {
-    background-color: rgb(17, 0, 255);
-    color: white;
-    padding: 0px 5px;
+.forum-wrapper .question_form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
 }
 
-.likes {
+.forum-wrapper .question_form select {
+    width: 20%;
+}
+
+.forum-wrapper .question_form input,
+.forum-wrapper textarea {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid silver;
+    padding: 10px;
+}
+
+.forum-wrapper .submit {
+    padding: 9px 10px;
+    border-radius: 12px;
+    background-color: rgb(104, 163, 182);
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    width: 20%;
+}
+
+.forum-wrapper .submit:hover {
+    background-color: rgb(82, 131, 150);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.forum-wrapper .intro {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forum-wrapper select {
+    padding: 0px 6px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    background-color: white;
+    border: 1px solid silver;
+    border-radius: 10px;
+    height: 30px;
+    width: 40%;
+}
+
+.forum-wrapper .intro_text {
+    font-size: 30px;
+}
+
+.forum-wrapper .welcome {
+    font-size: 30px;
+}
+
+.forum-wrapper .intro_left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.forum-wrapper .ans-top {
+    display: flex;
+    gap: 12px;
+}
+
+.forum-wrapper .ans-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    padding: 8px 10px;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    height: 35px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.forum-wrapper .ans-top a:visited {
+    color: black;
+}
+
+
+.forum-wrapper .intro_right button {
+    font-weight: 500;
+    padding: 8px 10px;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.forum-wrapper .intro_right button:hover,
+.forum-wrapper .ans-top a:hover {
+    cursor: pointer;
+    background-color: rgba(247, 247, 247, 0.705);
+    transition: all 0.15s;
+}
+
+.forum-wrapper .intro_right button:active,
+.forum-wrapper .ans-top a:active {
+    background-color: rgba(197, 197, 197, 0.841);
+}
+
+.forum-wrapper .intro_left button {
+    width: 50px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid silver;
+    border-radius: 50px;
+}
+
+.forum-wrapper .intro_left button:hover {
+    cursor: pointer;
+    background-color: rgba(247, 247, 247, 0.705);
+    transition: all 0.15s;
+}
+
+.forum-wrapper .intro_left button:active {
+    background-color: rgba(197, 197, 197, 0.841);
+}
+
+.forum-wrapper .individual_question .content {
+    cursor: pointer;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0px;
+}
+
+.forum-wrapper .username {
+    font-size: 14px;
+}
+
+.forum-wrapper .individual_question .text {
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.forum-wrapper .individual_question .tags {
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.like_button {
+.forum-wrapper .question_controls {
     display: flex;
-    background-color: #0c9ee2;
-    color: white;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forum-wrapper .individual_tag {
+    background-color: #9acdd37d;
+    border-radius: 30px;
+    padding: 2px 8px;
+}
+
+.forum-wrapper .likes {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.forum-wrapper .individual_question .description {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.forum-wrapper .like_button,
+.forum-wrapper .dislike_button,
+.forum-wrapper .comments {
+    cursor: pointer;
+    background-color: white;
+    display: flex;
     border: none;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    font-size: 15px;
 }
 
-.like_button:hover {
-    background-color: #1f8bbd;
-    color: white;
+.forum-wrapper .likes svg {
+    fill: none;
+    width: 26px;
+    transition: 0.2s;
 }
 
-.dislike_button {
-    display: flex;
-    background-color: #0c9ee2;
-    color: white;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+.forum-wrapper .likes svg:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+    cursor: pointer;
 }
 
-.dislike_button:hover {
-    background-color: #237aa2;
+.forum-wrapper .like_button svg:hover {
+    fill: lightgreen;
+}
+
+.forum-wrapper .dislike_button svg:hover {
+    fill: lightcoral;
 }

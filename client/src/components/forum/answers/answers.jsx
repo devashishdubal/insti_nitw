@@ -1,36 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import AnswerCard from "./answer_card";
-import "./answers.css"
+import QuestionCard from '../questions/question_card';
+import "./answers.css";
+import axios from 'axios';
 
-const Answers = ({hideAnswers, Data}) => {
+const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
     const [answers, setAllAnswers] = useState([]);
+    const [answerDescription, setDesc] = useState("");
+    // const [postFlag, setPostFlag] = useState(0);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            answerDescription
+        };
+        axios
+            .put(`http://localhost:8000/api/v1/forum/reply/${id}`, data)
+            .then(() => {
+                setDesc("");
+                fetch();
+            })
+            .catch((error) => {
+                console.log(error)
+                alert("Error! Please check input fields");
+            });
+    };
 
     useEffect(() => {
         //console.log(Data)
-        setAllAnswers([...Array(7)].map((_, index) => ({ id: index + 1, card: <AnswerCard/> })));
-    }, []);
+        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]}/> })));
+    }, [ans]);
 
     return(
         <div className="All">
-            <div className="Header-answer">
-                <div className="header_top_answer">
-                    <button id = "Back" onClick={hideAnswers}> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M12 5l-7 7 7 7"/></svg> </button>
-                    <h3 id = "qn">{Data.title}</h3>
-                    <a href='#yourAnswer'>Give your answer</a>
-                </div>
-                <p>{Data.description}</p>
-                <p>Asked by: <i>u/username</i></p>
-            </div>
+            <div className="individual_question">{qCard}</div>
+
 
             <div className="Section">
             {answers.map((answer, index) => (
-                <div key={index} className='each_answer'>{answer.card}</div>
+                <>{answer.card}</>
             ))}
             </div>
-
             <div className="Input" id='yourAnswer'>
-                <textarea placeholder="Enter your Answer. Please refrain from profanity."></textarea>
-                <button>Submit</button>
+                <h1>Your Reply</h1>
+                <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
+                <button className="submit" onClick={handleSubmit}>Reply</button>
             </div>
         </div>
     );

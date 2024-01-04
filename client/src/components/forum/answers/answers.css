@@ -1,105 +1,74 @@
-.Header-answer{
+.All {
+
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 60%;
-    height: 150px;
+    gap: 20px;
 }
 
-.header_top_answer {
+.All h1 {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.All .Answer_card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
-    align-items: center;
+    border: 1px solid silver;
+    border-radius: 16px;
+    background-color: #ffffff;
+    width: 50%;
+    padding: 6px 12px;
 }
 
-#Back{
-    width: 50px;
-    height: 30px;
-    align-self: center;
-    background-color: dodgerblue;
-    border: none;
-    color: white;
-}
 
-#qn{
-    margin-left: 10px;
-}
-
-.Answer_card{
-    border-radius: 10px;
-    width: 60%;
-    border: 2px solid #000;
-    padding: 15px;
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
-    background-color: #067e992a;
-}
-
-.user_info_card {
+.All .user_info {
     display: flex;
     justify-content: space-between;
     padding: 0px 10px;
 }
 
-.text{
-    padding : 10px;
-    margin-bottom: 5px;
+
+.All .Buttons {
+    display: flex;
+    justify-content: flex-end;
 }
 
-.Buttons{
-   display:flex;
-   justify-content: flex-end;
-}
-
-.Input{
+.All .Input {
     display: flex;
     flex-direction: column;
     width: 60%;
-    padding: 20px;
-    border-top: 1px solid black;
     gap: 10px;
 }
 
-.Input button {
-    width : 100%;
-    padding: 20px;
-    align-self: center;
-    border-radius: 5px;
-    background-color: dodgerblue;
-    color: white;
-    border: none; 
-    font-size: 25px;
-}
-
-.Input textarea{
-    height: 100px;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.All {
+.All .Section {
+    border-top: 1px solid silver;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.Section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
-    gap: 15px;
-}
-
-.each_answer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Buttons {
     gap: 10px;
+}
+
+.forum-wrapper .Answer_card .description, .forum-wrapper .All .individual_question .description{
+    max-width: 100%;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+
+.All .Buttons {
+    gap: 10px;
+}
+
+.All .likes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.All .content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }

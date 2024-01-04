@@ -43,7 +43,8 @@
     width: 20%;
 }
 
-.forum-wrapper .question_form input, .forum-wrapper textarea  {
+.forum-wrapper .question_form input,
+.forum-wrapper textarea {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     border-radius: 12px;
@@ -85,6 +86,7 @@
     height: 30px;
     width: 40%;
 }
+
 .forum-wrapper .intro_text {
     font-size: 30px;
 }
@@ -104,7 +106,10 @@
     gap: 12px;
 }
 
-.forum-wrapper .ans-top a{
+.forum-wrapper .ans-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 500;
     padding: 8px 10px;
     font-family: "Poppins", sans-serif;
@@ -112,6 +117,8 @@
     background-color: white;
     border-radius: 8px;
     font-size: 16px;
+    height: 35px;
+    box-sizing: border-box;
     text-decoration: none;
 }
 
@@ -130,18 +137,21 @@
     font-size: 18px;
 }
 
-.forum-wrapper .intro_right button:hover, .forum-wrapper .ans-top a:hover {
+.forum-wrapper .intro_right button:hover,
+.forum-wrapper .ans-top a:hover {
     cursor: pointer;
     background-color: rgba(247, 247, 247, 0.705);
     transition: all 0.15s;
 }
 
-.forum-wrapper .intro_right button:active, .forum-wrapper .ans-top a:active {
+.forum-wrapper .intro_right button:active,
+.forum-wrapper .ans-top a:active {
     background-color: rgba(197, 197, 197, 0.841);
 }
 
 .forum-wrapper .intro_left button {
     width: 50px;
+    height: 35px;
     background-color: white;
     border: 1px solid silver;
     border-radius: 50px;
@@ -172,7 +182,7 @@
 .forum-wrapper .individual_question .text {
     font-size: 18px;
     font-weight: 600;
-    
+
 }
 
 .forum-wrapper .individual_question .tags {
@@ -207,7 +217,9 @@
     white-space: nowrap;
 }
 
-.forum-wrapper .like_button, .forum-wrapper .dislike_button, .forum-wrapper .comments {
+.forum-wrapper .like_button,
+.forum-wrapper .dislike_button,
+.forum-wrapper .comments {
     cursor: pointer;
     background-color: white;
     display: flex;
@@ -230,10 +242,10 @@
     cursor: pointer;
 }
 
-.forum-wrapper .like_button svg:hover{
+.forum-wrapper .like_button svg:hover {
     fill: lightgreen;
 }
 
-.forum-wrapper .dislike_button svg:hover{
+.forum-wrapper .dislike_button svg:hover {
     fill: lightcoral;
 }

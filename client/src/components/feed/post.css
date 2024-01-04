@@ -25,12 +25,33 @@
 .controlButtons {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 15px;
+}
+
+.enabled_btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 50%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.disabled_btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 50%;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .controlButtons .disabled {
     border: none;
-    background-color: #7db0c7;
+    background-color: rgb(12, 157, 230);
+    color: white;
+    border-radius: 0px;
 }
 
 .controlButtons button {

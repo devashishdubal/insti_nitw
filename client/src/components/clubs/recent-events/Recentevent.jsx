@@ -16,7 +16,7 @@ export default function Recentevent() {
             
             setTimeout(function() {
               setLoading(false)
-            }, 1500);
+            }, 1000);
             setData(response.data);
 
             const cards = response.data.map((event, index) => ({

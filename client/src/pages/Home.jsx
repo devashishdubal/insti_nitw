@@ -18,13 +18,14 @@ import UpcomingEvents from "../components/clubs/upcoming-events/Upcomingevent"
 import "./Home.css"
 // import Recenteventcard from "../components/recent-events/recenteventcard";
 import Recentevent from "../components/clubs/recent-events/Recentevent";
+import Feed from "../components/feed/feed";
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(
     isNaN(parseInt(localStorage.getItem('buttonSelect'))) ? 1 : parseInt(localStorage.getItem('buttonSelect'))
   );
   const [sidebarButtonSelect, setSidebarButtonSelect] = useState(
-    localStorage.getItem('sidebarButtonSelect') || null
+    localStorage.getItem('sidebarButtonSelect') || "Feed"
   );
 
   const [centerContent, setCenterContent] = useState(
@@ -45,13 +46,16 @@ export default function Home() {
       console.log(btn.className);
       if (btn.className === 'student selected') {
         setButtonSelect(1);
+        setSidebarButtonSelect("Feed");
       } else if (btn.className === 'club selected') {
         setButtonSelect(2);
+        setSidebarButtonSelect("NITW Clubs");
       } else if (btn.className === 'food selected') {
         setButtonSelect(3);
+        setSidebarButtonSelect("Mess");
       }
     }
-      setSidebarButtonSelect(null); //t
+ 
   };
 
   const storeConfigData = () => {
@@ -80,6 +84,8 @@ export default function Home() {
       setCenterContent(<ClubList />)
     } else if (buttonName == 'Profile') {
       setCenterContent(<Profile />)
+    } else if (buttonName == "Feed") {
+      setCenterContent(<Feed/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

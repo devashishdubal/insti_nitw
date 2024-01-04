@@ -34,6 +34,7 @@ const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
         <div className="All">
             <div className="individual_question">{qCard}</div>
 
+
             <div className="Section">
             {answers.map((answer, index) => (
                 <>{answer.card}</>

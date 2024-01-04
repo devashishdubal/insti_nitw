@@ -85,7 +85,7 @@ const Questions = () => {
                                     <path d="M19 12H6M12 5l-7 7 7 7" />
                                 </svg>
                             </button>
-                            <a href='#yourAnswer'>Give Your Answer</a>
+                            <a href='#yourAnswer'>Give Your Reply</a>
                         </div>
                     )}
                     {answer ? (null) : ask ? null : (

@@ -60,6 +60,31 @@ router.put('/updateDislikes/:id', async (request, response) => {
   }
 });
 
+router.put('/updateLikes/comments/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const filter = { 'answers._id': id };
+    await Forum.findOneAndUpdate(filter, { $inc: { 'answers.$.likes': 1 } });
+
+    return response.status(200).send({ message: 'Likes Increased' });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+router.put('/updateDislikes/comments/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const filter = { 'answers._id': id };
+    await Forum.findOneAndUpdate(filter, { $inc: { 'answers.$.dislikes': 1 } });
+
+    return response.status(200).send({ message: 'Dislikes Increased' });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
 router.put('/reply/:id', async (request, response) => {
   try {
     const { id } = request.params;

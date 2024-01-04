@@ -27,7 +27,7 @@ const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
 
     useEffect(() => {
         //console.log(Data)
-        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard answer={ans[index]}/> })));
+        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]}/> })));
     }, [ans]);
 
     return(
@@ -36,13 +36,13 @@ const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
 
             <div className="Section">
             {answers.map((answer, index) => (
-                <div key={index} className='each_answer'>{answer.card}</div>
+                <>{answer.card}</>
             ))}
             </div>
-
             <div className="Input" id='yourAnswer'>
-                <textarea value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
-                <button onClick={handleSubmit}>Submit</button>
+                <h1>Your Reply</h1>
+                <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
+                <button className="submit" onClick={handleSubmit}>Reply</button>
             </div>
         </div>
     );

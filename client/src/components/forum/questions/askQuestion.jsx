@@ -40,7 +40,7 @@ const AskQuestionForm = ({fetch}) => {
                 <option value="EEE">EEE</option>
                 <option value="BT">BT</option>
             </select>
-            <button onClick={handleSubmit}>Submit</button>
+            <button className="submit" onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

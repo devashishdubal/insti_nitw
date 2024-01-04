@@ -19,6 +19,7 @@
 }
 
 .forum-wrapper .individual_question {
+    box-sizing: border-box;
     max-width: 100%;
     flex: 1 1 45%;
     display: flex;
@@ -42,7 +43,7 @@
     width: 20%;
 }
 
-.forum-wrapper .question_form input, .forum-wrapper .question_form textarea  {
+.forum-wrapper .question_form input, .forum-wrapper textarea  {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     border-radius: 12px;
@@ -50,7 +51,7 @@
     padding: 10px;
 }
 
-.forum-wrapper .question_form button {
+.forum-wrapper .submit {
     padding: 9px 10px;
     border-radius: 12px;
     background-color: rgb(104, 163, 182);
@@ -61,7 +62,7 @@
     width: 20%;
 }
 
-.forum-wrapper .question_form button:hover {
+.forum-wrapper .submit:hover {
     background-color: rgb(82, 131, 150);
     cursor: pointer;
     transition: all 0.2s;
@@ -164,7 +165,7 @@
     padding: 0px;
 }
 
-.forum-wrapper .individual_question .username {
+.forum-wrapper .username {
     font-size: 14px;
 }
 
@@ -199,8 +200,8 @@
     gap: 5px;
 }
 
-.forum-wrapper .description {
-    max-width: 550px;
+.forum-wrapper .individual_question .description {
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

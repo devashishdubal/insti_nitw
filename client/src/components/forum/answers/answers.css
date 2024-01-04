@@ -1,7 +1,6 @@
 .All {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     gap: 10px;
 }
@@ -31,7 +30,7 @@
 }
 
 .All #qn {
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 .All .Answer_card {
@@ -52,7 +51,7 @@
 
 .All .text {
     padding: 10px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .All .Buttons {

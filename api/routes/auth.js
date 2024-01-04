@@ -5,19 +5,24 @@ const bcrypt = require('bcrypt');
 //register
 router.post("/register", async (req, res) => {
     try {
+        const userExists = await User.findOne({ userId: req.body.userId });
+
+        if (userExists) {
+            return res.status(200).send("Welcome back!")
+        }
+
         const newUser = new User({
             userId: req.body.userId,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            password: req.body.password,
+            username: req.body.username,
             email: req.body.email,
-            rollNo: req.body.rollNo
+            profilePic: req.body.photoURL,
         });
 
         const user = await newUser.save();
-        res.status(200).json(user);
+        return res.status(200).json(user);
     } catch (error) {
-        res.status(500).json(error);
+        console.log(error)
+        return res.status(500).json(error);
     }
 })
 

@@ -1,10 +1,30 @@
-.login_area {
+.landing_page_full {
     display: flex;
-    flex: 1;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.landing_page_image {
+    flex: 2;
+    border: 3px solid white;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.landing_page_image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.login_area {
+    flex: 1.5;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 100vh;
 }
 
 .login_area .all_logos {

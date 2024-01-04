@@ -6,17 +6,16 @@ const userSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
     firstName: {
         type: String,
-        required: true
     },
     lastName: {
         type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
     },
     email: {
         type: String,
@@ -26,7 +25,6 @@ const userSchema = new mongoose.Schema({
     rollNo: {
         type: String,
         unique: true,
-        required: true
     },
     profilePic: {
         type: String,

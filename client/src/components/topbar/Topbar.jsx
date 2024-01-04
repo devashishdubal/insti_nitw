@@ -1,7 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import "./Topbar.css";
+import {auth , provider} from "../../firebase"
+import { AuthContext, useAuth } from "../../Context/AuthContext"
 
 const Topbar = ({ buttonSelect, clickFunction }) => {
+  const {currentUser} = useContext(AuthContext)
+
+  const logout = () => {
+    auth.signOut()
+  }
+
   return (
     <div className="navBar">
       <div className="buttonGroup">
@@ -10,8 +18,7 @@ const Topbar = ({ buttonSelect, clickFunction }) => {
         <a className="food" onClick={clickFunction}>Food</a>
       </div>
       <div className="signUp">
-        <button className="login">Login</button>
-        <button className="register" onClick={clickFunction}>Register</button>
+        <button className="login" onClick={logout}>Logout</button>
       </div>
     </div>
   );

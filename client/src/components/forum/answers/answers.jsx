@@ -4,7 +4,7 @@ import QuestionCard from '../questions/question_card';
 import "./answers.css";
 import axios from 'axios';
 
-const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
+const Answers = ({ qCard, fetch, id, ans, hideAnswers, Data }) => {
     const [answers, setAllAnswers] = useState([]);
     const [answerDescription, setDesc] = useState("");
     // const [postFlag, setPostFlag] = useState(0);
@@ -27,19 +27,21 @@ const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
 
     useEffect(() => {
         //console.log(Data)
-        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]}/> })));
+        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]} /> })));
     }, [ans]);
 
-    return(
+    return (
         <div className="All">
             <div className="individual_question">{qCard}</div>
 
 
-            <div className="Section">
-            {answers.map((answer, index) => (
-                <>{answer.card}</>
-            ))}
-            </div>
+            {(ans.length) > 0 && (
+                <div className="Section">
+                    {answers.map((answer, index) => (
+                        <>{answer.card}</>
+                    ))}
+                </div>
+            )}
             <div className="Input" id='yourAnswer'>
                 <h1>Your Reply</h1>
                 <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
@@ -48,6 +50,6 @@ const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
         </div>
     );
 }
-    
+
 export default Answers
-    
+

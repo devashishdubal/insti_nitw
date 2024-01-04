@@ -18,6 +18,7 @@ import UpcomingEvents from "../components/clubs/upcoming-events/Upcomingevent"
 import "./Home.css"
 // import Recenteventcard from "../components/recent-events/recenteventcard";
 import Recentevent from "../components/clubs/recent-events/Recentevent";
+import Feed from "../components/feed/feed";
 
 export default function Home() {
   const [buttonSelect, setButtonSelect] = useState(
@@ -83,6 +84,8 @@ export default function Home() {
       setCenterContent(<ClubList />)
     } else if (buttonName == 'Profile') {
       setCenterContent(<Profile />)
+    } else if (buttonName == "Feed") {
+      setCenterContent(<Feed/>)
     } else {
       setCenterContent(<h1>{buttonName}</h1>)
     }

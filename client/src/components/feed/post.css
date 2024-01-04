@@ -1,0 +1,142 @@
+.post_card {
+    width: 80%;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.post_card_top {
+    width: 100%;
+}
+
+.post_card_content {
+    width: 100%;
+}
+
+.post_card_top_right button {
+    border: none;
+    background-color: #4684A0;
+    border-radius: 0px 20px;
+}
+
+.controlButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.enabled_btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 50%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.disabled_btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 50%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.controlButtons .disabled {
+    border: none;
+    background-color: rgb(12, 157, 230);
+    color: white;
+    border-radius: 0px;
+}
+
+.controlButtons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #4684A0;
+    color: white;
+    padding: 5px 15px;
+    font-size: 15px;
+    border-radius: 15px;
+    gap: 10px;
+}
+
+.controlButtons .enabled:hover {
+    background-color: #226584;
+}
+
+.post_card_top_left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.post_card_top_left p {
+    font-size: large;
+    font-weight: 500;
+}
+
+.post_card_top_left img {
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.post_card_content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.post_card_center_left {
+    width: 100%;
+    flex: 1;
+}
+
+.post_card_center_left img {
+    object-fit: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 0px 0px 20px;
+}
+
+.post_card_center_right {
+    flex: 2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post_card_top_right button {
+    border-radius: 0px 20px 0px 0px;
+    color: white;
+    height: 100%;
+}
+
+.post_text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post_card_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #d3e4ec;
+    border-radius: 0px 20px 0px 0px;
+}
+
+.post_card_center_right .post_title {
+    font-size: 25px;
+    font-weight: 500;
+}

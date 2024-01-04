@@ -62,6 +62,15 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Forum'
     }],
+    ownerOf: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Club'
+    }],
+    adminOf: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Club'
+    }],
+    // ownerOf, adminOf arrays (so extra button is visible)
 });
 
 module.exports = mongoose.model("User", userSchema);

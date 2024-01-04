@@ -1,0 +1,21 @@
+.allPosts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.heading p {
+    font-size: 30px;
+}
+
+.heading svg {
+    font-size: 30px;
+}

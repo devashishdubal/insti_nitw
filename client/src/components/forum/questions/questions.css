@@ -98,6 +98,27 @@
     gap: 8px;
 }
 
+.forum-wrapper .ans-top {
+    display: flex;
+    gap: 12px;
+}
+
+.forum-wrapper .ans-top a{
+    font-weight: 500;
+    padding: 8px 10px;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.forum-wrapper .ans-top a:visited {
+    color: black;
+}
+
+
 .forum-wrapper .intro_right button {
     font-weight: 500;
     padding: 8px 10px;
@@ -108,27 +129,31 @@
     font-size: 18px;
 }
 
-.forum-wrapper .intro_right button:hover {
+.forum-wrapper .intro_right button:hover, .forum-wrapper .ans-top a:hover {
     cursor: pointer;
-    background-color: rgba(240, 240, 240, 0.841);
+    background-color: rgba(247, 247, 247, 0.705);
     transition: all 0.15s;
 }
 
-.forum-wrapper .intro_right button:active {
+.forum-wrapper .intro_right button:active, .forum-wrapper .ans-top a:active {
     background-color: rgba(197, 197, 197, 0.841);
 }
 
 .forum-wrapper .intro_left button {
     width: 50px;
     background-color: white;
-    border: 1px solid grey;
+    border: 1px solid silver;
     border-radius: 50px;
 }
 
 .forum-wrapper .intro_left button:hover {
     cursor: pointer;
-    background-color: rgba(240, 240, 240, 0.841);
+    background-color: rgba(247, 247, 247, 0.705);
     transition: all 0.15s;
+}
+
+.forum-wrapper .intro_left button:active {
+    background-color: rgba(197, 197, 197, 0.841);
 }
 
 .forum-wrapper .individual_question .content {

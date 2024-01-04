@@ -79,14 +79,14 @@ const Questions = () => {
                         </button>
                     )}
                     {(answer) && (
-                        <>
-                        <button onClick={() => changeContents(0)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M19 12H6M12 5l-7 7 7 7" />
-                            </svg>
-                        </button>
-                        <h1>Give your answer</h1>
-                        </>
+                        <div class="ans-top">
+                            <button onClick={() => changeContents(0)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 12H6M12 5l-7 7 7 7" />
+                                </svg>
+                            </button>
+                            <a href='#yourAnswer'>Give Your Answer</a>
+                        </div>
                     )}
                     {answer ? (null) : ask ? null : (
                         <select onChange={(e) => {
@@ -110,7 +110,7 @@ const Questions = () => {
             {ask ? (
                 <AskQuestionForm fetch={fetchData} />
             ) : answer ? (
-                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} />
+                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} qCard={<QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />}/>
             ) : (
                 <div className='questions scroller'>
                     {allQuestions.map((question, index) => (

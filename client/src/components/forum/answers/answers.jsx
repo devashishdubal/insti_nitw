@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import AnswerCard from "./answer_card";
+import QuestionCard from '../questions/question_card';
 import "./answers.css";
 import axios from 'axios';
 
-const Answers = ({fetch, id, ans, hideAnswers, Data}) => {
+const Answers = ({  qCard, fetch, id, ans, hideAnswers, Data  }) => {
     const [answers, setAllAnswers] = useState([]);
     const [answerDescription, setDesc] = useState("");
     // const [postFlag, setPostFlag] = useState(0);
@@ -31,14 +32,7 @@ const Answers = ({fetch, id, ans, hideAnswers, Data}) => {
 
     return(
         <div className="All">
-            <div className="Header">
-                <div className="header_top">
-                    
-                    <h3 id = "qn">{Data.questionTitle}</h3>
-                </div>
-                <p>{Data.questionDescription}</p>
-                <p>Asked by: <i>u/username</i></p>
-            </div>
+            <div className="individual_question">{qCard}</div>
 
             <div className="Section">
             {answers.map((answer, index) => (

@@ -50,6 +50,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Forum'
     }],
+    // ownerOf, adminOf arrays (so extra button is visible)
 });
 
 module.exports = mongoose.model("User", userSchema);

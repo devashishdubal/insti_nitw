@@ -43,7 +43,8 @@ const Answers = ({ qCard, fetch, id, ans, hideAnswers, Data }) => {
                 </div>
             )}
             <div className="Input" id='yourAnswer'>
-                <h1>Your Reply</h1>
+                {(ans.length > 0) && (<h1>Your Reply</h1>)}
+                {(ans.length == 0) && (<h1>Start The Conversation!</h1>)}
                 <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
                 <button className="submit" onClick={handleSubmit}>Reply</button>
             </div>

@@ -1,9 +1,15 @@
 .All {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
+}
+
+.All h3 {
+    font-weight: normal;
+    margin: 0px;
+    color: grey;
+    padding: 0px;
 }
 
 .All h1 {

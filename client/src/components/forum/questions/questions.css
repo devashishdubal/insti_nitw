@@ -47,6 +47,7 @@
     border-radius: 12px;
     border: 1px solid silver;
     padding: 10px;
+    margin: 0;
 }
 
 .forum-wrapper .submit {

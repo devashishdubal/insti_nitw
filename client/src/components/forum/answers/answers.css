@@ -43,6 +43,8 @@
 }
 
 .All .Section {
+    border-top: 1px solid silver;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

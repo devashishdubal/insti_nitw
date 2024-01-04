@@ -5,8 +5,27 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
+const cookieSession = require("cookie-session");
+const passport = require("passport")
 
-app.use(cors())
+app.use(cookieSession(
+    {
+        name: "session",
+        keys: ["cses_nitw_nexus"],
+        maxAge: 15 * 24 * 60 * 60 * 100 /// session will last for 15 days
+    }
+))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(
+    cors({
+        origin:"http://localhost:3000",
+        methods:"GET,POST,PUT,DELETE,PATCH",
+        credentials: true
+    }
+))
 
 // const User = require("./models/User");
 

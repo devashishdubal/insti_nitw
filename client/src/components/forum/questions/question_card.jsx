@@ -23,14 +23,14 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             });
     };
 
+    if (!description) description = "(empty)";
+
     return (
         <>
             <div className="username"><i>u/{user}</i> • {date}</div>
             <div className="content" onClick={(e) => { if (e.target.className.baseVal != 'avoid') showAnswers(index) }}>
                 <p className="text">{title}</p>
-                <p className="description">
-                    {description}
-                </p>
+                <p className="description">{description}</p>
                 <div className="question_controls">
                     <div className="tags">
                         <p key={index} className="individual_tag">{tags}</p>

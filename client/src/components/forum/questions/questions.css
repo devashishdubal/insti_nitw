@@ -148,6 +148,9 @@
 }
 
 .forum-wrapper .intro_left button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50px;
     height: 35px;
     background-color: white;

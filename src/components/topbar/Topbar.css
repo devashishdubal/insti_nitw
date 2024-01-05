@@ -1,0 +1,68 @@
+.navBar {
+    width: 90%;
+    border-radius: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    background-image: linear-gradient(to right, #44829f, #5895ac, #6da8b9, #84bbc6, #9bced4);
+    height: 75px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.navBar img {
+    height: 85px
+}
+
+.navBar > div {
+    display: flex;
+}
+
+.navBar button, a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.buttonGroup {
+    font-size: 20px;
+    gap: 35px;
+}
+
+.buttonGroup>a:hover {
+    cursor: pointer;
+    font-weight: bold;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.selected {
+    font-weight: bold;
+    text-decoration: underline white 4px;
+    text-underline-offset: 6px;
+}
+
+.signUp {
+    gap: 12px;
+}
+
+.signUp > button {
+    font-size: 17px;
+    padding: 22px 15px;
+    border-radius: 5px;
+    border: 0px;
+    height: 40px;
+    color: white;
+    border-radius: 25px;
+    background-color: #4886A2;
+    box-shadow: 5px 5px 5px #6ba1b0;
+}
+
+.signUp > button:hover {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.2s;
+}

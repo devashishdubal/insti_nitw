@@ -1,0 +1,65 @@
+.sidebar {
+  width: max-content;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    height: min-content;
+}
+
+.sidebar button svg {
+    width: 35px;
+    height: 35px;
+}
+
+.sidebar button {
+    box-shadow: #5C99AF 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    font-family: 'ABeeZee', sans-serif;
+    font-size: 0px;
+    padding: 12px 10px;
+    height: min-content;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 15px;
+    border: 0px;
+    transition: font-size 0.3s ease-in, border-radius 0.3s ease-in;
+}
+
+.sidebar button:hover {
+    box-shadow: #92C6CE 0px 5px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    font-weight: bold;
+    border-radius: 22px;
+    background-image: linear-gradient(to right bottom, #44829f, #5895ac, #6da8b9);
+    cursor: pointer;
+    transition: font-size 0.3s ease-in, border-radius 0.3s ease-in;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+span {
+  flex: 1;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px); 
+  }
+}
+  
+.arrow {
+  cursor: pointer;
+  animation: shake 1s infinite; 
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar .expanded {
+  font-size: 18px;
+  transition: all 0.3s ease-in;
+}

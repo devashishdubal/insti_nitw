@@ -1,4 +1,6 @@
+import StudentSidebar from "../components/sidebar/student_sidebar";
 import Topbar from "../components/topbar/Topbar"
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 const HomeLayout = ({ buttonSelect, clickFunction, left, right }) => {
   return (

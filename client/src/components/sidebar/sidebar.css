@@ -6,6 +6,10 @@
     border-right: 1px solid rgb(197, 196, 196)
 }
 
+.sidebar a {
+    display: flex;
+}
+
 .sidebar img[alt="logo"] {
     margin-bottom: 12px;
     height: 100px;
@@ -26,6 +30,7 @@
 }
 
 .sidebar button {
+    flex: 1;
     border-radius: 8px;
     height: 50px;
     font-size: 16px;

@@ -15,6 +15,9 @@ import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
 import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
+import FoodSidebar from "./components/sidebar/food_sidebar";
+import Places from "./components/food/places_to_eat/Places";
+import Menu from "./components/food/mess/menu";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -86,6 +89,26 @@ function App() {
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<Recentevent />} />
           <Route path="upcoming_events" element={<UpcomingEvents />} />
+        </Route>
+        <Route
+          path="food"
+          element={
+            <div className="full_app">
+              <div className="side">
+                <FoodSidebar />
+              </div>
+              <div className="main">
+                <Topbar />
+                <div className="center scrollbar scrollbar-primary">
+                  <Outlet />
+                  <div className="force-overflow"></div> {/*scrollbar*/}
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <Route path="places_to_eat" element={<Places />} />
+          <Route path="mess" element={<Menu />} />
         </Route>
       </Routes>
     </Router>

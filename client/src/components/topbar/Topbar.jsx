@@ -21,7 +21,7 @@ const Topbar = ({ buttonSelect, clickFunction }) => {
         <Link to="/clubs/nitw_clubs">
           <a className="club" onClick={clickFunction}>Clubs</a>
         </Link>
-        <Link to="/food/places_to_vist">
+        <Link to="/food/places_to_eat">
           <a className="food" onClick={clickFunction}>Food</a>
         </Link>
       </div>

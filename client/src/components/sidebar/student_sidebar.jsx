@@ -1,6 +1,5 @@
 import "./sidebar.css";
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StudentSidebar = () => {
 

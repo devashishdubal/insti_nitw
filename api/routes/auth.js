@@ -8,11 +8,13 @@ router.post("/register", async (req, res) => {
         const userExists = await User.findOne({ userId: req.body.userId });
 
         if (userExists) {
+            /*
             if (!userExists.firstName || !userExists.lastName || !userExists.branch) {
                 return res.status(200).send({detailsPresent: false});
             }
+            */
 
-            return res.status(200).send({detailsPresent: false});
+            return res.status(200).send("Welcome back");
         }
 
         const newUser = new User({
@@ -26,7 +28,7 @@ router.post("/register", async (req, res) => {
         });
 
         const user = await newUser.save();
-        return res.status(200).json({detailsPresent: false});
+        return res.status(200).json("Welcome");
     } catch (error) {
         console.log(error)
         return res.status(500).json(error);

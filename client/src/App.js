@@ -17,13 +17,21 @@ function App() {
     return children
   }
 
+  const ProtectedRouteLogin  = ({children}) => {
+    if (currentUser) {
+      return <Navigate to="/" />
+    }
+
+    return children
+  }
+
   return (
       <Router>
         <Routes>
           <Route path="/">
             <Route index element={<ProtectedRoute><Home/></ProtectedRoute>} />
           </Route>
-          <Route path="login" element={<LoginWithGoogle/>} />
+          <Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle/></ProtectedRouteLogin>} />
           <Route path="/profile/:userId" Component={ViewProfile} />
         </Routes>
       </Router>

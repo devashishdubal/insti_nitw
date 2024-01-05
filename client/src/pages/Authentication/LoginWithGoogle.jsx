@@ -127,7 +127,7 @@ const LoginWithGoogle = () => {
                         <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
                         Sign in with google
                     </button>
-
+                    <Toaster/>
                     <p>* Login should only be with student email</p>
                 </div>
             </div>

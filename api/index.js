@@ -6,7 +6,13 @@ const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
 
-app.use(cors())
+app.use(
+    cors({
+        origin:"http://localhost:3000",
+        methods:"GET,POST,PUT,DELETE,PATCH",
+        credentials: true
+    }
+))
 
 // const User = require("./models/User");
 

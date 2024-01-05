@@ -1,0 +1,89 @@
+.landing_page_full {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.landing_page_image {
+    flex: 2;
+    border: 3px solid white;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.landing_page_image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.login_area {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login_area .all_logos {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.login_area .all_logos img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.animated_typing_class {
+    height: 50px;
+}
+
+.login_button_area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login_button_area p {
+    color: red;
+    font-style: italic;
+}
+
+.login_area .animated_typing_class {
+    text-align: center;
+    height:50px;
+    font-size: 38px;
+    font-family: "Russo One", sans-serif;
+    font-weight: bold;
+    background: -webkit-linear-gradient(0deg, #5087a5 0%, black 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.login_button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f1f1f1;
+    color: black;
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.login_button:hover {
+    color: white;
+    background-color: green;
+}
+
+.login_button img {
+    width: 30px;
+    height: 30px;
+}

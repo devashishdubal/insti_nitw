@@ -78,11 +78,11 @@ const Profile = () => {
 
         <div className="information">
           <h2>{userData.firstName} {userData.lastName} </h2>
-          <h4>Username: {userData.userId}</h4>
+          <h4>Username: {userData.username}</h4>
           <h4>Roll Number: {userData.rollNo}</h4>
-          <h4>Branch: Computer Science and Engineering</h4>
+          <h4>Branch: {userData.branch}</h4>
           <h4>Email: {userData.email}</h4>
-          <p>About: Kabhi Kabhi lagta hai apun hi Bhagwan hai</p>
+          <p>About: {userData.aboutMe}</p>
         </div>
 
         <div className="social_buttons">

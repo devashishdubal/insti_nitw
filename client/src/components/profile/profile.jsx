@@ -9,11 +9,18 @@ const Profile = () => {
     const [userData, setUserData] = useState(null);
     const {currentUser} = useContext(AuthContext)
     const [link, setLink] = useState("");
-    let username = currentUser.email.split("@")[0];
-
+    //let username;
+    //const [username, setUsername] = useState(null)
+    /*
+    useEffect(() => {
+      if (currentUser && currentUser.email) {
+        setUsername(currentUser.email.split("@")[0]);
+      }
+    }, [currentUser]);
+    */
     useEffect(() => {
     // Fetch user data and set the link
-      const fetchData = async () => {
+      const fetchData = async (username) => {
         try {
           let reqLink = "http://localhost:8000/api/v1/users/" + username;
           const response = await axios.get(reqLink);
@@ -24,7 +31,11 @@ const Profile = () => {
         }
       };
 
-      fetchData();
+      if (currentUser && currentUser.email) {
+        //setUsername(currentUser.email.split("@")[0]);
+        fetchData(currentUser.email.split("@")[0]);
+      }
+
     }, []);
 
     const handleCopyLink = () => {

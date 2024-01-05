@@ -12,6 +12,7 @@ import Questions from "../components/forum/questions/questions";
 import ClubList from "../components/clubs/NITW-clubs/clubList";
 import Register from "../components/register/Register";
 import Profile from "../components/profile/profile";
+import Profiletesting from "../components/profile-testing/Profiletesting";
 import UpcomingEvents from "../components/clubs/upcoming-events/Upcomingevent"
 
 
@@ -83,7 +84,7 @@ export default function Home() {
     } else if (buttonName == 'NITW Clubs') {
       setCenterContent(<ClubList />)
     } else if (buttonName == 'Profile') {
-      setCenterContent(<Profile />)
+      setCenterContent(<Profiletesting />)
     } else if (buttonName == "Feed") {
       setCenterContent(<Feed/>)
     } else {

@@ -26,13 +26,13 @@ function App() {
     if (!currentUser) {
       return <Navigate to="/login" />
     }
-
+    
     return children
   }
 
   const ProtectedRouteLogin = ({ children }) => {
     if (currentUser) {
-      return <Navigate to="/" />
+      return <Navigate to="/students/feed" />
     }
 
     return children

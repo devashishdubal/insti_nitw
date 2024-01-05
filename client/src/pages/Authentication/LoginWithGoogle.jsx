@@ -24,12 +24,12 @@ const LoginWithGoogle = () => {
             .post(`http://localhost:8000/api/v1/auth/register`, data)
             .then((response) => {
                 //setDesc("");
-                console.log(response.data);
+                //console.log(response.data)
+                
                 //fetch();
             })
             .catch((error) => {
-                console.log(error)
-                alert("Error! Please check input fields");
+                // handle the error
             });
     }
 
@@ -66,9 +66,17 @@ const LoginWithGoogle = () => {
             } else {
                 // redirect
                 // setContext
+                let rollNo = result.user.email.slice(2, result.user.email.indexOf('@'));
+
+                let username = result.user.email.split("@")[0];
+                let firstname = result.user.displayName.split(" ")[0]
+                let lastname = result.user.displayName.split(" ")[1]
                 const object = {
                     "userId": result.user.uid,
-                    "username": result.user.displayName,
+                    "username": username,
+                    "firstName": firstname,
+                    "lastName": lastname,
+                    "rollNo": rollNo,
                     "email": result.user.email,
                     "photoURL": result.user.photoURL
                 }

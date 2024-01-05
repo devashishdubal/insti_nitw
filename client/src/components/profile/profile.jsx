@@ -1,19 +1,24 @@
 import "./profile.css"
-import { useState,useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext} from "../../Context/AuthContext"
+
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
+    const {currentUser} = useContext(AuthContext)
     const [link, setLink] = useState("");
+    let username = currentUser.email.split("@")[0];
 
     useEffect(() => {
     // Fetch user data and set the link
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:8000/api/v1/users/jdoe");
+          let reqLink = "http://localhost:8000/api/v1/users/" + username;
+          const response = await axios.get(reqLink);
           setUserData(response.data);
-          setLink("http://localhost:3000/profile/jdoe"); // Set the link from the response URL
+          setLink("http://localhost:3000/profile/" + username); // Set the link from the response URL
         } catch (error) {
           console.log('Error! Please check input fields');
         }
@@ -66,7 +71,7 @@ const Profile = () => {
 
           <div className="circle-container">
             <img
-              src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg"
+              src={currentUser.photoURL}
               alt="Your img"
               className="circle-photo"
             />

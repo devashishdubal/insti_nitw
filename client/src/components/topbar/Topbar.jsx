@@ -18,6 +18,8 @@ const Topbar = ({ buttonSelect, clickFunction }) => {
         <a className="food" onClick={clickFunction}>Food</a>
       </div>
       <div className="signUp">
+        <img src={currentUser.photoURL} alt='displayPic' />
+        <p>{currentUser.displayName}</p>
         <button className="login" onClick={logout}>Logout</button>
       </div>
     </div>

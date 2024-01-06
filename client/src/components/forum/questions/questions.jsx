@@ -46,7 +46,8 @@ const Questions = () => {
     useEffect(() => {
         //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
-            ({ id: index + 1, card: <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /> })));
+            ({ id: index + 1, card: 
+                <Link to={`/students/forum/${Data[index]._id}`}><QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /></Link> })));
     }, [Data]);
 
     const changeContents = (choice) => {
@@ -95,7 +96,7 @@ const Questions = () => {
                     )}
                 </div>
                 <div className='intro_right'>
-                    {answer ? (null) : ask ? null : (                        
+                    {answer ? (null) : ask ? null : (
                         <Link to="/students/forum/ask_question">
                             <button>Ask Question</button>
                         </Link>
@@ -103,7 +104,7 @@ const Questions = () => {
                 </div>
             </div>
             {answer ? (
-                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} qCard={<QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />} />
+                    <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} qCard={<QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />} />
             ) : (
                 <div className='questions scroller'>
                     {allQuestions.map((question, index) => (

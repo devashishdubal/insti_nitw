@@ -6,7 +6,7 @@ const ClubsSidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebar-top">
-                <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />
+                <img src={process.env.PUBLIC_URL + "/assets/logo.png"} alt="logo" />
                 <NavLink to="/clubs/nitw_clubs">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" stroke-linecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     <span className="button-desc">NITW Clubs</span>

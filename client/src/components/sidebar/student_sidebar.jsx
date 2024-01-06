@@ -1,13 +1,12 @@
 import "./sidebar.css";
 import { NavLink } from "react-router-dom";
-import logo from '../../assets/logo.png'
 
 const StudentSidebar = () => {
 
     return (
         <div className="sidebar">
             <div className="sidebar-top">
-                <img src={logo} alt="logo" />
+                <img src={process.env.PUBLIC_URL + "/assets/logo.png"} alt="logo" />
                 <NavLink to="/students/feed">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-globe">
                         <circle cx="12" cy="12" r="10"></circle>

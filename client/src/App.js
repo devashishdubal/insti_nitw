@@ -23,12 +23,15 @@ import Profile from "./components/profile/profile";
 function App() {
   const { currentUser } = useContext(AuthContext);
 
-  const ProtectedRoute = ({ children }) => {
+  const ProtectedRoute = () => {
+    console.log(currentUser)
     if (!currentUser) {
+      console.log(currentUser)
       return <Navigate to="/login" />
     }
+    console.log(currentUser)
     
-    return children
+    return <Navigate to="/students/feed" />
   }
 
   const ProtectedRouteLogin = ({ children }) => {

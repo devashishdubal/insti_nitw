@@ -24,8 +24,7 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const ProtectedRoute = () => {
-    console.log(currentUser == false)
-    if (currentUser.length == undefined) {
+    if (currentUser.uid == null) {
       console.log("trying")
       return <Navigate to="/login" />
     }
@@ -35,7 +34,7 @@ function App() {
 
   const ProtectedRouteLogin = ({ children }) => {
     console.log("in");
-    if (currentUser) {
+    if (currentUser.uid != null) {
       return <Navigate to="/students/feed" />
     }
 

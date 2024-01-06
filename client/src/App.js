@@ -75,6 +75,7 @@ function App() {
           <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="academics" element={<h1>Academics</h1>} />
+          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route
           path="clubs"
@@ -99,6 +100,7 @@ function App() {
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
           <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
+          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route
           path="food"
@@ -121,6 +123,7 @@ function App() {
         >
           <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
           <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route
           path="students/forum"

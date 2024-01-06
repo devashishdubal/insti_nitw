@@ -9,18 +9,18 @@
     padding: 12px 30px;
     background-image: linear-gradient(to right, #44829f, #5895ac, #6da8b9, #84bbc6, #9bced4);
     height: 85px;
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
 
 .navBar img {
     height: 85px
 }
 
-.navBar > div {
+.navBar>div {
     display: flex;
 }
 
-.navBar button, .navBar a {
+.navBar button,
+.navBar a {
     text-decoration: none;
     color: black;
     display: flex;
@@ -41,7 +41,7 @@
     transition: 0.2s;
 }
 
-.navBar .selected {
+.navBar .active {
     font-weight: bold;
     text-decoration: underline white 4px;
     text-underline-offset: 6px;
@@ -54,17 +54,17 @@
     gap: 12px;
 }
 
-.signUp > img {
+.signUp>img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
 
-.signUp > p {
+.signUp>p {
     font-size: 20px;
 }
 
-.signUp > button {
+.signUp>button {
     font-size: 17px;
     padding: 22px 15px;
     border-radius: 5px;
@@ -76,7 +76,7 @@
     /* box-shadow: 5px 5px 5px #6ba1b0; */
 }
 
-.signUp > button:hover {
+.signUp>button:hover {
     font-weight: bold;
     cursor: pointer;
     transform: scale(1.05);

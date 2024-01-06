@@ -1,5 +1,5 @@
 import "./sidebar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const StudentSidebar = () => {
 
@@ -7,17 +7,15 @@ const StudentSidebar = () => {
         <div className="sidebar">
             <div className="sidebar-top">
                 <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt="logo" />
-                <Link to="/students/feed">
-                    <button>
+                <NavLink to="/students/feed">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-globe">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                         <span className="button-desc">Feed</span>
-                    </button>
-                </Link>
-                <Link to="/students/calendar">
+                </NavLink>
+                <NavLink to="/students/calendar">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-calendar">
                             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -27,8 +25,8 @@ const StudentSidebar = () => {
                         </svg>
                         <span className="button-desc">Calendar</span>
                     </button>
-                </Link>
-                <Link to="/students/forum">
+                </NavLink>
+                <NavLink to="/students/forum">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-edit">
                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -36,8 +34,8 @@ const StudentSidebar = () => {
                         </svg>
                         <span className="button-desc">Forum</span>
                     </button>
-                </Link>
-                <Link to="/students/academics">
+                </NavLink>
+                <NavLink to="/students/academics">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-book-open">
                             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -45,7 +43,7 @@ const StudentSidebar = () => {
                         </svg>
                         <span className="button-desc">Academics</span>
                     </button>
-                </Link>
+                </NavLink>
             </div>
 
             <div className="sidebar-end">

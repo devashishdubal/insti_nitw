@@ -24,17 +24,17 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const ProtectedRoute = () => {
-    console.log(currentUser)
-    if (!currentUser) {
-      console.log(currentUser)
+    console.log(currentUser == false)
+    if (currentUser.length == undefined) {
+      console.log("trying")
       return <Navigate to="/login" />
     }
-    console.log(currentUser)
     
     return <Navigate to="/students/feed" />
   }
 
   const ProtectedRouteLogin = ({ children }) => {
+    console.log("in");
     if (currentUser) {
       return <Navigate to="/students/feed" />
     }

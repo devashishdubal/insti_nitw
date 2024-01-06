@@ -20,14 +20,20 @@ const Topbar = () => {
     <div className="navBar">
       <div className="buttonGroup">
 
-        <NavLink to="/students/feed">
-          <a className="student">Student</a>
+        <NavLink to="/students">
+          <Link to="/students/feed">
+            <a className="student">Student</a>
+          </Link>
         </NavLink>
-        <NavLink to="/clubs/nitw_clubs">
-          <a className="club">Clubs</a>
+        <NavLink to="/clubs">
+          <Link to="/clubs/nitw_clubs">
+            <a className="club">Clubs</a>
+          </Link>
         </NavLink>
-        <NavLink to="/food/places_to_eat">
-          <a className="food">Food</a>
+        <NavLink to="/food">
+          <Link to="/food/places_to_eat">
+            <a className="food">Food</a>
+          </Link>
         </NavLink>
       </div>
       <div className="signUp">

@@ -1,4 +1,3 @@
-import Home from "./pages/Home"
 import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
 import ViewProfile from "./pages/ViewProfile/ViewProfile"
 import { Link, Outlet } from "react-router-dom";
@@ -18,6 +17,8 @@ import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
+import "./App.css"
+import Profile from "./components/profile/profile";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -115,11 +116,4 @@ function App() {
   );
 }
 
-/*
-function App() {
-  return (
-    <Home />
-  );
-}
-*/
 export default App;

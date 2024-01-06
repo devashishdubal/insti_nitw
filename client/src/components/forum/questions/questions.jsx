@@ -47,7 +47,7 @@ const Questions = () => {
         //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
             ({ id: index + 1, card: 
-                <Link to={`/students/forum/${Data[index]._id}`}><QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} /></Link> })));
+                <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />})));
     }, [Data]);
 
     const changeContents = (choice) => {

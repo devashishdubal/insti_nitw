@@ -3,8 +3,10 @@ import AnswerCard from "./answer_card";
 import QuestionCard from '../questions/question_card';
 import "./answers.css";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const Answers = ({ qCard, fetch, id, ans, hideAnswers, Data }) => {
+const Answers = () => {
+    const {id} = useParams();
     const [answers, setAllAnswers] = useState([]);
     const [answerDescription, setDesc] = useState("");
     // const [postFlag, setPostFlag] = useState(0);
@@ -25,14 +27,15 @@ const Answers = ({ qCard, fetch, id, ans, hideAnswers, Data }) => {
             });
     };
 
-    useEffect(() => {
-        //console.log(Data)
-        setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]} /> })));
-    }, [ans]);
+    // useEffect(() => {
+    //     //console.log(Data)
+    //     setAllAnswers([...Array(ans.length)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetch} id={ans[index]._id} answer={ans[index]} /> })));
+    // }, [ans]);
 
     return (
         <div className="All">
-            <div className="individual_question">{qCard}</div>
+            {id}
+            {/* <div className="individual_question">{qCard}</div>
 
 
             {(ans.length) > 0 && (
@@ -47,7 +50,7 @@ const Answers = ({ qCard, fetch, id, ans, hideAnswers, Data }) => {
                 {(ans.length == 0) && (<h1>Start The Conversation!</h1>)}
                 <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
                 <button className="submit" onClick={handleSubmit}>Reply</button>
-            </div>
+            </div> */}
         </div>
     );
 }

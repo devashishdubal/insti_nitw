@@ -20,6 +20,7 @@ import Menu from "./components/food/mess/menu";
 import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
+import Answers from "./components/forum/answers/answers";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -142,6 +143,7 @@ function App() {
         >
           <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
+          <Route path=":id" element={<ProtectedRoute><Answers/></ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

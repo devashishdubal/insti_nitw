@@ -104,7 +104,7 @@
     gap: 12px;
 }
 
-.forum-wrapper .ans-top a {
+.forum-wrapper .ans-top a[href='#yourAnswer']{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,7 +120,7 @@
     text-decoration: none;
 }
 
-.forum-wrapper .ans-top a:visited {
+.forum-wrapper .ans-top a[href='#yourAnswer']:visited {
     color: black;
 }
 
@@ -136,14 +136,14 @@
 }
 
 .forum-wrapper .intro_right button:hover,
-.forum-wrapper .ans-top a:hover {
+.forum-wrapper .ans-top a[href='#yourAnswer']:hover {
     cursor: pointer;
     background-color: rgba(247, 247, 247, 0.705);
     transition: all 0.15s;
 }
 
 .forum-wrapper .intro_right button:active,
-.forum-wrapper .ans-top a:active {
+.forum-wrapper .ans-top a[href='#yourAnswer']:active {
     background-color: rgba(197, 197, 197, 0.841);
 }
 

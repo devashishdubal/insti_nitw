@@ -143,7 +143,7 @@ function App() {
         >
           <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
-          <Route path=":id" element={<ProtectedRoute><Answers/></ProtectedRoute>} />
+          <Route path=":id" element={<ProtectedRoute><Answers /></ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

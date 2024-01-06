@@ -4,6 +4,7 @@ import AskQuestionForm from './askQuestion';
 // import Data from "./dummyData.json";
 import Answers from '../answers/answers';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const Questions = () => {
@@ -66,18 +67,9 @@ const Questions = () => {
             <div className='intro'>
                 <div className='intro_left'>
                     {answer ? (
-                        <b><p className='intro_text'>Comments</p></b>                        
-                    ) : ask ? (
-                        <b><p className='intro_text'>Ask Your Question</p></b>
+                        <b><p className='intro_text'>Comments</p></b>
                     ) : (
                         <b><p className='welcome'>Welcome To NITW Forum</p></b>
-                    )}
-                    {(ask) && (
-                        <button onClick={() => changeContents(1)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M19 12H6M12 5l-7 7 7 7" />
-                            </svg>
-                        </button>
                     )}
                     {(answer) && (
                         <div class="ans-top">
@@ -103,15 +95,15 @@ const Questions = () => {
                     )}
                 </div>
                 <div className='intro_right'>
-                    {answer ? (null) : ask ? null : (
-                        <button onClick={changeContents}>Ask Question</button>
+                    {answer ? (null) : ask ? null : (                        
+                        <Link to="/students/forum/ask_question">
+                            <button>Ask Question</button>
+                        </Link>
                     )}
                 </div>
             </div>
-            {ask ? (
-                <AskQuestionForm fetch={fetchData} />
-            ) : answer ? (
-                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} qCard={<QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />}/>
+            {answer ? (
+                <Answers fetch={fetchData} id={Data[index]._id} ans={Data[index].answers} hideAnswers={hideAnswerPage} Data={Data[index]} qCard={<QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />} />
             ) : (
                 <div className='questions scroller'>
                     {allQuestions.map((question, index) => (

@@ -19,15 +19,16 @@ import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
 import "./App.css"
 import Profile from "./components/profile/profile";
+import AskQuestionForm from "./components/forum/questions/askQuestion";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
 
-  const ProtectedRoute = ({children}) => {
+  const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {
       return <Navigate to="/" />
     }
-    
+
     return children
   }
 
@@ -72,7 +73,6 @@ function App() {
         >
           <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
-          <Route path="forum" element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="academics" element={<h1>Academics</h1>} />
         </Route>
         <Route
@@ -120,6 +120,28 @@ function App() {
         >
           <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
           <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+        </Route>
+        <Route
+          path="students/forum"
+          element={
+            <ProtectedRoute>
+              <div className="full_app">
+                <div className="side">
+                  <StudentSidebar />
+                </div>
+                <div className="main">
+                  <Topbar />
+                  <div className="center scrollbar scrollbar-primary">
+                    <Outlet />
+                    <div className="force-overflow"></div> {/*scrollbar*/}
+                  </div>
+                </div>
+              </div>
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
+          <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

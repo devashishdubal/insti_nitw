@@ -15,7 +15,6 @@ const forumSchema = new mongoose.Schema({
     },
     userId: { 
         type: String, 
-        default: "dummyUserId",
         required: true 
     },
     date: { 

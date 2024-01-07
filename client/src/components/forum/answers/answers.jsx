@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AnswerCard from "./answer_card";
 import QuestionCard from '../questions/question_card';
 import "./answers.css";
@@ -6,9 +6,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext, useAuth } from "../../../Context/AuthContext"
 
 
 const Answers = () => {
+    const { currentUser, userDetails } = useContext(AuthContext)
     const { id } = useParams()
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
@@ -66,6 +68,7 @@ const Answers = () => {
         }
 
         const data = {
+            userId: userDetails.username,
             answerDescription
         };
         axios

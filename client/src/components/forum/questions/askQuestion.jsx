@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext, useAuth } from "../../../Context/AuthContext"
 
 const AskQuestionForm = ({ fetch }) => {
+    const { currentUser, userDetails } = useContext(AuthContext)
     const navigate = useNavigate();
     const [questionTitle, setTitle] = useState("");
     const [questionDescription, setBody] = useState("");
@@ -30,7 +32,8 @@ const AskQuestionForm = ({ fetch }) => {
         const data = {
             questionTitle,
             questionDescription,
-            questionTag
+            questionTag,
+            userId: userDetails.username
         };
         axios
             .post('http://localhost:8000/api/v1/forum/postQuestion', data)

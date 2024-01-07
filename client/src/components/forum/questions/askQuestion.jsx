@@ -49,7 +49,20 @@ const AskQuestionForm = ({ fetch }) => {
         setTag("");
         setBody("");
         setTitle("");
-        navigate(-1);
+
+        toast.success('Question Posted!', {
+            duration: 500,
+            position: 'top-right',
+            style: {marginTop: 70},
+            className: '',
+            ariaProps: {
+              role: 'status',
+              'aria-live': 'polite',
+            },
+        });
+        setTimeout(() => {
+            navigate(-1);
+        }, 500);
     };
     return (
         <div className="forum-wrapper">
@@ -67,7 +80,7 @@ const AskQuestionForm = ({ fetch }) => {
             </div>
             <div className="question_form">
                 <input value={questionTitle} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
-                <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Text (optional)">
+                <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
                 </textarea>
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>
                     <option value="" disabled hidden>Add a Tag:</option>

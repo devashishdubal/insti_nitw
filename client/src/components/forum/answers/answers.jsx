@@ -81,6 +81,17 @@ const Answers = () => {
                 console.log(error)
                 alert("Error! Please check input fields");
             });
+
+        toast.success('Reply Posted!', {
+            duration: 3000,
+            position: 'top-right',
+            style: { marginTop: 70 },
+            className: '',
+            ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+            },
+        });
     };
 
     useEffect(() => {

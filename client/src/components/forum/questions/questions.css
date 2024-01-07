@@ -87,17 +87,19 @@
 
 .forum-wrapper .intro_text {
     font-size: 30px;
+    font-weight: bold;
 }
 
 .forum-wrapper .welcome {
     font-size: 30px;
+    font-weight: bold;
 }
 
 .forum-wrapper .intro_left {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
 }
 
 .forum-wrapper .ans-top {

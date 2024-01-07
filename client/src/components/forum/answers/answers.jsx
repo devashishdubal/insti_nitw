@@ -104,7 +104,7 @@ const Answers = () => {
             <div className="All">
                 <div className="intro">
                     <div className="intro_left">
-                        <b><p className='intro_text'>Comments</p></b>
+                        <p className='intro_text'>Comments</p>
                         <div class="ans-top">
                             <Link to="/students/forum">
                                 <button>

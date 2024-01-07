@@ -69,7 +69,7 @@ const Questions = () => {
         <div className="forum-wrapper">
             <div className='intro'>
                 <div className='intro_left'>
-                    <b><p className='welcome'>Welcome To NITW Forum</p></b>
+                    <p className='welcome'>Welcome To NITW Forum</p>
                     <select onChange={(e) => {
                         setFilter(e.target.value)
                     }}>

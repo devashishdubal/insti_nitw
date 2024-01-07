@@ -24,6 +24,11 @@ export const AuthContextProvider = ({ children }) => {
       };
 
       setCurrentUser(user)
+
+      if (user == null) {
+        setUserDetails(null);
+        return;
+      }
   
       fetchData();
       // get user session from db

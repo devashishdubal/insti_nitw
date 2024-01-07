@@ -55,8 +55,8 @@ const Topbar = () => {
         </NavLink>
       </div>
       <div className="signUp">
-        <img src={userDetails.profilePic} alt='displayPic' />
-        <p>{userDetails.username}</p>
+        <img src={userDetails && userDetails.profilePic} alt='displayPic' />
+        <p>{userDetails && userDetails.username}</p>
         <button className="login" onClick={logout}>Logout</button>
       </div>
     </div>

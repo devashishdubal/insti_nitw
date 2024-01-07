@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const QuestionCard = ({ comments, fetch, id, user, date, title, description, tags, index, likes, dislikes }) => {
     const handleLikeCick = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         axios
             .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}`)
             .then(() => {
@@ -15,7 +15,7 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             });
     };
     const handleDislikeCick = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         axios
             .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}`)
             .then(() => {

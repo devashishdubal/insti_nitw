@@ -9,13 +9,9 @@ import { Link } from 'react-router-dom';
 
 const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
-    const [ask, setAsk] = useState(false);
-    const [answer, setAnswer] = useState(false);
-    const [index, setIndex] = useState(null);
     const [filter, setFilter] = useState("0");
-    //
     const [Data, setData] = useState([]);
-
+    
     const fetchData = () => {
         axios
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}`)
@@ -30,21 +26,13 @@ const Questions = () => {
 
     useEffect(() => {
         fetchData();
-    }, [filter]);
-
-    const showAnswersPage = (index) => {
-        setAsk(false);
-        setAnswer(true);
-        setIndex(index)
-        console.log(allQuestions[index])
-    };
+    }, [filter]);    
 
     useEffect(() => {
-        //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
         ({
             id: index + 1, card:
-                <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />
+                <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />
         })));
     }, [Data]);
 

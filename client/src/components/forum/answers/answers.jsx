@@ -22,9 +22,9 @@ const Answers = () => {
         dislikes: 0,
         date: "",
         answers: []
-      };
-      
-      const [Data, setData] = useState(initialData);
+    };
+
+    const [Data, setData] = useState(initialData);
 
     const fetchData = () => {
         axios
@@ -52,16 +52,16 @@ const Answers = () => {
             toast.error('Answer field is empty!', {
                 duration: 3000,
                 position: 'top-right',
-              
+
                 // Styling
-                style: {marginTop: 70},
+                style: { marginTop: 70 },
                 className: '',
                 // Aria
                 ariaProps: {
-                  role: 'status',
-                  'aria-live': 'polite',
+                    role: 'status',
+                    'aria-live': 'polite',
                 },
-              });
+            });
             return;
         }
 
@@ -104,7 +104,7 @@ const Answers = () => {
                     </div>
                 </div>
                 <div className="individual_question">
-                <QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} />
+                    <QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} />
                 </div>
                 {((Data.answers?.length) || 0) > 0 && (
                     <div className="Section">
@@ -118,7 +118,7 @@ const Answers = () => {
                     {(Data.answers.length == 0) && (<h1>Start The Conversation!</h1>)}
                     <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
                     <button className="submit" onClick={handleSubmit}>Reply</button>
-                    <Toaster/>
+                    <Toaster />
                 </div>
             </div>
         </div>

@@ -13,20 +13,17 @@ const AskQuestionForm = ({ fetch }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (questionTitle.length ===  0 || questionDescription.length === 0) {
+        if (questionTitle.length === 0 || questionDescription.length === 0 || !questionTag) {
             toast.error('Some fields are empty!', {
                 duration: 3000,
                 position: 'top-right',
-              
-                // Styling
                 style: {marginTop: 70},
                 className: '',
-                // Aria
                 ariaProps: {
                   role: 'status',
                   'aria-live': 'polite',
                 },
-              });
+            });
             return;
         }
 
@@ -70,7 +67,7 @@ const AskQuestionForm = ({ fetch }) => {
                 <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Text (optional)">
                 </textarea>
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>
-                    <option>Add Tag:</option>
+                    <option value="" disabled hidden>Add a Tag:</option>
                     <option value="CSE">CSE</option>
                     <option value="ECE">ECE</option>
                     <option value="EEE">EEE</option>

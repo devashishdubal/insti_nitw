@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-rou
 import axios from 'axios';
 
 const Topbar = () => {
-  const { currentUser } = useContext(AuthContext)
+  const { currentUser, userDetails } = useContext(AuthContext)
   const [username, setUsername] = useState(null);
 
   // const clickFunction = () => {
@@ -14,6 +14,7 @@ const Topbar = () => {
   //   console.log(topbarButtons);
   // }
 
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,6 +28,7 @@ const Topbar = () => {
 
     fetchData();
   })
+  */
 
   const logout = () => {
     auth.signOut()
@@ -53,8 +55,8 @@ const Topbar = () => {
         </NavLink>
       </div>
       <div className="signUp">
-        <img src={currentUser.photoURL} alt='displayPic' />
-        <p>{username}</p>
+        <img src={userDetails.profilePic} alt='displayPic' />
+        <p>{userDetails.username}</p>
         <button className="login" onClick={logout}>Logout</button>
       </div>
     </div>

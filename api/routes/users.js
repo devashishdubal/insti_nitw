@@ -27,4 +27,31 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/updateProfile/:id",async (req,res)=>{
+    // try{
+
+    //     const user = await User.findOne({ username: req.params.id });
+
+    //     if(!user){
+    //         return res.status(404).send("The event does not exist")
+    //     }
+
+    //     event.eventName = req.body.eventName || event.eventName;
+    //     event.eventDescription = req.body.eventDescription || event.eventDescription;
+    //     event.eventDateTime = req.body.eventDateTime || event.eventDateTime;
+    //     event.eventOrganizer = req.body.eventOrganizer || event.eventOrganizer;
+    //     event.registerable = req.body.registerable || event.registerable;
+    //     event.registrationLink = req.body.registrationLink || event.registrationLink;
+    //     event.eventImage = req.body.eventImage || event.eventImage;
+    //     event.eventVenue = req.body.eventVenue || event.eventVenue;
+    //     event.targetYear = req.body.targetYear || event.targetYear;
+
+    //     const updatedEvent = await event.save();
+
+    //     res.status(200).send(updatedEvent)
+    // }catch(error){
+    //     res.status(500).send(error);
+    // }
+})
+
 module.exports = router;

@@ -69,7 +69,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 60vh; /* Adjusted height */
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 0.7 opacity */
+    border-radius: 15px; /* Optional: Add border-radius for rounded corners */
+    padding: 20px; /* Optional: Add padding for spacing inside the box */
+    max-width: 500px; /* Adjusted maximum width */
+    margin: 0 auto; /* Center the box horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow with a subtle effect */
 }
 
 .login_area .all_logos {

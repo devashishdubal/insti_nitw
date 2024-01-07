@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const AskQuestionForm = ({ fetch }) => {
     const navigate = useNavigate();
@@ -11,6 +12,24 @@ const AskQuestionForm = ({ fetch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (questionTitle.length ===  0 || questionDescription.length === 0) {
+            toast.error('Some fields are empty!', {
+                duration: 3000,
+                position: 'top-right',
+              
+                // Styling
+                style: {marginTop: 70},
+                className: '',
+                // Aria
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                },
+              });
+            return;
+        }
+
         const data = {
             questionTitle,
             questionDescription,
@@ -58,6 +77,7 @@ const AskQuestionForm = ({ fetch }) => {
                     <option value="BT">BT</option>
                 </select>
                 <button className="submit" onClick={handleSubmit}>Submit</button>
+                <Toaster/>
             </div>
         </div>
     );

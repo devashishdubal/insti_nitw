@@ -5,6 +5,8 @@ import "./answers.css";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Answers = () => {
     const { id } = useParams()
@@ -45,6 +47,24 @@ const Answers = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (answerDescription.length === 0) {
+            toast.error('Answer field is empty!', {
+                duration: 3000,
+                position: 'top-right',
+              
+                // Styling
+                style: {marginTop: 70},
+                className: '',
+                // Aria
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                },
+              });
+            return;
+        }
+
         const data = {
             answerDescription
         };
@@ -98,6 +118,7 @@ const Answers = () => {
                     {(Data.answers.length == 0) && (<h1>Start The Conversation!</h1>)}
                     <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
                     <button className="submit" onClick={handleSubmit}>Reply</button>
+                    <Toaster/>
                 </div>
             </div>
         </div>

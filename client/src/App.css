@@ -43,8 +43,8 @@ body {
 }
 
 .center {
-    padding: 20px 20px;
-    overflow-y: auto;
+    padding: 14px;
+    overflow-y: scroll;
     flex: 1;
 }
 
@@ -57,12 +57,20 @@ body {
 }
 
 .scrollbar-primary::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
     background-color: #dadada;
 }
 
 .scrollbar-primary::-webkit-scrollbar-thumb {
     border-radius: 20px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #a5a5a5;
+    background-color: #bdbdbd; 
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb:hover {
+    background-color: #a5a5a5; 
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb:active {
+    background-color: #878787; 
 }

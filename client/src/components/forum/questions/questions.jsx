@@ -39,10 +39,6 @@ const Questions = () => {
         console.log(allQuestions[index])
     };
 
-    const hideAnswerPage = () => {
-        setAnswer(false);
-    }
-
     useEffect(() => {
         //console.log(Data)
         setAllQuestions([...Array(Data.length)].map((_, index) =>
@@ -51,19 +47,6 @@ const Questions = () => {
                 <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} showAnswers={showAnswersPage} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />
         })));
     }, [Data]);
-
-    const changeContents = (choice) => {
-        if (choice) {
-            console.log(ask);
-            setAsk(!ask);
-            console.log(ask);
-            setAnswer(false);
-        }
-        else {
-            setAsk(false);
-            setAnswer(!answer);
-        }
-    };
 
     return (
         <div className="forum-wrapper">

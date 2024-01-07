@@ -12,4 +12,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/getSession/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    //const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(user._doc);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

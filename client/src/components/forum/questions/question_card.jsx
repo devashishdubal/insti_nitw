@@ -26,11 +26,14 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             });
     };
 
+
     if (!description) description = "(empty)";
 
     return (
         <>
-            <div className="username"><i>u/{user}</i> • {date}</div>
+            <Link to={`/profile/${user}`}>
+                <div className="username" ><i>u/{user}</i> • {date}</div>
+            </Link>
             <Link to={`/students/forum/${id}`}>
                 <div className="content">
                     <p className="text">{title}</p>

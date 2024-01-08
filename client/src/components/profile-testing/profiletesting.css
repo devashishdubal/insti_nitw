@@ -76,7 +76,7 @@
 
 .profile_page .logo-button:hover {
     font-weight: bold;
-    cursor: pointer;
+    /* cursor: pointer; */
     transform: scale(1.05);
     transition: 0.2s;
 }
@@ -114,9 +114,20 @@ textarea{
 .social_buttons{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 textarea{
     resize: none;
+}
+
+.social_buttons input{
+    font-family: var(--font-stack);
+    height: 10px;
+    width: 700px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid silver;
+    padding: 10px;
+    margin: 0;
 }

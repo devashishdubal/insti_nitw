@@ -1,5 +1,6 @@
 import "./answers.css"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AnswerCard = ({ id, answer, fetch }) => {
     const handleLikeCick = (e) => {
@@ -24,9 +25,11 @@ const AnswerCard = ({ id, answer, fetch }) => {
     };
     return (
         <div className="Answer_card">
-            <div className="username">
-                <i>u/{answer.userId}</i> • {answer.date.split('T')[0]}
-            </div>
+            <Link to={`/profile/${answer.userId}`}>
+                <div className="username">
+                    <i>u/{answer.userId}</i> • {answer.date.split('T')[0]}
+                </div>
+            </Link>
 
             <div className="content">
                 <p className="description">{answer.answerDescription}</p>

@@ -110,10 +110,10 @@ const LoginWithGoogle = () => {
 
     return (
         <div className="landing_page_full">
-            <div className="landing_page_image">
-                {/* Just a nice picture of NITW */}
-                <img src={process.env.PUBLIC_URL + "../assets/banner.avif"} alt="bg"/>
-            </div>
+        <section id="up"></section>
+        <section id="down"></section>
+        <section id="left"></section>
+        <section id="right"></section>
             <div className="login_area">
                 <h1 className="animated_typing_class">Welcome to NITW Nexus</h1>
                 <div className="all_logos">

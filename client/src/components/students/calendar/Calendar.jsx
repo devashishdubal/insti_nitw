@@ -74,8 +74,8 @@ const Calendar = ({ dateSelected, setDateSelected, CustomButtonSelected, setButt
         <p ref={dispMonthYear} className="current-date"></p>
         <div className="icons">
           <span onClick={setButtonSelect}>+</span>
-          <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>l</span>
-          <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>r</span>
+          <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>{`<`}</span>
+          <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>{`>`}</span>
         </div>
       </header>
       <div className="calendar">

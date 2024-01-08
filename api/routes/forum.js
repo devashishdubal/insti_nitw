@@ -10,7 +10,8 @@ router.post("/postQuestion", async (req, res) => {
     const newQn = new Forum({
       questionTitle: req.body.questionTitle,
       questionDescription: req.body.questionDescription,
-      questionTag: req.body.questionTag
+      questionTag: req.body.questionTag,
+      userId: req.body.userId
     });
 
     const qn = await newQn.save();
@@ -32,6 +33,18 @@ router.get('/getQuestions/:filter', async (request, response) => {
     return response.status(200).json({
       Data: qns
     });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+router.get('/getQuestionById/:id', async (request, response) => {
+  try {
+
+    const { id } = request.params;
+    let qn = await Forum.find({_id: id});
+    return response.status(200).json(qn[0]);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -89,6 +102,7 @@ router.put('/reply/:id', async (request, response) => {
   try {
     const { id } = request.params;
     const newAns = new Answer({
+      userId: request.body.userId,
       answerDescription: request.body.answerDescription
     });
 

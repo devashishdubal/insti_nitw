@@ -184,10 +184,11 @@
     font-size: 14px;
 }
 
-.forum-wrapper .username:hover {
+.forum-wrapper i:hover {
+    transition: 0.1s;
     font-size: 14px;
     cursor: pointer;
-    color:blue;
+    background-color: #CDE6E9;
 }
 
 .forum-wrapper .individual_question .text {

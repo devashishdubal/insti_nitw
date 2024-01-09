@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext, useAuth } from "../../../Context/AuthContext"
 
-
 const Answers = () => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const { id } = useParams()

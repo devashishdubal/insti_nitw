@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
 // import Data from "./dummyData.json";
 import Answers from '../answers/answers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { AuthContext } from "../../../Context/AuthContext"
 
 const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
+    const { currentUser, userDetails } = useContext(AuthContext)
     
     const fetchData = () => {
         axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}`)
+            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
             .then((response) => {
                 // console.log(response.d)
                 setData(response.data.Data);
+                console.log(response.data.Data)
             })
             .catch((error) => {
                 console.log(error);
@@ -32,7 +34,9 @@ const Questions = () => {
         setAllQuestions([...Array(Data.length)].map((_, index) =>
         ({
             id: index + 1, card:
-                <QuestionCard comments={Data[index].answers.length} fetch={fetchData} id={Data[index]._id} title={Data[index].questionTitle} description={Data[index].questionDescription} tags={Data[index].questionTag} index={index} likes={Data[index].likes} dislikes={Data[index].dislikes} user={Data[index].userId} date={Data[index].date.split('T')[0]} />
+                <QuestionCard comments={Data[index]._doc.answers.length} fetch={fetchData} id={Data[index]._doc._id} title={Data[index]._doc.questionTitle} description={Data[index]._doc.questionDescription} tags={Data[index]._doc.questionTag} index={index} likes={Data[index]._doc.likes} dislikes={Data[index]._doc.dislikes} 
+                user={Data[index]._doc.userId} date={Data[index]._doc.date.split('T')[0]}
+                liked={Data[index].userHasLiked} disliked={Data[index].userHasDisliked}/>
         })));
     }, [Data]);
 

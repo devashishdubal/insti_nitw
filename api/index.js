@@ -26,7 +26,7 @@ const forumRoute = require("./routes/forum")
 
 dotenv.config();
 
-mongoose.connect(process.env.mongo_link, { useNewUrlParser: true });
+mongoose.connect(process.env.mongo_link); //, { useNewUrlParser: true } removed cuz deprecated
 app.use(express.json());
 
 app.get("/", (req, res) => {

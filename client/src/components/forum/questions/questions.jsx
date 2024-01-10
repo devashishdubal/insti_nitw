@@ -61,6 +61,8 @@ const Questions = () => {
         );
     }, [Data]);
 
+    const stack = new Stack();
+
     return (
         <div className="forum-wrapper">
             <div className='intro'>

@@ -19,7 +19,6 @@ const Questions = () => {
             .then((response) => {
                 // console.log(response.d)
                 setData(response.data.Data);
-                console.log(response.data.Data)
             })
             .catch((error) => {
                 console.log(error);

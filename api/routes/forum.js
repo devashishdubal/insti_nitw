@@ -49,8 +49,25 @@ router.get('/getQuestions/:filter', async (request, response) => {
 router.get('/getQuestionById/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    let qn = await Forum.find({_id: id});
-    return response.status(200).json(qn[0]);
+    const { userId } = request.query;
+    let qn = await Forum.findById(id);
+
+    if (!qn) {
+      return response.status(404).send("Question not found!");
+    }
+
+    const questionWithLikes = {
+      ...qn.toObject(),
+      userHasLiked: qn.likes_users.includes(userId),
+      userHasDisliked: qn.dislikes_users.includes(userId),
+      answers: qn.answers.map((answer) => ({
+        ...answer.toObject(),
+        userHasLiked: answer.likes_users.includes(userId),
+        userHasDisliked: answer.dislikes_users.includes(userId),
+      })),
+    };
+    
+    return response.status(200).json(questionWithLikes);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -114,9 +131,30 @@ router.put('/updateDislikes/:id', async (request, response) => {
 router.put('/updateLikes/comments/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const filter = { 'answers._id': id };
-    await Forum.findOneAndUpdate(filter, { $inc: { 'answers.$.likes': 1 } });
+    const { userId, questionId } = request.query;
 
+    const question = await Forum.findById(questionId);
+
+    if (!question) {
+      return response.status(404).send("Question not found!");
+    }
+    const answer = question.answers.id(id);
+
+    if (!answer) {
+      return response.status(404).send("Answer not found!");
+    }
+
+    if (answer.likes_users.includes(userId)) {
+      const indexOfLike = answer.likes_users.indexOf(userId);
+      answer.likes_users.splice(indexOfLike, 1);
+      answer.likes -= 1;  // Decrease the likes count
+      await question.save(); // Save the updated question
+      return response.status(200).json({ message: 'Like removed' });
+    }
+
+    answer.likes_users.push(userId);
+    answer.likes += 1; // Increase the likes count
+    await question.save(); // Save the updated question
     return response.status(200).send({ message: 'Likes Increased' });
   } catch (error) {
     console.log(error.message);
@@ -124,18 +162,43 @@ router.put('/updateLikes/comments/:id', async (request, response) => {
   }
 });
 
+
 router.put('/updateDislikes/comments/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const filter = { 'answers._id': id };
-    await Forum.findOneAndUpdate(filter, { $inc: { 'answers.$.dislikes': 1 } });
+    const { userId, questionId } = request.query;
 
+    const question = await Forum.findById(questionId);
+
+    if (!question) {
+      return response.status(404).send("Question not found!");
+    }
+
+    const answer = question.answers.id(id);
+
+    if (!answer) {
+      return response.status(404).send("Answer not found!");
+    }
+
+    if (answer.dislikes_users.includes(userId)) {
+      const indexOfDislike = answer.dislikes_users.indexOf(userId);
+      answer.dislikes_users.splice(indexOfDislike, 1);
+      answer.dislikes -= 1;  // Decrease the dislikes count
+      await question.save(); // Save the updated question
+      return response.status(200).json({ message: 'Dislike removed' });
+    }
+
+    answer.dislikes_users.push(userId);
+    answer.dislikes += 1; // Increase the dislikes count
+    await question.save(); // Save the updated question
     return response.status(200).send({ message: 'Dislikes Increased' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
+
+
 router.put('/reply/:id', async (request, response) => {
   try {
     const { id } = request.params;

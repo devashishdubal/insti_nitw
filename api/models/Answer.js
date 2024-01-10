@@ -20,6 +20,8 @@ const answerSchema = new mongoose.Schema({
         type: Number, 
         default: 0 
     },
+    likes_users:  [{ type: String, ref: 'User' }],
+    dislikes_users:  [{ type: String, ref: 'User' }]
 });
 
 module.exports = mongoose.model("Answer", answerSchema);

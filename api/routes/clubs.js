@@ -29,9 +29,18 @@ router.post("/createclub", async (req, res) => {
 
 router.get("/getAllClubs", async (req, res) => {
     try {
+        const { username } = req.query;
         const clubDetails = await Club.find({});
+        const userDetails = await User.findOne({username: username});
         
-        return res.status(200).send(clubDetails);
+        const clubDetailsWithSubscriptions = clubDetails.map((club) => ({
+            ...club,
+            userIsSubscribed: userDetails.subscribedTo.includes(club.clubId)
+        }));
+
+        
+      
+        return res.status(200).send(clubDetailsWithSubscriptions);
     } catch (error) {
         console.log(error)
         return res.status(500).send("Internal Server Error");
@@ -277,10 +286,12 @@ router.put("/removeMember", async(req, res) => {
 router.put("/handleSubscribe", async (req, res) => {
     try {
         const clubId = req.body.clubId;
-        const user_to_subscribe = req.body.userId;
+        const user_to_subscribe = req.body.username;
+
+        console.log(clubId, user_to_subscribe)
 
         const userExists = await User.findOne({
-            userId: user_to_subscribe
+            username: user_to_subscribe
         });
 
         if (!userExists) {
@@ -301,7 +312,7 @@ router.put("/handleSubscribe", async (req, res) => {
         );
 
         const userResult = await User.updateOne(
-            { userId: user_to_subscribe },
+            { username: user_to_subscribe },
             { $addToSet: { subscribedTo: clubId } }
         );
 
@@ -325,9 +336,9 @@ router.put("/handleSubscribe", async (req, res) => {
 router.put("/handleUnsubscribe", async (req, res) => {
     try {
         const clubId = req.body.clubId;
-        const user_to_unsubscribe = req.body.userId;
+        const user_to_unsubscribe = req.body.username;
 
-        const userExists = await User.findOne({ userId: user_to_unsubscribe });
+        const userExists = await User.findOne({ username: user_to_unsubscribe });
         const clubExists = await Club.findOne({ clubId: clubId });
 
         if (!userExists) {
@@ -344,7 +355,7 @@ router.put("/handleUnsubscribe", async (req, res) => {
         );
 
         const userResult = await User.updateOne(
-            { userId: user_to_unsubscribe },
+            { username: user_to_unsubscribe },
             { $pull: { subscribedTo: clubId } }
         );
 

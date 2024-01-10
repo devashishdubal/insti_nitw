@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext, useAuth } from "../../../Context/AuthContext"
+import JoditEditor from 'jodit-react';
 
 const Answers = () => {
     const { currentUser, userDetails } = useContext(AuthContext)
@@ -127,9 +128,14 @@ const Answers = () => {
                     </div>
                 )}
                 <div className="Input" id='yourAnswer'>
-                    {(Data.answers.length > 0) && (<h1>Your Reply</h1>)}
+                    {(Data.answers.length > 0) && (<h1>Enter your answer here</h1>)}
                     {(Data.answers.length == 0) && (<h1>Start The Conversation!</h1>)}
-                    <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Enter your Answer. Please refrain from profanity."></textarea>
+                    <JoditEditor 
+                        value={answerDescription}
+                        onChange={(newContent) => {setDesc(newContent)}}
+                        
+                    />
+                    {/* <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Please refrain from profanity."></textarea> */}
                     <button className="submit" onClick={handleSubmit}>Reply</button>
                     <Toaster />
                 </div>

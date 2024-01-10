@@ -9,7 +9,6 @@ const ClubList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("Fetching")
             try {
                 const response = await axios.get('http://localhost:8000/api/v1/clubs/getAllClubs/');
                 setData(response.data);

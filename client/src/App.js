@@ -72,6 +72,7 @@ function App() {
             </ProtectedRoute>
           }
         >
+          <Route index element={<Navigate to="feed" />} />
           <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="academics" element={<h1>Academics</h1>} />
@@ -96,6 +97,7 @@ function App() {
             </ProtectedRoute>
           }
         >
+          <Route index element={<Navigate to="nitw_clubs" />} />
           <Route path="nitw_clubs" element={<ProtectedRoute><ClubList /></ProtectedRoute>} />
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
@@ -121,6 +123,7 @@ function App() {
             </ProtectedRoute>
           }
         >
+          <Route index element={<Navigate to="places_to_eat" />} />
           <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
           <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

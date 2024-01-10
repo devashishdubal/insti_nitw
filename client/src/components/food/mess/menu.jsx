@@ -32,7 +32,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Mon["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Mon["LH"].dinner;
             //e.target.style.backgroundColor = "darkgreen";
-        } else if (e.target.id == "tue" ) {
+        } else if (e.target.id == "tue") {
             setCurrentDay("tue")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Tue["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Tue["IFC-B"].breakfast
@@ -144,7 +144,6 @@ function Menu() {
 
     const defaultDay = () => {
         if (currentDay == "mon") {
-            console.log("Mon"); 
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Mon["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Mon["IFC-B"].breakfast
             document.getElementsByClassName("breakfast")[2].innerHTML = jsonData.Mon["IFC-C"].breakfast
@@ -160,8 +159,7 @@ function Menu() {
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Mon["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Mon["LH"].dinner;
             //e.target.style.backgroundColor = "darkgreen";
-        } else if (currentDay == "tue" ) {
-            console.log("Tue");
+        } else if (currentDay == "tue") {
 
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Tue["IFC-A"].breakfast
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Tue["IFC-B"].breakfast
@@ -178,7 +176,6 @@ function Menu() {
             document.getElementsByClassName("dinner")[2].innerHTML = jsonData.Tue["IFC-C"].dinner;
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Tue["LH"].dinner;
         } else if (currentDay == "wed") {
-            console.log("Wed");
             // Change the day to Wednesday (replace "Tue" with "Wed")
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Wed["IFC-A"].breakfast;
             document.getElementsByClassName("breakfast")[1].innerHTML = jsonData.Wed["IFC-B"].breakfast;
@@ -196,7 +193,6 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Wed["LH"].dinner;
 
         } else if (currentDay == "thu") {
-            console.log("Thu");
 
             // Thursday
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Thu["IFC-A"].breakfast;
@@ -215,7 +211,6 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Thu["LH"].dinner;
 
         } else if (currentDay == "fri") {
-            console.log("Fri");
 
             // Friday
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Fri["IFC-A"].breakfast;
@@ -234,7 +229,6 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Fri["LH"].dinner;
 
         } else if (currentDay == "sat") {
-            console.log("Sat");
 
             // Saturday
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sat["IFC-A"].breakfast;
@@ -253,7 +247,6 @@ function Menu() {
             document.getElementsByClassName("dinner")[3].innerHTML = jsonData.Sat["LH"].dinner;
 
         } else if (currentDay == "sun") {
-            console.log("Sun");
 
             // Sunday
             document.getElementsByClassName("breakfast")[0].innerHTML = jsonData.Sun["IFC-A"].breakfast;
@@ -284,12 +277,12 @@ function Menu() {
     }
 
     ///////////////////
-    
+
     useEffect(() => {
         defaultDay();
     }, []);
 
-      ///////////////////
+    ///////////////////
     return (
         <div className="mess_menu">
             <div className="days">
@@ -305,68 +298,76 @@ function Menu() {
                 <div className="info">
                     <p className="mess_heading"><b>IFC-A</b></p>
                 </div>
-                <table class="menu">
-                    <tr>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Dinner</th>
-                    </tr>
-                    <tr>
-                        <td className = "breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
-                    </tr>
+                <table className="menu">
+                    <tbody>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                        <tr>
+                            <td className="breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div className="mess_name">
                 <div className="info">
                     <p className="mess_heading"><b>IFC-B</b></p>
                 </div>
-                <table class="menu">
-                    <tr>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Dinner</th>
-                    </tr>
-                    <tr>
-                        <td className = "breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
-                    </tr>
+                <table className="menu">
+                    <tbody>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                        <tr>
+                            <td className="breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div className="mess_name">
                 <div className="info">
                     <p className="mess_heading"><b>IFC-C</b></p>
                 </div>
-                <table class="menu">
-                    <tr>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Dinner</th>
-                    </tr>
-                    <tr>
-                        <td className = "breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
-                    </tr>
+                <table className="menu">
+                    <tbody>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                        <tr>
+                            <td className="breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div className="mess_name">
                 <div className="info">
                     <p className="mess_heading"><b>LH</b>&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 </div>
-                <table class="menu">
-                    <tr>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Dinner</th>
-                    </tr>
-                    <tr>
-                        <td className = "breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
-                        <td className = "dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
-                    </tr>
+                <table className="menu">
+                    <tbody>
+                        <tr>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                        <tr>
+                            <td className="breakfast">Poori, aalu curry, break, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="lunch">Channa, rice, roti, some shit some shit.Poori, aalu curry, break, some shit some shit</td>
+                            <td className="dinner">Someshit, someshit, someshit, someshit.Poori, aalu curry, break, some shit some shit</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

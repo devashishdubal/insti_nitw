@@ -101,7 +101,7 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
     };
 
 
-    if (!description) description = "(empty)";
+    //if (!description) description = "(empty)";
 
     return (
         <>
@@ -111,7 +111,7 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             <Link to={`/students/forum/${id}`}>
                 <div className="content">
                     <p className="text">{title}</p>
-                    <p className="description">{description}</p>
+                    <div className='description' dangerouslySetInnerHTML={{__html:description}}/>
                     <div className="question_controls">
                         <div className="tags">
                             <p key={index} className="individual_tag">{tags}</p>

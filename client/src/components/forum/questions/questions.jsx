@@ -34,7 +34,7 @@ const Questions = () => {
         setAllQuestions([...Array(Data.length)].map((_, index) =>
         ({
             id: index + 1, card:
-                <QuestionCard comments={Data[index]._doc.answers.length} fetch={fetchData} id={Data[index]._doc._id} title={Data[index]._doc.questionTitle} description={Data[index]._doc.questionDescription} tags={Data[index]._doc.questionTag} index={index} likes={Data[index]._doc.likes} dislikes={Data[index]._doc.dislikes} 
+                <QuestionCard comments={Data[index]._doc.answers.length} fetch={fetchData} id={Data[index]._doc._id} title={Data[index]._doc.questionTitle} description={/*Data[index]._doc.questionDescription*/""} tags={Data[index]._doc.questionTag} index={index} likes={Data[index]._doc.likes} dislikes={Data[index]._doc.dislikes} 
                 user={Data[index]._doc.userId} date={Data[index]._doc.date.split('T')[0]}
                 liked={Data[index].userHasLiked} disliked={Data[index].userHasDisliked}/>
         })));

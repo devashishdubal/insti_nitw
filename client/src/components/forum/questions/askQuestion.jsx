@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext, useAuth } from "../../../Context/AuthContext"
+import JoditEditor from 'jodit-react';
 
 const AskQuestionForm = ({ fetch }) => {
     const { currentUser, userDetails } = useContext(AuthContext)
@@ -80,8 +81,13 @@ const AskQuestionForm = ({ fetch }) => {
             </div>
             <div className="question_form">
                 <input value={questionTitle} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
-                <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
-                </textarea>
+                <JoditEditor 
+                    value={questionDescription}
+                    onChange={(newContent) => {setBody(newContent)}}
+                />
+                {questionDescription}
+                {/* <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
+                </textarea> */}
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>
                     <option value="" disabled hidden>Add a Tag:</option>
                     <option value="CSE">CSE</option>

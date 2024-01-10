@@ -121,10 +121,34 @@ const Answers = () => {
                 </div>
                 <div className="individual_question">
                     {(Data.userHasDisliked != null && Data.userHasLiked != null) ?
-                        (<QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes}
-                            dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} liked={Data.userHasLiked} disliked={Data.userHasDisliked} />) : (null)
+                        (
+                            <QuestionCard
+                                comments={Data.answers.length}
+                                fetch={fetchData}
+                                id={Data._id}
+                                title={Data.questionTitle}
+                                description={Data.questionDescription}
+                                tags={Data.questionTag}
+                                likes={Data.likes}
+                                time={new Date(Data.date).toLocaleTimeString(undefined, {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: true
+                                })}
+                                dislikes={Data.dislikes}
+                                user={Data.userId}
+                                date={new Date(Data.date).toLocaleDateString('en-GB', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit'
+                                })}
+                                liked={Data.userHasLiked}
+                                disliked={Data.userHasDisliked}
+                            />
+                        ) : (null)
                     }
                 </div>
+
                 {((Data.answers?.length) || 0) > 0 && (
                     <div className="Section">
                         {answers.map((answer, index) => (

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from "../../../Context/AuthContext"
 
-const QuestionCard = ({ comments, fetch, id, user, date, title, description, tags, index, likes, dislikes, liked, disliked }) => {
+const QuestionCard = ({ time, comments, fetch, id, user, date, title, description, tags, index, likes, dislikes, liked, disliked }) => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const [likeColor, setLikeColor] = useState(liked ? "lightgreen" : "white");
     const [dislikeColor, setDislikeColor] = useState(disliked ? "lightcoral" : "white")
@@ -84,7 +84,7 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
         <>
             <div className="username">
                 <Link to={`/profile/${user}`}>
-                    <i>u/{user}</i> </Link>• {date}
+                    <i>u/{user}</i> </Link>• {date} • {time}
             </div>
             <Link to={`/students/forum/${id}`}>
                 <div className="content">

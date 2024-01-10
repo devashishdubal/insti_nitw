@@ -11,7 +11,7 @@ const Questions = () => {
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
     const { currentUser, userDetails } = useContext(AuthContext)
-    
+
     const fetchData = () => {
         axios
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
@@ -25,16 +25,40 @@ const Questions = () => {
 
     useEffect(() => {
         fetchData();
-    }, [filter]);    
+    }, [filter]);
 
     useEffect(() => {
-        setAllQuestions([...Array(Data.length)].map((_, index) =>
-        ({
-            id: index + 1, card:
-                <QuestionCard comments={Data[index]._doc.answers.length} fetch={fetchData} id={Data[index]._doc._id} title={Data[index]._doc.questionTitle} description={Data[index]._doc.questionDescription} tags={Data[index]._doc.questionTag} index={index} likes={Data[index]._doc.likes} dislikes={Data[index]._doc.dislikes} 
-                user={Data[index]._doc.userId} date={Data[index]._doc.date.split('T')[0]}
-                liked={Data[index].userHasLiked} disliked={Data[index].userHasDisliked}/>
-        })));
+        setAllQuestions(
+            Data.map((question, index) => ({
+                id: index + 1,
+                card: (
+                    <QuestionCard
+                        comments={question._doc.answers.length}
+                        fetch={fetchData}
+                        id={question._doc._id}
+                        title={question._doc.questionTitle}
+                        description={question._doc.questionDescription}
+                        tags={question._doc.questionTag}
+                        index={index}
+                        likes={question._doc.likes}
+                        dislikes={question._doc.dislikes}
+                        user={question._doc.userId}
+                        time={new Date(question._doc.date).toLocaleTimeString(undefined, {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        })}
+                        date={new Date(question._doc.date).toLocaleDateString('en-GB', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        })}
+                        liked={question.userHasLiked}
+                        disliked={question.userHasDisliked}
+                    />
+                ),
+            }))
+        );
     }, [Data]);
 
     return (

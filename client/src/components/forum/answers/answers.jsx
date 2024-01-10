@@ -6,13 +6,14 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { AuthContext, useAuth } from "../../../Context/AuthContext"
+import { AuthContext } from "../../../Context/AuthContext"
 
 const Answers = () => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const { id } = useParams()
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
+
     const initialData = {
         _id: "",
         questionTitle: "",
@@ -22,20 +23,20 @@ const Answers = () => {
         likes: 0,
         dislikes: 0,
         date: "",
-        answers: []
+        answers: [],
+        userHasLiked: null,
+        userHasDisliked: null
     };
 
     const [Data, setData] = useState(initialData);
 
-    const fetchData = () => {
-        axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}`)
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails.username}`);
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -94,8 +95,8 @@ const Answers = () => {
     };
 
     useEffect(() => {
-        //console.log(Data)
-        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]} /> })));
+        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]} 
+            questionId = {Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked}/>})));
     }, [Data]);
 
     return (
@@ -117,7 +118,10 @@ const Answers = () => {
                     </div>
                 </div>
                 <div className="individual_question">
-                    <QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} />
+                    {(Data.userHasDisliked != null && Data.userHasLiked != null) ?
+                    (<QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} 
+                    dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} liked={Data.userHasLiked} disliked={Data.userHasDisliked}/>): (null)
+                    }
                 </div>
                 {((Data.answers?.length) || 0) > 0 && (
                     <div className="Section">

@@ -14,17 +14,6 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails.username}&disliked=${disliked}`)
             .then(() => {
                 fetch();
-                liked = !liked;
-
-                if (liked) {
-                    setLikeColor("lightgreen")
-                    if (disliked) {
-                        setDislikeColor("white")
-                        disliked = !disliked;
-                    }
-                } else {
-                    setLikeColor("white")
-                }
             })
             .catch((error) => {
                 console.log(error);
@@ -36,23 +25,11 @@ const QuestionCard = ({ comments, fetch, id, user, date, title, description, tag
             .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails.username}&liked=${liked}`)
             .then(() => {
                 fetch();
-                disliked = !disliked;
-
-                if (disliked) {
-                    setDislikeColor("lightcoral")
-                    if (liked) {
-                        setLikeColor("white")
-                        liked = !liked;
-                    }
-                } else {
-                    setDislikeColor("white")
-                }
             })
             .catch((error) => {
                 console.log(error);
             });
     };
-
 
     const handleLikeCick = (e) => {
         e.preventDefault();

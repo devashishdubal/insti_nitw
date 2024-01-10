@@ -101,7 +101,6 @@ const LoginWithGoogle = () => {
             showCursor: false
           });
           
-          console.log(currentUser)
           return () => {
             // Destroy Typed instance during cleanup to stop animation
             typed.destroy();

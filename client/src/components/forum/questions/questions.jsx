@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
-// import Data from "./dummyData.json";
 import Answers from '../answers/answers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -17,7 +16,6 @@ const Questions = () => {
         axios
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
             .then((response) => {
-                // console.log(response.d)
                 setData(response.data.Data);
             })
             .catch((error) => {

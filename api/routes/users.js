@@ -22,4 +22,27 @@ router.get("/getSession/:email", async (req, res) => {
   }
 });
 
+router.put("/updateVisibility/:id", async (req, res) => {
+  try {
+    const username = req.params.id;
+    const { privateProfile } = req.body; 
+
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { privateProfile: privateProfile },
+      { new: true } // returns the updated document
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.json({ message: 'Private profile updated successfully', user: updatedUser });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;

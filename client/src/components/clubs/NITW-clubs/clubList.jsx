@@ -7,7 +7,7 @@ import { AuthContext } from "../../../Context/AuthContext";
 const ClubList = () => {
     const [allCards, setAllCards] = useState([]);
     const [data, setData] = useState(null);
-    const { currentUser, userDetails } = useContext(AuthContext)
+    const { userDetails } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchData = async () => {

@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../../../Context/AuthContext"
 
 const Answers = () => {
-    const { currentUser, userDetails } = useContext(AuthContext)
+    const { userDetails } = useContext(AuthContext)
     const { id } = useParams()
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
@@ -95,8 +95,10 @@ const Answers = () => {
     };
 
     useEffect(() => {
-        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]} 
-            questionId = {Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked}/>})));
+        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
+            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]}
+                questionId={Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked} />
+        })));
     }, [Data]);
 
     return (
@@ -119,10 +121,34 @@ const Answers = () => {
                 </div>
                 <div className="individual_question">
                     {(Data.userHasDisliked != null && Data.userHasLiked != null) ?
-                    (<QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} 
-                    dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} liked={Data.userHasLiked} disliked={Data.userHasDisliked}/>): (null)
+                        (
+                            <QuestionCard
+                                comments={Data.answers.length}
+                                fetch={fetchData}
+                                id={Data._id}
+                                title={Data.questionTitle}
+                                description={Data.questionDescription}
+                                tags={Data.questionTag}
+                                likes={Data.likes}
+                                time={new Date(Data.date).toLocaleTimeString(undefined, {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: true
+                                })}
+                                dislikes={Data.dislikes}
+                                user={Data.userId}
+                                date={new Date(Data.date).toLocaleDateString('en-GB', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit'
+                                })}
+                                liked={Data.userHasLiked}
+                                disliked={Data.userHasDisliked}
+                            />
+                        ) : (null)
                     }
                 </div>
+
                 {((Data.answers?.length) || 0) > 0 && (
                     <div className="Section">
                         {answers.map((answer, index) => (

@@ -37,3 +37,9 @@
 .main-form .datetime{
     width: 150px;
 }
+
+.main-form .check{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

@@ -1,8 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
-import "./createEvent.css";
+import { useState } from 'react';
 
-const CreateEvent = () => {
+const EditEvent = () => {
     const [title,setTitle] = useState("");
     const [description,setDesc] = useState("");
     const [venue,setVenue] = useState("");
@@ -16,7 +15,7 @@ const CreateEvent = () => {
     };
     return (
         <>
-        <p className='title'>Create Event</p>
+        <p className='title'>Edit Event</p>
         <div className='main-form'>
             <input value={title} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
             <textarea
@@ -70,4 +69,4 @@ const CreateEvent = () => {
     )
 }
 
-export default CreateEvent
+export default EditEvent

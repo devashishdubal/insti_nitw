@@ -83,8 +83,8 @@ const QuestionCard = ({ loading, time, comments, fetch, id, user, date, title, d
         <>
             {!loading && <div className="username">
                 <Link to={`/profile/${user}`}>
-                    <i>u/{user}</i>
-                </Link> • {date} • {time}
+                    <span><i>u/{user}</i></span>
+                </Link><span>{date} • {time}</span>
             </div>
             }
             <Link to={`/students/forum/${id}`}>

@@ -41,8 +41,8 @@ const Questions = () => {
                         description={question._doc.questionDescription}
                         tags={question._doc.questionTag}
                         index={index}
-                        likes={question._doc.likes}
-                        dislikes={question._doc.dislikes}
+                        nlikes={question._doc.likes}
+                        ndislikes={question._doc.dislikes}
                         user={question._doc.userId}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
@@ -54,8 +54,8 @@ const Questions = () => {
                             month: '2-digit',
                             day: '2-digit'
                         })}
-                        liked={question.userHasLiked}
-                        disliked={question.userHasDisliked}
+                        isliked={question.userHasLiked}
+                        isdisliked={question.userHasDisliked}
                     />
                 ),
             }))

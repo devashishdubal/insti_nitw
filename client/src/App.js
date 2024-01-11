@@ -14,6 +14,7 @@ import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
 import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
+import CreateEvent from "./components/clubs/create-event/createEvent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
@@ -102,6 +103,7 @@ function App() {
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
           <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
+          <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route

@@ -1,0 +1,39 @@
+.main-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
+}
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.main-form input,
+.main-form textarea {
+    font-family: var(--font-stack);
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid silver;
+    padding: 10px;
+    margin: 0;
+}
+.main-form .submit{
+    padding: 9px 10px;
+    border-radius: 12px;
+    background-color: rgb(104, 163, 182);
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-family: var(--font-stack);
+    width: 20%;
+}
+
+.main-form .submit:hover{
+    background-color: rgb(82, 131, 150);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.main-form .datetime{
+    width: 150px;
+}

@@ -10,6 +10,7 @@ const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const { currentUser, userDetails } = useContext(AuthContext)
 
     const fetchData = () => {
@@ -17,6 +18,7 @@ const Questions = () => {
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
             .then((response) => {
                 setData(response.data.Data);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -37,7 +39,7 @@ const Questions = () => {
                         fetch={fetchData}
                         id={question._doc._id}
                         title={question._doc.questionTitle}
-                        description={question._doc.questionDescription}
+                        description={question._doc.questionDescription || "(empty)"}
                         tags={question._doc.questionTag}
                         index={index}
                         likes={question._doc.likes}
@@ -55,13 +57,12 @@ const Questions = () => {
                         })}
                         liked={question.userHasLiked}
                         disliked={question.userHasDisliked}
+                        loading={false}
                     />
                 ),
             }))
         );
     }, [Data]);
-
-    // const stack = new Stack();
 
     return (
         <div className="forum-wrapper">
@@ -86,6 +87,9 @@ const Questions = () => {
             </div>
 
             <div className='questions scroller'>
+                {loading && [...Array(8)].map(() => (
+                    <QuestionCard loading={true} />
+                ))}
                 {allQuestions.map((question, index) => (
                     <div className="individual_question" key={index}>{question.card}</div>
                 ))}

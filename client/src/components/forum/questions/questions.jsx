@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../Context/AuthContext"
 
 const Questions = () => {
+    console.log('yo')
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);

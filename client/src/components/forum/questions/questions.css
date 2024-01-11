@@ -16,6 +16,13 @@
     gap: 12px;
 }
 
+.forum-wrapper .intro_right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
 .forum-wrapper .individual_question {
     box-sizing: border-box;
     display: flex;
@@ -261,3 +268,22 @@
 .forum-wrapper .dislike_button svg:hover {
     fill: lightcoral;
 }
+
+.forum-wrapper .filtering_options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.forum-wrapper .intro_right input {
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+}
+
+.forum-wrapper .intro_right .search_place {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+

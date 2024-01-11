@@ -7,8 +7,6 @@ const QuestionLikes = require("../models/QuestionLikes");
 // owner can change permission settings for admin and members
 // admins can change permission settings for members only
 
-
-
 router.post("/postQuestion", async (req, res) => {
   try {
     const newQn = new Forum({
@@ -28,10 +26,13 @@ router.post("/postQuestion", async (req, res) => {
 
 router.get('/getQuestions/:filter', async (request, response) => {
   try {
-    const { userId } = request.query;
+    const { userId, searchData } = request.query;
     const { filter } = request.params;
-    let qns = await Forum.find({}).sort({ date: -1 });;
-    if (filter != 0) qns = await Forum.find({ questionTag: filter }).sort({ date: -1 });
+    
+    let qns = (searchData.length == 0) ? (await Forum.find({}).sort({ date: -1 })) : (await Forum.find({$text:{$search:searchData}}).sort({ date: -1 }));
+    if (filter != 0) {
+      qns = (searchData.length == 0) ? (await Forum.find({ questionTag: filter }).sort({ date: -1 })) : (await Forum.find({questionTag: filter, $text:{$search:searchData}}).sort({ date: -1 }));
+    }
 
     const questionsWithLikes = qns.map((question) => ({
       ...question,

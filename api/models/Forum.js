@@ -34,4 +34,6 @@ const forumSchema = new mongoose.Schema({
     dislikes_users:  [{ type: String, ref: 'User' }]
 });
 
+forumSchema.index({questionTitle: 1})
+
 module.exports = mongoose.model("Forum", forumSchema);

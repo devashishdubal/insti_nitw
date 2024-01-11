@@ -11,10 +11,11 @@ const Questions = () => {
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
     const { currentUser, userDetails } = useContext(AuthContext)
+    const [searchBar, setSearchBar] = useState("");
     
     const fetchData = () => {
         axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
+            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}&searchData=${searchBar}`)
             .then((response) => {
                 setData(response.data.Data);
             })
@@ -22,6 +23,16 @@ const Questions = () => {
                 console.log(error);
             });
     };
+
+    const searchData = (e) => {
+        setSearchBar(e.target.value)
+        console.log(searchBar)
+    }
+
+    const fastSearch = () => {
+        fetchData();
+        setSearchBar("");
+    }
 
     useEffect(() => {
         fetchData();
@@ -53,6 +64,12 @@ const Questions = () => {
                     </select>
                 </div>
                 <div className='intro_right'>
+                    <div className='search_place'>
+                        <input type="text" placeholder='Search' value={searchBar} onChange={searchData}/>
+                        <button onClick={fastSearch}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
                     <Link to="/students/forum/ask_question">
                         <button>Ask Question</button>
                     </Link>

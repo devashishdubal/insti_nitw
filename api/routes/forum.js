@@ -29,9 +29,9 @@ router.get('/getQuestions/:filter', async (request, response) => {
     const { userId, searchData } = request.query;
     const { filter } = request.params;
     
-    let qns = (searchData.length == 0) ? (await Forum.find({}).sort({ date: -1 })) : (await Forum.find({$text:{$search:searchData}}).sort({ date: -1 }));
+    let qns = (searchData.length == 0) ? (await Forum.find({}).sort({ date: -1 })) : (await Forum.find({questionTitle: { $regex: searchData, $options: 'i' }}).sort({ date: -1 }));
     if (filter != 0) {
-      qns = (searchData.length == 0) ? (await Forum.find({ questionTag: filter }).sort({ date: -1 })) : (await Forum.find({questionTag: filter, $text:{$search:searchData}}).sort({ date: -1 }));
+      qns = (searchData.length == 0) ? (await Forum.find({ questionTag: filter }).sort({ date: -1 })) : (await Forum.find({questionTag: filter, questionTitle: { $regex: searchData, $options: 'i' }}).sort({ date: -1 }));
     }
 
     const questionsWithLikes = qns.map((question) => ({

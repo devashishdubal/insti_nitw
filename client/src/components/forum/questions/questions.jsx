@@ -28,11 +28,6 @@ const Questions = () => {
         setSearchBar(e.target.value)
     }
 
-    const fastSearch = () => {
-        fetchData();
-        setSearchBar("");
-    }
-
     useEffect(() => {
         fetchData();
     }, [filter, searchBar]);    

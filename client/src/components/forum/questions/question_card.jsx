@@ -13,7 +13,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
         axios
             .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails.username}&disliked=${disliked}`)
             .then(() => {
-                fetch();
+                //fetch();
             })
             .catch((error) => {
                 console.log(error);
@@ -24,7 +24,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
         axios
             .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails.username}&liked=${liked}`)
             .then(() => {
-                fetch();
+                //fetch();
             })
             .catch((error) => {
                 console.log(error);
@@ -40,12 +40,15 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
                 liked = !liked;
 
                 if (liked) {
+                    likes++;
                     setLikeColor("lightgreen")
                     if (disliked) {
+                        dislikes--;
                         setDislikeColor("white")
                         updateDislike();
                     }
                 } else {
+                    likes--;
                     setLikeColor("white")
                 }
             })
@@ -63,12 +66,15 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
                 disliked = !disliked;
 
                 if (disliked) {
+                    dislikes++;
                     setDislikeColor("lightcoral")
                     if (liked) {
+                        likes--;
                         setLikeColor("white")
                         updateLike();
                     }
                 } else {
+                    dislikes--;
                     setDislikeColor("white")
                 }
             })
@@ -79,6 +85,10 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
 
 
     if (!description) description = "(empty)";
+
+    useEffect(() => {
+        /* Kuch karo */
+    }, [likes, dislikes])
 
     return (
         <>

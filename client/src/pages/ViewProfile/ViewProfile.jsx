@@ -107,7 +107,7 @@ const Profile = () => {
           <button className="logo-button" onClick={() => redirectToUrl('mailto:{your.email@example.com}')}>
             <img
               className="logo-img"
-              src="https://clipground.com/images/email-logo-png-19.png"
+              src="https://clipgroundh.com/images/email-logo-png-19.png"
               alt="Mail"
             />
           </button>

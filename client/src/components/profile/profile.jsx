@@ -90,6 +90,7 @@ const Profile = () => {
         </div>
 
         <div className="information">
+          <button>Visibility</button>
           <h2>{userData.firstName} {userData.lastName} </h2>
           <h4>Username: {userData.username}</h4>
           <h4>Roll Number: {userData.rollNo}</h4>

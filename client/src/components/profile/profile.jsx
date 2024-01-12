@@ -9,6 +9,7 @@ const Profile = () => {
     const [userData, setUserData] = useState(null);
     const {currentUser} = useContext(AuthContext)
     const [link, setLink] = useState("");
+    const [isPrivate, setIsPrivate] = useState(null);
     //let username;
     //const [username, setUsername] = useState(null)
     /*
@@ -18,6 +19,36 @@ const Profile = () => {
       }
     }, [currentUser]);
     */
+
+    const handlePrivatePublicButton = () => {
+      const newPrivateProfileValue = !isPrivate;
+      setIsPrivate(newPrivateProfileValue);
+      // send http request also
+      const profileVisibilityChanges = {"privateProfile": newPrivateProfileValue};
+      axios
+        .put(`http://localhost:8000/api/v1/users/updateVisibility/${userData.username}`, profileVisibilityChanges)
+        .then(() => {
+          //console.log("Updated")
+          let confirmationString = (newPrivateProfileValue) ? ("Account is private") : ("Account is public");
+          toast.success(confirmationString, {
+            duration: 3000,
+            position: 'top-right',
+          
+            // Styling
+            style: {},
+            className: '',
+            // Aria
+            ariaProps: {
+              role: 'status',
+              'aria-live': 'polite',
+            },
+          });
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
     useEffect(() => {
     // Fetch user data and set the link
       const fetchData = async (username) => {
@@ -25,6 +56,7 @@ const Profile = () => {
           let reqLink = "http://localhost:8000/api/v1/users/" + username;
           const response = await axios.get(reqLink);
           setUserData(response.data);
+          setIsPrivate(response.data.privateProfile);
           setLink("http://localhost:3000/profile/" + username); // Set the link from the response URL
         } catch (error) {
           console.log('Error! Please check input fields');
@@ -36,7 +68,7 @@ const Profile = () => {
         fetchData(currentUser.email.split("@")[0]);
       }
 
-    }, []);
+    }, [isPrivate]);
 
     const handleCopyLink = () => {
       navigator.clipboard.writeText(link)
@@ -90,6 +122,19 @@ const Profile = () => {
         </div>
 
         <div className="information">
+          <div className="visibility_settings">
+            <p>Stay private: </p>
+            <label class="switch">
+            <label className="switch">
+              { (isPrivate != null) ? (
+              <input type="checkbox" checked={isPrivate} onChange={handlePrivatePublicButton}/>): (null)
+              }
+              { (isPrivate != null) ? (
+              <span className="slider round"></span>): (null)
+              }
+            </label>
+            </label>
+          </div>
           <h2>{userData.firstName} {userData.lastName} </h2>
           <h4>Username: {userData.username}</h4>
           <h4>Roll Number: {userData.rollNo}</h4>

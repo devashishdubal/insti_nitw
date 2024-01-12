@@ -11,22 +11,29 @@ const Questions = () => {
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const { currentUser, userDetails } = useContext(AuthContext)
-
+    const [searchBar, setSearchBar] = useState("");
+    
     const fetchData = () => {
         axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}`)
+            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}&searchData=${searchBar}`)
             .then((response) => {
                 setData(response.data.Data);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
     };
 
+    const searchData = (e) => {
+        setSearchBar(e.target.value)
+    }
+
     useEffect(() => {
         fetchData();
-    }, [filter]);
+    }, [filter, searchBar]);    
 
     useEffect(() => {
         setAllQuestions(
@@ -38,7 +45,7 @@ const Questions = () => {
                         fetch={fetchData}
                         id={question._doc._id}
                         title={question._doc.questionTitle}
-                        description={question._doc.questionDescription}
+                        description={question._doc.questionDescription || "(empty)"}
                         tags={question._doc.questionTag}
                         index={index}
                         nlikes={question._doc.likes}
@@ -56,13 +63,12 @@ const Questions = () => {
                         })}
                         isliked={question.userHasLiked}
                         isdisliked={question.userHasDisliked}
+                        loading={false}
                     />
                 ),
             }))
         );
     }, [Data]);
-
-    // const stack = new Stack();
 
     return (
         <div className="forum-wrapper">
@@ -80,6 +86,12 @@ const Questions = () => {
                     </select>
                 </div>
                 <div className='intro_right'>
+                    <div className='search_place'>
+                        <input type="text" placeholder='Search' value={searchBar} onChange={searchData}/>
+                        <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
                     <Link to="/students/forum/ask_question">
                         <button>Ask Question</button>
                     </Link>
@@ -87,6 +99,9 @@ const Questions = () => {
             </div>
 
             <div className='questions scroller'>
+                {loading && [...Array(8)].map(() => (
+                    <QuestionCard loading={true} />
+                ))}
                 {allQuestions.map((question, index) => (
                     <div className="individual_question" key={index}>{question.card}</div>
                 ))}

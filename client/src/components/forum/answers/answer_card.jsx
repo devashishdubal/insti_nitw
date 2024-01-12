@@ -92,7 +92,7 @@ const AnswerCard = ({ id, answer, fetch, questionId, userHasLiked, userHasDislik
             <Link to={`/profile/${answer.userId}`}>
                 <div className="username">
                     {console.log(answer.date)}
-                    <i>u/{answer.userId}</i> • {new Date(answer.date).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })} • {new Date(answer.date).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: true })}
+                    <i>u/{answer.userId}</i>{new Date(answer.date).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })} • {new Date(answer.date).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: true })}
                 </div>
             </Link>
 

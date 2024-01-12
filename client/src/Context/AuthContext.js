@@ -32,6 +32,7 @@ const AuthContextProvider = React.memo(({ children }) => {
   
       fetchData();
       // get user session from db
+      // get request 
     });
 
     return () => {

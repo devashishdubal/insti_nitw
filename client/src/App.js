@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import Topbar from "./components/topbar/Topbar";
 import StudentSidebar from "./components/sidebar/student_sidebar";
 import Questions from "./components/forum/questions/questions";
@@ -25,7 +25,12 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 
 function App() {
+  console.log('huh')
   const { currentUser } = useContext(AuthContext);
+
+  if (!currentUser) {
+    return null;
+  }
 
   const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {

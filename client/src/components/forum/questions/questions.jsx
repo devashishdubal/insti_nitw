@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../Context/AuthContext"
 
 const Questions = () => {
+    console.log('yo')
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
@@ -47,8 +48,8 @@ const Questions = () => {
                         description={question._doc.questionDescription || "(empty)"}
                         tags={question._doc.questionTag}
                         index={index}
-                        likes={question._doc.likes}
-                        dislikes={question._doc.dislikes}
+                        nlikes={question._doc.likes}
+                        ndislikes={question._doc.dislikes}
                         user={question._doc.userId}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
@@ -60,8 +61,8 @@ const Questions = () => {
                             month: '2-digit',
                             day: '2-digit'
                         })}
-                        liked={question.userHasLiked}
-                        disliked={question.userHasDisliked}
+                        isliked={question.userHasLiked}
+                        isdisliked={question.userHasDisliked}
                         loading={false}
                     />
                 ),

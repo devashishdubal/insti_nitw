@@ -73,6 +73,39 @@ const Profile = () => {
                   />
                 </div>
 
+          {/* Add similar blocks for other social buttons */}
+          
+          <button className="logo-button" onClick={() => redirectToUrl('https://www.linkedin.com')}>
+            <img
+              className="logo-img"
+              src="https://th.bing.com/th/id/R.c5c502876072b029777af952de544fa2?rik=4ZzmtGhxDHoMWg&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2013%2f04%2flinkedin-logo-transparent_371228.png&ehk=dJYm07mzFlEA2Ygv3E2Z7u%2bYgIpw5iewUm6vHledgok%3d&risl=&pid=ImgRaw&r=0"
+              alt="LinkedIn"
+            />
+          </button>
+          
+          <button className="logo-button" onClick={() => redirectToUrl('mailto:{your.email@example.com}')}>
+            <img
+              className="logo-img"
+              src="https://clipgroundh.com/images/email-logo-png-19.png"
+              alt="Mail"
+            />
+          </button>
+          
+          <button className="logo-button" onClick={() => redirectToUrl('https://www.github.com')}>
+            <img
+              className="logo-img"
+              src="https://th.bing.com/th/id/R.7a864f07681f187fb572468bfc949977?rik=EyUQGBjtSbMjVw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fgithub%2fgithub_PNG80.png&ehk=sCQlSHnb7Wc8WNPgOilokXbf8jL4g20yv7QFEFpl6ko%3d&risl=&pid=ImgRaw&r=0"
+              alt="Github"
+            />
+          </button>
+          
+          <button className="logo-button" onClick={() => redirectToUrl('https://www.twitter.com')}>
+            <img
+              className="logo-img"
+              src="https://clipartcraft.com/images/twitter-logo-high-quality-5.png"
+              alt="Twitter"
+            />
+          </button>
                 <div className="circle-container">
                   <img
                     src="https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg"

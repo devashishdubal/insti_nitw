@@ -129,21 +129,21 @@ const Answers = () => {
                                 title={Data.questionTitle}
                                 description={Data.questionDescription}
                                 tags={Data.questionTag}
-                                likes={Data.likes}
+                                nlikes={Data.likes}
                                 time={new Date(Data.date).toLocaleTimeString(undefined, {
                                     hour: '2-digit',
                                     minute: '2-digit',
                                     hour12: true
                                 })}
-                                dislikes={Data.dislikes}
+                                ndislikes={Data.dislikes}
                                 user={Data.userId}
                                 date={new Date(Data.date).toLocaleDateString('en-GB', {
                                     year: 'numeric',
                                     month: '2-digit',
                                     day: '2-digit'
                                 })}
-                                liked={Data.userHasLiked}
-                                disliked={Data.userHasDisliked}
+                                isliked={Data.userHasLiked}
+                                isdisliked={Data.userHasDisliked}
                             />
                         ) : (null)
                     }

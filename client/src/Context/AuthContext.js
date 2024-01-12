@@ -1,12 +1,12 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useEffect, useState, useContext, memo } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
 import { UserContext } from "./UserContext";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const AuthContextProvider = ({ children }) => {
+const AuthContextProvider = React.memo(({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [userDetails, setUserDetails] = useState({});
   //const {currentUser, setCurrentUser} = useContext(UserContext)
@@ -44,4 +44,7 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
+)
+
+export { AuthContextProvider, AuthContext };

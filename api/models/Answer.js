@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const answerSchema = new mongoose.Schema({
     userId: { 
         type: String, 
-        default: "dummyUserId",
         required: true 
     },
     date: { 
@@ -21,6 +20,8 @@ const answerSchema = new mongoose.Schema({
         type: Number, 
         default: 0 
     },
+    likes_users:  [{ type: String, ref: 'User' }],
+    dislikes_users:  [{ type: String, ref: 'User' }]
 });
 
 module.exports = mongoose.model("Answer", answerSchema);

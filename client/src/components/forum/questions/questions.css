@@ -12,9 +12,16 @@
 
 .forum-wrapper .questions {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
     gap: 12px;
 }
+
+.forum-wrapper .intro_right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 
 .forum-wrapper .individual_question {
     box-sizing: border-box;
@@ -87,16 +94,19 @@
 
 .forum-wrapper .intro_text {
     font-size: 30px;
+    font-weight: bold;
 }
 
 .forum-wrapper .welcome {
     font-size: 30px;
+    font-weight: bold;
 }
 
 .forum-wrapper .intro_left {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
 }
 
 .forum-wrapper .ans-top {
@@ -104,7 +114,7 @@
     gap: 12px;
 }
 
-.forum-wrapper .ans-top a {
+.forum-wrapper .ans-top a[href='#yourAnswer'] {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,7 +130,7 @@
     text-decoration: none;
 }
 
-.forum-wrapper .ans-top a:visited {
+.forum-wrapper .ans-top a[href='#yourAnswer']:visited {
     color: black;
 }
 
@@ -136,18 +146,21 @@
 }
 
 .forum-wrapper .intro_right button:hover,
-.forum-wrapper .ans-top a:hover {
+.forum-wrapper .ans-top a[href='#yourAnswer']:hover {
     cursor: pointer;
     background-color: rgba(247, 247, 247, 0.705);
     transition: all 0.15s;
 }
 
 .forum-wrapper .intro_right button:active,
-.forum-wrapper .ans-top a:active {
+.forum-wrapper .ans-top a[href='#yourAnswer']:active {
     background-color: rgba(197, 197, 197, 0.841);
 }
 
 .forum-wrapper .intro_left button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50px;
     height: 35px;
     background-color: white;
@@ -175,7 +188,16 @@
 }
 
 .forum-wrapper .username {
-    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+}
+
+.forum-wrapper .username .left:hover {
+    transition: 0.1s;
+    cursor: pointer;
+    background-color: #CDE6E9;
 }
 
 .forum-wrapper .individual_question .text {
@@ -232,12 +254,12 @@
 .forum-wrapper .likes svg {
     fill: none;
     width: 26px;
-    transition: 0.2s;
+    /*transition: 0.2s;*/
 }
 
 .forum-wrapper .likes svg:hover {
     transform: scale(1.1);
-    transition: 0.2s;
+    /*transition: 0.2s;*/
     cursor: pointer;
 }
 
@@ -248,3 +270,22 @@
 .forum-wrapper .dislike_button svg:hover {
     fill: lightcoral;
 }
+
+.forum-wrapper .filtering_options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.forum-wrapper .intro_right input {
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+}
+
+.forum-wrapper .intro_right .search_place {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+

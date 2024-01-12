@@ -6,6 +6,10 @@
     border-right: 1px solid rgb(197, 196, 196)
 }
 
+.sidebar a {
+    display: flex;
+}
+
 .sidebar img[alt="logo"] {
     margin-bottom: 12px;
     height: 100px;
@@ -25,9 +29,12 @@
     stroke: black;
 }
 
-.sidebar button {
+.sidebar a {
+    box-sizing: border-box;
+    padding: 0px 10px;
+    flex: 1;
     border-radius: 8px;
-    height: 50px;
+    min-height: 50px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     align-items: center;
@@ -37,12 +44,20 @@
     border: 0;
 }
 
-.sidebar button:hover:not(.selected){
+.sidebar a:active {
+    color: black;
+}
+
+.sidebar a:visited {
+    color: black;
+}
+
+.sidebar a:hover:not(.active){
     transition: 0.1s;
     background-color: rgba(240, 240, 240, 0.841);
 }
 
-.sidebar button:hover{
+.sidebar a:hover{
     cursor: pointer;
 }
 
@@ -51,22 +66,22 @@
     border-top: 1px solid rgb(197, 196, 196)
 }
 
-.sidebar .selected {
+.sidebar a.active {
     color: white;
     font-weight: 500;
     transition: 0.2s;
     background-color: #4684A0;
 }
 
-.sidebar .selected svg{
+.sidebar .active svg{
     stroke: white;
 }
 
-.sidebar .selected svg[fill=""]{
+.sidebar .active svg[fill=""]{
     fill: white;
 }
 
-.sidebar .sidebar-top button:active:not(.selected) {
+.sidebar .sidebar-top a:active:not(.active) {
     background-color: rgba(197, 197, 197, 0.841);
     transition-delay: 50ms;
 }

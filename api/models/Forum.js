@@ -15,7 +15,6 @@ const forumSchema = new mongoose.Schema({
     },
     userId: { 
         type: String, 
-        default: "dummyUserId",
         required: true 
     },
     date: { 
@@ -31,6 +30,10 @@ const forumSchema = new mongoose.Schema({
         type: Number, 
         default: 0 
     },
+    likes_users:  [{ type: String, ref: 'User' }],
+    dislikes_users:  [{ type: String, ref: 'User' }]
 });
+
+forumSchema.index({questionTitle: 'text'})
 
 module.exports = mongoose.model("Forum", forumSchema);

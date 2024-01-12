@@ -13,8 +13,6 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
     const [likeColor, setLikeColor] = useState(liked ? "lightgreen" : "white");
     const [dislikeColor, setDislikeColor] = useState(disliked ? "lightcoral" : "white")
 
-
-
     const updateLike = () => {
         axios
             .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails.username}&liked=${!liked}`)

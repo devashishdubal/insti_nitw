@@ -35,5 +35,6 @@ const forumSchema = new mongoose.Schema({
 });
 
 forumSchema.index({questionTitle: 'text'})
+forumSchema.index({questionDescription: 'text'})
 
 module.exports = mongoose.model("Forum", forumSchema);

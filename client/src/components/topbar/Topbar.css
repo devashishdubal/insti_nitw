@@ -24,6 +24,7 @@
     text-decoration: none;
     color: black;
     display: flex;
+    font-size: 21px;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
@@ -34,10 +35,13 @@
     gap: 35px;
 }
 
+.buttonGroup .empty {
+    width: 75px;
+}
+
 .buttonGroup a:hover {
     cursor: pointer;
     font-weight: bold;
-    transform: scale(1.05);
     transition: 0.2s;
 }
 
@@ -49,7 +53,7 @@
 .navBar .active::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
     height: 4px;

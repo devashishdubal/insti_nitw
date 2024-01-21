@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   };
   
 
-const Post = () => {
+const Post = ({eventName, eventImage, eventOrganizer, eventOrganizerLogo, eventDescription}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -31,8 +31,8 @@ const Post = () => {
         <div className='post_card'>
             <div className='post_card_top'>
                 <div className='post_card_top_left'>
-                    <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt='logo'/>
-                    <p>Club name</p>
+                    <img src={eventOrganizerLogo} alt='logo'/>
+                    <p>{eventOrganizer}</p>
                 </div>
                 <div className='post_card_top_right'>
                     <button>
@@ -42,15 +42,12 @@ const Post = () => {
             </div>
             <div className='post_card_content'>
                 <div className='post_card_center_left'>
-                    <img src='https://www.elegantthemes.com/blog/wp-content/uploads/2018/12/top11.png' alt='poster' />
+                    <img src={eventImage} alt='poster' />
                 </div>
                 <div className='post_card_center_right'>
                     <div className='post_text'>
-                        <p className='post_title'>Web development Workshop</p>
-                        <p className='post_description'>Do you want to be a web developer? Here, you can learn the basic skills 
-                            which you need to become one. You will be introduced to HTML, CSS and 
-                            JS as well as frontend frameworks like ReactJS and backend environment 
-                            like Node.js.
+                        <p className='post_title'>{eventName}</p>
+                        <p className='post_description'>{eventDescription}
                         </p>
                     </div>
                     <div className='controlButtons'>

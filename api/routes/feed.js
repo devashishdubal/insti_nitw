@@ -1,3 +1,4 @@
+const router = require('express').Router();
 const User = require('../models/User');
 const Event = require('../models/Event');
 
@@ -5,19 +6,27 @@ const Event = require('../models/Event');
 router.get("/getUserFeed/:userId", async (req, res) => {
     try {
         // make a timeline here
-        const user = await User.findOne({userId: req.params.userId});
+        const user = await User.findById(req.params.userId).populate('subscribedTo');
         const clubs = user.subscribedTo;
 
-        let clubWithLatestEvents  = [];
-        clubs.map(async (club) => {
-            const individualEvent = await Event.findOne({ clubId: club.clubId })
-                .sort({ 'events.timestamp': -1 }) // Sort events in descending order based on timestamp
-                .slice('events', 0, 3); // Get the latest three events
-        
-            clubWithLatestEvents.push(individualEvent)  
-        });
+        const feed = [];
+        const promises = clubs.map(async (club) => {
+            const individualEvent = await Event.find({ eventOrganizer: club._id });
 
-        res.status(200).send({message: "Success", data: clubWithLatestEvents});
+            individualEvent.map((event) => {
+                const modifiedEvent = {
+                    ...event,
+                    eventOrganizer: club.clubName,
+                    eventOrganizerLogo: club.clubLogo
+                };
+                feed.push(modifiedEvent);
+            })
+            return individualEvent;
+        });
+        
+        await Promise.all(promises);
+
+        res.status(200).send({message: "Success", data: feed});
     } catch (error) {
         res.status(500).send({message: "Internal server error", data: null})
     }

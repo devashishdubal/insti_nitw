@@ -52,8 +52,9 @@ const userSchema = new mongoose.Schema({
     branch: {
         type: String
     },
+    // changed to object Id reference
     subscribedTo: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
     }],
     likedQuestions: [{

@@ -12,7 +12,7 @@ const ClubList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/v1/clubs/getAllClubs/?username=${userDetails.username}`);
+                const response = await axios.get(`http://localhost:8000/api/v1/clubs/getAllClubs/?username=${userDetails._id}`);
                 setData(response.data);
                 const cards = response.data.map((club, index) => ({
                     id: index + 1,
@@ -22,7 +22,7 @@ const ClubList = () => {
                             imageLink={club._doc.clubLogo}
                             clubName={club._doc.clubName}
                             clubDescription={club._doc.clubDescription}
-                            clubId={club._doc.clubId}
+                            clubId={club._doc._id}
                             isSubscribed={club.userIsSubscribed}
                         />
                     ),
@@ -32,7 +32,7 @@ const ClubList = () => {
                 console.error('Error:', error);
             }
         };
-
+        
         fetchData();
     }, []);
 

@@ -37,6 +37,7 @@ router.get('/getQuestions/:filter', async (request, response) => {
           questionTag: filter,
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
+            { userId: { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } }
           ]
         }).sort({ date: -1 }));
@@ -46,6 +47,7 @@ router.get('/getQuestions/:filter', async (request, response) => {
         (await Forum.find({
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
+            { userId: { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } }
           ]
         }).sort({ date: -1 }));

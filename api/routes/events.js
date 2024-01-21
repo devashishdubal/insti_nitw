@@ -7,7 +7,7 @@ const User = require('../models/User');
 //register
 router.post("/create-event", async (req, res) => {
     try {
-        const club = await Club.findOne({ clubId: req.body.eventOrganizer });
+        const club = await Club.findById(req.body.eventOrganizer);
 
         if(!club){
             return res.status(404).send("Club doesn't exist");

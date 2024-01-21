@@ -9,7 +9,7 @@ const ClubCard = ({ imageLink, clubName, clubDescription, clubId, isSubscribed }
     const subscriptionHandler = async (e) => {
         e.preventDefault();
         axios
-            .put("http://localhost:8000/api/v1/clubs/handleSubscribe", { "clubId": clubId, "username": userDetails.username })
+            .put("http://localhost:8000/api/v1/clubs/handleSubscribe", { "clubId": clubId, "username": userDetails._id })
             .then(() => {
                 //fetch();
                 //isSubscribed = !isSubscribed;
@@ -23,7 +23,7 @@ const ClubCard = ({ imageLink, clubName, clubDescription, clubId, isSubscribed }
     const unsubscriptionHandler = async (e) => {
         e.preventDefault();
         axios
-            .put("http://localhost:8000/api/v1/clubs/handleUnsubscribe", { "clubId": clubId, "username": userDetails.username })
+            .put("http://localhost:8000/api/v1/clubs/handleUnsubscribe", { "clubId": clubId, "username": userDetails._id })
             .then(() => {
                 //fetch();
                 setSubscribeStatus(!subscribeStatus)

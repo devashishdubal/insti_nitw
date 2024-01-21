@@ -69,7 +69,6 @@
 .sidebar a.active {
     color: white;
     font-weight: 500;
-    transition: 0.2s;
     background-color: #4684A0;
 }
 
@@ -83,5 +82,4 @@
 
 .sidebar .sidebar-top a:active:not(.active) {
     background-color: rgba(197, 197, 197, 0.841);
-    transition-delay: 50ms;
 }

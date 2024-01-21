@@ -21,6 +21,7 @@ const clubRoute = require("./routes/clubs")
 const userRoute = require("./routes/users")
 const eventRoute = require("./routes/events")
 const forumRoute = require("./routes/forum")
+const feedRoute = require("./routes/feed")
 
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -43,6 +44,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);
+app.use("/api/v1/feed/", feedRoute);
 
 app.listen(process.env.PORT, () => {
     console.log("Backend server is running!");

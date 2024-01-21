@@ -102,7 +102,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
             }
             <Link to={`/students/forum/${id}`}>
                     {loading ? (
-                        <SkeletonTheme baseColor="#ffffff" highlightColor="#DADADA">
+                        <SkeletonTheme baseColor="#ffffff" highlightColor="#ECECF0">
                             <Skeleton height={20} width={200} />
                             <Skeleton height={20} />
                             <Skeleton height={40} />

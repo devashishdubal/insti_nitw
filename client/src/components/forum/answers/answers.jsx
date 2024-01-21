@@ -32,7 +32,7 @@ const Answers = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails.username}`);
+            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails._id}`);
             setData(response.data);
         } catch (error) {
             console.log(error);

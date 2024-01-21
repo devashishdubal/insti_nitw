@@ -25,7 +25,7 @@ const AuthContextProvider = React.memo(({ children }) => {
 
       setCurrentUser(user)
 
-      if (user == null) {
+      if (user === null) {
         setUserDetails(null);
         return;
       }

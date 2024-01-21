@@ -68,7 +68,7 @@ const Questions = () => {
                 ),
             }))
         );
-    }, [Data]);
+    }, [Data, searchBar]);
 
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 

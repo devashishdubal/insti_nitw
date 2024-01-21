@@ -28,10 +28,6 @@ function App() {
   console.log('huh')
   const { currentUser } = useContext(AuthContext);
 
-  if (!currentUser) {
-    return null;
-  }
-
   const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {
       return <Navigate to="/" />

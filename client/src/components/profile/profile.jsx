@@ -103,6 +103,7 @@ const Profile = () => {
           const response = await axios.get(reqLink);
           setUserData(response.data);
           setIsPrivate(response.data.privateProfile);
+          console.log(userData.profilePic)
           setLink("http://localhost:3000/profile/" + userDetails); // Set the link from the response URL
         } catch (error) {
           console.log('Error! Please check input fields');
@@ -160,7 +161,7 @@ const Profile = () => {
 
           <div className="circle-container">
             <img
-              src={currentUser.photoURL}
+              src={userData.profilePic}
               alt="Your img"
               className="circle-photo"
             />

@@ -5,7 +5,7 @@ import { AuthContext } from "../../Context/AuthContext"
 import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-router-dom";
 
 const Topbar = () => {
-  const { userDetails } = useContext(AuthContext)
+  const {userDetails } = useContext(AuthContext)
 
   const logout = () => {
     auth.signOut()

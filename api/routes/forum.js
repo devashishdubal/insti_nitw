@@ -45,6 +45,9 @@ router.get('/getQuestions/:filter', async (request, response) => {
     }
 
     qns = qns.concat(anotherArray)
+
+    qns = [...new Set(qns)];
+
     const questionsWithLikes = qns.map((question) => ({
       ...question,
       userHasLiked: question.likes_users.includes(userId),

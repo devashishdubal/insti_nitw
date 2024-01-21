@@ -17,7 +17,7 @@ const Questions = () => {
 
     const fetchData = () => {
         axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}&searchData=${searchBar}`)
+            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBar}`)
             .then((response) => {
                 setAllQuestions([])
                 setData(response.data.Data);
@@ -51,7 +51,7 @@ const Questions = () => {
                         index={index}
                         nlikes={question._doc.likes}
                         ndislikes={question._doc.dislikes}
-                        user={question._doc.userId}
+                        user={question._doc.userId.username}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
                             minute: '2-digit',

@@ -33,7 +33,7 @@ const AskQuestionForm = ({ fetch }) => {
             questionTitle,
             questionDescription,
             questionTag,
-            userId: userDetails.username
+            userId: userDetails._id
         };
         axios
             .post('http://localhost:8000/api/v1/forum/postQuestion', data)
@@ -44,7 +44,7 @@ const AskQuestionForm = ({ fetch }) => {
             .catch((error) => {
                 console.log(data);
                 console.log(error)
-                alert("Error! Please check input fields");
+                //alert("Error! Please check input fields");
             });
         setTag("");
         setBody("");

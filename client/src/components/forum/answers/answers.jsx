@@ -68,7 +68,7 @@ const Answers = () => {
         }
 
         const data = {
-            userId: userDetails.username,
+            userId: userDetails._id,
             answerDescription
         };
         axios
@@ -96,7 +96,11 @@ const Answers = () => {
 
     useEffect(() => {
         setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
-            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]}
+            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index].answerDescription}
+                username={Data.answers[index].userId.username}
+                date = {Data.answers[index].date}
+                nlikes = {Data.answers[index].likes}
+                ndislikes = {Data.answers[index].dislikes}
                 questionId={Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked} />
         })));
     }, [Data]);
@@ -136,7 +140,7 @@ const Answers = () => {
                                     hour12: true
                                 })}
                                 ndislikes={Data.dislikes}
-                                user={Data.userId}
+                                user={Data.userId.username}
                                 date={new Date(Data.date).toLocaleDateString('en-GB', {
                                     year: 'numeric',
                                     month: '2-digit',

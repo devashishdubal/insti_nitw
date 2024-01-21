@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Answer = require('../models/Answer');
 const Forum = require('../models/Forum');
+const User = require("../models/User")
 const QuestionLikes = require("../models/QuestionLikes");
 
 // make an endpoint to create a club and assign club owners (not for public)
@@ -53,14 +54,18 @@ router.get('/getQuestions/:filter', async (request, response) => {
         }).sort({ date: -1 }));
     }
 
-    const questionsWithLikes = qns.map((question) => ({
-      ...question,
-      userHasLiked: question.likes_users.includes(userId),
-      userHasDisliked: question.dislikes_users.includes(userId)
+    const questionsWithLikes = await Promise.all(qns.map(async (question) => {
+      const populatedQuestion = await question.populate('userId');
+    
+      return {
+        ...populatedQuestion,
+        userHasLiked: question.likes_users.includes(userId),
+        userHasDisliked: question.dislikes_users.includes(userId),
+      };
     }));
-
+    
     return response.status(200).json({
-      Data: questionsWithLikes
+      Data: questionsWithLikes,
     });
   } catch (error) {
     console.log(error.message);
@@ -78,15 +83,18 @@ router.get('/getQuestionById/:id', async (request, response) => {
       return response.status(404).send("Question not found!");
     }
 
+    await qn.populate('userId');
+    await qn.populate('answers.userId')
     const questionWithLikes = {
       ...qn.toObject(),
       userHasLiked: qn.likes_users.includes(userId),
       userHasDisliked: qn.dislikes_users.includes(userId),
-      answers: qn.answers.map((answer) => ({
+      answers: await Promise.all(qn.answers.map(async (answer) => ({
         ...answer.toObject(),
+        username: await User.findById(answer.userId).username, 
         userHasLiked: answer.likes_users.includes(userId),
         userHasDisliked: answer.dislikes_users.includes(userId),
-      })),
+      }))),
     };
 
     return response.status(200).json(questionWithLikes);

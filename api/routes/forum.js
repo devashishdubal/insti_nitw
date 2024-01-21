@@ -28,14 +28,27 @@ router.get('/getQuestions/:filter', async (request, response) => {
   try {
     const { userId, searchData } = request.query;
     const { filter } = request.params;
-    
+
     let qns;
     if (filter != 0) {
-      qns = (searchData.length === 0) ? (await Forum.find({ questionTag: filter }).sort({ date: -1 })) : 
-      (await Forum.find({questionTag: filter, questionTitle: { $regex: searchData, $options: 'i' }}).sort({}));
+      qns = (searchData.length === 0) ?
+        (await Forum.find({ questionTag: filter }).sort({ date: -1 })) :
+        (await Forum.find({
+          questionTag: filter,
+          $or: [
+            { questionTitle: { $regex: searchData, $options: 'i' } },
+            { questionDescription: { $regex: searchData, $options: 'i' } }
+          ]
+        }).sort({ date: -1 }));
     } else {
-      qns = (searchData.length === 0) ? (await Forum.find({}).sort({ date: -1 })) 
-      : (await Forum.find({questionTitle: { $regex: searchData, $options: 'i' }}).sort({}))
+      qns = (searchData.length === 0) ?
+        (await Forum.find({}).sort({ date: -1 })) :
+        (await Forum.find({
+          $or: [
+            { questionTitle: { $regex: searchData, $options: 'i' } },
+            { questionDescription: { $regex: searchData, $options: 'i' } }
+          ]
+        }).sort({ date: -1 }));
     }
 
     const questionsWithLikes = qns.map((question) => ({
@@ -73,7 +86,7 @@ router.get('/getQuestionById/:id', async (request, response) => {
         userHasDisliked: answer.dislikes_users.includes(userId),
       })),
     };
-    
+
     return response.status(200).json(questionWithLikes);
   } catch (error) {
     console.log(error.message);
@@ -83,7 +96,7 @@ router.get('/getQuestionById/:id', async (request, response) => {
 
 router.put('/updateLikes/:id', async (request, response) => {
   try {
-    const {userId, disliked} = request.query
+    const { userId, disliked } = request.query
     const { id } = request.params
 
     const question = await Forum.findById(id);
@@ -110,7 +123,7 @@ router.put('/updateLikes/:id', async (request, response) => {
 
 router.put('/updateDislikes/:id', async (request, response) => {
   try {
-    const {userId, liked} = request.query
+    const { userId, liked } = request.query
     const { id } = request.params
 
     const question = await Forum.findById(id);

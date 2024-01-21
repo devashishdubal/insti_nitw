@@ -19,6 +19,7 @@ const Questions = () => {
         axios
             .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails.username}&searchData=${searchBar}`)
             .then((response) => {
+                setAllQuestions([])
                 setData(response.data.Data);
                 setLoading(false);
             })
@@ -38,7 +39,7 @@ const Questions = () => {
     useEffect(() => {
         setAllQuestions(
             Data.map((question, index) => ({
-                id: index + 1,
+                id: question._doc._id,
                 card: (
                     <QuestionCard
                         comments={question._doc.answers.length}

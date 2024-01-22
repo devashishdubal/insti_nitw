@@ -52,6 +52,10 @@ const userSchema = new mongoose.Schema({
     branch: {
         type: String
     },
+    mess: {
+        type: Number,
+        default: 1
+    },
     // changed to object Id reference
     subscribedTo: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -71,6 +71,7 @@ router.put("/updateProfile/:id",async (req,res)=>{
     user.username = req.body.username || user.username;
     user.instagramLink = req.body.instagramLink || user.instagramLink;
     user.linkedinLink = req.body.linkedinLink || user.linkedinLink;
+    user.mess = req.body.mess || user.mess;
     user.twitterLink = req.body.twitterLink || user.twitterLink;
     user.githubLink = req.body.githubLink || user.githubLink;
     user.aboutMe = req.body.aboutMe || user.aboutMe;

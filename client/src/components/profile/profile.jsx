@@ -18,8 +18,35 @@ const Profile = () => {
     const[githubLink,setGitLink] = useState("");
     const[linkedinLink,setLinLink] = useState("");
     const[aboutMe, setAboutMe] = useState("");
+    const[mess, setMess] = useState("1");
 
     const [apiStatus, setApiStatus] = useState("idle");
+
+    const MessChooser = () => {
+        return (
+          <div>
+            <label for="mess">Choose a mess:</label>
+
+            <select name="mess" id="mess" value={mess} onChange={(e) => setMess(e.target.value)}>
+              <option value="1">IFC-A</option>
+              <option value="2">IFC-B</option>
+              <option value="3">IFC-C</option>
+              <option value="4">Ladies Hostel</option>
+            </select>
+          </div>
+        );
+    }
+
+    const MessName = (number) => {
+        switch (number) {
+          case 1: return "IFC-A";
+          case 2: return "IFC-B";
+          case 3: return "IFC-C";
+          case 4: return "Ladies Hostel";
+        }
+
+        return "";
+    }
 
     const validateUsername = async(e) => {
         e.preventDefault();
@@ -44,8 +71,9 @@ const Profile = () => {
     
     const handleUpdate = (e) => {
       e.preventDefault();
+      console.log();
       const data = {"username": username, "instagramLink": instagramLink, "linkedinLink": linkedinLink,
-              "twitterLink": twitterLink, "githubLink": githubLink, "aboutMe": aboutMe};
+              "twitterLink": twitterLink, "githubLink": githubLink, "aboutMe": aboutMe, "mess": mess};
       axios
         .put(`http://localhost:8000/api/v1/users/updateProfile/${userData.username}`, data)
         .then(() => {
@@ -183,6 +211,7 @@ const Profile = () => {
             </label>
           </div>
           <h2>{userData.firstName} {userData.lastName} </h2>
+          {openEdit ? (<MessChooser/>): (<p>You are subscribed to {MessName(userData.mess)}</p>)}
           {openEdit ? 
             (<div><input type="text" value={username} onChange={validateUsername} 
             placeholder={userData.username} />

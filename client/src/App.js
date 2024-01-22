@@ -21,6 +21,8 @@ import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
+import Academics from "./components/academics/academics";
+import Resources from "./components/academics/resources";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -75,7 +77,7 @@ function App() {
           <Route index element={<Navigate to="feed" />} />
           <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
-          <Route path="academics" element={<h1>Academics</h1>} />
+          <Route path="academics" element={<ProtectedRoute><Academics /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route
@@ -146,11 +148,34 @@ function App() {
               </div>
             </ProtectedRoute>
           }
-        >
+         >
           <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
           <Route path=":id/" element={<ProtectedRoute><Answers /></ProtectedRoute>} />
         </Route>
+
+        <Route
+          path="students/academics"
+          element={
+            <ProtectedRoute>
+              <div className="full_app">
+                <div className="side">
+                  <StudentSidebar />
+                </div>
+                <div className="main">
+                  <Topbar />
+                  <div className="center scrollbar scrollbar-primary">
+                    <Outlet />
+                    <div className="force-overflow"></div> {/*scrollbar*/}
+                  </div>
+                </div>
+              </div>
+            </ProtectedRoute>
+          }
+        >
+        <Route path="resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
+        </Route>
+
       </Routes>
     </Router>
   );

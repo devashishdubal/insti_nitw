@@ -31,15 +31,13 @@ router.get("/getAllClubs", async (req, res) => {
     try {
         const { username } = req.query;
         const clubDetails = await Club.find({});
-        const userDetails = await User.findOne({username: username});
+        const userDetails = await User.findById(username);
         
         const clubDetailsWithSubscriptions = clubDetails.map((club) => ({
             ...club,
-            userIsSubscribed: userDetails.subscribedTo.includes(club.clubId)
+            userIsSubscribed: userDetails.subscribedTo.includes(club._id)
         }));
-
         
-      
         return res.status(200).send(clubDetailsWithSubscriptions);
     } catch (error) {
         console.log(error)
@@ -51,7 +49,7 @@ router.get("/getclubdetails/:id", async (req, res) => {
     try {
         const clubId = req.params.id;
 
-        const clubDetails = await Club.findOne({ clubId: clubId });
+        const clubDetails = await Club.findById(clubId);
 
         if (!clubDetails) {
             return res.status(404).send("Club with this ID does not exist");
@@ -291,28 +289,26 @@ router.put("/handleSubscribe", async (req, res) => {
         console.log(clubId, user_to_subscribe)
 
         const userExists = await User.findOne({
-            username: user_to_subscribe
+            _id: user_to_subscribe
         });
 
         if (!userExists) {
             return res.status(404).send("User does not exist");
         }
 
-        const clubExists = await Club.findOne({
-            clubId: clubId
-        });
+        const clubExists = await Club.findById(clubId);
 
         if (!clubExists) {
             return res.status(404).send("Club does not exist");
         }
 
         const clubResult = await Club.updateOne(
-            { clubId: clubId },
+            { _id: clubId },
             { $addToSet: { clubSubscribers: user_to_subscribe } }
         );
 
         const userResult = await User.updateOne(
-            { username: user_to_subscribe },
+            { _id: user_to_subscribe },
             { $addToSet: { subscribedTo: clubId } }
         );
 
@@ -338,8 +334,8 @@ router.put("/handleUnsubscribe", async (req, res) => {
         const clubId = req.body.clubId;
         const user_to_unsubscribe = req.body.username;
 
-        const userExists = await User.findOne({ username: user_to_unsubscribe });
-        const clubExists = await Club.findOne({ clubId: clubId });
+        const userExists = await User.findById(user_to_unsubscribe);
+        const clubExists = await Club.findById(clubId);
 
         if (!userExists) {
             return res.status(404).send("User does not exist");
@@ -350,12 +346,12 @@ router.put("/handleUnsubscribe", async (req, res) => {
         }
 
         const clubResult = await Club.updateOne(
-            { clubId: clubId },
+            { _id: clubId },
             { $pull: { clubSubscribers: user_to_unsubscribe } }
         );
 
         const userResult = await User.updateOne(
-            { username: user_to_unsubscribe },
+            { _id: user_to_unsubscribe },
             { $pull: { subscribedTo: clubId } }
         );
 

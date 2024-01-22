@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import Topbar from "./components/topbar/Topbar";
 import StudentSidebar from "./components/sidebar/student_sidebar";
 import Questions from "./components/forum/questions/questions";
@@ -14,6 +14,8 @@ import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
 import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
+import CreateEvent from "./components/clubs/create-event/createEvent";
+import EditEvent from "./components/clubs/edit-event/EditEvent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
@@ -25,6 +27,7 @@ import Academics from "./components/academics/academics";
 import Resources from "./components/academics/resources";
 
 function App() {
+  console.log('huh')
   const { currentUser } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
@@ -104,6 +107,8 @@ function App() {
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
           <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
+          <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
+          <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route

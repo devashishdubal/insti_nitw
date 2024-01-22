@@ -3,11 +3,10 @@ const Event = require('../models/Event');
 const Club = require('../models/Clubs');
 const User = require('../models/User');
 
-
 //register
 router.post("/create-event", async (req, res) => {
     try {
-        const club = await Club.findOne({ clubId: req.body.eventOrganizer });
+        const club = await Club.findById(req.body.eventOrganizer);
 
         if(!club){
             return res.status(404).send("Club doesn't exist");
@@ -79,7 +78,7 @@ router.get("/recentEvents", async (req, res) => {
         const currentDate = new Date();
         const recentEvents = await Event.find({
             eventDateTime: { $lt: currentDate },
-        });
+        }).populate('eventOrganizer');
 
         return res.status(200).send(recentEvents);
     } catch (error) {
@@ -92,7 +91,7 @@ router.get("/upcomingEvents", async (req, res) => {
         const currentDate = new Date();
         const upcomingEvents = await Event.find({
             eventDateTime: { $gt: currentDate },
-        });
+        }).populate('eventOrganizer');;
 
         return res.status(200).send(upcomingEvents);
     } catch (error) {

@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   };
   
 
-const Post = () => {
+const Post = ({eventName, eventImage, eventOrganizer, eventOrganizerLogo, eventDescription, date, time}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -31,8 +31,8 @@ const Post = () => {
         <div className='post_card'>
             <div className='post_card_top'>
                 <div className='post_card_top_left'>
-                    <img src={process.env.PUBLIC_URL + "../assets/logo.png"} alt='logo'/>
-                    <p>Club name</p>
+                    <img src={eventOrganizerLogo} alt='logo'/>
+                    <p>{eventOrganizer}</p>
                 </div>
                 <div className='post_card_top_right'>
                     <button>
@@ -42,15 +42,12 @@ const Post = () => {
             </div>
             <div className='post_card_content'>
                 <div className='post_card_center_left'>
-                    <img src='https://www.elegantthemes.com/blog/wp-content/uploads/2018/12/top11.png' alt='poster' />
+                    <img src={eventImage} alt='poster' />
                 </div>
                 <div className='post_card_center_right'>
                     <div className='post_text'>
-                        <p className='post_title'>Web development Workshop</p>
-                        <p className='post_description'>Do you want to be a web developer? Here, you can learn the basic skills 
-                            which you need to become one. You will be introduced to HTML, CSS and 
-                            JS as well as frontend frameworks like ReactJS and backend environment 
-                            like Node.js.
+                        <p className='post_title'>{eventName}</p>
+                        <p className='post_description'>{eventDescription}
                         </p>
                     </div>
                     <div className='controlButtons'>
@@ -66,11 +63,11 @@ const Post = () => {
                         </div>
                         <div className='disabled_btns'>
                             <button disabled={true} className='disabled'>
-                                05/01/2024
+                                {date}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             </button>
                             <button disabled={true} className='disabled'>
-                                5PM
+                                {time}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>                        
                             </button>
                         </div>

@@ -7,7 +7,7 @@ export default function UpcomingEventCard({eventData}) {
         <div className="card-body">
           <h2>{eventData.eventName}</h2>
           <p>{eventData.eventDescription}</p>
-          <h5>{eventData.eventOrganizer}</h5>
+          <h5>{eventData.eventOrganizer.clubName}</h5>
         </div>
       </div>
   )

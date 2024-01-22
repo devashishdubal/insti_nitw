@@ -80,8 +80,3 @@
 .sidebar .active svg[fill=""]{
     fill: white;
 }
-
-.sidebar .sidebar-top a:active:not(.active) {
-    background-color: rgba(197, 197, 197, 0.841);
-    transition-delay: 50ms;
-}

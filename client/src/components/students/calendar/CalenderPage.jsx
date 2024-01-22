@@ -2,8 +2,6 @@ import CalendarLayout from "../../../layout/CalenderLayout";
 import { useState, useEffect } from "react";
 import CustomEvents from "./CustomEvents";
 
-
-
 const CalendarPage = () => {
     const [dateSelected, setDateSelected] = useState(new Date());
     const [eventPage, setEventPage] = useState(<CustomEvents dateSelected={new Date()} />);

@@ -7,7 +7,7 @@ export default function recenteventcard({recenteventdata}) {
         <div className="card-body">
           <h2>{recenteventdata.eventName}</h2>
           <p>{recenteventdata.eventDescription}</p>
-          <h5>{recenteventdata.eventOrganizer}</h5>
+          <h5>{recenteventdata.eventOrganizer.clubName}</h5>
         </div>
       </div>
   )

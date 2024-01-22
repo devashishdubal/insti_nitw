@@ -22,6 +22,16 @@ const Feed = () => {
                             eventOrganizer = {club.eventOrganizer}
                             eventOrganizerLogo = {club.eventOrganizerLogo}
                             eventDescription = {club._doc.eventDescription}
+                            time={new Date(club._doc.eventDateTime).toLocaleTimeString(undefined, {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true
+                            })}
+                            date={new Date(club._doc.eventDateTime).toLocaleDateString('en-GB', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit'
+                            })}
                         />
                     ),
                 }));

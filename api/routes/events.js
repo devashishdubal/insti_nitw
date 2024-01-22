@@ -3,7 +3,6 @@ const Event = require('../models/Event');
 const Club = require('../models/Clubs');
 const User = require('../models/User');
 
-
 //register
 router.post("/create-event", async (req, res) => {
     try {

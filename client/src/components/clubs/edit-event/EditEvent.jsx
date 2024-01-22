@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import "./EventCard.css"
 
 const EditEvent = () => {
     const [title,setTitle] = useState("");

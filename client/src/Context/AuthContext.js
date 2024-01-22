@@ -13,7 +13,6 @@ const AuthContextProvider = React.memo(({ children }) => {
   //const {currentUser, setCurrentUser} = useContext(UserContext)
 
   useEffect(() => {
-    console.log("auth running")
     const unsub = onAuthStateChanged(auth, (user) => {
       const fetchData = async () => {
         try {

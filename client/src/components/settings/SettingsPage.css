@@ -1,0 +1,16 @@
+.option{
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.clubSec{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 8px;
+    width: 200px;
+    height: 100px;
+}

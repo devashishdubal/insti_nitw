@@ -23,6 +23,7 @@ import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
+import SettingsPage from "./components/settings/SettingsPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -79,6 +80,7 @@ function App() {
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="academics" element={<h1>Academics</h1>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         </Route>
         <Route
           path="clubs"
@@ -107,6 +109,7 @@ function App() {
           <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
           <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         </Route>
         <Route
           path="food"
@@ -131,6 +134,7 @@ function App() {
           <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
           <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         </Route>
         <Route
           path="students/forum"
@@ -154,6 +158,7 @@ function App() {
           <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
           <Route path=":id/" element={<ProtectedRoute><Answers /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

@@ -78,7 +78,7 @@ router.get("/recentEvents", async (req, res) => {
         const currentDate = new Date();
         const recentEvents = await Event.find({
             eventDateTime: { $lt: currentDate },
-        });
+        }).populate('eventOrganizer');
 
         return res.status(200).send(recentEvents);
     } catch (error) {

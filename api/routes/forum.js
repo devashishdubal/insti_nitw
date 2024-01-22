@@ -38,17 +38,18 @@ router.get('/getQuestions/:filter', async (request, response) => {
           questionTag: filter,
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
-            { userId: { $regex: searchData, $options: 'i' } },
-            { questionDescription: { $regex: searchData, $options: 'i' } }
+            { questionDescription: { $regex: searchData, $options: 'i' } },
+            { 'userId.username': { $regex: searchData, $options: 'i' } },
           ]
         }).sort({ date: -1 }));
+
     } else {
       qns = (searchData.length === 0) ?
         (await Forum.find({}).sort({ date: -1 })) :
         (await Forum.find({
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
-            { userId: { $regex: searchData, $options: 'i' } },
+            { 'userId.username': { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } }
           ]
         }).sort({ date: -1 }));
@@ -56,14 +57,14 @@ router.get('/getQuestions/:filter', async (request, response) => {
 
     const questionsWithLikes = await Promise.all(qns.map(async (question) => {
       const populatedQuestion = await question.populate('userId');
-    
+
       return {
         ...populatedQuestion,
         userHasLiked: question.likes_users.includes(userId),
         userHasDisliked: question.dislikes_users.includes(userId),
       };
     }));
-    
+
     return response.status(200).json({
       Data: questionsWithLikes,
     });
@@ -91,7 +92,7 @@ router.get('/getQuestionById/:id', async (request, response) => {
       userHasDisliked: qn.dislikes_users.includes(userId),
       answers: await Promise.all(qn.answers.map(async (answer) => ({
         ...answer.toObject(),
-        username: await User.findById(answer.userId).username, 
+        username: await User.findById(answer.userId).username,
         userHasLiked: answer.likes_users.includes(userId),
         userHasDisliked: answer.dislikes_users.includes(userId),
       }))),

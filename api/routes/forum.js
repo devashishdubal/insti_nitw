@@ -30,6 +30,10 @@ router.get('/getQuestions/:filter', async (request, response) => {
     const { userId, searchData } = request.query;
     const { filter } = request.params;
 
+    let idFromName = await User.find({
+      username: { $regex: searchData, $options: 'i' }
+    });
+
     let qns;
     if (filter != 0) {
       qns = (searchData.length === 0) ?
@@ -39,7 +43,7 @@ router.get('/getQuestions/:filter', async (request, response) => {
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } },
-            { 'userId.username': { $regex: searchData, $options: 'i' } },
+            { userId: idFromName },
           ]
         }).sort({ date: -1 }));
 
@@ -49,8 +53,8 @@ router.get('/getQuestions/:filter', async (request, response) => {
         (await Forum.find({
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
-            { 'userId.username': { $regex: searchData, $options: 'i' } },
-            { questionDescription: { $regex: searchData, $options: 'i' } }
+            { questionDescription: { $regex: searchData, $options: 'i' } },
+            { userId: idFromName },
           ]
         }).sort({ date: -1 }));
     }
@@ -64,7 +68,6 @@ router.get('/getQuestions/:filter', async (request, response) => {
         userHasDisliked: question.dislikes_users.includes(userId),
       };
     }));
-
     return response.status(200).json({
       Data: questionsWithLikes,
     });

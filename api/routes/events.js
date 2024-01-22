@@ -91,7 +91,7 @@ router.get("/upcomingEvents", async (req, res) => {
         const currentDate = new Date();
         const upcomingEvents = await Event.find({
             eventDateTime: { $gt: currentDate },
-        });
+        }).populate('eventOrganizer');;
 
         return res.status(200).send(upcomingEvents);
     } catch (error) {

@@ -1,6 +1,7 @@
 import "./menu.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import jsonData from './menuData.json' // Import your JSON data
+import { AuthContext } from "../../../Context/AuthContext";
 
 
 function Menu() {
@@ -10,6 +11,8 @@ function Menu() {
     // You might want to convert it to a string for better readability
     const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     const [currentDay, setCurrentDay] = useState(daysOfWeek[dayOfWeek]);
+    const { currentUser, userDetails } = useContext(AuthContext)
+    console.log(userDetails)
 
     //console.log(currentDay)
 

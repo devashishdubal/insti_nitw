@@ -17,19 +17,19 @@ const clubSchema = new mongoose.Schema({
         type: String
     },
     clubOwners: [{
-        type: String, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' }],
     clubAdmins: [{
-         type: String, 
+        type: mongoose.Schema.Types.ObjectId, 
          ref: 'User' }],
     clubPosts: [{
          type: mongoose.Schema.Types.ObjectId, 
          ref: 'Post' }],
     clubMembers: [{
-        type: String, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User' }],
     clubSubscribers: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
         }
     ] // a list of all the subscribers of the club

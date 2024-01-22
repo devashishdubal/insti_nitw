@@ -13,7 +13,6 @@ export default function UpcomingEvents() {
         try {
             const response = await axios.get('http://localhost:8000/api/v1/events/upcomingEvents/');
             setData(response.data);
-            console.log(response.data)
             const cards = response.data.map((event, index) => ({
                 id: index + 1,
                 card: (

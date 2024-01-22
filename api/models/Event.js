@@ -19,7 +19,7 @@ const eventSchema = new mongoose.Schema({
     required: true,
   },
   eventOrganizer: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Club', // Assuming Club is another mongoose model for organizers
     required: true,
   },

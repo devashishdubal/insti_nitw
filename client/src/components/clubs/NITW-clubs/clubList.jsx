@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ClubCard from "./clubCard";
 import axios from "axios";
 import "./clubs.css";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const ClubList = () => {
     const [allCards, setAllCards] = useState([]);
     const [data, setData] = useState(null);
+    const { userDetails } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("Fetching")
             try {
-                const response = await axios.get('http://localhost:8000/api/v1/clubs/getAllClubs/');
+                const response = await axios.get(`http://localhost:8000/api/v1/clubs/getAllClubs/?username=${userDetails._id}`);
                 setData(response.data);
-
                 const cards = response.data.map((club, index) => ({
                     id: index + 1,
                     card: (
                         <ClubCard
                             key={index}
-                            imageLink={club.clubLogo}
-                            clubName={club.clubName}
-                            clubDescription={club.clubDescription}
+                            imageLink={club._doc.clubLogo}
+                            clubName={club._doc.clubName}
+                            clubDescription={club._doc.clubDescription}
+                            clubId={club._doc._id}
+                            isSubscribed={club.userIsSubscribed}
                         />
                     ),
                 }));
@@ -30,7 +32,7 @@ const ClubList = () => {
                 console.error('Error:', error);
             }
         };
-
+        
         fetchData();
     }, []);
 

@@ -10,10 +10,11 @@ import { AuthContext, useAuth } from "../../../Context/AuthContext"
 import JoditEditor from 'jodit-react';
 
 const Answers = () => {
-    const { currentUser, userDetails } = useContext(AuthContext)
+    const { userDetails } = useContext(AuthContext)
     const { id } = useParams()
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
+
     const initialData = {
         _id: "",
         questionTitle: "",
@@ -23,20 +24,20 @@ const Answers = () => {
         likes: 0,
         dislikes: 0,
         date: "",
-        answers: []
+        answers: [],
+        userHasLiked: null,
+        userHasDisliked: null
     };
 
     const [Data, setData] = useState(initialData);
 
-    const fetchData = () => {
-        axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}`)
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails._id}`);
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -68,7 +69,7 @@ const Answers = () => {
         }
 
         const data = {
-            userId: userDetails.username,
+            userId: userDetails._id,
             answerDescription
         };
         axios
@@ -95,8 +96,14 @@ const Answers = () => {
     };
 
     useEffect(() => {
-        //console.log(Data)
-        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({ id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]} /> })));
+        setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
+            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index].answerDescription}
+                username={Data.answers[index].userId.username}
+                date = {Data.answers[index].date}
+                nlikes = {Data.answers[index].likes}
+                ndislikes = {Data.answers[index].dislikes}
+                questionId={Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked} />
+        })));
     }, [Data]);
 
     return (
@@ -118,8 +125,35 @@ const Answers = () => {
                     </div>
                 </div>
                 <div className="individual_question">
-                    <QuestionCard comments={Data.answers.length} fetch={fetchData} id={Data._id} title={Data.questionTitle} description={Data.questionDescription} tags={Data.questionTag} likes={Data.likes} dislikes={Data.dislikes} user={Data.userId} date={Data.date.split('T')[0]} />
+                    {(Data.userHasDisliked != null && Data.userHasLiked != null) ?
+                        (
+                            <QuestionCard
+                                comments={Data.answers.length}
+                                fetch={fetchData}
+                                id={Data._id}
+                                title={Data.questionTitle}
+                                description={Data.questionDescription}
+                                tags={Data.questionTag}
+                                nlikes={Data.likes}
+                                time={new Date(Data.date).toLocaleTimeString(undefined, {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: true
+                                })}
+                                ndislikes={Data.dislikes}
+                                user={Data.userId.username}
+                                date={new Date(Data.date).toLocaleDateString('en-GB', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit'
+                                })}
+                                isliked={Data.userHasLiked}
+                                isdisliked={Data.userHasDisliked}
+                            />
+                        ) : (null)
+                    }
                 </div>
+
                 {((Data.answers?.length) || 0) > 0 && (
                     <div className="Section">
                         {answers.map((answer, index) => (

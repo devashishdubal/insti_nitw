@@ -4,6 +4,10 @@
     gap: 20px;
 }
 
+.card-wrapper {
+    width: 100%;
+}
+
 .heading {
     display: flex;
     flex-direction: row;

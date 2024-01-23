@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import "./SettingsPage.css";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 const SettingsPage = () => {
+    const [clubs,setClubs] = useState(null);
     const [click, setClick] = useState('settings')
     const [content,setContent] = useState(
         <>
@@ -12,6 +14,11 @@ const SettingsPage = () => {
             </div>
         </>
     )
+    const fetchClubs = async () => {
+        const response = await axios.get('http://localhost:8000/api/v1/clubs/getAllClubs');
+        setClubs(response.data);
+    }
+
     useEffect(() => {
       if (click == 'settings'){
         setContent(
@@ -24,6 +31,7 @@ const SettingsPage = () => {
         );
       }
       else if (click == 'manage'){
+        fetchClubs();
         setContent(
             <>
                 <div className='title'>Manage Subscriptions</div>
@@ -50,6 +58,11 @@ const SettingsPage = () => {
       }
     
     }, [click])
+
+    useEffect(() => {
+      console.log(clubs);
+    }, [clubs])
+    
     
   return (
     <>

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Answer = require('../models/Answer');
 const Forum = require('../models/Forum');
+const User = require("../models/User")
 const QuestionLikes = require("../models/QuestionLikes");
 
 // make an endpoint to create a club and assign club owners (not for public)
@@ -26,19 +27,49 @@ router.post("/postQuestion", async (req, res) => {
 
 router.get('/getQuestions/:filter', async (request, response) => {
   try {
-    const { userId } = request.query;
+    const { userId, searchData } = request.query;
     const { filter } = request.params;
-    let qns = await Forum.find({}).sort({ date: -1 });;
-    if (filter != 0) qns = await Forum.find({ questionTag: filter }).sort({ date: -1 });
 
-    const questionsWithLikes = qns.map((question) => ({
-      ...question,
-      userHasLiked: question.likes_users.includes(userId),
-      userHasDisliked: question.dislikes_users.includes(userId)
+    let idFromName = await User.find({
+      username: { $regex: searchData, $options: 'i' }
+    });
+
+    let qns;
+    if (filter != 0) {
+      qns = (searchData.length === 0) ?
+        (await Forum.find({ questionTag: filter }).sort({ date: -1 })) :
+        (await Forum.find({
+          questionTag: filter,
+          $or: [
+            { questionTitle: { $regex: searchData, $options: 'i' } },
+            { questionDescription: { $regex: searchData, $options: 'i' } },
+            { userId: idFromName },
+          ]
+        }).sort({ date: -1 }));
+
+    } else {
+      qns = (searchData.length === 0) ?
+        (await Forum.find({}).sort({ date: -1 })) :
+        (await Forum.find({
+          $or: [
+            { questionTitle: { $regex: searchData, $options: 'i' } },
+            { questionDescription: { $regex: searchData, $options: 'i' } },
+            { userId: idFromName },
+          ]
+        }).sort({ date: -1 }));
+    }
+
+    const questionsWithLikes = await Promise.all(qns.map(async (question) => {
+      const populatedQuestion = await question.populate('userId');
+
+      return {
+        ...populatedQuestion,
+        userHasLiked: question.likes_users.includes(userId),
+        userHasDisliked: question.dislikes_users.includes(userId),
+      };
     }));
-
     return response.status(200).json({
-      Data: questionsWithLikes
+      Data: questionsWithLikes,
     });
   } catch (error) {
     console.log(error.message);
@@ -56,17 +87,20 @@ router.get('/getQuestionById/:id', async (request, response) => {
       return response.status(404).send("Question not found!");
     }
 
+    await qn.populate('userId');
+    await qn.populate('answers.userId')
     const questionWithLikes = {
       ...qn.toObject(),
       userHasLiked: qn.likes_users.includes(userId),
       userHasDisliked: qn.dislikes_users.includes(userId),
-      answers: qn.answers.map((answer) => ({
+      answers: await Promise.all(qn.answers.map(async (answer) => ({
         ...answer.toObject(),
+        username: await User.findById(answer.userId).username,
         userHasLiked: answer.likes_users.includes(userId),
         userHasDisliked: answer.dislikes_users.includes(userId),
-      })),
+      }))),
     };
-    
+
     return response.status(200).json(questionWithLikes);
   } catch (error) {
     console.log(error.message);
@@ -76,7 +110,7 @@ router.get('/getQuestionById/:id', async (request, response) => {
 
 router.put('/updateLikes/:id', async (request, response) => {
   try {
-    const {userId, disliked} = request.query
+    const { userId, disliked } = request.query
     const { id } = request.params
 
     const question = await Forum.findById(id);
@@ -103,7 +137,7 @@ router.put('/updateLikes/:id', async (request, response) => {
 
 router.put('/updateDislikes/:id', async (request, response) => {
   try {
-    const {userId, liked} = request.query
+    const { userId, liked } = request.query
     const { id } = request.params
 
     const question = await Forum.findById(id);

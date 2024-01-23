@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    privateProfile: {
+        type: Boolean,
+        default: true
+    },
     profilePic: {
         type: String,
         default: "https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
@@ -48,8 +52,13 @@ const userSchema = new mongoose.Schema({
     branch: {
         type: String
     },
+    mess: {
+        type: Number,
+        default: 1
+    },
+    // changed to object Id reference
     subscribedTo: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
     }],
     likedQuestions: [{

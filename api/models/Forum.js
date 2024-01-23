@@ -14,8 +14,8 @@ const forumSchema = new mongoose.Schema({
         required: true 
     },
     userId: { 
-        type: String, 
-        required: true 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User',
     },
     date: { 
         type: Date, 
@@ -30,8 +30,11 @@ const forumSchema = new mongoose.Schema({
         type: Number, 
         default: 0 
     },
-    likes_users:  [{ type: String, ref: 'User' }],
-    dislikes_users:  [{ type: String, ref: 'User' }]
+    likes_users:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    dislikes_users:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
+
+forumSchema.index({questionTitle: 'text'})
+forumSchema.index({questionDescription: 'text'})
 
 module.exports = mongoose.model("Forum", forumSchema);

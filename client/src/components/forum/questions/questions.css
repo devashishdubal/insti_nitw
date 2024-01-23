@@ -1,6 +1,8 @@
 .forum-wrapper p {
     padding: 0px;
     margin: 0px;
+    margin-block: 0;
+    line-height: 120%
 }
 
 .forum-wrapper {
@@ -16,6 +18,62 @@
     gap: 12px;
 }
 
+.forum-wrapper .intro_right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.forum-wrapper .intro_right input {
+    height: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-stack);
+}
+
+.forum-wrapper .intro_right input:focus {
+    outline: none;
+}
+
+.forum-wrapper .intro_right button {
+    font-weight: 500;
+    padding: 8px 10px;
+    font-family: var(--font-stack);
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.forum-wrapper .intro_right .search_place {
+    padding: 3px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forum-wrapper .intro_right .search_place.focused {
+    outline: black auto 1px;
+}
+
+.forum-wrapper .intro_right .search_place:hover {
+    background-color: white;
+}
+
+.forum-wrapper .intro_right > * button:hover,
+.forum-wrapper .ans-top a[href='#yourAnswer']:hover {
+    cursor: pointer;
+    background-color: rgba(247, 247, 247, 0.705);
+    transition: all 0.15s;
+}
+
+.forum-wrapper .intro_right button:active,
+.forum-wrapper .ans-top a[href='#yourAnswer']:active {
+    background-color: rgba(197, 197, 197, 0.841);
+}
+
+
 .forum-wrapper .individual_question {
     box-sizing: border-box;
     display: flex;
@@ -27,6 +85,12 @@
     padding: 6px 12px;
     background-color: white;
     width: 100%;
+}
+
+.forum-wrapper .individual_question > a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .forum-wrapper .question_form {
@@ -99,7 +163,7 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
 .forum-wrapper .ans-top {
@@ -125,29 +189,6 @@
 
 .forum-wrapper .ans-top a[href='#yourAnswer']:visited {
     color: black;
-}
-
-
-.forum-wrapper .intro_right button {
-    font-weight: 500;
-    padding: 8px 10px;
-    font-family: "Poppins", sans-serif;
-    border: 1px solid silver;
-    background-color: white;
-    border-radius: 8px;
-    font-size: 18px;
-}
-
-.forum-wrapper .intro_right button:hover,
-.forum-wrapper .ans-top a[href='#yourAnswer']:hover {
-    cursor: pointer;
-    background-color: rgba(247, 247, 247, 0.705);
-    transition: all 0.15s;
-}
-
-.forum-wrapper .intro_right button:active,
-.forum-wrapper .ans-top a[href='#yourAnswer']:active {
-    background-color: rgba(197, 197, 197, 0.841);
 }
 
 .forum-wrapper .intro_left button {
@@ -187,10 +228,10 @@
     font-size: 15px;
 }
 
-.forum-wrapper .username .left:hover {
+.forum-wrapper .username i:hover {
     transition: 0.1s;
     cursor: pointer;
-    background-color: #CDE6E9;
+    color: #4684A0;
 }
 
 .forum-wrapper .individual_question .text {
@@ -263,3 +304,10 @@
 .forum-wrapper .dislike_button svg:hover {
     fill: lightcoral;
 }
+
+.forum-wrapper .filtering_options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+

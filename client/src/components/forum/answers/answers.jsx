@@ -32,7 +32,7 @@ const Answers = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails.username}`);
+            const response = await axios.get(`http://localhost:8000/api/v1/forum/getQuestionById/${id}?userId=${userDetails._id}`);
             setData(response.data);
         } catch (error) {
             console.log(error);
@@ -68,7 +68,7 @@ const Answers = () => {
         }
 
         const data = {
-            userId: userDetails.username,
+            userId: userDetails._id,
             answerDescription
         };
         axios
@@ -96,7 +96,11 @@ const Answers = () => {
 
     useEffect(() => {
         setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
-            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index]}
+            id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index].answerDescription}
+                username={Data.answers[index].userId.username}
+                date = {Data.answers[index].date}
+                nlikes = {Data.answers[index].likes}
+                ndislikes = {Data.answers[index].dislikes}
                 questionId={Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked} />
         })));
     }, [Data]);
@@ -129,21 +133,21 @@ const Answers = () => {
                                 title={Data.questionTitle}
                                 description={Data.questionDescription}
                                 tags={Data.questionTag}
-                                likes={Data.likes}
+                                nlikes={Data.likes}
                                 time={new Date(Data.date).toLocaleTimeString(undefined, {
                                     hour: '2-digit',
                                     minute: '2-digit',
                                     hour12: true
                                 })}
-                                dislikes={Data.dislikes}
-                                user={Data.userId}
+                                ndislikes={Data.dislikes}
+                                user={Data.userId.username}
                                 date={new Date(Data.date).toLocaleDateString('en-GB', {
                                     year: 'numeric',
                                     month: '2-digit',
                                     day: '2-digit'
                                 })}
-                                liked={Data.userHasLiked}
-                                disliked={Data.userHasDisliked}
+                                isliked={Data.userHasLiked}
+                                isdisliked={Data.userHasDisliked}
                             />
                         ) : (null)
                     }

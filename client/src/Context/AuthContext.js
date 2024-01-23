@@ -9,6 +9,7 @@ const AuthContext = createContext();
 const AuthContextProvider = React.memo(({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [userDetails, setUserDetails] = useState({});
+  const [complete, setComplete] = useState(false)
   //const {currentUser, setCurrentUser} = useContext(UserContext)
 
   useEffect(() => {
@@ -30,7 +31,9 @@ const AuthContextProvider = React.memo(({ children }) => {
         return;
       }
   
-      fetchData();
+      fetchData().then(() => {
+        setComplete(true)
+      })
       // get user session from db
       // get request 
     });
@@ -40,7 +43,7 @@ const AuthContextProvider = React.memo(({ children }) => {
     };
   }, []);
 
-  return (
+  return (complete &&
     <AuthContext.Provider value={{ currentUser, userDetails }}>
       {children}
     </AuthContext.Provider>

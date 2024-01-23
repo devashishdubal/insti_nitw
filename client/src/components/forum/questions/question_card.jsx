@@ -111,7 +111,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
                     ) : (
                         <>
                             <p className="text">{title}</p>
-                            <p className="description">{description}</p>
+                            <p className="description"><div dangerouslySetInnerHTML={{__html: description}}></div></p>
                             <div className="question_controls">
                                 <div className="tags">
                                     <p key={index} className="individual_tag">{tags}</p>
@@ -133,6 +133,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
                             </div>
                         </>
                     )}
+                    {/* <div classname="expand-button" onclick={expandContent}>▼ Expand</div> */}
             </Link>
         </>
     );

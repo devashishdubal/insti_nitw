@@ -46,12 +46,12 @@ const Questions = () => {
                         fetch={fetchData}
                         id={question._doc._id}
                         title={question._doc.questionTitle}
-                        description={question._doc.questionDescription || "(empty)"}
+                        description={question._doc.questionDescription}
                         tags={question._doc.questionTag}
                         index={index}
                         nlikes={question._doc.likes}
                         ndislikes={question._doc.dislikes}
-                        user={question._doc.userId.username}
+                        // user={question._doc.userId.username}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
                             minute: '2-digit',

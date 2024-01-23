@@ -85,6 +85,21 @@
     padding: 6px 12px;
     background-color: white;
     width: 100%;
+
+    max-height: 150px; /* Set your desired max height */
+    overflow: hidden;
+    position: relative;
+}
+
+.expand-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-top-left-radius: 5px;
 }
 
 .forum-wrapper .individual_question > a {

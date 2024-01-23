@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Event = require('../models/Event');
 const Club = require('../models/Clubs');
 const User = require('../models/User');
-
+const CustomEvent = require("../models/CustomEvent")
 //register
 router.post("/create-event", async (req, res) => {
     try {
@@ -112,6 +112,45 @@ router.get("/collegeEvents/:date", async (req, res) => {
         const events = await Event.find({ eventDateTime: { $gte: dateObject, $lt: new Date(dateObject.getTime() + 24 * 60 * 60 * 1000) } }).populate('eventOrganizer');;
         //const events = await Event.find({});
         return res.status(200).send(events);
+    } catch (error) {
+        return res.status(500).send("Internal server error")
+    }
+})
+
+router.post("/createCustomEvent", async(req, res) => {
+    try {
+        const eventTitle = req.body.eventTitle;
+        const userId = req.body.userId;
+        const eventDateTime = req.body.eventDateTime;
+        const newEvent = new CustomEvent({
+            eventTitle: eventTitle,
+            userId: userId,
+            eventDateTime: eventDateTime
+        })
+
+        await newEvent.save();
+        return res.status(200).send("Done!");
+    } catch (error) {
+        return res.status(500).send("Internal server error")
+    }
+})
+
+router.get("/getCustomEvents/:userId/:date", async(req, res) => {
+    try {
+        const userId = req.params.userId;
+        const date = new Date(req.params.date);
+        console.log(userId, date)
+        const startDate = new Date(date);
+        startDate.setHours(0, 0, 0, 0);  
+        const endDate = new Date(date);
+        endDate.setHours(23, 59, 59, 999);
+
+        const userEvents = await CustomEvent.find({
+            userId: userId,
+            eventDateTime: { $gte: startDate, $lte: endDate }
+        })
+
+        return res.status(200).send(userEvents);
     } catch (error) {
         return res.status(500).send("Internal server error")
     }

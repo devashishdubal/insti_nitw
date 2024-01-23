@@ -7,16 +7,17 @@ const CalendarLayout = ({dateSelected,setDateSelected,eventPage,CustomButtonSele
     const [events, setEvents] = useState([]);
     const [custom, setCustom] = useState(false);
     const [date, setDate] = useState(new Date());
+    const [customEvents, setCustomEvents] = useState([]);
     return (
         <div className="calendar-wrapper">
             <div className="calender">
-                <Calendar setEvents={setEvents} dateSelected={date} setDateSelected={setDate} CustomButtonSelected={CustomButtonSelected} setCustom={setCustom} custom = {custom}/>
+                <Calendar setEvents={setEvents} dateSelected={date} setDateSelected={setDate} CustomButtonSelected={CustomButtonSelected} setCustom={setCustom} custom={custom} setCustomEvents={setCustomEvents}/>
             </div>
             <div className="event">
-            {custom ? <CustomEvents dateSelected={date}/> : events.length > 0 ? (
+            {custom ? <CustomEvents dateSelected={date}/> : events.length > 0 || customEvents.length > 0 ? (
                 <div>
                     <div className="collegeEvents">
-                        <h3>College events</h3>
+                        {events.length > 0 && <h3>College events</h3>}
                         {events.map(event => (
                             <div key={event._id} className="individualEvent">
                                 <img src={event.eventOrganizer.clubLogo} alt="logo"/>
@@ -34,7 +35,27 @@ const CalendarLayout = ({dateSelected,setDateSelected,eventPage,CustomButtonSele
                         ))}
                     </div>
                     <div className="customEvents">
-                        <h3>Custom events</h3>
+                        {customEvents.length > 0 && <h3>Custom events</h3>}
+                        {customEvents.map(event => (
+                            <div key={event._id} className="individualEvent">
+                                <div className="customEventCard">
+                                    <div className="details">
+                                    <p className="eventTitle">
+                                    <p>Custom event: </p>
+                                    <p>{event.eventTitle}</p>
+                                    </p>
+                                    </div>
+                                    <p>
+                                        {new Date(event.eventDateTime).toLocaleDateString('en-GB', {
+                                            year: 'numeric',
+                                            month: '2-digit',
+                                            day: '2-digit'
+                                        })}
+                                        </p>
+                                </div>
+                            </div>
+                            // Replace 'name' and 'date' with the actual fields in your event model
+                        ))}
                     </div>
                 </div>
             ) : (

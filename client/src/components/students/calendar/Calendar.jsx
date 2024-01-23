@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import CustomEvents from './CustomEvents';
 import './Calendar.css';
 import axios from "axios"
+import { AuthContext } from "../../../Context/AuthContext";
 
-const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelected, setCustom, custom }) => {
+const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelected, setCustom, custom, setCustomEvents }) => {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let date = new Date();
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
   const dispMonthYear = useRef(null);
   const dispDates = useRef(null);
+  const { userDetails } = useContext(AuthContext)
 
   const fetchEvents = async (date) => {
       try {
@@ -20,6 +22,15 @@ const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelect
       }
   }
 
+  const fetchCustomEvents = async (date) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/v1/events/getCustomEvents/${userDetails._id}/${date}`);
+      setCustomEvents(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleDateClick = (event) => {
     const litag = event.target;
     const textInElement = litag.textContent;
@@ -27,6 +38,7 @@ const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelect
     let selectedDate = new Date(currentYear, currentMonth, parseInt(textInElement));
 
     fetchEvents(selectedDate)
+    fetchCustomEvents(selectedDate)
     setDateSelected(selectedDate)
     // get event on this particular date and list them on the right
     // Remove "selected" class from previously selected element, if any

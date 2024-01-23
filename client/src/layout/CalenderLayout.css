@@ -3,6 +3,34 @@
     justify-content: space-around;
 }
 
+.calendar-wrapper .individualEvent {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border-color: black;
+}
+
+.calendar-wrapper .individualEvent .eventTitle {
+    font-size: 20px;
+}
+
+.calendar-wrapper .individualEvent .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.calendar-wrapper .individualEvent img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
 .calender {}
 
 .event {}

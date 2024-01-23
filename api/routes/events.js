@@ -99,4 +99,22 @@ router.get("/upcomingEvents", async (req, res) => {
     }
 }) 
 
+router.get("/collegeEvents/:date", async (req, res) => {
+    try {  
+        const dateString = req.params.date;
+        const dateObject = new Date(dateString);
+
+        if (isNaN(dateObject)) {
+            return res.status(400).send("Invalid date format");
+        }
+
+        // Assuming 'Event' is the model for your events
+        const events = await Event.find({ eventDateTime: { $gte: dateObject, $lt: new Date(dateObject.getTime() + 24 * 60 * 60 * 1000) } }).populate('eventOrganizer');;
+        //const events = await Event.find({});
+        return res.status(200).send(events);
+    } catch (error) {
+        return res.status(500).send("Internal server error")
+    }
+})
+
 module.exports = router;

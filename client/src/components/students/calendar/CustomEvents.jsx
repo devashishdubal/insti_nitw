@@ -1,14 +1,29 @@
 import "./CustomEvents.css";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 const CustomEvents = ({ dateSelected }) => {
     const dateComp = useRef(null);
     const setDate = () => {
         dateComp.current.value = `${dateSelected.getDate()} / ${dateSelected.getMonth() + 1} / ${dateSelected.getFullYear()}`;
     };
+
     useEffect(() => {
         setDate();
     }, [dateSelected])
+
+    const createCustomEvent = async () => {
+        try {
+            const response = await axios.post('http://localhost:3001/createEvent', {
+              // Include other fields as needed
+            });
+      
+            console.log(response.data);
+            // Optionally update state or perform other actions based on the response
+          } catch (error) {
+            console.error(error);
+            // Handle error
+          }
+    }
 
     return (
         <>

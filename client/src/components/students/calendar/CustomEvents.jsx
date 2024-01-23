@@ -19,6 +19,19 @@ const CustomEvents = ({ dateSelected }) => {
     const { userDetails } = useContext(AuthContext)
 
     const createCustomEvent = async () => {
+        if (title.length === 0 || time.length === 0) {
+            toast.error('Some fields are empty!', {
+                duration: 3000,
+                position: 'top-right',
+                style: {marginTop: 70},
+                className: '',
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                },
+            });
+            return;
+        }
         try {
             let dateToBeSubmitted = dateSelected;
             const [hours, minutes] = time.split(":");

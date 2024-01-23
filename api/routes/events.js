@@ -139,7 +139,6 @@ router.get("/getCustomEvents/:userId/:date", async(req, res) => {
     try {
         const userId = req.params.userId;
         const date = new Date(req.params.date);
-        console.log(userId, date)
         const startDate = new Date(date);
         startDate.setHours(0, 0, 0, 0);  
         const endDate = new Date(date);

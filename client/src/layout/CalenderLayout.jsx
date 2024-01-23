@@ -9,7 +9,7 @@ const CalendarLayout = ({dateSelected,setDateSelected,eventPage,CustomButtonSele
                 <Calendar dateSelected={dateSelected} setDateSelected={setDateSelected} CustomButtonSelected={CustomButtonSelected} setButtonSelect={setButtonSelect}/>
             </div>
             <div className="event">
-                {eventPage}
+                <h1>Events</h1>
             </div>
         </div>
     );

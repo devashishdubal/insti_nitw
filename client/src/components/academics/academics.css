@@ -1,43 +1,24 @@
-.syllabusbuttons{
+.toggles {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-.syllabus-button{
-    text-align: center;
-    width: 200px;
-    height: 35px;
-    background-color: #f6160e7d;
-    border-radius: 30px;
-    padding: 2px 8px;
-    margin-top: 7px;   
-    margin-left: 7px;
-}
-
-.syllabus-button:hover {
-    font-weight: bold;
-    cursor: pointer;
-    transform: scale(1.05);
-    transition: 0.2s;
-}
-
-.toggles{
+.upper, .lower {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    margin-top: 30px
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .toggle-button{
     text-align: center;
     width: 120px;
-    height: 35px;
-    background-color: rgb(111, 112, 204);
-    border-radius: 30px;
-    padding: 2px 8px;
-    margin-top: 7px; 
+    height: 40px;
+    background-color: rgb(243, 247, 247);
+    border-radius: 30px; 
     margin-left: 5px;
+    margin-right: 5px;
     
 }
 
@@ -46,6 +27,11 @@
     cursor: pointer;
     transform: scale(1.05);
     transition: 0.2s;
+}
+
+.toggle-button.active {
+    background-color:  #7dafccd0;
+    font-weight: bold; /* You can adjust this based on your design */
 }
 
 

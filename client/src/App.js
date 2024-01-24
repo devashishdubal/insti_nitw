@@ -25,6 +25,7 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 import Academics from "./components/academics/academics";
 import Resources from "./components/academics/resources";
+import Quicklinks from "./components/academics/quicklinks";
 
 function App() {
   console.log('huh')
@@ -179,8 +180,9 @@ function App() {
           }
         >
         <Route path="resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
+        <Route path="quicklinks" element={<ProtectedRoute><Quicklinks /></ProtectedRoute>} />
         </Route>
-
+        
       </Routes>
     </Router>
   );

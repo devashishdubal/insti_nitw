@@ -41,7 +41,7 @@ router.get("/getAllClubs", async (req, res) => {
         return res.status(200).send(clubDetailsWithSubscriptions);
     } catch (error) {
         console.log(error)
-        return res.status(500).send("ayo");
+        return res.status(500).send("Internal Server Issue");
     }
 })
 

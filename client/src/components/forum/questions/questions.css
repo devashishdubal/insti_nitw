@@ -163,7 +163,7 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
 .forum-wrapper .ans-top {

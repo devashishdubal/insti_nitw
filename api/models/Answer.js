@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const answerSchema = new mongoose.Schema({
     userId: { 
-        type: String, 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true 
     },
     date: { 
@@ -20,8 +21,8 @@ const answerSchema = new mongoose.Schema({
         type: Number, 
         default: 0 
     },
-    likes_users:  [{ type: String, ref: 'User' }],
-    dislikes_users:  [{ type: String, ref: 'User' }]
+    likes_users:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    dislikes_users:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 module.exports = mongoose.model("Answer", answerSchema);

@@ -14,10 +14,10 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
     const [dislikes, setDislikes] = useState(ndislikes);
     const [likeColor, setLikeColor] = useState(liked ? "lightgreen" : "white");
     const [dislikeColor, setDislikeColor] = useState(disliked ? "lightcoral" : "white")
-
+    
     const updateLike = () => {
         axios
-            .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails.username}&liked=${!liked}`)
+            .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails._id}&liked=${!liked}`)
             .then(() => {
                 //fetch();
             })
@@ -28,7 +28,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
 
     const updateDislike = () => {
         axios
-            .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails.username}&disliked=${!disliked}`)
+            .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails._id}&disliked=${!disliked}`)
             .then(() => {
                 //fetch();
             })
@@ -40,7 +40,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
     const handleLikeClick = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails.username}&liked=${!liked}`)
+            .put(`http://localhost:8000/api/v1/forum/updateLikes/${id}?userId=${userDetails._id}&liked=${!liked}`)
             .then(() => {
                 setLiked(!liked);
 
@@ -66,7 +66,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
     const handleDislikeClick = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails.username}&disliked=${!disliked}`)
+            .put(`http://localhost:8000/api/v1/forum/updateDislikes/${id}?userId=${userDetails._id}&disliked=${!disliked}`)
             .then(() => {
                 setDisliked(!disliked);
 
@@ -102,7 +102,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
             }
             <Link to={`/students/forum/${id}`}>
                     {loading ? (
-                        <SkeletonTheme baseColor="#ffffff" highlightColor="#DADADA">
+                        <SkeletonTheme baseColor="#ffffff" highlightColor="#ECECF0">
                             <Skeleton height={20} width={200} />
                             <Skeleton height={20} />
                             <Skeleton height={40} />

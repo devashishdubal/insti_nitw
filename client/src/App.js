@@ -1,6 +1,8 @@
+import React from 'react'
 import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
 import ViewProfile from "./pages/ViewProfile/ViewProfile"
 import { Link, Outlet } from "react-router-dom";
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
@@ -27,15 +29,13 @@ import Academics from "./components/academics/academics";
 import Resources from "./components/academics/resources";
 import Quicklinks from "./components/academics/quicklinks";
 
-function App() {
+const App = React.memo(() => {
   console.log('huh')
   const { currentUser } = useContext(AuthContext);
-
   const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {
       return <Navigate to="/" />
     }
-
     return children
   }
 
@@ -47,7 +47,7 @@ function App() {
     return children
   }
 
-  return (
+  return ( currentUser &&
     <Router>
       <Routes>
         <Route
@@ -186,6 +186,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+})
 
 export default App;

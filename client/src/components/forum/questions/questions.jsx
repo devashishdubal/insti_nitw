@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../Context/AuthContext"
 
 const Questions = () => {
-    console.log('yo')
+    console.log('Rendering Questions Component...')
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
@@ -33,6 +33,7 @@ const Questions = () => {
     }
 
     useEffect(() => {
+        console.log('Inside useEffect in Questions component');
         fetchData();
     }, [filter, searchBar]);
 
@@ -51,7 +52,7 @@ const Questions = () => {
                         index={index}
                         nlikes={question._doc.likes}
                         ndislikes={question._doc.dislikes}
-                        user={question._doc.userId.username}
+                        user={question._doc.userId? question._doc.userId.username : ''}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
                             minute: '2-digit',

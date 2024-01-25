@@ -46,6 +46,6 @@ app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);
 app.use("/api/v1/feed/", feedRoute);
 
-app.listen(process.env.PORT, () => {
+app.listen(8000 || process.env.PORT, () => {
     console.log("Backend server is running!");
 });

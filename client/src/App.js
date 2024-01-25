@@ -27,8 +27,8 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 
 const App = React.memo(() => {
-  console.log('huh')
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, userDetails } = useContext(AuthContext);
+  console.log(currentUser, userDetails)
   const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {
       return <Navigate to="/" />
@@ -44,7 +44,7 @@ const App = React.memo(() => {
     return children
   }
 
-  return ( currentUser &&
+  return (
     <Router>
       <Routes>
         <Route

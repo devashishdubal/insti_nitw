@@ -35,7 +35,7 @@ router.post("/create-event", async (req, res) => {
 router.get("/getEventDetails/:id", async (req, res) => {
     try {
         const event = await Event.findOne({ _id: req.params.id });
-
+        console.log(event);
         if(!event){
             return res.status(404).send("The event does not exist")
         }
@@ -47,7 +47,7 @@ router.get("/getEventDetails/:id", async (req, res) => {
     }
 })
 
-router.get("getEventDetails/:club", async (req,res) => {
+router.get("/getEventDetails/club/:club", async (req,res) => {
     try{
         const event = await Event.find({eventOrganizer: req.params.club})
         if(!event){

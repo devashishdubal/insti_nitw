@@ -1,8 +1,11 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import "./EventCard.css"
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const EditEvent = () => {
+    const { id } = useParams()
     const [title,setTitle] = useState("");
     const [description,setDesc] = useState("");
     const [venue,setVenue] = useState("");
@@ -11,6 +14,23 @@ const EditEvent = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink,setRegLink] = useState("");
 
+    const fetchData = () => {
+        const response = axios.get(`http://localhost:8000/api/v1/events/getEventDetails/?id=${id}`);
+        console.log(response);
+        const event = response.data;
+        setTitle(event.eventName);
+        setDesc(event.eventDescription);
+        setVenue(event.eventVenue);
+        setDate(event.eventDateTime);
+        if (event.registerable){
+            setIsChecked(true);
+            setRegLink(event.registrationLink);
+        }
+    }
+    useEffect(() => {
+      fetchData();
+    }, [])
+    
     const handleSubmit = () =>{
 
     };

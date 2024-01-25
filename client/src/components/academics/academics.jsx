@@ -7,7 +7,7 @@ const Academics = () => {
   ];
 
   const coursesPerButton = [
-    ["Computer Science Engineering", "Course B for B.Tech", "Course C for B.Tech", "Course D for B.Tech"],
+    ["Computer Science Engineering", "Electronics and Communication Engineering", "Course C for B.Tech", "Course D for B.Tech"],
     ["Course A for Integrated M.Sc", "Course B for Integrated M.Sc"],
     ["Course A for M.Tech", "Course B for M.Tech"],
     ["Course A for M.Sc.", "Course B for M.Sc."],

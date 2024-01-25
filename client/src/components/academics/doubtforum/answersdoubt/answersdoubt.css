@@ -1,0 +1,82 @@
+.All {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.All h3 {
+    font-weight: normal;
+    margin: 0px;
+    color: grey;
+    padding: 0px;
+}
+
+.All h1 {
+    font-size: 30px;
+    line-height: 30px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.All .Answer_card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid silver;
+    border-radius: 16px;
+    background-color: #ffffff;
+    width: 50%;
+    padding: 6px 12px;
+}
+
+
+.All .user_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+
+
+.All .Buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.All .Input {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    gap: 12px;
+}
+
+.All .Section {
+    border-top: 1px solid silver;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.forum-wrapper .Answer_card .description, .forum-wrapper .All .individual_question .description{
+    max-width: 100%;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+
+.All .Buttons {
+    gap: 10px;
+}
+
+.All .likes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.All .content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}

@@ -11,7 +11,7 @@ import Topbar from "./components/topbar/Topbar";
 import StudentSidebar from "./components/sidebar/student_sidebar";
 import Questions from "./components/forum/questions/questions";
 import Feed from "./components/feed/feed";
-import Calendar from "./components/students/calendar/Calendar";
+import Calendar from "./layout/CalenderLayout";
 import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
@@ -36,8 +36,8 @@ import Things from './components/academics/Things';
 import Answersdoubt from './components/academics/doubtforum/answersdoubt/answersdoubt';
 
 const App = React.memo(() => {
-  console.log('huh')
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, userDetails } = useContext(AuthContext);
+  console.log(currentUser, userDetails)
   const ProtectedRoute = ({ children }) => {
     if (currentUser === null) {
       return <Navigate to="/" />
@@ -53,7 +53,7 @@ const App = React.memo(() => {
     return children
   }
 
-  return ( currentUser &&
+  return (
     <Router>
       <Routes>
         <Route

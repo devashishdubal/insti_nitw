@@ -11,7 +11,7 @@ import Topbar from "./components/topbar/Topbar";
 import StudentSidebar from "./components/sidebar/student_sidebar";
 import Questions from "./components/forum/questions/questions";
 import Feed from "./components/feed/feed";
-import Calendar from "./components/students/calendar/Calendar";
+import Calendar from "./layout/CalenderLayout";
 import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";

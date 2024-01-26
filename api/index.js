@@ -1,10 +1,15 @@
 const express = require("express");
+const passport = require("passport");
+const session = require("express-session");
 const cors = require('cors');
-const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
+const passportSetup = require("./passport-setup");
+
+//invoking express
+const app = express();
 
 app.use(
     cors({
@@ -14,6 +19,14 @@ app.use(
     }
 ))
 
+app.use(session({
+    secret : 'mysecret',
+    resave : true,
+    saveUninitialized : true,
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 // const User = require("./models/User");
 
 const authRoute = require("./routes/auth")
@@ -38,6 +51,32 @@ app.get("/", (req, res) => {
     }
 })
 
+app.get('/login-success', (req, res) => {
+    res.status(200).send("Login success");
+})
+
+app.get('/login-failure', (req, res) => {
+    res.status(200).send("Login failure");
+})
+
+app.get("/auth/google", 
+    passport.authenticate('google', {scope: ['profile', 'email']}),
+    (req, res) => {
+        res.redirect('/login-success');
+    }
+)
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {failureRedirect: '/login-failure'}),
+    (req, res) => {
+        res.redirect("/login-success")
+    }
+)
+
+app.get('/user', (req, res) => {
+    res.json(req.user)
+})
+
 //routes
 app.use("/api/v1/clubs", clubRoute);
 app.use("/api/v1/auth", authRoute);
@@ -45,6 +84,8 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);
 app.use("/api/v1/feed/", feedRoute);
+
+passportSetup();
 
 app.listen(8000 || process.env.PORT, () => {
     console.log("Backend server is running!");

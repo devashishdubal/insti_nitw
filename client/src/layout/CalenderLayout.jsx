@@ -3,7 +3,8 @@ import CustomEvents from "../components/students/calendar/CustomEvents";
 import "./CalenderLayout.css";
 import { useState } from "react";
 
-const CalendarLayout = ({dateSelected,setDateSelected,eventPage,CustomButtonSelected,setButtonSelect}) => {
+const CalendarLayout = ({CustomButtonSelected}) => {
+    console.log("Cal")
     const [events, setEvents] = useState([]);
     const [custom, setCustom] = useState(false);
     const [date, setDate] = useState(new Date());

@@ -12,35 +12,36 @@ module.exports = function () {
         clientSecret: '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',
         callbackURL: 'http://localhost:8000/auth/google/callback',
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
         const allowedDomain = 'student.nitw.ac.in'; // Replace with your desired domain
         const userEmail = profile.emails[0].value;
-        console.log(userEmail)
         // Check if user already exists in your database
         if (userEmail.endsWith(`@${allowedDomain}`)) {
-            /*
-            User.findOne({ userId: profile.id }, (err, user) => {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    // Create new user in database
-                    user = new User({
-                        userId: profile.id,
-                        // Add other user properties as needed
-                    });
-                    user.save((err) => {
-                        if (err) console.error(err);
-                        return done(err, user);
-                    });
-                } else {
-                    // User already exists
-                    return done(err, user);
-                }
+            console.log(profile)
+            let rollNo = userEmail.slice(2, userEmail.indexOf('@'));
+
+            let username = userEmail.split("@")[0];
+            let firstname = profile.displayName.split(" ")[0]
+            let lastname = profile.displayName.split(" ")[1]
+            let photoURL = profile.photos[0].value;
+            const userExists = await User.findOne({ userId: profile.id });
+        
+            if (userExists) {
+                return res.status(200).send("Welcome back");
+            }
+    
+            const newUser = new User({
+                userId: profile.id,
+                username: username,
+                firstName: firstname,
+                lastName: lastname,
+                email: userEmail,
+                rollNo: rollNo,
+                profilePic: photoURL,
             });
-            */
-           console.log("Hellooooo")
-           return done(null, profile)
+    
+            const user = await newUser.save();
+            return res.status(200).json("Welcome");
         } else {
             return done(null, false, {message: "Please login with only student email"})
         }

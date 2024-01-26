@@ -17,78 +17,10 @@ const LoginWithGoogle = () => {
         return false;
     }
 
-    const navigate = useNavigate()
-
-    const addToDB = (data) => {
-        axios
-            .post(`http://localhost:8000/api/v1/auth/register`, data)
-            .then((response) => {
-                //setDesc("");
-                //console.log(response.data)
-                
-                //fetch();
-            })
-            .catch((error) => {
-                // handle the error
-            });
-    }
-
     const {currentUser, setCurrentUser} = useContext(AuthContext);
 
     const signin = () => {
-        auth.signInWithPopup(provider)
-        .then((result) => {
-            if (!verifier(result.user.email)) {
-                auth.signOut()
-                .then(() => {
-                    console.log("Signed out successfully")
-                });
-
-                deleteUser(result.user).then(() => {
-                    console.log("User deleted successfully");
-                }).catch((error) => {
-                    console.error("Error deleting user:", error);
-                });
-
-                toast.error('Please use your student email', {
-                    duration: 3000,
-                    position: 'top-right',
-                  
-                    // Styling
-                    style: {},
-                    className: '',
-                    // Aria
-                    ariaProps: {
-                      role: 'status',
-                      'aria-live': 'polite',
-                    },
-                  });
-            } else {
-                // redirect
-                // setContext
-                let rollNo = result.user.email.slice(2, result.user.email.indexOf('@'));
-
-                let username = result.user.email.split("@")[0];
-                let firstname = result.user.displayName.split(" ")[0]
-                let lastname = result.user.displayName.split(" ")[1]
-                const object = {
-                    "userId": result.user.uid,
-                    "username": username,
-                    "firstName": firstname,
-                    "lastName": lastname,
-                    "rollNo": rollNo,
-                    "email": result.user.email,
-                    "photoURL": result.user.photoURL
-                }
-
-                addToDB(object); // add it to our database 
-                navigate("/");
-                // axios request here
-                // send this to register endpoint
-                //console.log(currentUser)
-            }
-        })
-        .catch(alert);
+        window.location.href = 'http://localhost:8000/auth/google';
     }
 
     const el = React.useRef(null);

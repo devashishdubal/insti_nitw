@@ -25,6 +25,7 @@ const Questions = () => {
             axios
                 .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}`)
                 .then((response) => {
+                    console.log(filter)
                     setAllQuestions([]);
                     setData(response.data.Data);
                     setLoading(false);
@@ -47,8 +48,9 @@ const Questions = () => {
 
     useEffect(() => {
         console.log('Inside useEffect in Questions component');
+        setLoading(true);
         fetchData();
-    }, []);
+    }, [filter]);
 
     useEffect(() => {
         setAllQuestions(

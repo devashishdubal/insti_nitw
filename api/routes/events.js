@@ -93,6 +93,7 @@ router.get("/upcomingEvents", async (req, res) => {
             eventDateTime: { $gt: currentDate },
         }).populate('eventOrganizer');;
 
+
         return res.status(200).send(upcomingEvents);
     } catch (error) {
         return res.status(500).send("Internal server error")

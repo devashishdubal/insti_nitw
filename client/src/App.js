@@ -25,6 +25,8 @@ import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
+import { AppContainer, Forceoverflow, Globalstyle, Main, Side } from './Appstyle';
+import ThemeProvider from './themes/ThemeProvider';
 
 const App = React.memo(() => {
   console.log("Huh")
@@ -44,7 +46,17 @@ const App = React.memo(() => {
     return children
   }
 
+
+  const [themeMode, setThemeMode] = useState('light');
+
+  const toggleTheme = () => {
+    setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
+
   return (
+  <>
+  <ThemeProvider themeMode={themeMode}>
+    <Globalstyle />
     <Router>
       <Routes>
         <Route
@@ -60,18 +72,18 @@ const App = React.memo(() => {
           path="students"
           element={
             <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
+              <AppContainer>
+                <Side>
                   <StudentSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
+                </ Side>
+                <Main>
+                  <Topbar toggleTheme={toggleTheme} />
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
+                    <Forceoverflow></ Forceoverflow> {/*scrollbar*/}
                   </div>
-                </div>
-              </div>
+                </ Main>
+              </ AppContainer>
             </ProtectedRoute>
           }
         >
@@ -85,18 +97,18 @@ const App = React.memo(() => {
           path="clubs"
           element={
             <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
+              <AppContainer>
+                <Side>
                   <ClubsSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
+                </ Side>
+                <Main>
+                  <Topbar toggleTheme={toggleTheme}/>
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
+                    <Forceoverflow></ Forceoverflow> {/*scrollbar*/}
                   </div>
-                </div>
-              </div>
+                </ Main>
+              </ AppContainer>
             </ProtectedRoute>
           }
         >
@@ -113,18 +125,18 @@ const App = React.memo(() => {
           path="food"
           element={
             <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
+              <AppContainer>
+                <Side>
                   <FoodSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
+                </ Side>
+                <Main>
+                  <Topbar toggleTheme={toggleTheme}/>
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
+                    <Forceoverflow></ Forceoverflow> {/*scrollbar*/}
                   </div>
-                </div>
-              </div>
+                </ Main>
+              </ AppContainer>
             </ProtectedRoute>
           }
         >
@@ -142,7 +154,7 @@ const App = React.memo(() => {
                   <StudentSidebar />
                 </div>
                 <div className="main">
-                  <Topbar />
+                  <Topbar toggleTheme={toggleTheme}/>
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
                     <div className="force-overflow"></div> {/*scrollbar*/}
@@ -158,6 +170,8 @@ const App = React.memo(() => {
         </Route>
       </Routes>
     </Router>
+  </ThemeProvider>
+  </>
   );
 })
 

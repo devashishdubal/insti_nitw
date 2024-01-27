@@ -5,7 +5,7 @@ import { auth } from "../../firebase"
 import { AuthContext } from "../../Context/AuthContext"
 import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-router-dom";
 
-const Topbar = () => {
+const Topbar = ({ toggleTheme }) => {
   const {userDetails, setCurrentUser, setUserDetails } = useContext(AuthContext)
 
   const logout = () => {
@@ -34,6 +34,7 @@ const Topbar = () => {
           <NavLink to="/food" className="food">Food</NavLink>
         </div>
       </div>
+      <button onClick={toggleTheme}>theme</button>
       <div className="signUp">
         <img src={userDetails && userDetails.profilePic} alt='displayPic' />
         <p>{userDetails && userDetails.username}</p>

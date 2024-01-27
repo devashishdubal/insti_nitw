@@ -7,8 +7,8 @@ const User = require('./models/User');
 module.exports = function () {
     // Configure Passport to use Google strategy
     passport.use(new GoogleStrategy({
-        clientID: '805111513571-ip1f800ie9lpt4gtnnghe8nnropk6qcr.apps.googleusercontent.com',
-        clientSecret: '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',
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: 'http://localhost:8000/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {

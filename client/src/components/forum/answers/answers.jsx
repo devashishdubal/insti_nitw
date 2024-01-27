@@ -97,7 +97,7 @@ const Answers = () => {
     useEffect(() => {
         setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
             id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index].answerDescription}
-                username={Data.answers[index].userId.username}
+                username={Data.answers[index].userId.username === null ? "Hi" : Data.answers[index].userId.username}
                 date = {Data.answers[index].date}
                 nlikes = {Data.answers[index].likes}
                 ndislikes = {Data.answers[index].dislikes}
@@ -140,7 +140,7 @@ const Answers = () => {
                                     hour12: true
                                 })}
                                 ndislikes={Data.dislikes}
-                                user={Data.userId.username}
+                                user={Data.userId.username === null ? "Hi" : Data.userId.username}
                                 date={new Date(Data.date).toLocaleDateString('en-GB', {
                                     year: 'numeric',
                                     month: '2-digit',

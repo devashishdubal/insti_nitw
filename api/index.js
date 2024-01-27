@@ -89,7 +89,6 @@ app.get('/auth/google/callback',
 )
 
 app.get('/user', (req, res) => {
-    console.log(req.user)
     res.status(200).send(req.user)
 })
 
@@ -102,7 +101,6 @@ app.get('/logout', (req, res) => {
 app.get('/auth/check-session', (req, res) => {
     if (req.isAuthenticated()) {
         // If the user is authenticated, return user details
-        console.log(req.session)
         return res.json(req.user);
     } else {
         // If the user is not authenticated, return an empty object

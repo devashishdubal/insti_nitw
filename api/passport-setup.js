@@ -1,9 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
-
+const session = require("express-session");
 const User = require('./models/User');
-
 
 module.exports = function () {
     // Configure Passport to use Google strategy
@@ -17,7 +16,6 @@ module.exports = function () {
         const userEmail = profile.emails[0].value;
         // Check if user already exists in your database
         if (userEmail.endsWith(`@${allowedDomain}`)) {
-            console.log(profile)
             let rollNo = userEmail.slice(2, userEmail.indexOf('@'));
 
             let username = userEmail.split("@")[0];
@@ -27,7 +25,7 @@ module.exports = function () {
             const userExists = await User.findOne({ userId: profile.id });
         
             if (userExists) {
-                return res.status(200).send("Welcome back");
+                return done(null, userExists)
             }
     
             const newUser = new User({
@@ -40,8 +38,8 @@ module.exports = function () {
                 profilePic: photoURL,
             });
     
-            const user = await newUser.save();
-            return res.status(200).json("Welcome");
+            await newUser.save();
+            return done(null, newUser)
         } else {
             return done(null, false, {message: "Please login with only student email"})
         }
@@ -49,17 +47,13 @@ module.exports = function () {
 
     // Serialize user to store in session
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user);
     });
 
     // Deserialize user from session
-    passport.deserializeUser((id, done) => {
-        User.findOne({userId : id})
-        .then(user => {
-            done(null, user);
-        })
-        .catch(err => {
-            done(err, null);
-        });
+    passport.deserializeUser(async (user, done) => {
+        //const userBlob = await User.findOne({userId : id})
+        //console.log(userBlob)
+        done(null, user);
     });
 };

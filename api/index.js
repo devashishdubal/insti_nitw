@@ -11,6 +11,16 @@ const passportSetup = require("./passport-setup");
 //invoking express
 const app = express();
 
+app.use(session({
+    secret: 'my-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        maxAge: 5 * 60 * 60 * 24 * 1000, // 5 days
+    },
+}));
+
 app.use(
     cors({
         origin:"http://localhost:3000",
@@ -18,12 +28,6 @@ app.use(
         credentials: true
     }
 ))
-
-app.use(session({
-    secret : 'mysecret',
-    resave : true,
-    saveUninitialized : true,
-}))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,31 +55,60 @@ app.get("/", (req, res) => {
     }
 })
 
-app.get('/login-success', (req, res) => {
-    res.status(200).send("Login success");
-})
+app.get("/login/success", (req, res) => {
+	if (req.user) {
+        res.redirect("http://localhost:3000/")
+        /*
+		res.status(200).json({
+			error: false,
+			message: "Successfully Loged In",
+			user: req.user,
+		});
+        */
+	} else {
+		res.status(403).json({ error: true, message: "Not Authorized" });
+	}
+});
 
-app.get('/login-failure', (req, res) => {
-    res.status(200).send("Login failure");
-})
+app.get("/login/failed", (req, res) => {
+	res.status(401).json({
+		error: true,
+		message: "Log in failure",
+	});
+});
 
 app.get("/auth/google", 
-    passport.authenticate('google', {scope: ['profile', 'email']}),
-    (req, res) => {
-        res.redirect('/login-success');
-    }
+    passport.authenticate('google', {scope: ['profile', 'email']})
 )
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect: '/login-failure'}),
+    passport.authenticate('google', {failureRedirect: 'http://localhost:3000/'}),
     (req, res) => {
-        res.redirect("/login-success")
+        res.redirect("/login/success")
     }
 )
 
 app.get('/user', (req, res) => {
-    res.json(req.user)
+    console.log(req.user)
+    res.status(200).send(req.user)
 })
+
+app.get('/logout', (req, res) => {
+    req.logout(() => {
+        res.redirect("http://localhost:3000/")
+    });
+});
+
+app.get('/auth/check-session', (req, res) => {
+    if (req.isAuthenticated()) {
+        // If the user is authenticated, return user details
+        console.log(req.session)
+        return res.json(req.user);
+    } else {
+        // If the user is not authenticated, return an empty object
+        return res.json({});
+    }
+});
 
 //routes
 app.use("/api/v1/clubs", clubRoute);

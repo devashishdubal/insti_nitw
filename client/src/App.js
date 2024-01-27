@@ -30,14 +30,14 @@ const App = React.memo(() => {
   console.log("Huh")
   const { currentUser, userDetails } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
-    if (currentUser === null) {
+    if (userDetails === null) {
       return <Navigate to="/" />
     }
     return children
   }
 
   const ProtectedRouteLogin = ({ children }) => {
-    if (currentUser !== null) {
+    if (userDetails !== null) {
       return <Navigate to="/students/feed" />
     }
 

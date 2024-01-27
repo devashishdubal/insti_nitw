@@ -9,14 +9,6 @@ import { AuthContext, useAuth } from "../../Context/AuthContext"
 import toast, { Toaster } from 'react-hot-toast';
 
 const LoginWithGoogle = () => {
-    //const [signedInUser] = useAuthState(auth);
-    const verifier = (email) => {
-        let domain = email.split("@")[1];
-        if (domain == "student.nitw.ac.in") return true;
-
-        return false;
-    }
-
     const {currentUser, setCurrentUser} = useContext(AuthContext);
 
     const signin = () => {

@@ -40,7 +40,7 @@ const Questions = () => {
         if (localStorage.getItem('qn') && element) {
             console.log(element);
             element.scrollIntoView({ behavior: 'smooth' });
-            localStorage.clear();
+            localStorage.removeItem('qn');
         }
     }, [allQuestions]);
 

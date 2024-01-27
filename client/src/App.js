@@ -2,7 +2,7 @@ import React from 'react'
 import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
 import ViewProfile from "./pages/ViewProfile/ViewProfile"
 import { Link, Outlet } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
@@ -25,9 +25,12 @@ import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
+import { BrowserRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
+  const location = useLocation();
   const ProtectedRoute = ({ children }) => {
     if (userDetails === null) {
       return <Navigate to="/" />
@@ -43,8 +46,14 @@ const App = React.memo(() => {
     return children
   }
 
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (!currentPath.startsWith('/students/forum')) {
+      localStorage.removeItem('qn');
+    }
+  }, [location]);
+
   return (
-    <Router>
       <Routes>
         <Route
           path="*"
@@ -156,7 +165,6 @@ const App = React.memo(() => {
           <Route path=":id/" element={<ProtectedRoute><Answers /></ProtectedRoute>} />
         </Route>
       </Routes>
-    </Router>
   );
 })
 

@@ -49,9 +49,9 @@ const App = React.memo(() => {
   useEffect(() => {
     const currentPath = window.location.pathname;
     if (!currentPath.startsWith('/students/forum')) {
-      localStorage.removeItem('qn');
-      localStorage.removeItem('search');
-      localStorage.removeItem('filter');
+      sessionStorage.removeItem('qn');
+      sessionStorage.removeItem('search');
+      sessionStorage.removeItem('filter');
     }
   }, [location]);
 

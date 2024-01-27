@@ -36,10 +36,10 @@ const Questions = () => {
     );
 
     useLayoutEffect(() => {
-        const element = document.getElementById(localStorage.getItem('qn'));
-        if (localStorage.getItem('qn') && element) {
+        const element = document.getElementById(sessionStorage.getItem('qn'));
+        if (sessionStorage.getItem('qn') && element) {
             element.scrollIntoView({ behavior: 'smooth' });
-            localStorage.removeItem('qn');
+            sessionStorage.removeItem('qn');
         }
     }, [allQuestions]);
 
@@ -52,17 +52,17 @@ const Questions = () => {
 
     useEffect(() => {
         setLoading(true);
-        if (localStorage.getItem('search')) {
-            setSearchBar(localStorage.getItem('search'));
-            searchBarRef.current = localStorage.getItem('search');
+        if (sessionStorage.getItem('search')) {
+            setSearchBar(sessionStorage.getItem('search'));
+            searchBarRef.current = sessionStorage.getItem('search');
         }
-        if (localStorage.getItem('filter') && localStorage.getItem('filter') != "0") {
-            setFilter(localStorage.getItem('filter'));
+        if (sessionStorage.getItem('filter') && sessionStorage.getItem('filter') != "0") {
+            setFilter(sessionStorage.getItem('filter'));
         } else {
             fetchData(); 
         }
-        localStorage.removeItem('search');
-        localStorage.removeItem('filter');
+        sessionStorage.removeItem('search');
+        sessionStorage.removeItem('filter');
     }, [filter, fetchData]);
     
 
@@ -147,7 +147,7 @@ const Questions = () => {
                     <QuestionCard loading={true} />
                 ))}
                 {allQuestions.map((question, index) => (
-                    <div className="individual_question" id={question.id} key={question.id} onClick={() => {localStorage.setItem('qn', question.id);localStorage.setItem('filter', filter);localStorage.setItem('search', searchBar);}}>{question.card}</div>
+                    <div className="individual_question" id={question.id} key={question.id} onClick={() => {sessionStorage.setItem('qn', question.id);sessionStorage.setItem('filter', filter);sessionStorage.setItem('search', searchBar);}}>{question.card}</div>
                 ))}
             </div>
         </div>

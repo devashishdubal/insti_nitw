@@ -38,7 +38,6 @@ const Questions = () => {
     useLayoutEffect(() => {
         const element = document.getElementById(localStorage.getItem('qn'));
         if (localStorage.getItem('qn') && element) {
-            console.log(element);
             element.scrollIntoView({ behavior: 'smooth' });
             localStorage.removeItem('qn');
         }
@@ -51,10 +50,20 @@ const Questions = () => {
         fetchData(); // Trigger the debounced fetching after 2 seconds
     }
 
-    useEffect(() => {      
+    useEffect(() => {
         setLoading(true);
-        fetchData();
-    }, [filter]);
+        if (localStorage.getItem('search')) {
+            setSearchBar(localStorage.getItem('search'));
+            searchBarRef.current = localStorage.getItem('search');
+        }
+        if (localStorage.getItem('filter') && localStorage.getItem('filter') != "0") {
+            setFilter(localStorage.getItem('filter'));
+        } else {
+            fetchData(); 
+        }
+        localStorage.removeItem('search');
+        localStorage.removeItem('filter');
+    }, [filter, fetchData]);
     
 
     useEffect(() => {
@@ -107,7 +116,7 @@ const Questions = () => {
             <div className='intro'>
                 <div className='intro_left'>
                     <p className='welcome'>Welcome To NITW Forum</p>
-                    <select onChange={(e) => setFilter(e.target.value)}>
+                    <select onChange={(e) => setFilter(e.target.value)} value={filter}>
                         <option value="0">Filter By Tag:</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
@@ -138,7 +147,7 @@ const Questions = () => {
                     <QuestionCard loading={true} />
                 ))}
                 {allQuestions.map((question, index) => (
-                    <div className="individual_question" id={question.id} key={question.id} onClick={() => localStorage.setItem('qn', question.id)}>{question.card}</div>
+                    <div className="individual_question" id={question.id} key={question.id} onClick={() => {localStorage.setItem('qn', question.id);localStorage.setItem('filter', filter);localStorage.setItem('search', searchBar);}}>{question.card}</div>
                 ))}
             </div>
         </div>

@@ -50,6 +50,8 @@ const App = React.memo(() => {
     const currentPath = window.location.pathname;
     if (!currentPath.startsWith('/students/forum')) {
       localStorage.removeItem('qn');
+      localStorage.removeItem('search');
+      localStorage.removeItem('filter');
     }
   }, [location]);
 

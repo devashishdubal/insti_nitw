@@ -54,117 +54,100 @@ const App = React.memo(() => {
   }, [location]);
 
   return (
-      <Routes>
-        <Route
-          path="*"
-          element={<h1>404</h1>}
-        />
-        <Route path="/">
-          <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
-        </Route>
-        {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
-        <Route path="/profile/:userId" element={<ViewProfile />} />
-        <Route
-          path="students"
-          element={
-            <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
-                  <StudentSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
-                  <div className="center scrollbar scrollbar-primary">
-                    <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
-                  </div>
+    <Routes>
+      <Route
+        path="*"
+        element={<h1>404</h1>}
+      />
+      <Route path="/">
+        <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
+      </Route>
+      {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
+      <Route path="/profile/:userId" element={<ViewProfile />} />
+      <Route
+        path="students"
+        element={
+          <ProtectedRoute>
+            <div className="full_app">
+              <div className="side">
+                <StudentSidebar />
+              </div>
+              <div className="main">
+                <Topbar />
+                <div className="center scrollbar scrollbar-primary">
+                  <Outlet />
+                  <div className="force-overflow"></div> {/*scrollbar*/}
                 </div>
               </div>
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="feed" />} />
-          <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
-          <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
-          <Route path="academics" element={<h1>Academics</h1>} />
-          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Route>
-        <Route
-          path="clubs"
-          element={
-            <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
-                  <ClubsSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
-                  <div className="center scrollbar scrollbar-primary">
-                    <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
-                  </div>
-                </div>
-              </div>
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="nitw_clubs" />} />
-          <Route path="nitw_clubs" element={<ProtectedRoute><ClubList /></ProtectedRoute>} />
-          <Route path="cses" element={<h1>CSES</h1>} />
-          <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
-          <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
-          <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
-          <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
-          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Route>
-        <Route
-          path="food"
-          element={
-            <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
-                  <FoodSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
-                  <div className="center scrollbar scrollbar-primary">
-                    <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
-                  </div>
-                </div>
-              </div>
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="places_to_eat" />} />
-          <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
-          <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
-          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        </Route>
-        <Route
-          path="students/forum"
-          element={
-            <ProtectedRoute>
-              <div className="full_app">
-                <div className="side">
-                  <StudentSidebar />
-                </div>
-                <div className="main">
-                  <Topbar />
-                  <div className="center scrollbar scrollbar-primary">
-                    <Outlet />
-                    <div className="force-overflow"></div> {/*scrollbar*/}
-                  </div>
-                </div>
-              </div>
-            </ProtectedRoute>
-          }
-        >
+            </div>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="feed" />} />
+        <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
+        <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
+        <Route path="academics" element={<h1>Academics</h1>} />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="forum" element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
           <Route index element={<ProtectedRoute><Questions /></ProtectedRoute>} />
           <Route path="ask_question" element={<ProtectedRoute><AskQuestionForm /></ProtectedRoute>} />
           <Route path=":id/" element={<ProtectedRoute><Answers /></ProtectedRoute>} />
         </Route>
-      </Routes>
+      </Route>
+      <Route
+        path="clubs"
+        element={
+          <ProtectedRoute>
+            <div className="full_app">
+              <div className="side">
+                <ClubsSidebar />
+              </div>
+              <div className="main">
+                <Topbar />
+                <div className="center scrollbar scrollbar-primary">
+                  <Outlet />
+                  <div className="force-overflow"></div> {/*scrollbar*/}
+                </div>
+              </div>
+            </div>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="nitw_clubs" />} />
+        <Route path="nitw_clubs" element={<ProtectedRoute><ClubList /></ProtectedRoute>} />
+        <Route path="cses" element={<h1>CSES</h1>} />
+        <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
+        <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
+        <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
+        <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      </Route>
+      <Route
+        path="food"
+        element={
+          <ProtectedRoute>
+            <div className="full_app">
+              <div className="side">
+                <FoodSidebar />
+              </div>
+              <div className="main">
+                <Topbar />
+                <div className="center scrollbar scrollbar-primary">
+                  <Outlet />
+                  <div className="force-overflow"></div> {/*scrollbar*/}
+                </div>
+              </div>
+            </div>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="places_to_eat" />} />
+        <Route path="places_to_eat" element={<ProtectedRoute><Places /></ProtectedRoute>} />
+        <Route path="mess" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      </Route>
+
+    </Routes>
   );
 })
 

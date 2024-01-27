@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback} from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
 import Answers from '../answers/answers';
+import debounce from 'lodash/debounce';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../Context/AuthContext"
@@ -14,28 +15,39 @@ const Questions = () => {
     const [loading, setLoading] = useState(true);
     const { currentUser, userDetails } = useContext(AuthContext)
     const [searchBar, setSearchBar] = useState("");
+    // const [searchTerm, setSearchTerm] = useState("");
+    const searchBarRef = useRef(searchBar);
 
-    const fetchData = () => {
-        axios
-            .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBar}`)
-            .then((response) => {
-                setAllQuestions([])
-                setData(response.data.Data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+    const fetchData = useCallback(
+        debounce(() => {
+            // Use the stored search term from the ref
+            axios
+                .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}`)
+                .then((response) => {
+                    setAllQuestions([]);
+                    setData(response.data.Data);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }, 1000),
+        [filter, userDetails._id]
+    );
+
 
     const searchData = (e) => {
-        setSearchBar(e.target.value)
+        const val = e.target.value;
+        setSearchBar(val);
+        searchBarRef.current = val; // Update the ref with the latest search term
+        // setLoading(true);
+        fetchData(); // Trigger the debounced fetching after 2 seconds
     }
 
     useEffect(() => {
         console.log('Inside useEffect in Questions component');
         fetchData();
-    }, [filter, searchBar]);
+    }, []);
 
     useEffect(() => {
         setAllQuestions(

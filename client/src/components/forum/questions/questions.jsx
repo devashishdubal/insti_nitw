@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useCallback} from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback, useLayoutEffect } from 'react';
 import QuestionCard from './question_card';
 import AskQuestionForm from './askQuestion';
 import Answers from '../answers/answers';
@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../Context/AuthContext"
 
 const Questions = () => {
-    console.log('Rendering Questions Component...')
     const [allQuestions, setAllQuestions] = useState([]);
     const [filter, setFilter] = useState("0");
     const [Data, setData] = useState([]);
@@ -25,7 +24,6 @@ const Questions = () => {
             axios
                 .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}`)
                 .then((response) => {
-                    console.log(filter)
                     setAllQuestions([]);
                     setData(response.data.Data);
                     setLoading(false);
@@ -33,24 +31,31 @@ const Questions = () => {
                 .catch((error) => {
                     console.log(error);
                 });
-        }, 750),
+        }, 500),
         [filter, userDetails._id]
     );
 
+    useLayoutEffect(() => {
+        const element = document.getElementById(localStorage.getItem('qn'));
+        if (localStorage.getItem('qn') && element) {
+            console.log(element);
+            element.scrollIntoView({ behavior: 'smooth' });
+            localStorage.clear();
+        }
+    }, [allQuestions]);
 
     const searchData = (e) => {
         const val = e.target.value;
         setSearchBar(val);
         searchBarRef.current = val; // Update the ref with the latest search term
-        // setLoading(true);
         fetchData(); // Trigger the debounced fetching after 2 seconds
     }
 
-    useEffect(() => {
-        console.log('Inside useEffect in Questions component');
+    useEffect(() => {      
         setLoading(true);
         fetchData();
     }, [filter]);
+    
 
     useEffect(() => {
         setAllQuestions(
@@ -67,7 +72,7 @@ const Questions = () => {
                         index={index}
                         nlikes={question._doc.likes}
                         ndislikes={question._doc.dislikes}
-                        user={question._doc.userId? question._doc.userId.username : ''}
+                        user={question._doc.userId ? question._doc.userId.username : ''}
                         time={new Date(question._doc.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
                             minute: '2-digit',
@@ -102,9 +107,7 @@ const Questions = () => {
             <div className='intro'>
                 <div className='intro_left'>
                     <p className='welcome'>Welcome To NITW Forum</p>
-                    <select onChange={(e) => {
-                        setFilter(e.target.value)
-                    }}>
+                    <select onChange={(e) => setFilter(e.target.value)}>
                         <option value="0">Filter By Tag:</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
@@ -135,7 +138,7 @@ const Questions = () => {
                     <QuestionCard loading={true} />
                 ))}
                 {allQuestions.map((question, index) => (
-                    <div className="individual_question" key={index}>{question.card}</div>
+                    <div className="individual_question" id={question.id} key={question.id} onClick={() => localStorage.setItem('qn', question.id)}>{question.card}</div>
                 ))}
             </div>
         </div>

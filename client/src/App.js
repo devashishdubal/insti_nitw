@@ -27,7 +27,6 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 
 const App = React.memo(() => {
-  console.log("Huh")
   const { currentUser, userDetails } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
     if (userDetails === null) {

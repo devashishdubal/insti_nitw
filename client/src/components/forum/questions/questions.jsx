@@ -21,6 +21,7 @@ const Questions = () => {
     const fetchData = useCallback(
         debounce(() => {
             // Use the stored search term from the ref
+            // setLoading(true);
             axios
                 .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}`)
                 .then((response) => {
@@ -31,7 +32,7 @@ const Questions = () => {
                 .catch((error) => {
                     console.log(error);
                 });
-        }, 1000),
+        }, 750),
         [filter, userDetails._id]
     );
 

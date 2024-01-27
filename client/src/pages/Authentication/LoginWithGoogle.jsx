@@ -48,7 +48,11 @@ const LoginWithGoogle = () => {
                 <div className="login_button_area">
                     <button className="login_button" onClick={signin}>
                         <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
-                        Sign in with google
+                        Student Sign in
+                    </button>
+                    <button className="login_button">
+                        <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
+                        Club Sign in
                     </button>
                     <Toaster/>
                     <p>* Login should only be with student email</p>

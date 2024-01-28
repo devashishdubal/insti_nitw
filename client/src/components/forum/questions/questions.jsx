@@ -85,13 +85,13 @@ const Questions = () => {
             setSearchBar(sessionStorage.getItem('search'));
             searchBarRef.current = sessionStorage.getItem('search');
         }
+        if (sessionStorage.getItem('filter') && sessionStorage.getItem('filter') != "0") {
+            setFilter(sessionStorage.getItem('filter'));
+        } 
         if (sessionStorage.getItem('page')) {
             setAllQuestions([])
             setPageNumber(+sessionStorage.getItem('page'));
             setLoadPrev(1);
-        }
-        if (sessionStorage.getItem('filter') && sessionStorage.getItem('filter') != "0") {
-            setFilter(sessionStorage.getItem('filter'));
         } else {
             console.log("Going to Render!", pageNumber)
             fetchData();

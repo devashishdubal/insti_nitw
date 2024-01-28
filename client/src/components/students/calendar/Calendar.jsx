@@ -1,19 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import CustomEvents from './CustomEvents';
 import './Calendar.css';
+import axios from "axios"
+import { AuthContext } from "../../../Context/AuthContext";
 
-const Calendar = ({ dateSelected, setDateSelected, CustomButtonSelected, setButtonSelect }) => {
+const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelected, setCustom, custom, setCustomEvents }) => {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let date = new Date();
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
   const dispMonthYear = useRef(null);
   const dispDates = useRef(null);
+  const { userDetails } = useContext(AuthContext)
+
+  const fetchEvents = async (date) => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/v1/events/collegeEvents/${date}`);
+        setEvents(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
+  const fetchCustomEvents = async (date) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/v1/events/getCustomEvents/${userDetails._id}/${date}`);
+      setCustomEvents(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleDateClick = (event) => {
     const litag = event.target;
     const textInElement = litag.textContent;
-    setDateSelected(new Date(currentYear, currentMonth, parseInt(textInElement)));
+    //setDateSelected(new Date(currentYear, currentMonth, parseInt(textInElement)));
+    let selectedDate = new Date(currentYear, currentMonth, parseInt(textInElement));
+
+    fetchEvents(selectedDate)
+    fetchCustomEvents(selectedDate)
+    setDateSelected(selectedDate)
+    // get event on this particular date and list them on the right
     // Remove "selected" class from previously selected element, if any
     const prev = dispDates.current.querySelectorAll('li');
     prev.forEach(element => {
@@ -73,7 +100,7 @@ const Calendar = ({ dateSelected, setDateSelected, CustomButtonSelected, setButt
       <header>
         <p ref={dispMonthYear} className="current-date"></p>
         <div className="icons">
-          <span onClick={setButtonSelect}>+</span>
+          <span onClick={() => setCustom(!custom)}>{custom ? "-": "+"}</span>
           <span id="prev" className="material-symbols-rounded" onClick={() => handleArrowClick('prev')}>{`<`}</span>
           <span id="next" className="material-symbols-rounded" onClick={() => handleArrowClick("next")}>{`>`}</span>
         </div>

@@ -77,7 +77,7 @@ app.get("/login/failed", (req, res) => {
 	});
 });
 
-app.get("/auth/google", 
+app.get("/auth/google/", 
     passport.authenticate('google', {scope: ['profile', 'email']})
 )
 

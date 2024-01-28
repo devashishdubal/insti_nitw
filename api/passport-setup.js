@@ -15,8 +15,6 @@ module.exports = function () {
         const allowedDomain = 'student.nitw.ac.in'; // Replace with your desired domain
         const userEmail = profile.emails[0].value;
 
-        // add club email logic here
-
         // Check if user already exists in your database
         if (userEmail.endsWith(`@${allowedDomain}`)) {
             let rollNo = userEmail.slice(2, userEmail.indexOf('@'));

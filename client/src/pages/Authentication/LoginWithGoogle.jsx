@@ -12,8 +12,10 @@ const LoginWithGoogle = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext);
 
     const signin = () => {
-        window.location.href = 'http://localhost:8000/auth/google';
+        const redirectUri = 'http://localhost:8000/auth/google';
+        window.location.href = redirectUri;
     }
+    
 
     const el = React.useRef(null);
     useEffect(() => {

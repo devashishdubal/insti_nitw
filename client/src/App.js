@@ -26,6 +26,7 @@ import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 import ClubAdmin from './components/club-admin/clubAdmin';
+import ClubLogin from './pages/ClubLogin/ClubLogin';
 
 const App = React.memo(() => {
   console.log("Huh")
@@ -56,6 +57,7 @@ const App = React.memo(() => {
           <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
         </Route>
         <Route path="/clubAdmin" element={<ClubAdmin/>} />
+        <Route path="/clubLogin" element={<ClubLogin/>} />
         {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
         <Route path="/profile/:userId" element={<ViewProfile />} />
         <Route path="/clubs/edit_event/:id" element={<EditEvent />} />

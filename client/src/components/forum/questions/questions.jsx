@@ -16,24 +16,53 @@ const Questions = () => {
     const [searchBar, setSearchBar] = useState("");
     // const [searchTerm, setSearchTerm] = useState("");
     const searchBarRef = useRef(searchBar);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [loadPrev, setLoadPrev] = useState(0);
+    const lastQuestionRef = useRef();
 
     const fetchData = useCallback(
         debounce(() => {
-            // Use the stored search term from the ref
-            // setLoading(true);
             axios
-                .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}`)
+                .get(`http://localhost:8000/api/v1/forum/getQuestions/${filter}?userId=${userDetails._id}&searchData=${searchBarRef.current}&page=${pageNumber}&loadPrev=${loadPrev}`)
                 .then((response) => {
-                    setAllQuestions([]);
+                    console.log(pageNumber)
                     setData(response.data.Data);
                     setLoading(false);
+                    setLoadPrev(0);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         }, 500),
-        [filter, userDetails._id]
+        [filter, userDetails._id, pageNumber]
     );
+
+
+    const handleScroll = () => {
+        const scroller = document.querySelector('.scrollbar');
+        const { scrollTop, clientHeight, scrollHeight } = scroller;
+
+        // Check if the user has scrolled to the bottom
+        if (scrollTop + clientHeight >= scrollHeight - 400) {
+            setPageNumber((prevPageNumber) => prevPageNumber + 1);
+            scroller.removeEventListener('scroll', handleScroll);
+            scroller.setAttribute('listener', 'false');
+        }
+    };
+
+    useEffect(() => {
+        const scroller = document.querySelector('.scrollbar');
+        if (Data.length === 16 && scroller.getAttribute('listener') !== 'true') {
+            console.log('add...')
+            scroller.addEventListener('scroll', handleScroll);
+            scroller.setAttribute('listener', 'true');
+        }
+    }, [Data])
+    
+    useEffect(() => {
+        console.log(allQuestions);
+    }, [allQuestions]);
+
 
     useLayoutEffect(() => {
         const element = document.getElementById(sessionStorage.getItem('qn'));
@@ -47,28 +76,39 @@ const Questions = () => {
         const val = e.target.value;
         setSearchBar(val);
         searchBarRef.current = val; // Update the ref with the latest search term
-        fetchData(); // Trigger the debounced fetching after 2 seconds
+        setLoading(true)
+        fetchData();
     }
 
     useEffect(() => {
-        setLoading(true);
         if (sessionStorage.getItem('search')) {
             setSearchBar(sessionStorage.getItem('search'));
             searchBarRef.current = sessionStorage.getItem('search');
         }
+        if (sessionStorage.getItem('page')) {
+            setAllQuestions([])
+            setPageNumber(+sessionStorage.getItem('page'));
+            setLoadPrev(1);
+        }
         if (sessionStorage.getItem('filter') && sessionStorage.getItem('filter') != "0") {
             setFilter(sessionStorage.getItem('filter'));
         } else {
-            fetchData(); 
+            console.log("Going to Render!", pageNumber)
+            fetchData();
         }
         sessionStorage.removeItem('search');
         sessionStorage.removeItem('filter');
+        sessionStorage.removeItem('page');
     }, [filter, fetchData]);
-    
 
     useEffect(() => {
-        setAllQuestions(
-            Data.map((question, index) => ({
+        setLoading(true);
+    }, [filter])
+
+    useEffect(() => {
+        setAllQuestions((prevQuestions) => [
+            ...prevQuestions,
+            ...Data.map((question) => ({
                 id: question._doc._id,
                 card: (
                     <QuestionCard
@@ -78,7 +118,6 @@ const Questions = () => {
                         title={question._doc.questionTitle}
                         description={question._doc.questionDescription || "(empty)"}
                         tags={question._doc.questionTag}
-                        index={index}
                         nlikes={question._doc.likes}
                         ndislikes={question._doc.dislikes}
                         user={question._doc.userId ? question._doc.userId.username : ''}
@@ -98,8 +137,9 @@ const Questions = () => {
                     />
                 ),
             }))
-        );
-    }, [Data, searchBar]);
+        ]);
+    }, [Data]);
+    
 
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -116,7 +156,7 @@ const Questions = () => {
             <div className='intro'>
                 <div className='intro_left'>
                     <p className='welcome'>Welcome To NITW Forum</p>
-                    <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+                    <select onChange={(e) => {setFilter(e.target.value); setAllQuestions([]); setPageNumber(1);}} value={filter}>
                         <option value="0">Filter By Tag:</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
@@ -131,7 +171,8 @@ const Questions = () => {
                             type="text"
                             placeholder='Search'
                             value={searchBar}
-                            onChange={searchData}
+                            onChange={(e) => {
+                                setAllQuestions([]); setPageNumber(1);searchData(e);}}
                             onFocus={handleSearchFocus}
                             onBlur={handleSearchBlur}
                         />
@@ -147,8 +188,22 @@ const Questions = () => {
                     <QuestionCard loading={true} />
                 ))}
                 {allQuestions.map((question, index) => (
-                    <div className="individual_question" id={question.id} key={question.id} onClick={() => {sessionStorage.setItem('qn', question.id);sessionStorage.setItem('filter', filter);sessionStorage.setItem('search', searchBar);}}>{question.card}</div>
+                    <div
+                        className="individual_question"
+                        id={question.id}
+                        key={question.id}
+                        ref={(index === allQuestions.length - 1) ? lastQuestionRef : null}
+                        onClick={() => {
+                            sessionStorage.setItem('qn', question.id);
+                            sessionStorage.setItem('filter', filter);
+                            sessionStorage.setItem('search', searchBar);
+                            sessionStorage.setItem('page', pageNumber);
+                        }}
+                    >
+                        {question.card}
+                    </div>
                 ))}
+
             </div>
         </div>
     );

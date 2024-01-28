@@ -52,6 +52,7 @@ const App = React.memo(() => {
       sessionStorage.removeItem('qn');
       sessionStorage.removeItem('search');
       sessionStorage.removeItem('filter');
+      sessionStorage.removeItem('page');
     }
   }, [location]);
 

@@ -17,7 +17,7 @@ import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
 import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
 import CreateEvent from "./components/clubs/create-event/createEvent";
-import EditEvent from "./components/clubs/edit-event/EditEvent";
+import EditEvent from "./components/club-admin/Edit-event/editEvent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
@@ -25,6 +25,7 @@ import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
+import ClubAdmin from './components/club-admin/clubAdmin';
 
 const App = React.memo(() => {
   console.log("Huh")
@@ -54,8 +55,10 @@ const App = React.memo(() => {
         <Route path="/">
           <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
         </Route>
+        <Route path="/clubAdmin" element={<ClubAdmin/>} />
         {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
         <Route path="/profile/:userId" element={<ViewProfile />} />
+        <Route path="/clubs/edit_event/:id" element={<EditEvent />} />
         <Route
           path="students"
           element={
@@ -105,8 +108,6 @@ const App = React.memo(() => {
           <Route path="cses" element={<h1>CSES</h1>} />
           <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
           <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
-          <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
-          <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route

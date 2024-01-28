@@ -50,10 +50,6 @@ const LoginWithGoogle = () => {
                         <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
                         Student Sign in
                     </button>
-                    <button className="login_button">
-                        <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
-                        Club Sign in
-                    </button>
                     <Toaster/>
                     <p>* Login should only be with student email</p>
                 </div>

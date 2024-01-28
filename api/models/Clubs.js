@@ -15,10 +15,6 @@ const clubSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    clubPassword: {
-        type: String,
-        unique: true
-    },
     clubLogo: { 
         type: String 
     }, // Assuming the logo is stored as a file path or URL

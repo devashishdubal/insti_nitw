@@ -26,7 +26,7 @@ module.exports = function () {
             const userExists = await User.findOne({ userId: profile.id });
         
             if (userExists) {
-                return done(null, userExists)
+                return done(null, {role: true, user: userExists})
             }
     
             const newUser = new User({
@@ -40,7 +40,7 @@ module.exports = function () {
             });
     
             await newUser.save();
-            return done(null, newUser)
+            return done(null, {role: true, user: userExists})
         } else {
             return done(null, false, {message: "Please login with only student email"})
         }

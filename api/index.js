@@ -33,7 +33,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 // const User = require("./models/User");
 
-const authRoute = require("./routes/auth")
 const clubRoute = require("./routes/clubs")
 const userRoute = require("./routes/users")
 const eventRoute = require("./routes/events")
@@ -58,13 +57,6 @@ app.get("/", (req, res) => {
 app.get("/login/success", (req, res) => {
 	if (req.user) {
         res.redirect("http://localhost:3000/")
-        /*
-		res.status(200).json({
-			error: false,
-			message: "Successfully Loged In",
-			user: req.user,
-		});
-        */
 	} else {
 		res.status(403).json({ error: true, message: "Not Authorized" });
 	}
@@ -108,9 +100,30 @@ app.get('/auth/check-session', (req, res) => {
     }
 });
 
+// club login backend left
+app.post("/club/login", (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return res.status(500).send({ success: false, message: "Internal Server Error" });
+        }
+        
+        if (!user) {
+            return res.status(401).send({ success: false, message: "Authentication failed!" });
+        }
+
+        req.logIn(user, (err) => {
+            if (err) {
+                return res.status(500).send({ success: false, message: "Internal Server Error" });
+            }
+
+            return res.status(200).send({ success: true, message: "Logged in successfully!" });
+        });
+    })(req, res, next);
+});
+
+
 //routes
 app.use("/api/v1/clubs", clubRoute);
-app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);

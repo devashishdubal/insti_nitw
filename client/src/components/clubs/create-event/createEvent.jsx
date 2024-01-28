@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import "./createEvent.css";
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CreateEvent = () => {
     const [title,setTitle] = useState("");
@@ -10,8 +12,36 @@ const CreateEvent = () => {
     const [time,setTime] = useState(null);
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink,setRegLink] = useState("");
+    const [image,setImage] = useState("");
 
-    const handleSubmit = () =>{
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        const data = {
+            eventName:title,
+            eventDescription:description,
+            eventVenue:venue,
+            eventDateTime:`${date}T${time}Z`,
+            registerable:isChecked,
+            registrationLink:registerLink,
+            eventOrganizer:"6592a8cd1f5a26e6d44749c6",
+            eventImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS9Gyu0IZMVf6gw2XpL300WUWKuxX5ZtZvfBPWdJTWvA&s",
+            targetYear:[]
+        }
+        try{
+            axios.post(`http://localhost:8000/api/v1/events/create-event`,data);
+            toast.success('Event Created!', {
+                duration: 1000,
+                position: 'top-right',
+                style: {marginTop: 70},
+                className: '',
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                },
+            });
+        } catch(e){
+            console.log(e);
+        }
 
     };
     return (

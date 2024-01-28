@@ -122,9 +122,30 @@ const App = React.memo(() => {
         <Route path="recent_events" element={<ProtectedRoute><Recentevent /></ProtectedRoute>} />
         <Route path="upcoming_events" element={<ProtectedRoute><UpcomingEvents /></ProtectedRoute>} />
         <Route path="create_event" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
-        <Route path="edit_event" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       </Route>
+      <Route
+          path="clubs/edit_event"
+          element={
+            <ProtectedRoute>
+              <div className="full_app">
+                <div className="side">
+                  <ClubsSidebar />
+                </div>
+                <div className="main">
+                  <Topbar />
+                  <div className="center scrollbar scrollbar-primary">
+                    <Outlet />
+                    <div className="force-overflow"></div> {/*scrollbar*/}
+                  </div>
+                </div>
+              </div>
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<ProtectedRoute><EventCard /></ProtectedRoute>}/>
+          <Route path=":id/" element={<ProtectedRoute><EditEvent /></ProtectedRoute>}/>
+        </Route>
       <Route
         path="food"
         element={

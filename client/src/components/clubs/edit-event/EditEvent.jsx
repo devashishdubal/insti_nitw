@@ -17,6 +17,7 @@ const EditEvent = () => {
     const [time,setTime] = useState("");
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink,setRegLink] = useState("");
+    const [image,setImage] = useState("");
     const [req1,setReq1] = useState("");
     const fetchData = async () => {
         const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/${id}`);
@@ -25,6 +26,7 @@ const EditEvent = () => {
         setTitle(event.eventName);
         setDesc(event.eventDescription);
         setVenue(event.eventVenue);
+        setImage(event.eventImage);
         setDate(event.eventDateTime.slice(0,10));
         setTime(event.eventDateTime.slice(11,16));
         if (event.registerable){
@@ -85,6 +87,12 @@ const EditEvent = () => {
                     onChange={(e) => setDesc(e.target.value)}
                     required
                 ></textarea>
+                <input type="text"
+                    value={image}
+                    required
+                    placeholder='Image Link'
+                    onChange={(e) => {setImage(e.target.value)}}
+                />
                 <input type="text"
                     value={venue}
                     required

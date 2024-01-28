@@ -3,13 +3,16 @@ import { useState } from 'react'
 import "./createEvent.css";
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
+
 
 const CreateEvent = () => {
+    const navigate = useNavigate();
     const [title,setTitle] = useState("");
     const [description,setDesc] = useState("");
     const [venue,setVenue] = useState("");
-    const [date,setDate] = useState(null);
-    const [time,setTime] = useState(null);
+    const [date,setDate] = useState("");
+    const [time,setTime] = useState("");
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink,setRegLink] = useState("");
     const [image,setImage] = useState("");
@@ -39,6 +42,9 @@ const CreateEvent = () => {
                   'aria-live': 'polite',
                 },
             });
+            setTimeout(() => {
+                navigate("/clubs/edit_event");
+            }, 1000);
         } catch(e){
             console.log(e);
         }
@@ -57,6 +63,12 @@ const CreateEvent = () => {
                 onChange={(e) => setDesc(e.target.value)}
                 required
             ></textarea>
+            <input type="text"
+                value={image}
+                required
+                placeholder='Image Link'
+                onChange={(e) => {setImage(e.target.value)}}
+            />
             <input type="text"
                 value={venue}
                 required
@@ -96,6 +108,7 @@ const CreateEvent = () => {
             
             <button className="submit" onClick={handleSubmit}>Submit</button>
         </div>
+        <Toaster/>
         </>
     )
 }

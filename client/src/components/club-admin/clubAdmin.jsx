@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './ClubAdmin.css'; // Import your CSS file
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import './EventCard.css'
+import { AuthContext } from '../../Context/AuthContext';
 
 const ClubAdmin = () => {
   const [adminSearch, setAdminSearch] = useState('');
   const [memberSearch, setMemberSearch] = useState('');
+  const { currentUser, userDetails } = useContext(AuthContext);
 
   const [events,setEvents] = useState([]);
   //const [club,setClub] = useState('CSES');
   const fetchClubEvents = async () => {
     try{
-      const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/club/6592a8cd1f5a26e6d44749c6`)
+      const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/club/${userDetails._id}`)
       const e1 = response.data.map((event,index) => ({
         id: index+1,
         card:

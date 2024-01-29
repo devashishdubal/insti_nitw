@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
 const passportSetup = require("./passport-setup");
+const passportClubSetup = require("./passport-club-setup")
 
 //invoking express
 const app = express();
@@ -101,26 +102,11 @@ app.get('/auth/check-session', (req, res) => {
 });
 
 // club login backend left
-app.post("/club/login", (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return res.status(500).send({ success: false, message: "Internal Server Error" });
-        }
-        
-        if (!user) {
-            return res.status(401).send({ success: false, message: "Authentication failed!" });
-        }
-
-        req.logIn(user, (err) => {
-            if (err) {
-                return res.status(500).send({ success: false, message: "Internal Server Error" });
-            }
-
-            return res.status(200).send({ success: true, message: "Logged in successfully!" });
-        });
-    })(req, res, next);
+app.post('/club/login',
+  passport.authenticate('club-local', { failureRedirect: '/', failureMessage: true }),
+  function(req, res) {
+    res.status(200).send({success: true, message: "Logging in!"})
 });
-
 
 //routes
 app.use("/api/v1/clubs", clubRoute);
@@ -130,6 +116,7 @@ app.use("/api/v1/forum", forumRoute);
 app.use("/api/v1/feed/", feedRoute);
 
 passportSetup();
+passportClubSetup();
 
 app.listen(8000 || process.env.PORT, () => {
     console.log("Backend server is running!");

@@ -1,15 +1,40 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local")
+const LocalStrategy = require("passport-local").Strategy;
 const Club = require('./models/Clubs');
 
-// hashing baadme dekhte hai
+module.exports = function () {
+    passport.use('club-local', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+    }, async (email, password, done) => {
+        try {
+            const club = await Club.findOne({ clubEmail: email });
 
-passport.use(new LocalStrategy(async function verify(email, password, cb) {
-    const club = await Club.findOne({clubEmail: email, clubPassword: password});
+            if (!club) {
+                // User not found
+                return done(null, false, { message: "Incorrect credentials!" });
+            }
 
-    if (!club) {
-        return cb(null, false, null);
-    }
+            // You should implement password hashing and verification here
+            // For now, let's assume you have a simple comparison
+            if (club.clubPassword !== password) {
+                // Incorrect password
+                return done(null, false, { message: "Incorrect credentials!" });
+            }
 
-    return cb(null, false, {role: false, user: club});
-}));
+            // Authentication successful
+            return done(null, { role: false, user: club });
+        } catch (err) {
+            console.error("Error during authentication:", err);
+            return done(err); // Pass the error to indicate authentication failure
+        }
+    }));
+
+    passport.serializeUser((user, done) => {
+        done(null, user);
+    });
+
+    passport.deserializeUser((user, done) => {
+        done(null, user);
+    });
+};

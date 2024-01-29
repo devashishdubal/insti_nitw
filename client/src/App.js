@@ -35,16 +35,30 @@ const App = React.memo(() => {
     if (userDetails === null) {
       return <Navigate to="/" />
     }
-    return children
+    
+    if (currentUser === true) return children
+    return <Navigate to="/" />
   }
 
   const ProtectedRouteLogin = ({ children }) => {
-    if (userDetails !== null) {
-      return <Navigate to="/students/feed" />
+    if (userDetails !== null && currentUser === true) {
+      return <Navigate to="/students/feed" />;
     }
 
-    return children
-  }
+    if (userDetails !== null && currentUser === false) {
+      return <Navigate to="/clubAmdin" />
+    }
+  
+    return children;
+  };
+  
+  const ProtectedClubRoute = ({ children }) => {
+    if (userDetails !== null && currentUser === false) {
+      return children;
+    }
+  
+    return <Navigate to="/" />;
+  };
 
   return (
     <Router>
@@ -56,8 +70,8 @@ const App = React.memo(() => {
         <Route path="/">
           <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
         </Route>
-        <Route path="/clubAdmin" element={<ClubAdmin/>} />
-        <Route path="/clubLogin" element={<ClubLogin/>} />
+        <Route path="/clubAdmin" element={<ProtectedClubRoute><ClubAdmin/></ProtectedClubRoute>} />
+        <Route path="/clubLogin" element={<ProtectedRouteLogin><ClubLogin/></ProtectedRouteLogin>} />
         {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
         <Route path="/profile/:userId" element={<ViewProfile />} />
         <Route path="/clubs/edit_event/:id" element={<EditEvent />} />

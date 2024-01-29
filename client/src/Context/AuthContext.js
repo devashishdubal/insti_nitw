@@ -13,6 +13,7 @@ const AuthContextProvider = ({ children }) => {
       try {
         const response = await axios.get("http://localhost:8000/user", {withCredentials: true,});
         setUserDetails(response.data === "" ? null : response.data.user)
+        setCurrentUser(response.data === "" ? null : response.data.role)
         setComplete(true);
       } catch (error) {
         console.error("Error checking Passport.js session:", error);

@@ -1,7 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
-const session = require("express-session");
 const User = require('./models/User');
 
 module.exports = function () {

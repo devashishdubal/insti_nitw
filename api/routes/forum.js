@@ -2,7 +2,6 @@ const router = require('express').Router();
 const Answer = require('../models/Answer');
 const Forum = require('../models/Forum');
 const User = require("../models/User")
-const QuestionLikes = require("../models/QuestionLikes");
 
 // make an endpoint to create a club and assign club owners (not for public)
 // owner can change permission settings for admin and members

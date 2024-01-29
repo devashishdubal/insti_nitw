@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import "./createEvent.css";
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from '../../../Context/AuthContext';
 
 const CreateEvent = () => {
     const navigate = useNavigate();
@@ -17,8 +17,11 @@ const CreateEvent = () => {
     const [registerLink,setRegLink] = useState("");
     const [image,setImage] = useState("");
 
+    const { userDetails } = useContext(AuthContext);
+
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log(userDetails._id)
         const data = {
             eventName:title,
             eventDescription:description,
@@ -26,7 +29,7 @@ const CreateEvent = () => {
             eventDateTime:`${date}T${time}Z`,
             registerable:isChecked,
             registrationLink:registerLink,
-            eventOrganizer:"6592a8cd1f5a26e6d44749c6",
+            eventOrganizer:`${userDetails._id}`,
             eventImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS9Gyu0IZMVf6gw2XpL300WUWKuxX5ZtZvfBPWdJTWvA&s",
             targetYear:[]
         }
@@ -43,7 +46,7 @@ const CreateEvent = () => {
                 },
             });
             setTimeout(() => {
-                navigate("/clubs/edit_event");
+                navigate("/clubAdmin");
             }, 1000);
         } catch(e){
             console.log(e);

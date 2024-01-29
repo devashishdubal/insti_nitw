@@ -16,7 +16,7 @@ import ClubList from "./components/clubs/NITW-clubs/clubList";
 import ClubsSidebar from "./components/sidebar/clubs_sidebar";
 import Recentevent from "./components/clubs/recent-events/Recentevent";
 import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
-import CreateEvent from "./components/clubs/create-event/createEvent";
+import CreateEvent from "./components/club-admin/Create-event/createEvent";
 import EditEvent from "./components/club-admin/Edit-event/editEvent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
@@ -46,7 +46,7 @@ const App = React.memo(() => {
     }
 
     if (userDetails !== null && currentUser === false) {
-      return <Navigate to="/clubAmdin" />
+      return <Navigate to="/clubAdmin" />
     }
   
     return children;
@@ -74,7 +74,8 @@ const App = React.memo(() => {
         <Route path="/clubLogin" element={<ProtectedRouteLogin><ClubLogin/></ProtectedRouteLogin>} />
         {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
         <Route path="/profile/:userId" element={<ViewProfile />} />
-        <Route path="/clubs/edit_event/:id" element={<EditEvent />} />
+        <Route path="/clubs/edit_event/:id" element={<ProtectedClubRoute><EditEvent /></ProtectedClubRoute>} />
+        <Route path="/clubs/create_event/" element={<ProtectedClubRoute><CreateEvent /></ProtectedClubRoute>} />
         <Route
           path="students"
           element={

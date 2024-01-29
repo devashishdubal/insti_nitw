@@ -5,8 +5,12 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 100vh;
-    margin: auto;
+    overflow-y: auto;
+}
+
+.club-admin-container .allEvents {
+    display: flex;
+    flex-direction: row;
 }
 
 .search-part {

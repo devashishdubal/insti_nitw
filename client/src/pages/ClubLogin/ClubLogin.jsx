@@ -16,7 +16,8 @@ export default function ClubLogin() {
             }, { withCredentials: true });
 
             // Handle success response
-            console.log(response.data);
+            //console.log(response.data);
+            window.location.href = "/clubAdmin";
         } catch (error) {
             // Handle error
             console.error("Error during login:", error.response.data);

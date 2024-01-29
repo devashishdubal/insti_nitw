@@ -42,8 +42,18 @@ const ClubAdmin = () => {
     fetchClubEvents();
   }, [])
 
+  const logout = () => {
+    window.location.href = 'http://localhost:8000/logout';
+  }
+
   return (
     <div className="club-admin-container">
+      <Link to="/clubs/create_event/">
+          <button>+ Create event</button>
+      </Link>
+      <Link to="/clubs/create_event/">
+          <button onClick={logout}>Logout</button>
+      </Link>
       <div className='search-part'>
         <div className="search-bar">
           <input
@@ -66,7 +76,7 @@ const ClubAdmin = () => {
         </div>
       </div>
       <h3>Upcoming club events </h3>
-        <div>
+      <div className='allEvents'>
         {events.length === 0 ? (
           <p>Loading...</p>
         ):(
@@ -76,8 +86,7 @@ const ClubAdmin = () => {
             </div>
           )
         ))}
-        </div>
-      {/* Add other components or elements as needed */}
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const Globalstyle = createGlobalStyle`
         width: 100%;
         background-color: ${props => props.theme.colors.primary};
         height: 100%;
-        transition: background-color 0.5s ease;
+        // transition: background-color 0.5s ease-in-out;
     }
 
     a {

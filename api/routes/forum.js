@@ -36,14 +36,9 @@ router.get('/getQuestions/:filter', async (request, response) => {
 
     // Calculate the skip value based on the page number
     let pageSize = 16; // Adjust this based on your desired number of questions per page
-    let skip = (page - 1) * pageSize;
-
-    console.log(loadPrev)
-    console.log(loadPrev == true)
+    let skip = (page - 1) * pageSize
 
     if (loadPrev == true) {
-      console.log('hi')
-      console.log(page)
       pageSize = 16 * page;
       skip = 0;
     }

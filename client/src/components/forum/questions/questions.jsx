@@ -58,7 +58,7 @@ const Questions = () => {
             scroller.setAttribute('listener', 'true');
         }
     }, [Data])
-    
+
     useEffect(() => {
         console.log(allQuestions);
     }, [allQuestions]);
@@ -87,11 +87,21 @@ const Questions = () => {
         }
         if (sessionStorage.getItem('filter') && sessionStorage.getItem('filter') != "0") {
             setFilter(sessionStorage.getItem('filter'));
-        } 
-        if (sessionStorage.getItem('page')) {
+        }
+        if (+sessionStorage.getItem('page')) {
             setAllQuestions([])
             setPageNumber(+sessionStorage.getItem('page'));
             setLoadPrev(1);
+            if (+sessionStorage.getItem('page') === 1) fetchData();
+            else {
+                const scroller = document.querySelector('.scrollbar');
+                if (scroller.getAttribute('listener') !== 'true') {
+                    console.log('hoi');
+                    console.log('add...')
+                    scroller.addEventListener('scroll', handleScroll);
+                    scroller.setAttribute('listener', 'true');
+                }
+            }
         } else {
             console.log("Going to Render!", pageNumber)
             fetchData();
@@ -139,7 +149,7 @@ const Questions = () => {
             }))
         ]);
     }, [Data]);
-    
+
 
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -156,7 +166,7 @@ const Questions = () => {
             <div className='intro'>
                 <div className='intro_left'>
                     <p className='welcome'>Welcome To NITW Forum</p>
-                    <select onChange={(e) => {setFilter(e.target.value); setAllQuestions([]); setPageNumber(1);}} value={filter}>
+                    <select onChange={(e) => { setFilter(e.target.value); setAllQuestions([]); setPageNumber(1); }} value={filter}>
                         <option value="0">Filter By Tag:</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
@@ -172,7 +182,8 @@ const Questions = () => {
                             placeholder='Search'
                             value={searchBar}
                             onChange={(e) => {
-                                setAllQuestions([]); setPageNumber(1);searchData(e);}}
+                                setAllQuestions([]); setPageNumber(1); searchData(e);
+                            }}
                             onFocus={handleSearchFocus}
                             onBlur={handleSearchBlur}
                         />

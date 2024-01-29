@@ -30,7 +30,7 @@ const CreateEvent = () => {
             registerable:isChecked,
             registrationLink:registerLink,
             eventOrganizer:`${userDetails._id}`,
-            eventImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS9Gyu0IZMVf6gw2XpL300WUWKuxX5ZtZvfBPWdJTWvA&s",
+            eventImage:`${image}`,
             targetYear:[]
         }
         try{

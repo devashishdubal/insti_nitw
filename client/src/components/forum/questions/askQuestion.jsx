@@ -13,6 +13,25 @@ const AskQuestionForm = ({ fetch }) => {
     const [questionDescription, setBody] = useState("");
     const [questionTag, setTag] = useState("");
 
+    const editorConfig = {
+        buttons: [
+            'bold',
+            'underline',
+            'italic', '|',
+            'ul',
+            'ol', '|',
+            'outdent', 'indent',  '|',
+            'font',
+            'brush',
+            'paragraph', '|',
+            'link', '|',
+            'align', 'undo', 'redo', '|',
+            'hr',
+            'eraser',
+            'copyformat', '|',
+        ],
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -83,9 +102,10 @@ const AskQuestionForm = ({ fetch }) => {
                 <input value={questionTitle} required type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
                 <JoditEditor 
                     value={questionDescription}
-                    onChange={(newContent) => {setBody(newContent)}}
+                    config={editorConfig}
+                    onBlur={(newContent) => {setBody(newContent)}}
                 />
-                {questionDescription}
+                {/* {questionDescription} */}
                 {/* <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
                 </textarea> */}
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>

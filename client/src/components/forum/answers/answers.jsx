@@ -15,6 +15,25 @@ const Answers = () => {
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
 
+    const editorConfig = {
+        buttons: [
+            'bold',
+            'underline',
+            'italic', '|',
+            'ul',
+            'ol', '|',
+            'outdent', 'indent',  '|',
+            'font',
+            'brush',
+            'paragraph', '|',
+            'link', '|',
+            'align', 'undo', 'redo', '|',
+            'hr',
+            'eraser',
+            'copyformat',
+        ],
+    };
+
     const initialData = {
         _id: "",
         questionTitle: "",
@@ -106,6 +125,7 @@ const Answers = () => {
         })));
     }, [Data]);
 
+
     return (
         <div className="forum-wrapper">
             <div className="All">
@@ -166,7 +186,8 @@ const Answers = () => {
                     {(Data.answers.length == 0) && (<h1>Start The Conversation!</h1>)}
                     <JoditEditor 
                         value={answerDescription}
-                        onChange={(newContent) => {setDesc(newContent)}}
+                        config={editorConfig}
+                        onBlur={(newContent) => {setDesc(newContent)}}
                         
                     />
                     {/* <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Please refrain from profanity."></textarea> */}

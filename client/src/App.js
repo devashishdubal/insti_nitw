@@ -48,9 +48,13 @@ const App = React.memo(() => {
 
 
   const [themeMode, setThemeMode] = useState('light');
+  const [isSunVisible, setIsSunVisible] = useState(false);
+  const [isMoonVisible, setIsMoonVisible] = useState(true);
 
   const toggleTheme = () => {
     setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setIsSunVisible(!isSunVisible);
+    setIsMoonVisible(!isMoonVisible);
   };
 
   return (
@@ -77,7 +81,7 @@ const App = React.memo(() => {
                   <StudentSidebar />
                 </ Side>
                 <Main>
-                  <Topbar toggleTheme={toggleTheme} />
+                  <Topbar toggleTheme={toggleTheme} sun={isSunVisible} moon={isMoonVisible} />
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
                     <Forceoverflow></ Forceoverflow> {/*scrollbar*/}
@@ -102,7 +106,7 @@ const App = React.memo(() => {
                   <ClubsSidebar />
                 </ Side>
                 <Main>
-                  <Topbar toggleTheme={toggleTheme}/>
+                  <Topbar toggleTheme={toggleTheme} sun={isSunVisible} moon={isMoonVisible} />
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
                     <Forceoverflow></ Forceoverflow> {/*scrollbar*/}
@@ -130,7 +134,7 @@ const App = React.memo(() => {
                   <FoodSidebar />
                 </ Side>
                 <Main>
-                  <Topbar toggleTheme={toggleTheme}/>
+                  <Topbar toggleTheme={toggleTheme} sun={isSunVisible} moon={isMoonVisible} />
                   <div className="center scrollbar scrollbar-primary">
                     <Outlet />
                     <Forceoverflow></ Forceoverflow> {/*scrollbar*/}

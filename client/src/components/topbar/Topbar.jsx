@@ -5,10 +5,9 @@ import { auth } from "../../firebase"
 import { AuthContext } from "../../Context/AuthContext"
 import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-router-dom";
 
-const Topbar = ({ toggleTheme }) => {
+const Topbar = ({ toggleTheme,sun,moon }) => {
   const {userDetails, setCurrentUser, setUserDetails } = useContext(AuthContext);
-  const [isSunVisible, setIsSunVisible] = useState(false);
-  const [isMoonVisible, setIsMoonVisible] = useState(true);
+  
 
   const logout = () => {
     /*
@@ -21,12 +20,6 @@ const Topbar = ({ toggleTheme }) => {
     }
     */
     window.location.href = 'http://localhost:8000/logout';
-  }
-
-  const clickHandler = () =>{
-    // setIsSunVisible(!isSunVisible);
-    // setIsMoonVisible(!isMoonVisible);
-    toggleTheme();
   }
 
 
@@ -43,11 +36,11 @@ const Topbar = ({ toggleTheme }) => {
           <NavLink to="/food" className="food">Food</NavLink>
         </div>
       </div>
-      <button className="container" aria-label="Toggle color mode" title="Toggle color mode" onClick={clickHandler}>
-        <div className={`sun ${isSunVisible ? 'visible' : ''}`}>
+      <button className="container" aria-label="Toggle color mode" title="Toggle color mode" onClick={toggleTheme}>
+        <div className={`sun ${sun ? 'visible' : ''}`}>
           <div className="sun-before"></div>
         </div>
-        <div className={`moon ${isMoonVisible ? 'visible' : ''}`}>
+        <div className={`moon ${moon ? 'visible' : ''}`}>
           <div className="star"></div>
           <div className="star small"></div>
         </div>

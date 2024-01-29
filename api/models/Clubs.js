@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const clubSchema = new mongoose.Schema({
-    clubId: { type: String, 
+    clubId: { 
+        type: String, 
         unique: true, 
         required: true 
     },
@@ -9,6 +10,10 @@ const clubSchema = new mongoose.Schema({
         type: String, 
         required: true,
         unique: true, 
+    },
+    clubEmail: {
+        type: String,
+        unique: true
     },
     clubLogo: { 
         type: String 

@@ -13,21 +13,14 @@ const CalendarPage = () => {
     }
     const handleClick = (date1) => {
         setDateSelected(date1);
+        console.log(dateSelected)
     };
     // useEffect(() => {
     //   console.log(dateSelected);
     // }, [dateSelected]);
 
-    useEffect(() => {
-        console.log(dateSelected);
-        if (CustomButtonSelected == 1) setEventPage(<CustomEvents dateSelected={dateSelected} />);
-        else setEventPage(<div>Event description</div>);
-        console.log(CustomButtonSelected);
-    }, [CustomButtonSelected, dateSelected])
-
-
     return (
-        <CalendarLayout dateSelected={dateSelected} setDateSelected={handleClick} eventPage={eventPage} CustomButtonSelected={CustomButtonSelected} setButtonSelect={CustomButtonClick} />
+        <CalendarLayout />
     );
 };
 

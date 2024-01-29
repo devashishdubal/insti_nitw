@@ -16,7 +16,7 @@ export default function UpcomingEvents() {
             const cards = response.data.map((event, index) => ({
                 id: index + 1,
                 card: (
-                  <UpcomingEventCard key={index} recenteventdata={event} />
+                  <UpcomingEventCard key={index} eventData={event} />
                 ),
             }));
             setAllCards(cards);

@@ -69,7 +69,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 60vh; /* Adjusted height */
+    height: 80vh; /* Adjusted height */
     background-color: rgba(0, 0, 0, 0.7); /* Black with 0.7 opacity */
     border-radius: 15px; /* Optional: Add border-radius for rounded corners */
     padding: 20px; /* Optional: Add padding for spacing inside the box */

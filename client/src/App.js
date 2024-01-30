@@ -2,7 +2,7 @@ import React from 'react'
 import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
 import ViewProfile from "./pages/ViewProfile/ViewProfile"
 import { Link, Outlet } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
@@ -34,24 +34,36 @@ import QuestionCarddoubt from './components/academics/doubtforum/questionsdoubt/
 import AskQuestiondoubt from './components/academics/doubtforum/questionsdoubt/askQuestiondoubt';
 import Things from './components/academics/Things';
 import Answersdoubt from './components/academics/doubtforum/answersdoubt/answersdoubt';
+import { BrowserRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
-  console.log(currentUser, userDetails)
+  const location = useLocation();
   const ProtectedRoute = ({ children }) => {
-    if (currentUser === null) {
+    if (userDetails === null) {
       return <Navigate to="/" />
     }
     return children
   }
 
   const ProtectedRouteLogin = ({ children }) => {
-    if (currentUser !== null) {
+    if (userDetails !== null) {
       return <Navigate to="/students/feed" />
     }
 
     return children
   }
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (!currentPath.startsWith('/students/forum')) {
+      sessionStorage.removeItem('qn');
+      sessionStorage.removeItem('search');
+      sessionStorage.removeItem('filter');
+      sessionStorage.removeItem('page');
+    }
+  }, [location]);
 
   return (
     <Router>

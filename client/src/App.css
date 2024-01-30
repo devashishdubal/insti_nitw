@@ -51,7 +51,7 @@ body {
 }
 
 .center {
-    padding: 14px;
+    padding: 0px 14px;
     overflow-y: scroll;
     flex: 1;
 }

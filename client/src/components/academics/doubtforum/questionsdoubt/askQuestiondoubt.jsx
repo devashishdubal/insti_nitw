@@ -12,7 +12,7 @@ const AskQuestiondoubt = ({ fetch }) => {
     const [questionTitle, setTitle] = useState("");
     const [questionDescription, setBody] = useState("");
 
-    const {course} = useParams();
+    const {course} = useParams(); {/* this */}
     const [questionTag, setTag] = useState(course);
 
     const handleSubmit = (e) => {

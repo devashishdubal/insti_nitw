@@ -6,7 +6,7 @@ import { AuthContext } from '../../../../Context/AuthContext';
 import 'react-loading-skeleton/dist/skeleton.css'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading }) => {
+const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading , course}) => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const [liked, setLiked] = useState(isliked);
     const [disliked, setDisliked] = useState(isdisliked);

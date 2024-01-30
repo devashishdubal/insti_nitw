@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 const Questionsdoubt = () => {
     console.log('Rendering Questions Component...')
     const [allQuestions, setAllQuestions] = useState([]);
-    const {course} = useParams();
+    const {course} = useParams(); {/* this one*/ }
     const [filter, setFilter] = useState(course);
     const [Data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -120,7 +120,7 @@ const Questionsdoubt = () => {
 
             <div className='questions scroller'>
                 {loading && [...Array(8)].map(() => (
-                    <QuestionCarddoubt loading={true} />
+                    <QuestionCarddoubt loading={true} course = {course}  />
                 ))}
                 {allQuestions.map((question, index) => (
                     <div className="individual_question" key={index}>{question.card}</div>

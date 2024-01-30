@@ -188,12 +188,9 @@ const App = React.memo(() => {
         <Route path="resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
         <Route path="quicklinks" element={<ProtectedRoute><Quicklinks /></ProtectedRoute>} />
         <Route path="notices" element={<ProtectedRoute><Notices /></ProtectedRoute>} />
-        // React Router route configuration
-        // React Router route configuration
-<Route path="/students/academics/doubtforum/questionsdoubt/questionsdoubt/:course" element={<Questionsdoubt/>} />
-
-<Route path="/students/academics/doubtforum/questionsdoubt/askQuestiondoubt/:course" element={<AskQuestiondoubt/>} />
-<Route path="/students/academics/doubtforum/answerssdoubt/answersdoubt/:id/:course" element={<Answersdoubt/>} />
+        <Route path="doubtforum/questionsdoubt/questionsdoubt/:course" element={<Questionsdoubt/>} /> {/*welcome to cse forum*/}
+        <Route path="doubtforum/questionsdoubt/askQuestiondoubt/:course" element={<AskQuestiondoubt/>} /> {/* ask a question */}
+        <Route path="doubtforum/answerssdoubt/answersdoubt/:id/:course" element={<Answersdoubt/>} />
         </Route>
         
       </Routes>

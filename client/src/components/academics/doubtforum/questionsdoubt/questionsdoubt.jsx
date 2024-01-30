@@ -120,7 +120,7 @@ const Questionsdoubt = () => {
 
             <div className='questions scroller'>
                 {loading && [...Array(8)].map(() => (
-                    <QuestionCarddoubt loading={true} course = {course}  />
+                    <QuestionCarddoubt loading={true} />
                 ))}
                 {allQuestions.map((question, index) => (
                     <div className="individual_question" key={index}>{question.card}</div>

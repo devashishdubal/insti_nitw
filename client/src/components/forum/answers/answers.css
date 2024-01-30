@@ -47,7 +47,7 @@
 .All .Input {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width:70%;
     gap: 12px;
 }
 

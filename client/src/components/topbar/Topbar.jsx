@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import "./Topbar.css";
+import axios from "axios"
 import { auth } from "../../firebase"
 import { AuthContext } from "../../Context/AuthContext"
 import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-router-dom";
 
 const Topbar = () => {
-  const {userDetails } = useContext(AuthContext)
+  const {userDetails, setCurrentUser, setUserDetails } = useContext(AuthContext)
 
   const logout = () => {
-    auth.signOut()
+    /*
+    try{
+      let response = await axios.get("http://localhost:8000/logout");
+      setUserDetails(null);
+      setCurrentUser(null);
+    }catch(err){
+      console.log(err)
+    }
+    */
+    window.location.href = 'http://localhost:8000/logout';
   }
 
   return (

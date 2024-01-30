@@ -15,6 +15,25 @@ const Answers = () => {
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
 
+    const editorConfig = {
+        buttons: [
+            'bold',
+            'underline',
+            'italic', '|',
+            'ul',
+            'ol', '|',
+            'outdent', 'indent',  '|',
+            'font',
+            'brush',
+            'paragraph', '|',
+            'link', '|',
+            'align', 'undo', 'redo', '|',
+            'hr',
+            'eraser',
+            'copyformat',
+        ],
+    };
+
     const initialData = {
         _id: "",
         questionTitle: "",
@@ -98,13 +117,14 @@ const Answers = () => {
     useEffect(() => {
         setAllAnswers([...Array((Data.answers.length) || 0)].map((_, index) => ({
             id: index + 1, card: <AnswerCard fetch={fetchData} id={Data.answers[index]._id} answer={Data.answers[index].answerDescription}
-                username={Data.answers[index].userId.username}
+                username={Data.answers[index].userId.username === null ? "Hi" : Data.answers[index].userId.username}
                 date = {Data.answers[index].date}
                 nlikes = {Data.answers[index].likes}
                 ndislikes = {Data.answers[index].dislikes}
                 questionId={Data._id} userHasLiked={Data.answers[index].userHasLiked} userHasDisliked={Data.answers[index].userHasDisliked} />
         })));
     }, [Data]);
+
 
     return (
         <div className="forum-wrapper">
@@ -141,7 +161,7 @@ const Answers = () => {
                                     hour12: true
                                 })}
                                 ndislikes={Data.dislikes}
-                                user={Data.userId.username}
+                                user={Data.userId.username === null ? "Hi" : Data.userId.username}
                                 date={new Date(Data.date).toLocaleDateString('en-GB', {
                                     year: 'numeric',
                                     month: '2-digit',
@@ -166,7 +186,8 @@ const Answers = () => {
                     {(Data.answers.length == 0) && (<h1>Start The Conversation!</h1>)}
                     <JoditEditor 
                         value={answerDescription}
-                        onChange={(newContent) => {setDesc(newContent)}}
+                        config={editorConfig}
+                        onBlur={(newContent) => {setDesc(newContent)}}
                         
                     />
                     {/* <textarea rows="6" value={answerDescription} onChange={(e) => setDesc(e.target.value)} placeholder="Please refrain from profanity."></textarea> */}

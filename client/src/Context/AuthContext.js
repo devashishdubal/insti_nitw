@@ -1,55 +1,36 @@
-import React, { createContext, useEffect, useState, useContext, memo } from "react";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { UserContext } from "./UserContext";
 
 const AuthContext = createContext();
 
-const AuthContextProvider = React.memo(({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+const AuthContextProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
   const [userDetails, setUserDetails] = useState({});
-  const [complete, setComplete] = useState(false)
-  //const {currentUser, setCurrentUser} = useContext(UserContext)
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    console.log("auth running")
-    const unsub = onAuthStateChanged(auth, (user) => {
-      const fetchData = async () => {
-        try {
-          let reqLink = "http://localhost:8000/api/v1/users/getSession/" + user.email;
-          const response = await axios.get(reqLink);
-          setUserDetails(response.data);
-        } catch (error) {
-          console.log('Error! Please check input fields');
-        }
-      };
-
-      setCurrentUser(user)
-
-      if (user === null) {
-        setUserDetails(null);
-        return;
+    const authenticateWithPassport = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/user", {withCredentials: true,});
+        setUserDetails(response.data === "" ? null : response.data)
+        console.log(response)
+        setComplete(true);
+      } catch (error) {
+        console.error("Error checking Passport.js session:", error);
+        setComplete(true);
       }
-  
-      fetchData().then(() => {
-        setComplete(true)
-      })
-      // get user session from db
-      // get request 
-    });
-
-    return () => {
-      unsub();
     };
+
+    authenticateWithPassport();
   }, []);
 
-  return (complete &&
-    <AuthContext.Provider value={{ currentUser, userDetails }}>
-      {children}
-    </AuthContext.Provider>
+  return (
+    complete && (
+      <AuthContext.Provider value={{ currentUser, userDetails, setUserDetails, setCurrentUser}}>
+        {children}
+      </AuthContext.Provider>
+    )
   );
-}
-)
+};
 
 export { AuthContextProvider, AuthContext };

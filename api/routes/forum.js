@@ -27,36 +27,45 @@ router.post("/postQuestion", async (req, res) => {
 
 router.get('/getQuestions/:filter', async (request, response) => {
   try {
-    const { userId, searchData } = request.query;
+    const { userId, searchData, page, loadPrev } = request.query;
     const { filter } = request.params;
 
     let idFromName = await User.find({
       username: { $regex: searchData, $options: 'i' }
     });
 
+    // Calculate the skip value based on the page number
+    let pageSize = 16; // Adjust this based on your desired number of questions per page
+    let skip = (page - 1) * pageSize
+
+    if (loadPrev == true) {
+      pageSize = 16 * page;
+      skip = 0;
+    }
+
     let qns;
-    if (filter != 0) {
-      qns = (searchData.length === 0) ?
-        (await Forum.find({ questionTag: filter }).sort({ date: -1 })) :
-        (await Forum.find({
+    if (filter !== '0') {
+      qns = searchData.length === 0 ?
+        await Forum.find({ questionTag: filter }).sort({ date: -1 }).skip(skip).limit(pageSize) :
+        await Forum.find({
           questionTag: filter,
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } },
             { userId: idFromName },
           ]
-        }).sort({ date: -1 }));
+        }).sort({ date: -1 }).skip(skip).limit(pageSize);
 
     } else {
-      qns = (searchData.length === 0) ?
-        (await Forum.find({}).sort({ date: -1 })) :
-        (await Forum.find({
+      qns = searchData.length === 0 ?
+        await Forum.find({}).sort({ date: -1 }).skip(skip).limit(pageSize) :
+        await Forum.find({
           $or: [
             { questionTitle: { $regex: searchData, $options: 'i' } },
             { questionDescription: { $regex: searchData, $options: 'i' } },
             { userId: idFromName },
           ]
-        }).sort({ date: -1 }));
+        }).sort({ date: -1 }).skip(skip).limit(pageSize);
     }
 
     const questionsWithLikes = await Promise.all(qns.map(async (question) => {
@@ -68,6 +77,7 @@ router.get('/getQuestions/:filter', async (request, response) => {
         userHasDisliked: question.dislikes_users.includes(userId),
       };
     }));
+
     return response.status(200).json({
       Data: questionsWithLikes,
     });
@@ -76,6 +86,7 @@ router.get('/getQuestions/:filter', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
 
 router.get('/getQuestionById/:id', async (request, response) => {
   try {

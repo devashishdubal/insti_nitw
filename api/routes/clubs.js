@@ -55,8 +55,6 @@ router.get("/getclubdetails/:id", async (req, res) => {
             return res.status(404).send("Club with this ID does not exist");
         }
 
-        console.log(clubDetails);
-
         return res.status(200).send(clubDetails);
     } catch (error) {
         return res.status(error.status || 500).send(error.message || "Internal Server Error");
@@ -285,8 +283,6 @@ router.put("/handleSubscribe", async (req, res) => {
     try {
         const clubId = req.body.clubId;
         const user_to_subscribe = req.body.username;
-
-        console.log(clubId, user_to_subscribe)
 
         const userExists = await User.findOne({
             _id: user_to_subscribe

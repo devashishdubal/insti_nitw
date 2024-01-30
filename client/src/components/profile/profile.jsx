@@ -9,7 +9,7 @@ const Profile = () => {
     const [userData, setUserData] = useState(null);
     const {currentUser, userDetails} = useContext(AuthContext)
     const [link, setLink] = useState("");
-    const [isPrivate, setIsPrivate] = useState(null);
+    const [isPrivate, setIsPrivate] = useState(userDetails.privateProfile);
     const [openEdit, setOpenEdit] = useState(false);
     // info which can be edited
     const[username,setUsername] = useState("");
@@ -125,25 +125,26 @@ const Profile = () => {
 
     useEffect(() => {
     // Fetch user data and set the link
-      const fetchData = async (userDetails) => {
+      const fetchData = async () => {
         try {
-          let reqLink = "http://localhost:8000/api/v1/users/" + userDetails;
+          let reqLink = "http://localhost:8000/api/v1/users/getSession/" + userDetails.email;
           const response = await axios.get(reqLink);
           setUserData(response.data);
           setIsPrivate(response.data.privateProfile);
           console.log(userData.profilePic)
-          setLink("http://localhost:3000/profile/" + userDetails); // Set the link from the response URL
+          setLink("http://localhost:3000/profile/" + response.data.username); // Set the link from the response URL
         } catch (error) {
           console.log('Error! Please check input fields');
         }
       };
 
-      if (currentUser && currentUser.email) {
+      if (userDetails && userDetails.email) {
         //setUsername(currentUser.email.split("@")[0]);
-        fetchData(userDetails.username);
+        fetchData();
       }
 
     }, [isPrivate]);
+
 
     const handleCopyLink = () => {
       navigator.clipboard.writeText(link)

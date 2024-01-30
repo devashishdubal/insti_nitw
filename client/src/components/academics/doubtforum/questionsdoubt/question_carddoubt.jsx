@@ -5,8 +5,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../../../Context/AuthContext';
 import 'react-loading-skeleton/dist/skeleton.css'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useParams } from 'react-router-dom';
 
-const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading , course}) => {
+const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading}) => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const [liked, setLiked] = useState(isliked);
     const [disliked, setDisliked] = useState(isdisliked);
@@ -14,6 +15,7 @@ const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, descr
     const [dislikes, setDislikes] = useState(ndislikes);
     const [likeColor, setLikeColor] = useState(liked ? "lightgreen" : "white");
     const [dislikeColor, setDislikeColor] = useState(disliked ? "lightcoral" : "white")
+    const {course} = useParams();
     
     const updateLike = () => {
         axios
@@ -100,7 +102,7 @@ const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, descr
                 </Link><span>{date} • {time}</span>
             </div>
             }
-            <Link to={`/students/forum/${id}`}>
+            <Link to={`http://localhost:3000/students/academics/doubtforum/answerssdoubt/answersdoubt/${id}/${course}`}>
                     {loading ? (
                         <SkeletonTheme baseColor="#ffffff" highlightColor="#ECECF0">
                             <Skeleton height={20} width={200} />

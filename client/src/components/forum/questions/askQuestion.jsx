@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext, useAuth } from "../../../Context/AuthContext"
-import JoditEditor from 'jodit-react';
+import JoditEditor, { Jodit } from 'jodit-react';
 
 const AskQuestionForm = ({ fetch }) => {
     const { currentUser, userDetails } = useContext(AuthContext)
@@ -40,7 +40,7 @@ const AskQuestionForm = ({ fetch }) => {
             .post('http://localhost:8000/api/v1/forum/postQuestion', data)
             .then(() => {
                 console.log(data);
-                // fetch();
+                // fetch();you
             })
             .catch((error) => {
                 console.log(data);
@@ -85,7 +85,7 @@ const AskQuestionForm = ({ fetch }) => {
                     value={questionDescription}
                     onChange={(newContent) => {setBody(newContent)}}
                 />
-                {questionDescription}
+                {Jodit.modules.Helpers.stripTags(questionDescription)}
                 {/* <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
                 </textarea> */}
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>

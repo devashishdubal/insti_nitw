@@ -39,7 +39,7 @@ import { useLocation } from 'react-router-dom';
 
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
-  const location = useLocation();
+  //const location = useLocation();
   const ProtectedRoute = ({ children }) => {
     if (userDetails === null) {
       return <Navigate to="/" />
@@ -63,7 +63,7 @@ const App = React.memo(() => {
       sessionStorage.removeItem('filter');
       sessionStorage.removeItem('page');
     }
-  }, [location]);
+  }, []);
 
   return (
     <Router>

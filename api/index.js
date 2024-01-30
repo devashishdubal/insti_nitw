@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
 
 app.get("/login/success", (req, res) => {
 	if (req.user) {
-        res.redirect("http://localhost:3000/")
+        res.redirect("http://localhost:3000/students/feed?showWelcome=true")
         /*
 		res.status(200).json({
 			error: false,

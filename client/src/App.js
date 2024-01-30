@@ -2,7 +2,7 @@ import React from 'react'
 import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
 import ViewProfile from "./pages/ViewProfile/ViewProfile"
 import { Link, Outlet } from "react-router-dom";
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
@@ -21,6 +21,7 @@ import EditEvent from "./components/clubs/edit-event/EditEvent";
 import FoodSidebar from "./components/sidebar/food_sidebar";
 import Places from "./components/food/places_to_eat/Places";
 import Menu from "./components/food/mess/menu";
+import Welcome from './components/welcome/Welcome';
 import "./App.css"
 import Profile from "./components/profile/profile";
 import AskQuestionForm from "./components/forum/questions/askQuestion";
@@ -30,6 +31,7 @@ import { useLocation } from 'react-router-dom';
 
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
+  const [showWelcome, setShowWelcome] = useState(false);
   const location = useLocation();
   const ProtectedRoute = ({ children }) => {
     if (userDetails === null) {
@@ -55,6 +57,13 @@ const App = React.memo(() => {
       sessionStorage.removeItem('page');
     }
   }, [location]);
+
+  useEffect(() => {
+    // Read the query parameter and update the showWelcome state
+    const params = new URLSearchParams(location.search);
+    setShowWelcome(params.get('showWelcome') === 'true');
+    console.log(showWelcome)
+  }, [location.search]);
 
   return (
     <Routes>
@@ -87,7 +96,7 @@ const App = React.memo(() => {
         }
       >
         <Route index element={<Navigate to="feed" />} />
-        <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
+        <Route path="feed" element={<ProtectedRoute>{showWelcome ? <Welcome /> : <Feed />}</ProtectedRoute>} />
         <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
         <Route path="academics" element={<h1>Academics</h1>} />
         <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

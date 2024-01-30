@@ -9,6 +9,7 @@ import { AuthContext, useAuth } from "../../Context/AuthContext"
 import toast, { Toaster } from 'react-hot-toast';
 
 const LoginWithGoogle = () => {
+    const navigate = useNavigate();
     const {currentUser, setCurrentUser} = useContext(AuthContext);
 
     const signin = () => {

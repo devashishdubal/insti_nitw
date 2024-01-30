@@ -1,0 +1,41 @@
+.curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black; /* Set the initial background color to match your page background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 1s ease-in-out; /* Smooth transition for the background color */
+  }
+
+  .welcome-content h1{
+    color:white;
+    font-size: 70px;
+  }
+
+  .welcome-content p{
+    color:white;
+    font-size: 40px;
+  }
+  
+  .closed {
+    background: transparent; /* Change the background color to transparent when closed */
+  }
+
+
+/* .welcome-screen {
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  } */

@@ -148,6 +148,7 @@ const Answers = () => {
                     {(Data.userHasDisliked != null && Data.userHasLiked != null) ?
                         (
                             <QuestionCard
+                                aPage={true}
                                 comments={Data.answers.length}
                                 fetch={fetchData}
                                 id={Data._id}

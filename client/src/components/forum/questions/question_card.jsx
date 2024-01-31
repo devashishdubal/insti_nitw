@@ -5,8 +5,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from "../../../Context/AuthContext"
 import 'react-loading-skeleton/dist/skeleton.css'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import JoditEditor, { Jodit } from 'jodit-react';
 
-const QuestionCard = ({ time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading }) => {
+const QuestionCard = ({ aPage, time, comments, fetch, id, user, date, title, description, tags, index, nlikes, ndislikes, isliked, isdisliked, loading }) => {
     const { currentUser, userDetails } = useContext(AuthContext)
     const [liked, setLiked] = useState(isliked);
     const [disliked, setDisliked] = useState(isdisliked);
@@ -112,7 +113,7 @@ const QuestionCard = ({ time, comments, fetch, id, user, date, title, descriptio
             ) : (
                 <Link to={`/students/forum/${id}`}>
                     <p className="text">{title}</p>
-                    <p className="description"><div dangerouslySetInnerHTML={{__html: description}}></div></p>
+                    <p className="description">{aPage? <div dangerouslySetInnerHTML={{__html: description}}></div> : Jodit.modules.Helpers.stripTags(description)}</p>
                     <div className="question_controls">
                         <div className="tags">
                             <p key={index} className="individual_tag">{tags}</p>

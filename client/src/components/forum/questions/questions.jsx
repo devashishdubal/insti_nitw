@@ -122,6 +122,7 @@ const Questions = () => {
                 id: question._doc._id,
                 card: (
                     <QuestionCard
+                        aPage={false}
                         comments={question._doc.answers.length}
                         fetch={fetchData}
                         id={question._doc._id}

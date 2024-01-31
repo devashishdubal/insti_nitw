@@ -105,7 +105,6 @@ const AskQuestionForm = ({ fetch }) => {
                     config={editorConfig}
                     onBlur={(newContent) => {setBody(newContent)}}
                 />
-                {Jodit.modules.Helpers.stripTags(questionDescription)}
                 {/* <textarea value={questionDescription} onChange={(e) => setBody(e.target.value)} rows="10" cols="50" placeholder="Description">
                 </textarea> */}
                 <select value={questionTag} required onChange={(e) => setTag(e.target.value)}>

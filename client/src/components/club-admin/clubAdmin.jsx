@@ -10,6 +10,24 @@ const ClubAdmin = () => {
   const [memberSearch, setMemberSearch] = useState('');
   const { currentUser, userDetails } = useContext(AuthContext);
 
+  const handleAdminClick = async () => {
+    try{
+      await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,null,{params:{"newClubAdmin":adminSearch,"clubId":"","userId":userDetails._id}});
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
+  const handleMemberClick = async () => {
+    try{
+      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,null,{params:{"newClubMember":adminSearch,"clubId":"","userId":userDetails._id}});
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
   const [events,setEvents] = useState([]);
   //const [club,setClub] = useState('CSES');
   const fetchClubEvents = async () => {
@@ -62,7 +80,7 @@ const ClubAdmin = () => {
             value={adminSearch}
             onChange={(e) => setAdminSearch(e.target.value)}
           />
-          <button>Add Admin</button>
+          <button onClick={handleAdminClick}>Add Admin</button>
         </div>
 
         <div className="search-bar">

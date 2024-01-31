@@ -11,6 +11,11 @@
 .club-admin-container .allEvents {
     display: flex;
     flex-direction: row;
+    max-width: 80%;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    overflow-y: auto;
 }
 
 .search-part {

@@ -1,17 +1,56 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import "./createEvent.css";
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../../Context/AuthContext';
 
 const CreateEvent = () => {
+    const navigate = useNavigate();
     const [title,setTitle] = useState("");
     const [description,setDesc] = useState("");
     const [venue,setVenue] = useState("");
-    const [date,setDate] = useState(null);
-    const [time,setTime] = useState(null);
+    const [date,setDate] = useState("");
+    const [time,setTime] = useState("");
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink,setRegLink] = useState("");
+    const [image,setImage] = useState("");
 
-    const handleSubmit = () =>{
+    const { userDetails } = useContext(AuthContext);
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log(userDetails._id)
+        const data = {
+            eventName:title,
+            eventDescription:description,
+            eventVenue:venue,
+            eventDateTime:`${date}T${time}Z`,
+            registerable:isChecked,
+            registrationLink:registerLink,
+            eventOrganizer:`${userDetails._id}`,
+            eventImage:`${image}`,
+            targetYear:[]
+        }
+        try{
+            axios.post(`http://localhost:8000/api/v1/events/create-event`,data);
+            toast.success('Event Created!', {
+                duration: 1000,
+                position: 'top-right',
+                style: {marginTop: 70},
+                className: '',
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                },
+            });
+            setTimeout(() => {
+                navigate("/clubAdmin");
+            }, 1000);
+        } catch(e){
+            console.log(e);
+        }
 
     };
     return (
@@ -27,6 +66,12 @@ const CreateEvent = () => {
                 onChange={(e) => setDesc(e.target.value)}
                 required
             ></textarea>
+            <input type="text"
+                value={image}
+                required
+                placeholder='Image Link'
+                onChange={(e) => {setImage(e.target.value)}}
+            />
             <input type="text"
                 value={venue}
                 required
@@ -66,6 +111,7 @@ const CreateEvent = () => {
             
             <button className="submit" onClick={handleSubmit}>Submit</button>
         </div>
+        <Toaster/>
         </>
     )
 }

@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const router = express.Router();
 const path = require("path");
 const passportSetup = require("./passport-setup");
+const passportClubSetup = require("./passport-club-setup")
 
 //invoking express
 const app = express();
@@ -33,7 +34,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 // const User = require("./models/User");
 
-const authRoute = require("./routes/auth")
 const clubRoute = require("./routes/clubs")
 const userRoute = require("./routes/users")
 const eventRoute = require("./routes/events")
@@ -58,13 +58,6 @@ app.get("/", (req, res) => {
 app.get("/login/success", (req, res) => {
 	if (req.user) {
         res.redirect("http://localhost:3000/")
-        /*
-		res.status(200).json({
-			error: false,
-			message: "Successfully Loged In",
-			user: req.user,
-		});
-        */
 	} else {
 		res.status(403).json({ error: true, message: "Not Authorized" });
 	}
@@ -77,7 +70,7 @@ app.get("/login/failed", (req, res) => {
 	});
 });
 
-app.get("/auth/google", 
+app.get("/auth/google/", 
     passport.authenticate('google', {scope: ['profile', 'email']})
 )
 
@@ -93,8 +86,10 @@ app.get('/user', (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
+    const role = req.user.role;
     req.logout(() => {
-        res.redirect("http://localhost:3000/")
+        if (role === true) res.redirect("http://localhost:3000/")
+        else res.redirect("http://localhost:3000/clubLogin")
     });
 });
 
@@ -108,15 +103,22 @@ app.get('/auth/check-session', (req, res) => {
     }
 });
 
+// club login backend left
+app.post('/club/login',
+  passport.authenticate('club-local', { failureRedirect: '/', failureMessage: true }),
+  function(req, res) {
+    res.status(200).send({success: true, message: "Logging in!"})
+});
+
 //routes
 app.use("/api/v1/clubs", clubRoute);
-app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);
 app.use("/api/v1/feed/", feedRoute);
 
 passportSetup();
+passportClubSetup();
 
 app.listen(8000 || process.env.PORT, () => {
     console.log("Backend server is running!");

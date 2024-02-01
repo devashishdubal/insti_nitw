@@ -1,0 +1,48 @@
+/* ClubAdmin.css */
+.club-admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.club-admin-container .allEvents {
+    display: flex;
+    flex-direction: row;
+    max-width: 80%;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    overflow-y: auto;
+}
+
+.search-part {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+  
+.search-bar {
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+  
+input {
+    padding: 10px;
+    flex: 1;
+}
+  
+button {
+    padding: 10px;
+    background-color: #4886A2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+  

@@ -9,15 +9,6 @@ const Topbar = () => {
   const {userDetails, setCurrentUser, setUserDetails } = useContext(AuthContext)
 
   const logout = () => {
-    /*
-    try{
-      let response = await axios.get("http://localhost:8000/logout");
-      setUserDetails(null);
-      setCurrentUser(null);
-    }catch(err){
-      console.log(err)
-    }
-    */
     window.location.href = 'http://localhost:8000/logout';
   }
 

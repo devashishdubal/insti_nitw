@@ -12,8 +12,8 @@ const AuthContextProvider = ({ children }) => {
     const authenticateWithPassport = async () => {
       try {
         const response = await axios.get("http://localhost:8000/user", {withCredentials: true,});
-        setUserDetails(response.data === "" ? null : response.data)
-        console.log(response)
+        setUserDetails(response.data === "" ? null : response.data.user)
+        setCurrentUser(response.data === "" ? null : response.data.role)
         setComplete(true);
       } catch (error) {
         console.error("Error checking Passport.js session:", error);

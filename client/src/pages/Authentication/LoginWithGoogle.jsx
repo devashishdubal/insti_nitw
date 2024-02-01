@@ -12,8 +12,10 @@ const LoginWithGoogle = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext);
 
     const signin = () => {
-        window.location.href = 'http://localhost:8000/auth/google';
+        const redirectUri = 'http://localhost:8000/auth/google';
+        window.location.href = redirectUri;
     }
+    
 
     const el = React.useRef(null);
     useEffect(() => {
@@ -49,10 +51,6 @@ const LoginWithGoogle = () => {
                     <button className="login_button" onClick={signin}>
                         <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
                         Student Sign in
-                    </button>
-                    <button className="login_button">
-                        <img src={process.env.PUBLIC_URL + "../assets/google.png"} alt="logo" />
-                        Club Sign in
                     </button>
                     <Toaster/>
                     <p>* Login should only be with student email</p>

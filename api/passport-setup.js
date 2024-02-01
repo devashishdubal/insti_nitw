@@ -1,7 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
-const session = require("express-session");
 const User = require('./models/User');
 
 module.exports = function () {
@@ -14,6 +13,7 @@ module.exports = function () {
     async (accessToken, refreshToken, profile, done) => {
         const allowedDomain = 'student.nitw.ac.in'; // Replace with your desired domain
         const userEmail = profile.emails[0].value;
+
         // Check if user already exists in your database
         if (userEmail.endsWith(`@${allowedDomain}`)) {
             let rollNo = userEmail.slice(2, userEmail.indexOf('@'));
@@ -25,7 +25,7 @@ module.exports = function () {
             const userExists = await User.findOne({ userId: profile.id });
         
             if (userExists) {
-                return done(null, userExists)
+                return done(null, {role: true, user: userExists})
             }
     
             const newUser = new User({
@@ -39,7 +39,7 @@ module.exports = function () {
             });
     
             await newUser.save();
-            return done(null, newUser)
+            return done(null, {role: true, user: userExists})
         } else {
             return done(null, false, {message: "Please login with only student email"})
         }

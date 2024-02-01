@@ -32,6 +32,7 @@ const Feed = () => {
                                 month: '2-digit',
                                 day: '2-digit'
                             })}
+                            registrationLink = {club._doc.registrationLink}
                         />
                     ),
                 }));

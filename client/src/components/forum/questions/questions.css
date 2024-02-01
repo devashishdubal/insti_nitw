@@ -8,7 +8,7 @@
 .forum-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
     font-family: var(--font-stack);
 }
 
@@ -132,6 +132,11 @@
 }
 
 .forum-wrapper .intro {
+    padding: 12px 0px 6px 0px;
+    background-color: #ECECF0;
+    /* position: sticky;
+    top: 0;
+    z-index: 100; */
     display: flex;
     flex-direction: row;
     align-items: center;

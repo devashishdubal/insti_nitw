@@ -38,6 +38,21 @@ const EditEvent = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
+        if (title.length === 0 || description.length === 0 || venue.length === 0 
+            || date.length === 0 || time.length === 0 || registerLink.length === 0) {
+                toast.error('Some fields are empty', {
+                    duration: 1000,
+                    position: 'top-right',
+                    style: {marginTop: 70},
+                    className: '',
+                    ariaProps: {
+                      role: 'status',
+                      'aria-live': 'polite',
+                    },
+                });
+                return;
+            }
+
         const data = {
             ...req1,
             eventName:title,

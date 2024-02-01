@@ -59,7 +59,7 @@ const App = React.memo(() => {
       return children;
     }
   
-    return <Navigate to="/" />;
+    return <Navigate to="/clubLogin" />;
   };
 
   useEffect(() => {

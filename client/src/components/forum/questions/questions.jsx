@@ -189,7 +189,7 @@ const Questions = () => {
                         />
                     </button>
                     <Link to="/students/forum/ask_question">
-                        <button>Ask Question</button>
+                        <button className='askQuestions'>Ask Question</button>
                     </Link>
                 </div>
             </div>

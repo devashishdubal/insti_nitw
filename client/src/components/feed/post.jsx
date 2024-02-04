@@ -28,6 +28,7 @@ const Post = ({eventName, eventImage, eventOrganizer, eventOrganizerLogo, eventD
     const closeModal = () => {
         setIsModalOpen(false);
     };
+    
     return (
         <div className='post_card'>
             <div className='post_card_top'>

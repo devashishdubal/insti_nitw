@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Club = require('../models/Clubs');
 const User = require('../models/User');
+const mongoose = require("mongoose")
 
 // make an endpoint to create a club and assign club owners (not for public)
 // owner can change permission settings for admin and members
@@ -73,18 +74,22 @@ router.put("/addAdmin", async (req, res) => {
         const userId = req.body.userId // this will be stored in login session
 
         const adminExists = await User.findOne({
-            userId: newAdminData
+            email: newAdminData
         });
 
         if (!adminExists) {
             //throw "The user you have entered does not exist"
             throw {status: 404, message: "The user you have entered does not exist"}
         }
+        
 
         const isClubOwner = await Club.findOne({
             clubId: clubIdToUpdate,
             clubOwners: { $in: [userId] }
         });
+
+        console.log(isClubOwner);
+
 
         if (!isClubOwner) {
             //throw "The current user does not have permission to add an admin";
@@ -95,7 +100,7 @@ router.put("/addAdmin", async (req, res) => {
             throw {status: 403, message: "Cannot add more than 2 admins"}
         }
 
-        const result = await Club.updateOne(
+        const result = await Club.findOneAndUpdate(
             { clubId: clubIdToUpdate },
             { $addToSet : {clubAdmins: newAdminData}}
         );

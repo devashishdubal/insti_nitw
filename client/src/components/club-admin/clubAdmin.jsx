@@ -90,7 +90,7 @@ const ClubAdmin = () => {
             value={memberSearch}
             onChange={(e) => setMemberSearch(e.target.value)}
           />
-          <button>Add Member</button>
+          <button onClick={handleMemberClick}>Add Member</button>
         </div>
       </div>
       <h3>Upcoming club events </h3>

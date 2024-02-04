@@ -102,7 +102,7 @@ const QuestionCarddoubt = ({ time, comments, fetch, id, user, date, title, descr
                 </Link><span>{date} • {time}</span>
             </div>
             }
-            <Link to={`http://localhost:3000/students/academics/doubtforum/answerssdoubt/answersdoubt/${id}/${course}`}>
+            <Link to={`/students/academics/doubtforum/answerssdoubt/answersdoubt/${id}/${course}`}>
                     {loading ? (
                         <SkeletonTheme baseColor="#ffffff" highlightColor="#ECECF0">
                             <Skeleton height={20} width={200} />

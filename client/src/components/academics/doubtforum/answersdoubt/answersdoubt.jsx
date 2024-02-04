@@ -11,7 +11,7 @@ import { AuthContext } from '../../../../Context/AuthContext';
 const Answersdoubt = () => {
     const { userDetails } = useContext(AuthContext)
     const { id } = useParams()
-    const { course } = useParams();
+    const {course} = useParams();
     const [answers, setAllAnswers] = useState([])
     const [answerDescription, setDesc] = useState("")
 
@@ -113,7 +113,7 @@ const Answersdoubt = () => {
                     <div className="intro_left">
                         <p className='intro_text'>Comments</p>
                         <div class="ans-top">
-                            <Link to={`/students/academics`}>
+                            <Link to={`/students/academics/doubtforum/questionsdoubt/questionsdoubt/${course}`}>
                                 <button>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M19 12H6M12 5l-7 7 7 7" />

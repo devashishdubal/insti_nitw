@@ -36,9 +36,11 @@ const Post = ({eventName, eventImage, eventOrganizer, eventOrganizerLogo, eventD
                     <p>{eventOrganizer}</p>
                 </div>
                 <div className='post_card_top_right'>
+                    <Link to="/clubs/nitw_clubs" target="_blank" rel="noopener noreferrer">
                     <button>
                         Manage subscriptions
                     </button>
+                    </Link>
                 </div>
             </div>
             <div className='post_card_content'>

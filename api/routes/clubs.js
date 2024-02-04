@@ -69,9 +69,9 @@ router.put("/addAdmin", async (req, res) => {
     try {
         // one more stage of verification (check if user doing this is owner)
         // if not, throw an error
-        const newAdminData = req.body.newClubAdmin;
-        const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session
+        const newAdminData = req.body.params.newClubAdmin;
+        const clubIdToUpdate = req.body.params.clubId;
+        const userId = req.body.params.userId // this will be stored in login session
 
         const adminExists = await User.findOne({
             email: newAdminData
@@ -79,6 +79,7 @@ router.put("/addAdmin", async (req, res) => {
 
         if (!adminExists) {
             //throw "The user you have entered does not exist"
+            console.log("The user you have entered does not exist")
             throw {status: 404, message: "The user you have entered does not exist"}
         }
         
@@ -87,8 +88,6 @@ router.put("/addAdmin", async (req, res) => {
             clubId: clubIdToUpdate,
             clubOwners: { $in: [userId] }
         });
-
-        console.log(isClubOwner);
 
 
         if (!isClubOwner) {
@@ -102,24 +101,24 @@ router.put("/addAdmin", async (req, res) => {
 
         const result = await Club.findOneAndUpdate(
             { clubId: clubIdToUpdate },
-            { $addToSet : {clubAdmins: newAdminData}}
+            { $addToSet : {clubAdmins: adminExists._id}}
         );
         
-        if (result.matchedCount > 0) {
-            // Check if the document was actually modified
-            if (result.modifiedCount > 0) {
-                //console.log('Document updated successfully');
-                res.status(200).send("A new admin has been added to the club.")
-            } else {
-                //console.log('Document found but no changes made');
-                // Handle the case where the document was found, but no changes were made
-                res.status(200).send("Admin already exists in the club.")
-            }
-        } else {
-            console.log('Document not found');
-            //throw "Document was not found";
-            throw {status: 404, message: "Document not found"}
-        }
+        // if (result.matchedCount > 0) {
+        //     // Check if the document was actually modified
+        //     if (result.modifiedCount > 0) {
+        //         //console.log('Document updated successfully');
+        //         res.status(200).send("A new admin has been added to the club.")
+        //     } else {
+        //         //console.log('Document found but no changes made');
+        //         // Handle the case where the document was found, but no changes were made
+        //         res.status(200).send("Admin already exists in the club.")
+        //     }
+        // } else {
+        //     console.log('Document not found');
+        //     //throw "Document was not found";
+        //     throw {status: 404, message: "Document not found"}
+        // }
     } catch (error) {
         res.status(error.status || 500).send(error.message || "Internal server error");
     }
@@ -130,12 +129,12 @@ router.put("/addMember", async (req, res) => {
     try {
         // one more stage of verification (check if user doing this is owner)
         // if not, throw an error
-        const newMemberData = req.body.newClubMember;
-        const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session 
+        const newMemberData = req.body.params.newClubMember;
+        const clubIdToUpdate = req.body.params.clubId;
+        const userId = req.body.params.userId // this will be stored in login session 
 
         const memberExists = await User.findOne({
-            userId: newMemberData
+            email: newMemberData
         });
 
 
@@ -159,7 +158,7 @@ router.put("/addMember", async (req, res) => {
 
         const result = await Club.updateOne(
             { clubId: clubIdToUpdate },
-            { $addToSet: {clubMembers: newMemberData}}
+            { $addToSet: {clubMembers: memberExists._id}}
         );
 
         if (result.matchedCount > 0) {

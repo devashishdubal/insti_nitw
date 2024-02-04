@@ -3,6 +3,7 @@ import './ClubAdmin.css'; // Import your CSS file
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import './EventCard.css'
+import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthContext';
 
 const ClubAdmin = () => {
@@ -10,9 +11,32 @@ const ClubAdmin = () => {
   const [memberSearch, setMemberSearch] = useState('');
   const { currentUser, userDetails } = useContext(AuthContext);
 
+  const aparams = {
+    newClubAdmin:adminSearch,
+    clubId:"CSES-234",
+    userId:userDetails._id,
+  };
+  const mparams = {
+    newClubMember:memberSearch,
+    clubId:"CSES-234",
+    userId:userDetails._id,
+  };
   const handleAdminClick = async () => {
     try{
-      await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,null,{params:{"newClubAdmin":adminSearch,"clubId":"","userId":userDetails._id}});
+      await axios.put('http://localhost:8000/api/v1/clubs/addAdmin',{params: aparams});
+
+      console.log("Admin Added");
+      setAdminSearch('');
+      toast.success('Admin Added!', {
+        duration: 3000,
+        position: 'top-right',
+        style: { marginTop: 70 },
+        className: '',
+        ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+        },
+      });
     }
     catch(e) {
       console.log(e);
@@ -21,7 +45,19 @@ const ClubAdmin = () => {
 
   const handleMemberClick = async () => {
     try{
-      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,null,{params:{"newClubMember":adminSearch,"clubId":"","userId":userDetails._id}});
+      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,{params: mparams});
+
+      setMemberSearch('');
+      toast.success('Member Added!', {
+        duration: 3000,
+        position: 'top-right',
+        style: { marginTop: 70 },
+        className: '',
+        ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+        },
+      });
     }
     catch(e) {
       console.log(e);
@@ -105,6 +141,7 @@ const ClubAdmin = () => {
           )
         ))}
       </div>
+      <Toaster />
     </div>
   );
 };

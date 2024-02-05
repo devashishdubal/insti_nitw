@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import "./Topbar.css";
-import axios from "axios"
-import { auth } from "../../firebase"
 import { AuthContext } from "../../Context/AuthContext"
 import { BrowserRouter as Router, Link, Routes, Route, NavLink } from "react-router-dom";
 

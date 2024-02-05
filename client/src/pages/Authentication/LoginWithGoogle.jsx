@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import "./login.css"
 import Typed from 'typed.js';
-import {auth , provider}  from '../../firebase';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAuth, deleteUser } from "firebase/auth";
 import { AuthContext, useAuth } from "../../Context/AuthContext"
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -31,7 +29,7 @@ const LoginWithGoogle = () => {
             // Destroy Typed instance during cleanup to stop animation
             typed.destroy();
           };
-    }, [auth])
+    }, [])
 
     return (
         <div className="landing_page_full">

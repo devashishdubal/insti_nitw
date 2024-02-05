@@ -18,14 +18,14 @@
     overflow-y: auto;
 }
 
-.search-part {
+.club-admin-container .search-part {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
   
-.search-bar {
+.club-admin-container .search-bar {
     display: flex;
     background-color: white;
     padding: 20px;
@@ -33,12 +33,12 @@
     border: 1px solid black;
 }
   
-input {
+.club-admin-container input {
     padding: 10px;
     flex: 1;
 }
   
-button {
+.club-admin-container button {
     padding: 10px;
     background-color: #4886A2;
     color: #fff;

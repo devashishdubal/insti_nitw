@@ -13,23 +13,7 @@ const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelect
   const dispDates = useRef(null);
   const { userDetails } = useContext(AuthContext)
 
-  const fetchEvents = async (date) => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/v1/events/collegeEvents/${date}`);
-        setEvents(response.data);
-      } catch (error) {
-        console.log(error)
-      }
-  }
-
-  const fetchCustomEvents = async (date) => {
-    try {
-      const response = await axios.get(`http://localhost:8000/api/v1/events/getCustomEvents/${userDetails._id}/${date}`);
-      setCustomEvents(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  
 
   const handleDateClick = (event) => {
     const litag = event.target;
@@ -37,8 +21,6 @@ const Calendar = ({ dateSelected, setEvents, setDateSelected, CustomButtonSelect
     //setDateSelected(new Date(currentYear, currentMonth, parseInt(textInElement)));
     let selectedDate = new Date(currentYear, currentMonth, parseInt(textInElement));
 
-    fetchEvents(selectedDate)
-    fetchCustomEvents(selectedDate)
     setDateSelected(selectedDate)
     // get event on this particular date and list them on the right
     // Remove "selected" class from previously selected element, if any

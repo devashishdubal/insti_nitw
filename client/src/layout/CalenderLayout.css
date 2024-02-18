@@ -1,6 +1,19 @@
 .calendar-wrapper {
     display: flex;
     justify-content: space-around;
+    margin-top: 20px;
+}
+
+.calendar-wrapper .collegeEvents{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.calendar-wrapper .customEvents{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .calendar-wrapper .individualEvent {

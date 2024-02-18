@@ -1,14 +1,43 @@
 import Calendar from "../components/students/calendar/Calendar";
 import CustomEvents from "../components/students/calendar/CustomEvents";
 import "./CalenderLayout.css";
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import axios from "axios"
+
 
 const CalendarLayout = ({CustomButtonSelected}) => {
-    console.log("Cal")
+    //console.log("Cal")
     const [events, setEvents] = useState([]);
     const [custom, setCustom] = useState(false);
     const [date, setDate] = useState(new Date());
     const [customEvents, setCustomEvents] = useState([]);
+    const { userDetails } = useContext(AuthContext)
+
+    const fetchEvents = async (date) => {
+        try {
+          const response = await axios.get(`http://localhost:8000/api/v1/events/collegeEvents/${date}`);
+          setEvents(response.data);
+        } catch (error) {
+          console.log(error)
+        }
+    }
+  
+    const fetchCustomEvents = async (date) => {
+      console.log("fetched")
+      try {
+        const response = await axios.get(`http://localhost:8000/api/v1/events/getCustomEvents/${userDetails._id}/${date}`);
+        setCustomEvents(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    useEffect(() => {
+        fetchEvents(date)
+        fetchCustomEvents(date)
+    }, [date])
+    
+
     return (
         <div className="calendar-wrapper">
             <div className="calender">
@@ -18,7 +47,7 @@ const CalendarLayout = ({CustomButtonSelected}) => {
             {custom ? <CustomEvents dateSelected={date}/> : events.length > 0 || customEvents.length > 0 ? (
                 <div>
                     <div className="collegeEvents">
-                        {events.length > 0 && <h3>College events</h3>}
+                        {events.length > 0 && <h1>College events</h1>}
                         {events.map(event => (
                             <div key={event._id} className="individualEvent">
                                 <img src={event.eventOrganizer.clubLogo} alt="logo"/>
@@ -28,7 +57,7 @@ const CalendarLayout = ({CustomButtonSelected}) => {
                                 </p>
                                 <p className="clubName">
                                     Organized by: 
-                                    {event.eventOrganizer.clubName}
+                                    {" "+event.eventOrganizer.clubName}
                                 </p>
                                 </div>
                             </div>
@@ -36,10 +65,9 @@ const CalendarLayout = ({CustomButtonSelected}) => {
                         ))}
                     </div>
                     <div className="customEvents">
-                        {customEvents.length > 0 && <h3>Custom events</h3>}
+                        {customEvents.length > 0 && <h1>Custom events</h1>}
                         {customEvents.map(event => (
                             <div key={event._id} className="individualEvent">
-                                <div className="customEventCard">
                                     <div className="details">
                                     <p className="eventTitle">
                                     <p>Custom event: </p>
@@ -53,7 +81,6 @@ const CalendarLayout = ({CustomButtonSelected}) => {
                                             day: '2-digit'
                                         })}
                                         </p>
-                                </div>
                             </div>
                             // Replace 'name' and 'date' with the actual fields in your event model
                         ))}

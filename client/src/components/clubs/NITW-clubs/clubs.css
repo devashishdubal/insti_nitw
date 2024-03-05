@@ -1,14 +1,16 @@
+/* Common styles for card container */
 .card_outside_container {
     width: 100%;
 }
 
+/* Styles for individual club cards */
 .club_card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 20%;
-    padding: 30px;
+    padding: 20px; /* Adjusted padding for smaller screens */
     background-color: rgb(255, 255, 255);
     box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease-in-out;
@@ -17,24 +19,28 @@
     gap: 10px;
 }
 
+/* Hover effect for club cards */
 .club_card:hover {
     transform: scale(1.02);
 }
 
+/* Styles for club name */
 .club_card .club_name {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Font size for club name */
 .club_name {
-    font-size: 25px;
-    font-weight: bold
+    font-size: 20px; /* Adjusted font size for smaller screens */
+    font-weight: bold;
 }
 
+/* Container for all club cards */
 .allClubs {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
@@ -43,27 +49,30 @@
     margin-top: 10px;
 }
 
+/* Styles for club logos */
 .logo {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Size and styling for logo images */
 .logo img {
-    width: 110px;
-    height: 110px;
+    width: 80px; /* Adjusted width for smaller screens */
+    height: 80px; /* Adjusted height for smaller screens */
     object-fit: cover;
     border: 2px solid black;
     border-radius: 50%;
 }
 
+/* Subscribe button styles */
 .subscribe_button {
     color: white;
     background-color: #4886A2;
     padding: 10px;
-    font-size: 15px;
+    font-size: 14px; /* Adjusted font size for smaller screens */
     border: none;
-    width: 50%;
+    width: 70%; /* Adjusted width for smaller screens */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,6 +80,29 @@
     border-radius: 20px;
 }
 
+/* Hover effect for subscribe button */
 .subscribe_button:hover {
     background-color: #37677d;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .club_card {
+        width: 45%; /* Adjusted width for smaller screens */
+        padding: 15px; /* Adjusted padding for smaller screens */
+    }
+
+    .club_name {
+        font-size: 18px; /* Adjusted font size for smaller screens */
+    }
+
+    .logo img {
+        width: 60px; /* Adjusted width for smaller screens */
+        height: 60px; /* Adjusted height for smaller screens */
+    }
+
+    .subscribe_button {
+        font-size: 12px; /* Adjusted font size for smaller screens */
+        width: 80%; /* Adjusted width for smaller screens */
+    }
 }

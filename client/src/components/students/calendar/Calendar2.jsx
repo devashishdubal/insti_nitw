@@ -31,13 +31,14 @@ const Calendar2 = ({dateSelected,setDateSelected,custom,setCustom}) => {
 
     const handleDateClick = (event) => {
         const selectedDay = parseInt(event.target.textContent);
-        const selectedDate = new Date(date.getFullYear(), date.getMonth(), selectedDay);
-        console.log(selectedDate);
-        setDate(selectedDate);
-        setDateSelected(selectedDate);
+        setDate(prevDate => {
+            const selectedDate = new Date(prevDate.getFullYear(), prevDate.getMonth(), selectedDay);
+            return selectedDate;
+        });
     };
     
-
+    
+    
     const renderCalender = () => {
         const lastDateofMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         const lastDayofMonth = new Date(date.getFullYear(), date.getMonth(), lastDateofMonth).getDay();
@@ -58,23 +59,25 @@ const Calendar2 = ({dateSelected,setDateSelected,custom,setCustom}) => {
           liTag += `<li class="inactive">${i}</li>`;
         }
         dispDates.current.innerHTML = liTag;
-        // const liElements = dispDates.current.querySelectorAll('li');
-        // liElements.forEach((li) => {
-        //     li.addEventListener('click', handleDateClick);
-        // });
-        // dispDates.current = liElements;
-        // console.log(dispDates.current);
-        dispDates.current.addEventListener('click', (event) => {
-          if (event.target.tagName === 'LI') {
-            handleDateClick(event); // Call your function when an <li> is clicked
-          }
-        });
-        // console.log(dispDates.current);
     };
 
     useEffect(() => {
       renderCalender();
     }, [date])
+
+    useEffect(() => {
+        if (dateSelected !== null) {
+            setDateSelected(date);
+        }
+    }, [dateSelected, date]);
+
+    useEffect(() => {
+        dispDates.current.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI') {
+              handleDateClick(event); // Call your function when an <li> is clicked
+            }
+        });
+    },[])
     
     return (
         <div className="wrapper">

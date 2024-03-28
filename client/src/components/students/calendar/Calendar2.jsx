@@ -30,13 +30,13 @@ const Calendar2 = ({dateSelected,setDateSelected,custom,setCustom}) => {
     }
 
     const handleDateClick = (event) => {
-        const t = event.target.textContent;
-        console.log(t);
-        const sel = new Date(new Date(date.getFullYear(),date.getMonth(),t));
-        console.log(sel);
-        setDate(sel);
-        setDateSelected(sel);
-    }
+        const selectedDay = parseInt(event.target.textContent);
+        const selectedDate = new Date(date.getFullYear(), date.getMonth(), selectedDay);
+        console.log(selectedDate);
+        setDate(selectedDate);
+        setDateSelected(selectedDate);
+    };
+    
 
     const renderCalender = () => {
         const lastDateofMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();

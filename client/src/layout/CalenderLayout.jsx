@@ -1,4 +1,5 @@
 import Calendar from "../components/students/calendar/Calendar";
+import Calendar2 from "../components/students/calendar/Calendar2";
 import CustomEvents from "../components/students/calendar/CustomEvents";
 import "./CalenderLayout.css";
 import { useState,useContext,useEffect } from "react";
@@ -41,7 +42,7 @@ const CalendarLayout = ({CustomButtonSelected}) => {
     return (
         <div className="calendar-wrapper">
             <div className="calender">
-                <Calendar setEvents={setEvents} dateSelected={date} setDateSelected={setDate} CustomButtonSelected={CustomButtonSelected} setCustom={setCustom} custom={custom} setCustomEvents={setCustomEvents}/>
+                <Calendar2 dateSelected={date} setDateSelected={setDate} setCustom={setCustom} custom={custom}/>
             </div>
             <div className="event">
             {custom ? <CustomEvents dateSelected={date}/> : events.length > 0 || customEvents.length > 0 ? (

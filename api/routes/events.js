@@ -12,11 +12,13 @@ router.post("/create-event", async (req, res) => {
             return res.status(404).send("Club doesn't exist");
         }
 
+        const eventDateTime = new Date(req.body.eventDateTime)
+
         const newEvent = new Event({
             // EventId: req.body.userId,
             eventName: req.body.eventName,
             eventDescription: req.body.eventDescription,
-            eventDateTime: req.body.eventDateTime,
+            eventDateTime: eventDateTime,
             eventOrganizer: req.body.eventOrganizer,
             registerable: req.body.registerable,
             registrationLink: req.body.registrationLink,
@@ -28,6 +30,7 @@ router.post("/create-event", async (req, res) => {
         const event = await newEvent.save();
         res.status(200).json(event);
     } catch (error) {
+        console.log(error)
        res.status(500).json(error);
     }
 })

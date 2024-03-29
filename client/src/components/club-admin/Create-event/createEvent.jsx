@@ -18,6 +18,7 @@ const CreateEvent = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [registerLink, setRegLink] = useState("");
     const [image, setImage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { userDetails } = useContext(AuthContext);
 
@@ -27,7 +28,7 @@ const CreateEvent = () => {
         const file = e.target.elements.posterImage.files[0];
         const date = new Date().getTime();
         const storageRef = ref(storage, `${userDetails._id + date}`);
-
+        setLoading(true);
         if (title.length === 0 || description.length === 0 || venue.length === 0
             || date.length === 0 || time.length === 0) {
             toast.error('Some fields are empty', {
@@ -40,6 +41,7 @@ const CreateEvent = () => {
                     'aria-live': 'polite',
                 },
             });
+            setLoading(false);
             return;
         }
 
@@ -54,6 +56,7 @@ const CreateEvent = () => {
                     'aria-live': 'polite',
                 },
             });
+            setLoading(false);
             return;
         }
 
@@ -70,6 +73,7 @@ const CreateEvent = () => {
                 isClosable: true,
             });
             console.log(error)
+            setLoading(false);
             return;
         })
 
@@ -107,8 +111,10 @@ const CreateEvent = () => {
             }, 1000);
         } catch (e) {
             console.log(e);
+            setLoading(false);
         }
 
+        setLoading(false);
     };
     return (
         <>
@@ -166,7 +172,7 @@ const CreateEvent = () => {
                     onChange={(e) => { setRegLink(e.target.value) }}
                 />}
 
-                <button className="submit">Submit</button>
+                <button className="submit" disabled={loading}>{loading ? <p>Uploading...</p>:<p>Submit</p>}</button>
             </div>
             <Toaster />
         </form>

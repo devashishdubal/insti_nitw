@@ -102,7 +102,6 @@ const ClubAdmin = () => {
   }
 
   const [events,setEvents] = useState([]);
-  //const [club,setClub] = useState('CSES');
   const fetchClubEvents = async () => {
     try{
       const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/club/${userDetails.club._id}`)

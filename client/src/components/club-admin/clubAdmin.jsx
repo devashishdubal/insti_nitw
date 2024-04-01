@@ -11,7 +11,7 @@ const ClubAdmin = () => {
   const [adminSearch, setAdminSearch] = useState('');
   const [memberSearch, setMemberSearch] = useState('');
   const { currentUser, userDetails } = useContext(AuthContext);
-  const [admins,setAdmins] = useState([]);
+  // const [admins,setAdmins] = useState([]);
 
   const handleAdminClick = async () => {
     try{
@@ -29,10 +29,32 @@ const ClubAdmin = () => {
         return;
       }
 
-      await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,{newClubAdmin:adminSearch,clubId:userDetails.club._id,userId:userDetails.club._id});
+      const response = await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,{newClubAdmin:adminSearch,clubId:userDetails.club.clubId});
+      // setAdmins(response.data);
+      toast.success('Admin added!', {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+      setAdminSearch("");
     }
     catch(e) {
       console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     }
   }
 
@@ -51,10 +73,31 @@ const ClubAdmin = () => {
         });
         return;
       }
-      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,null,{params:{"newClubMember":adminSearch,"clubId":userDetails._id,"userId":userDetails._id}});
+      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,{newClubMember:memberSearch,clubId:userDetails.club.clubId});
+      toast.success('Member added!', {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+      setMemberSearch("");
     }
     catch(e) {
       console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     }
   }
 
@@ -87,16 +130,11 @@ const ClubAdmin = () => {
     }
   }
   useEffect(() => {
-    // console.log(userDetails);
+    console.log(userDetails);
     setStatus(userDetails.status)
-    setAdmins(userDetails.club.clubAdmins);
+    // setAdmins(userDetails.club.clubAdmins);
     fetchClubEvents();
   }, [])
-
-  useEffect(() => {
-    console.log(adminSearch);
-  }, [adminSearch])
-  
 
   const logout = () => {
     window.location.href = 'http://localhost:8000/logout';
@@ -143,7 +181,7 @@ const ClubAdmin = () => {
           )
         ))}
       </div>
-      <div className='admins'>
+      {/* <div className='admins'>
         {admins.length === 0 ? (<p>No admins found!</p>):(
           admins.map((admin) => (
             <div key={admin}>
@@ -151,7 +189,8 @@ const ClubAdmin = () => {
             </div>
           ))
         )}
-      </div>
+      </div> */}
+      <Toaster/>
     </div>
   );
 };

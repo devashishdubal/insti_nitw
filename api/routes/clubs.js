@@ -69,7 +69,6 @@ router.put("/addAdmin", async (req, res) => {
         // if not, throw an error
         const newAdminData = req.body.newClubAdmin;
         const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session
 
         console.log(newAdminData);
         const adminExists = await User.findOne({
@@ -82,10 +81,10 @@ router.put("/addAdmin", async (req, res) => {
         }
 
         const isClubOwner = await Club.findOne({
-            clubId: clubIdToUpdate,
+            clubId: clubIdToUpdate
             // clubOwners: { $in: [userId] }
         });
-
+        console.log(isClubOwner);
         // const isClubAdmin = await Club.findOne({
         //     clubId: clubIdToUpdate,
         //     clubAdmins: { $in: [userId] }
@@ -109,7 +108,7 @@ router.put("/addAdmin", async (req, res) => {
             // Check if the document was actually modified
             if (result.modifiedCount > 0) {
                 //console.log('Document updated successfully');
-                res.status(200).send("A new admin has been added to the club.")
+                res.status(200).send(result);
             } else {
                 //console.log('Document found but no changes made');
                 // Handle the case where the document was found, but no changes were made
@@ -133,10 +132,9 @@ router.put("/addMember", async (req, res) => {
         // if not, throw an error
         const newMemberData = req.body.newClubMember;
         const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session 
 
         const memberExists = await User.findOne({
-            userId: newMemberData
+            email: newMemberData
         });
 
 
@@ -144,23 +142,23 @@ router.put("/addMember", async (req, res) => {
             throw {status: 404, message: "The user you have entered does not exist"}
         }
 
-        const isClubAdmin = await Club.findOne({
-            clubId: clubIdToUpdate,
-            clubAdmins: { $in: [userId] }
-        });
+        // const isClubAdmin = await Club.findOne({
+        //     clubId: clubIdToUpdate,
+        //     clubAdmins: { $in: [userId] }
+        // });
 
         const isClubOwner = await Club.findOne({
-            clubId: clubIdToUpdate,
-            clubOwners: { $in: [userId] }
+            clubId: clubIdToUpdate
+            // clubOwners: { $in: [userId] }
         });
 
-        if (!isClubAdmin && !isClubOwner) {
-            throw {status: 403, message: "The user does not have permission to add an member"}
-        }
+        // if (!isClubAdmin && !isClubOwner) {
+        //     throw {status: 403, message: "The user does not have permission to add an member"}
+        // }
 
         const result = await Club.updateOne(
             { clubId: clubIdToUpdate },
-            { $addToSet: {clubMembers: newMemberData}}
+            { $addToSet: {clubMembers: memberExists._id}}
         );
 
         if (result.matchedCount > 0) {
@@ -177,6 +175,7 @@ router.put("/addMember", async (req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
+        console.log(error);
         res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })

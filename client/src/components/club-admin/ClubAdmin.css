@@ -7,7 +7,11 @@
     gap: 10px;
     overflow-y: auto;
 }
-
+.club-admin-container .admins{
+    border-width: 2px;
+    border-color: black;
+    
+}
 .club-admin-container .allEvents {
     display: flex;
     flex-direction: row;
@@ -23,6 +27,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
   
 .club-admin-container .search-bar {

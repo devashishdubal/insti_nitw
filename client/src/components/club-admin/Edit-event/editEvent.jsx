@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import './editeventCSS.css'
 
 const EditEvent = () => {
     const navigate = useNavigate();
@@ -83,61 +84,63 @@ const EditEvent = () => {
     };
     return (
         <>
+            <div className='editeventWrapper'>
             <p className='title'>Edit Event</p>
-            <div className='main-form'>
-                <input value={title} 
-                    required 
-                    type="text" 
-                    placeholder="Title" 
-                    onChange={(e) => setTitle(e.target.value)} 
-                />
-                <textarea
-                    placeholder="Description"
-                    rows="10" 
-                    cols="50"
-                    value={description}
-                    onChange={(e) => setDesc(e.target.value)}
-                    required
-                ></textarea>
-                <input type="text"
-                    value={venue}
-                    required
-                    placeholder='Venue'
-                    onChange={(e) => {setVenue(e.target.value)}}
-                />
-                <input
-                    type="date"
-                    name="date"
-                    className='datetime'
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    required
-                />
-                <input
-                    type="time"
-                    className='datetime'
-                    name="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                    required
-                />
-                <div className='check'>
-                    <p>Registerable</p>
-                    <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => {setIsChecked(!isChecked);}}
+                <div className='main-form'>
+                    <input value={title} 
+                        required 
+                        type="text" 
+                        placeholder="Title" 
+                        onChange={(e) => setTitle(e.target.value)} 
                     />
+                    <textarea
+                        placeholder="Description"
+                        rows="10" 
+                        cols="50"
+                        value={description}
+                        onChange={(e) => setDesc(e.target.value)}
+                        required
+                    ></textarea>
+                    <input type="text"
+                        value={venue}
+                        required
+                        placeholder='Venue'
+                        onChange={(e) => {setVenue(e.target.value)}}
+                    />
+                    <input
+                        type="date"
+                        name="date"
+                        className='datetime'
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="time"
+                        className='datetime'
+                        name="time"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                        required
+                    />
+                    <div className='check'>
+                        <p>Registerable</p>
+                        <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => {setIsChecked(!isChecked);}}
+                        />
+                    </div>
+                    {isChecked && <input
+                                        type="text"
+                                        placeholder='Registration Link'
+                                        value={registerLink}
+                                        onChange={(e) => {setRegLink(e.target.value)}}
+                                        />}
+                    
+                    <button className="submit" onClick={handleSubmit}>Submit</button>
+                    <Toaster/>
                 </div>
-                {isChecked && <input
-                                    type="text"
-                                    placeholder='Registration Link'
-                                    value={registerLink}
-                                    onChange={(e) => {setRegLink(e.target.value)}}
-                                    />}
-                
-                <button className="submit" onClick={handleSubmit}>Submit</button>
-                <Toaster/>
             </div>
         </>
     )

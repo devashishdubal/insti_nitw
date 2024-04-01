@@ -4,15 +4,32 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import './EventCard.css'
 import { AuthContext } from '../../Context/AuthContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ClubAdmin = () => {
+  const [status,setStatus] = useState("member");
   const [adminSearch, setAdminSearch] = useState('');
   const [memberSearch, setMemberSearch] = useState('');
   const { currentUser, userDetails } = useContext(AuthContext);
+  const [admins,setAdmins] = useState([]);
 
   const handleAdminClick = async () => {
     try{
-      await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,null,{params:{"newClubAdmin":adminSearch,"clubId":"","userId":userDetails._id}});
+      if (status == "member"){
+        toast.error('Members cannot add users!!', {
+          duration: 1000,
+          position: 'top-right',
+          style: {marginTop: 70},
+          className: '',
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        });
+        return;
+      }
+
+      await axios.put(`http://localhost:8000/api/v1/clubs/addAdmin`,{newClubAdmin:adminSearch,clubId:userDetails.club._id,userId:userDetails.club._id});
     }
     catch(e) {
       console.log(e);
@@ -21,7 +38,20 @@ const ClubAdmin = () => {
 
   const handleMemberClick = async () => {
     try{
-      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,null,{params:{"newClubMember":adminSearch,"clubId":"","userId":userDetails._id}});
+      if (status == "member"){
+        toast.error('Members cannot add users!!', {
+          duration: 1000,
+          position: 'top-right',
+          style: {marginTop: 70},
+          className: '',
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        });
+        return;
+      }
+      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,null,{params:{"newClubMember":adminSearch,"clubId":userDetails._id,"userId":userDetails._id}});
     }
     catch(e) {
       console.log(e);
@@ -32,7 +62,7 @@ const ClubAdmin = () => {
   //const [club,setClub] = useState('CSES');
   const fetchClubEvents = async () => {
     try{
-      const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/club/${userDetails._id}`)
+      const response = await axios.get(`http://localhost:8000/api/v1/events/getEventDetails/club/${userDetails.club._id}`)
       const e1 = response.data.map((event,index) => ({
         id: index+1,
         card:
@@ -57,8 +87,16 @@ const ClubAdmin = () => {
     }
   }
   useEffect(() => {
+    // console.log(userDetails);
+    setStatus(userDetails.status)
+    setAdmins(userDetails.club.clubAdmins);
     fetchClubEvents();
   }, [])
+
+  useEffect(() => {
+    console.log(adminSearch);
+  }, [adminSearch])
+  
 
   const logout = () => {
     window.location.href = 'http://localhost:8000/logout';
@@ -90,7 +128,7 @@ const ClubAdmin = () => {
             value={memberSearch}
             onChange={(e) => setMemberSearch(e.target.value)}
           />
-          <button>Add Member</button>
+          <button onClick={handleMemberClick}>Add Member</button>
         </div>
       </div>
       <h3>Upcoming club events </h3>
@@ -104,6 +142,15 @@ const ClubAdmin = () => {
             </div>
           )
         ))}
+      </div>
+      <div className='admins'>
+        {admins.length === 0 ? (<p>No admins found!</p>):(
+          admins.map((admin) => (
+            <div key={admin}>
+              {admin}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const Club = require('./models/Clubs');
+const User = require('./models/User')
 
 module.exports = function () {
     passport.use('club-local', new LocalStrategy({
@@ -8,7 +9,18 @@ module.exports = function () {
         passwordField: 'password',
     }, async (email, password, done) => {
         try {
-            const club = await Club.findOne({ clubEmail: email });
+            let club;
+            let status = "owner";
+            const user1 = await User.findOne({email: email});
+            club = await Club.findOne({ clubEmail: email });
+            if (!club) {
+                club = await Club.findOne({clubAdmins:{$in:[user1._id]}});
+                status = "admin";
+            }
+            if (!club){
+                club = await Club.findOne({clubMembers:{$in:[user1._id]}});
+                status = "member";
+            }
 
             if (!club) {
                 // User not found
@@ -23,7 +35,7 @@ module.exports = function () {
             }
 
             // Authentication successful
-            return done(null, { role: false, user: club });
+            return done(null, { role: false, user: {club:club, status:status} });
         } catch (err) {
             console.error("Error during authentication:", err);
             return done(err); // Pass the error to indicate authentication failure

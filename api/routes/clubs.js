@@ -61,7 +61,6 @@ router.get("/getclubdetails/:id", async (req, res) => {
     }
 });
 
-
 router.put("/addAdmin", async (req, res) => {
     // only owner can add admin
     // add admin provided the person is already in the members list
@@ -72,8 +71,9 @@ router.put("/addAdmin", async (req, res) => {
         const clubIdToUpdate = req.body.clubId;
         const userId = req.body.userId // this will be stored in login session
 
+        console.log(newAdminData);
         const adminExists = await User.findOne({
-            userId: newAdminData
+            email: newAdminData
         });
 
         if (!adminExists) {
@@ -83,13 +83,18 @@ router.put("/addAdmin", async (req, res) => {
 
         const isClubOwner = await Club.findOne({
             clubId: clubIdToUpdate,
-            clubOwners: { $in: [userId] }
+            // clubOwners: { $in: [userId] }
         });
 
-        if (!isClubOwner) {
-            //throw "The current user does not have permission to add an admin";
-            throw {status: 403, message: "The user does not have permission to add an admin"}
-        }
+        // const isClubAdmin = await Club.findOne({
+        //     clubId: clubIdToUpdate,
+        //     clubAdmins: { $in: [userId] }
+        // });
+
+        // if (!isClubOwner) {
+        //     //throw "The current user does not have permission to add an admin";
+        //     throw {status: 403, message: "The user does not have permission to add an admin"}
+        // }
 
         if (isClubOwner.clubAdmins.length === 2) {
             throw {status: 403, message: "Cannot add more than 2 admins"}
@@ -97,7 +102,7 @@ router.put("/addAdmin", async (req, res) => {
 
         const result = await Club.updateOne(
             { clubId: clubIdToUpdate },
-            { $addToSet : {clubAdmins: newAdminData}}
+            { $addToSet : {clubAdmins: adminExists._id}}
         );
         
         if (result.matchedCount > 0) {
@@ -116,6 +121,7 @@ router.put("/addAdmin", async (req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
+        console.log(error);
         res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })

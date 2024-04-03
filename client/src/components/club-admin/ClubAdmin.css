@@ -5,18 +5,22 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    overflow-y: auto;
+    overflow-y: auto; /* Add this to enable vertical scrollbar */
+    overflow-x: auto; 
 }
 
 .club-admin-container .allEvents {
     display: flex;
-    flex-direction: row;
-    max-width: 80%;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-    overflow-y: auto;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: space-around; /* Distributes items evenly along the main axis */
+    overflow-y: auto; /* Add this to enable vertical scrollbar */
+    overflow-x: auto; 
 }
+
+.club-admin-container .allEvents > div {
+    width: calc(33.33% - 10px); /* Set the width of each card */
+}
+
 
 .club-admin-container .search-part {
     display: flex;
@@ -45,4 +49,5 @@
     border: none;
     cursor: pointer;
 }
+
   

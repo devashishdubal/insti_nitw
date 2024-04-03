@@ -35,6 +35,19 @@ router.post("/create-event", async (req, res) => {
     }
 })
 
+router.delete("/deleteEvent/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedRecord = await Event.findByIdAndDelete(id);
+        if (!deletedRecord) {
+        return res.status(404).json({ message: 'Record not found' });
+        }
+    return res.status(200).json({ message: 'Record deleted successfully' });
+    } catch (e) {
+        res.status(500).json(e);
+    }
+})
+
 router.get("/getEventDetails/:id", async (req, res) => {
     try {
         const event = await Event.findOne({ _id: req.params.id });

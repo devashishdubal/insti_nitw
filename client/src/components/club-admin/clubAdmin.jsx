@@ -5,17 +5,64 @@ import { Link } from 'react-router-dom';
 import './EventCard.css'
 import { AuthContext } from '../../Context/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
+/*
+chetankar65@gmail.com
+12345678
+*/
 
 const ClubAdmin = () => {
   const [status,setStatus] = useState("member");
   const [adminSearch, setAdminSearch] = useState('');
   const [memberSearch, setMemberSearch] = useState('');
+  const [owner, setOwner] = useState('');
   const { currentUser, userDetails } = useContext(AuthContext);
-  // const [admins,setAdmins] = useState([]);
+  const [admins,setAdmins] = useState([]);
+  const [members,setMembers] = useState([]);
 
+  const setMemberDetails = async () => {
+    try{
+      userDetails.club.clubMembers.forEach(async (userId) => {
+        const response = await axios.get("http://localhost:8000/api/v1/users/getUserNameById/" + userId);
+        setMembers((prev) => [...prev, {username:response.data,userID:userId}]);
+      })
+    } catch (e){
+      console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    }
+  }
+
+  const setAdminDetails = async () => {
+    try{
+      userDetails.club.clubAdmins.forEach(async (userId) => {
+        const response = await axios.get("http://localhost:8000/api/v1/users/getUserNameById/" + userId);
+        setAdmins((prev) => [...prev, {username:response.data,userID:userId}]);
+      })
+    } catch (e) {
+      console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    }
+  }
   const handleAdminClick = async () => {
     try{
-      if (status == "member"){
+      if (status === "member"){
         toast.error('Members cannot add users!!', {
           duration: 1000,
           position: 'top-right',
@@ -60,7 +107,7 @@ const ClubAdmin = () => {
 
   const handleMemberClick = async () => {
     try{
-      if (status == "member"){
+      if (status === "member"){
         toast.error('Members cannot add users!!', {
           duration: 1000,
           position: 'top-right',
@@ -129,9 +176,10 @@ const ClubAdmin = () => {
     }
   }
   useEffect(() => {
-    console.log(userDetails);
+    // console.log(userDetails);
     setStatus(userDetails.status)
-    // setAdmins(userDetails.club.clubAdmins);
+    setAdminDetails();
+    setMemberDetails();
     fetchClubEvents();
   }, [])
 
@@ -180,15 +228,31 @@ const ClubAdmin = () => {
           )
         ))}
       </div>
-      {/* <div className='admins'>
-        {admins.length === 0 ? (<p>No admins found!</p>):(
-          admins.map((admin) => (
-            <div key={admin}>
-              {admin}
-            </div>
-          ))
-        )}
-      </div> */}
+      <div className='club-details'>
+        <div>
+          <h3>Admins</h3>
+          {admins === null ? ("admin null") : (
+            admins.map((admin) => (
+              <div key={admin.userID}>
+                {admin.username}
+              </div>
+            ))
+          )}
+        </div>
+        <div>
+          <h3>Members</h3>
+          {
+            members === null ? ("members null") : (
+              members.map((member) => (
+                <div key={member.userID}>
+                  {member.username}
+                </div>
+              ))
+            )
+          }
+        </div>
+        
+      </div>
       <Toaster/>
     </div>
   );

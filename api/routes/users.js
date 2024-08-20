@@ -16,12 +16,14 @@ router.get("/exist/:id",async (req,res) => {
     }
 })
 
+
 //get a user
-router.get("/:id", async (req, res) => {
+router.get("/getUserNameById/:id", async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.params.id });
-    const { password, updatedAt, ...other } = user._doc;
-    res.status(200).json(user._doc);
+    // console.log(req.params);
+    const user = await User.findById(req.params.id);
+    //const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(user.username);
   } catch (err) {
     res.status(500).json(err);
   }

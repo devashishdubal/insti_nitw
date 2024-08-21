@@ -21,6 +21,7 @@ const ClubAdmin = () => {
 
   const setMemberDetails = async () => {
     try{
+      setMembers([]);
       userDetails.club.clubMembers.forEach(async (userId) => {
         const response = await axios.get("http://localhost:8000/api/v1/users/getUserNameById/" + userId);
         setMembers((prev) => [...prev, {username:response.data,userID:userId}]);
@@ -89,8 +90,39 @@ const ClubAdmin = () => {
         },
       });
       setAdminSearch("");
+      setAdmins((prev) => [...prev, {username:response.data.username,userID:response.data.userID}]);
     }
     catch(e) {
+      console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    }
+  }
+
+  const removeAdmin = async (userId) => {
+    try{
+      const response = await axios.delete(`http://localhost:8000/api/v1/clubs/removeAdmin/${userDetails.club._id}/${userId}`);
+      const temp = admins.filter((admin) => {return admin.userID !== userId});
+      setAdmins(temp);
+      toast.success('Admin deleted!', {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    } catch (e) {
       console.log(e);
       toast.error(e.response.data, {
         duration: 1000,
@@ -120,7 +152,7 @@ const ClubAdmin = () => {
         });
         return;
       }
-      await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,{newClubMember:memberSearch,clubId:userDetails.club.clubId});
+      const response = await axios.put(`http://localhost:8000/api/v1/clubs/addMember`,{newClubMember:memberSearch,clubId:userDetails.club.clubId});
       toast.success('Member added!', {
         duration: 1000,
         position: 'top-right',
@@ -131,9 +163,41 @@ const ClubAdmin = () => {
           'aria-live': 'polite',
         },
       });
+      // userDetails.club.clubMembers.push(response.data.userID);
       setMemberSearch("");
+      setMembers((prev) => [...prev, {username:response.data.username,userID:response.data.userID}]);
     }
     catch(e) {
+      console.log(e);
+      toast.error(e.response.data, {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    }
+  }
+
+  const removeMember = async (userId) => {
+    try{
+      const response = await axios.delete(`http://localhost:8000/api/v1/clubs/removeMember/${userDetails.club._id}/${userId}`);
+      const temp = members.filter((member) => {return member.userID !== userId});
+      setMembers(temp);
+      toast.success('Member deleted!', {
+        duration: 1000,
+        position: 'top-right',
+        style: {marginTop: 70},
+        className: '',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+    } catch (e){
       console.log(e);
       toast.error(e.response.data, {
         duration: 1000,
@@ -176,7 +240,7 @@ const ClubAdmin = () => {
     }
   }
   useEffect(() => {
-    // console.log(userDetails);
+    console.log(userDetails);
     setStatus(userDetails.status)
     setAdminDetails();
     setMemberDetails();
@@ -229,23 +293,29 @@ const ClubAdmin = () => {
         ))}
       </div>
       <div className='club-details'>
-        <div>
+        <div className='club-details-sub'>
           <h3>Admins</h3>
           {admins === null ? ("admin null") : (
             admins.map((admin) => (
-              <div key={admin.userID}>
+              <div key={admin.userID} className='club-details-sub-sub'>
                 {admin.username}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width={20} height={20} onClick={() => removeAdmin(admin.userID)}>
+                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                  </svg>
               </div>
             ))
           )}
         </div>
-        <div>
+        <div className='club-details-sub'>
           <h3>Members</h3>
           {
             members === null ? ("members null") : (
               members.map((member) => (
-                <div key={member.userID}>
+                <div key={member.userID} className='club-details-sub-sub'>
                   {member.username}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width={20} height={20} onClick={() => removeMember(member.userID)}>
+                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                  </svg>
                 </div>
               ))
             )

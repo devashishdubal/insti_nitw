@@ -56,3 +56,20 @@
     flex-direction: row;
     gap: 50px;
 }
+
+.club-admin-container .club-details .club-details-sub{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.club-admin-container .club-details .club-details-sub .club-details-sub-sub{
+    padding: 2px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}

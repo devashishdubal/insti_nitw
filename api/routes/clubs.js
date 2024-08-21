@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const Club = require('../models/Clubs');
 const User = require('../models/User');
 
@@ -45,9 +46,10 @@ router.get("/getAllClubs", async (req, res) => {
     }
 })
 
-router.get("/getclubdetails/:id", async (req, res) => {
+router.get("/getclubdetails/:id?", async (req, res) => {
     try {
         const clubId = req.params.id;
+        // console.log(clubId)
 
         const clubDetails = await Club.findById(clubId);
 
@@ -70,7 +72,7 @@ router.put("/addAdmin", async (req, res) => {
         const newAdminData = req.body.newClubAdmin;
         const clubIdToUpdate = req.body.clubId;
 
-        console.log(newAdminData);
+        // console.log(newAdminData);
         const adminExists = await User.findOne({
             email: newAdminData
         });
@@ -84,7 +86,7 @@ router.put("/addAdmin", async (req, res) => {
             clubId: clubIdToUpdate
             // clubOwners: { $in: [userId] }
         });
-        console.log(isClubOwner);
+        // console.log(isClubOwner);
         // const isClubAdmin = await Club.findOne({
         //     clubId: clubIdToUpdate,
         //     clubAdmins: { $in: [userId] }
@@ -108,7 +110,7 @@ router.put("/addAdmin", async (req, res) => {
             // Check if the document was actually modified
             if (result.modifiedCount > 0) {
                 //console.log('Document updated successfully');
-                res.status(200).send(result);
+                res.status(200).json({message:"admin added to club successfully",username:adminExists.username,userID:adminExists._id});
             } else {
                 //console.log('Document found but no changes made');
                 // Handle the case where the document was found, but no changes were made
@@ -165,7 +167,7 @@ router.put("/addMember", async (req, res) => {
             // Check if the document was actually modified
             if (result.modifiedCount > 0) {
                 //console.log('Document updated successfully');
-                res.status(200).send("A new member has been added to the club.")
+                res.status(200).json({message:"A new member has been added to the club.", userID:memberExists._id,username:memberExists.username})
             } else {
                 //console.log('Document found but no changes made');
                 // Handle the case where the document was found, but no changes were made
@@ -183,86 +185,60 @@ router.put("/addMember", async (req, res) => {
 // remove admin
 // remove member
 
-router.put("/removeAdmin", async(req, res) => {
+router.delete("/removeAdmin/:clubID?/:userID?", async(req, res) => {
     try {
-        const removeAdminData = req.body.removeClubAdmin;
-        const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session
+        // one more stage of verification (check if user doing this is owner)
+        // if not, throw an error
+        const userToRemove = req.params.userID;
+        const clubIdToUpdate = req.params.clubID;
+        if (!userToRemove || !clubIdToUpdate) {
+            return res.status(400).send("Both clubID and userID are required");
+        }
 
-        const adminExists = await User.findOne({
-            userId: removeAdminData
-        });
-
-        if (!adminExists) {
+        const memberExists = await User.findById(userToRemove);
+        if (!memberExists) {
             throw {status: 404, message: "The user you have entered does not exist"}
         }
-
-        const isClubOwner = await Club.findOne({
-            clubId: clubIdToUpdate,
-            clubOwners: { $in: [userId] }
-        });
-
-        if (!isClubOwner) {
-            throw {status: 403, message: "The user does not have permission to remove an admin"}
-        }
-
         const result = await Club.updateOne(
-            { clubId: clubIdToUpdate },
-            { $pull: { clubAdmins: removeAdminData }}
+            { _id: clubIdToUpdate },
+            { $pull: {clubAdmins: userToRemove}}
         );
-        
 
         if (result.matchedCount > 0) {
             // Check if the document was actually modified
             if (result.modifiedCount > 0) {
                 //console.log('Document updated successfully');
-                res.status(200).send("Removed member from the club")
+                res.status(200).send("Admin has been removed")
             } else {
                 //console.log('Document found but no changes made');
                 // Handle the case where the document was found, but no changes were made
-                res.status(200).send("Member is not in the club.")
+                res.status(200).send("Admin is not in the club.")
             }
         } else {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
+        console.log(error);
         res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })
-
-router.put("/removeMember", async(req, res) => {
+router.delete("/removeMember/:clubID?/:userID?", async(req, res) => {
     try {
         // one more stage of verification (check if user doing this is owner)
         // if not, throw an error
-        const removeMemberData = req.body.removeClubMember;
-        const clubIdToUpdate = req.body.clubId;
-        const userId = req.body.userId // this will be stored in login session 
+        const userToRemove = req.params.userID;
+        const clubIdToUpdate = req.params.clubID;
+        if (!userToRemove || !clubIdToUpdate) {
+            return res.status(400).send("Both clubID and userID are required");
+        }
 
-        const memberExists = await User.findOne({
-            userId: removeMemberData
-        });
-
+        const memberExists = await User.findById(userToRemove);
         if (!memberExists) {
             throw {status: 404, message: "The user you have entered does not exist"}
         }
-
-        const isClubAdmin = await Club.findOne({
-            clubId: clubIdToUpdate,
-            clubAdmins: { $in: [userId] }
-        });
-
-        const isClubOwner = await Club.findOne({
-            clubId: clubIdToUpdate,
-            clubOwners: { $in: [userId] }
-        });
-
-        if (!isClubAdmin && !isClubOwner) {
-            throw {status: 403, message: "The user does not have permission to remove a member"}
-        }
-
         const result = await Club.updateOne(
-            { clubId: clubIdToUpdate },
-            { $pull: {clubMembers: removeMemberData}}
+            { _id: clubIdToUpdate },
+            { $pull: {clubMembers: userToRemove}}
         );
 
         if (result.matchedCount > 0) {
@@ -279,6 +255,7 @@ router.put("/removeMember", async(req, res) => {
             throw {status: 404, message: "Document not found"}
         }
     } catch (error) {
+        console.log(error);
         res.status(error.status || 500).send(error.message || "Internal server error");
     }
 })

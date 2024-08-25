@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 
 const FoodSidebar = () => {
-
   return (
     <div className="sidebar">
       <div className="sidebar-top">

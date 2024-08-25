@@ -47,6 +47,7 @@ const ClubAdmin = () => {
                     {/* <p className="event-info">Time</p> */}
                     <p className="event-info">{event.eventVenue}</p>
                 </div>
+                <button>Preview Event</button>
               </div>
           </Link>
       }));

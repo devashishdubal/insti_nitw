@@ -91,7 +91,7 @@ const CreateEvent = () => {
             registerable: isChecked,
             registrationLink: registerLink,
             eventOrganizer: `${userDetails._id}`,
-            eventImage: `${image}`,
+            eventImage: image,
             targetYear: []
         }
         try {

@@ -17,11 +17,11 @@ const Feed = () => {
                     id: index + 1,
                     card: (
                         <Post
-                            eventName = {club._doc.eventName}
-                            eventImage = {club._doc.eventImage}
-                            eventOrganizer = {club.eventOrganizer}
-                            eventOrganizerLogo = {club.eventOrganizerLogo}
-                            eventDescription = {club._doc.eventDescription}
+                            eventName={club._doc.eventName}
+                            eventImage={club._doc.eventImage}
+                            eventOrganizer={club.eventOrganizer}
+                            eventOrganizerLogo={club.eventOrganizerLogo}
+                            eventDescription={club._doc.eventDescription}
                             time={new Date(club._doc.eventDateTime).toLocaleTimeString(undefined, {
                                 hour: '2-digit',
                                 minute: '2-digit',
@@ -32,7 +32,7 @@ const Feed = () => {
                                 month: '2-digit',
                                 day: '2-digit'
                             })}
-                            registrationLink = {club._doc.registrationLink}
+                            registrationLink={club._doc.registrationLink}
                         />
                     ),
                 }));
@@ -41,18 +41,18 @@ const Feed = () => {
                 console.error('Error:', error);
             }
         };
-        
+
         fetchData();
     }, []);
     return (
         <div className='allPosts'>
             <div className="allClubs">
-            {allCards.map((card) => (
-                <div id={card.id} className='card-wrapper'>
-                {card.card}
-                </div>
-            ))}
-        </div>
+                {allCards.map((card) => (
+                    <div id={card.id} className='card-wrapper'>
+                        {card.card}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

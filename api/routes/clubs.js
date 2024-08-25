@@ -71,6 +71,7 @@ router.put("/addAdmin", async (req, res) => {
         const newAdminData = req.body.newClubAdmin;
         const clubIdToUpdate = req.body.clubId;
         const userId = req.body.userId // this will be stored in login session
+        console.log(newAdminData);
 
         const adminExists = await User.findOne({
             userId: newAdminData
@@ -132,7 +133,6 @@ router.put("/addMember", async (req, res) => {
         const memberExists = await User.findOne({
             userId: newMemberData
         });
-
 
         if (!memberExists) {
             throw {status: 404, message: "The user you have entered does not exist"}

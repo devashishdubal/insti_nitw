@@ -109,6 +109,21 @@ const ClubAdmin = () => {
 
   const removeAdmin = async (userId) => {
     try{
+      if (status === "member"){
+        toast.error('Members cannot add users!!', {
+          duration: 1000,
+          position: 'top-right',
+          style: {marginTop: 70},
+          className: '',
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        });
+        return;
+      }
+
+
       const response = await axios.delete(`http://localhost:8000/api/v1/clubs/removeAdmin/${userDetails.club._id}/${userId}`);
       const temp = admins.filter((admin) => {return admin.userID !== userId});
       setAdmins(temp);
@@ -184,6 +199,20 @@ const ClubAdmin = () => {
 
   const removeMember = async (userId) => {
     try{
+      if (status === "member"){
+        toast.error('Members cannot add users!!', {
+          duration: 1000,
+          position: 'top-right',
+          style: {marginTop: 70},
+          className: '',
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        });
+        return;
+      }
+      
       const response = await axios.delete(`http://localhost:8000/api/v1/clubs/removeMember/${userDetails.club._id}/${userId}`);
       const temp = members.filter((member) => {return member.userID !== userId});
       setMembers(temp);

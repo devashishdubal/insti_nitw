@@ -7,22 +7,38 @@ module.exports = function () {
     passport.use('club-local', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
-    }, async (email, password, done) => {
+        passReqToCallback: true
+    }, async (req, email, password, done) => {
         try {
+            const clubName = req.body.clubName;
             let club;
-            let status = "owner";
+            let status = null;
+            // console.log(clubName)
             const user1 = await User.findOne({email: email});
-            club = await Club.findOne({ clubEmail: email });
-            if (!club) {
-                club = await Club.findOne({clubAdmins:{$in:[user1._id]}});
-                status = "admin";
+            club = await Club.findOne({ clubName: clubName });
+            // console.log(club)
+            if (!status) {
+                // console.log(club.clubOwners.includes(user1._id))
+                if (club.clubOwners.includes(user1._id)) {
+                    status = "owner";
+                }
+                
             }
-            if (!club){
-                club = await Club.findOne({clubMembers:{$in:[user1._id]}});
-                status = "member";
+            if (!status) {
+                // console.log(club.clubAdmins.includes(user1._id))
+                if ((club.clubAdmins.includes(user1._id))){
+                    status = "admin";
+                }
             }
+            if (!status){
+                // console.log(club.clubMembers.includes(user1._id))
+                if ((club.clubMembers.includes(user1._id)) ){
+                    status = "member";
+                }
+            }
+            // console.log(status);
 
-            if (!club) {
+            if (!status) {
                 // User not found
                 return done(null, false, { message: "Incorrect credentials!" });
             }

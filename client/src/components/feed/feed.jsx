@@ -17,6 +17,7 @@ const Feed = () => {
                     id: index + 1,
                     card: (
                         <Post
+                            eventId = {club._doc._id}
                             eventName={club._doc.eventName}
                             eventImage={club._doc.eventImage}
                             eventOrganizer={club.eventOrganizer}

@@ -14,18 +14,19 @@ const app = express();
 
 app.use(session({
     secret: 'my-secret-key',
-    resave: false,
-    saveUninitialized: true,
+    resave: true,
+    saveUninitialized: false,
     cookie: {
-        httpOnly: true,
-        maxAge: 5 * 60 * 60 * 24 * 1000, // 5 days
+        //httpOnly: true,
+        //maxAge: 5 * 60 * 60 * 24 * 1000, // 5 days
+        secure: false
     },
 }));
 
 app.use(
     cors({
-        origin:"http://localhost:3000",
-        methods:"GET,POST,PUT,DELETE,PATCH",
+        origin: "http://localhost:3000",
+        methods: "GET,POST,PUT,DELETE,PATCH",
         credentials: true
     }
 ))
@@ -39,9 +40,8 @@ const userRoute = require("./routes/users")
 const eventRoute = require("./routes/events")
 const forumRoute = require("./routes/forum")
 const feedRoute = require("./routes/feed")
-
+//const notificationsRoute = require("./routes/notifications")
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
-
 dotenv.config();
 
 mongoose.connect(process.env.mongo_link); //, { useNewUrlParser: true } removed cuz deprecated
@@ -56,26 +56,26 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login/success", (req, res) => {
-	if (req.user) {
+    if (req.user) {
         res.redirect("http://localhost:3000/")
-	} else {
-		res.status(403).json({ error: true, message: "Not Authorized" });
-	}
+    } else {
+        res.status(403).json({ error: true, message: "Not Authorized" });
+    }
 });
 
 app.get("/login/failed", (req, res) => {
-	res.status(401).json({
-		error: true,
-		message: "Log in failure",
-	});
+    res.status(401).json({
+        error: true,
+        message: "Log in failure",
+    });
 });
 
-app.get("/auth/google/", 
-    passport.authenticate('google', {scope: ['profile', 'email']})
+app.get("/auth/google/",
+    passport.authenticate('google', { scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar'] })
 )
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect: 'http://localhost:3000/'}),
+    passport.authenticate('google', { failureRedirect: 'http://localhost:3000/' }),
     (req, res) => {
         res.redirect("/login/success")
     }
@@ -105,10 +105,67 @@ app.get('/auth/check-session', (req, res) => {
 
 // club login backend left
 app.post('/club/login',
-  passport.authenticate('club-local', { failureRedirect: '/', failureMessage: true }),
-  function(req, res) {
-    res.status(200).send({success: true, message: "Logging in!"})
-});
+    passport.authenticate('club-local', { failureRedirect: '/', failureMessage: true }),
+    function (req, res) {
+        res.status(200).send({ success: true, message: "Logging in!" })
+    });
+
+const Reminder = require("./models/Reminders"); 
+const { createOAuth2Client, createEvent } = require("./calendar_api_setup")
+
+
+function convertToISO(dateString) {
+    // Split the input date string into day, month, and year
+    const [day, month, year] = dateString.split('/');
+    // Create a new Date object using the year, month, and day
+    const isoDate = new Date(`${year}-${month}-${day}`);
+    // Convert the Date object to an ISO string
+    return isoDate.toISOString();
+}
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.status(401).json({ message: 'User not authenticated' });
+}
+
+app.post("/schedule-reminder", ensureAuthenticated, async (req, res) => {
+    try {
+        //create new reminder in the database
+        const { userId, eventDateTime, event, email } = req.body; // get from the frontend
+        /// check if user are already set a reminder for this event, or if this event has already happened
+        const alreadySent = await Reminder.find({ userId: userId, event: event });
+        if (alreadySent.length > 0) {
+            return res.status(200).json({ message: 'Reminder already set!' })
+        }
+
+        const iso_date = convertToISO(eventDateTime);
+        const eventDetails = {
+            startDateTime: iso_date,
+            endDateTime: iso_date,
+            email: email,
+        };
+
+        const reminder = new Reminder({
+            userId: userId,
+            eventDateTime: iso_date,
+            event: event
+        })
+
+        const oAuth2Client = createOAuth2Client(req.user.accessToken);
+        try {
+            const rem = await reminder.save();
+            const calendar_event = await createEvent(oAuth2Client, eventDetails);
+            return res.status(200).json({ message: 'Reminder set on Google Calendar.' })
+        } catch (error) {
+            return res.status(500).json({ message: 'Some error has occurred!' })
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: 'Some error has occurred!' })
+    }
+})
 
 //routes
 app.use("/api/v1/clubs", clubRoute);

@@ -9,6 +9,7 @@ module.exports = function () {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: 'http://localhost:8000/auth/google/callback',
+        scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
     },
     async (accessToken, refreshToken, profile, done) => {
         const allowedDomain = 'student.nitw.ac.in'; // Replace with your desired domain
@@ -25,7 +26,7 @@ module.exports = function () {
             const userExists = await User.findOne({ userId: profile.id });
         
             if (userExists) {
-                return done(null, {role: true, user: userExists})
+                return done(null, {role: true, user: userExists, accessToken: accessToken})
             }
     
             const newUser = new User({
@@ -39,7 +40,9 @@ module.exports = function () {
             });
     
             await newUser.save();
-            return done(null, {role: true, user: userExists})
+            //newUser.accessToken = accessToken;
+            //newUser.refreshToken = refreshToken;
+            return done(null, {role: true, user: newUser, accessToken: accessToken})
         } else {
             return done(null, false, {message: "Please login with only student email"})
         }

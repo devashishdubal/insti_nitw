@@ -56,6 +56,9 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
+    accessToken: {
+        type: String,
+    },
     // changed to object Id reference
     subscribedTo: [{
         type: mongoose.Schema.Types.ObjectId,

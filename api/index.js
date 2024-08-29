@@ -123,6 +123,13 @@ function convertToISO(dateString) {
     return isoDate.toISOString();
 }
 
+function convertToString(dateString) {
+    const [day, month, year] = dateString.split('/');
+    // Create a new Date object using the year, month, and day
+    const dateStr = new Date(`${year}-${month}-${day}`);
+    return dateStr;
+}
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -134,6 +141,14 @@ app.post("/schedule-reminder", ensureAuthenticated, async (req, res) => {
     try {
         //create new reminder in the database
         const { userId, eventDateTime, event, email } = req.body; // get from the frontend
+        const today = new Date(); // Get current date and time
+        // Set the time part to midnight to compare just the dates
+        today.setHours(0, 0, 0, 0); 
+        date.setHours(0, 0, 0, 0);
+
+        if (convertToString(eventDateTime) < today) {
+            return res.status(409).json({ message: 'Cannot set reminder for a past date.' })
+        }
         /// check if user are already set a reminder for this event, or if this event has already happened
         const alreadySent = await Reminder.find({ userId: userId, event: event });
         if (alreadySent.length > 0) {

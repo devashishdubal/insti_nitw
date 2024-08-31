@@ -119,24 +119,24 @@ const Questions = () => {
         setAllQuestions((prevQuestions) => [
             ...prevQuestions,
             ...Data.map((question) => ({
-                id: question._doc._id,
+                id: question._id,
                 card: (
                     <QuestionCard
-                        comments={question._doc.answers.length}
+                        comments={question.answers.length}
                         fetch={fetchData}
-                        id={question._doc._id}
-                        title={question._doc.questionTitle}
-                        description={question._doc.questionDescription || "(empty)"}
-                        tags={question._doc.questionTag}
-                        nlikes={question._doc.likes}
-                        ndislikes={question._doc.dislikes}
-                        user={question._doc.userId ? question._doc.userId.username : ''}
-                        time={new Date(question._doc.date).toLocaleTimeString(undefined, {
+                        id={question._id}
+                        title={question.questionTitle}
+                        description={question.questionDescription || "(empty)"}
+                        tags={question.questionTag}
+                        nlikes={question.likes}
+                        ndislikes={question.dislikes}
+                        user={question.userId ? question.userId.username : ''}
+                        time={new Date(question.date).toLocaleTimeString(undefined, {
                             hour: '2-digit',
                             minute: '2-digit',
                             hour12: true
                         })}
-                        date={new Date(question._doc.date).toLocaleDateString('en-GB', {
+                        date={new Date(question.date).toLocaleDateString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit'

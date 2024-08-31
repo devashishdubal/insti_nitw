@@ -282,6 +282,10 @@ app.post("/schedule-reminder", ensureAuthenticated, async (req, res) => {
         event. Here's a breakdown of what each part is doing: */
         /* The line `const oAuth2Client = createOAuth2Client(req.user.accessToken);` is creating an
         OAuth2 client using the access token obtained from the `req.user` object.  */
+
+        /// The functions createOAuth2Client and createEvent are defined in ./calender_api_setup.js. 
+        /// Please refer there
+
         const oAuth2Client = createOAuth2Client(req.user.accessToken);
         try {
             /* The line `const rem = await reminder.save();` is saving a new reminder object to the

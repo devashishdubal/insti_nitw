@@ -134,6 +134,10 @@ const Academics = () => {
     return Array.from({ length: numberOfYears }, (_, i) => `Year ${i + 1}`);
   };
 
+  const redirectToUrl = (url) => {
+    window.open(url, "_blank");
+  };
+
   const validateUsername = async (e) => {
     e.preventDefault();
     const value = e.target.value;
@@ -214,16 +218,8 @@ const Academics = () => {
         )}
       </div>
 
-      <div className="information">
-        <h5>Hey! {userData.firstName || "User"}</h5>
-      </div>
-
 
       <div className="Buttons">
-        <Link to="/students/academics/quicklinks">
-        <button className="button">Quick Links</button>
-        </Link>
-
         <Link to="/students/academics/resources">
         <button className="button">Resources</button>
         </Link>
@@ -232,6 +228,28 @@ const Academics = () => {
         <button className="button">Doubts</button>
         </Link>
       </div>
+
+      <div className = "quicklinks">
+                <h4>Quick Links</h4>
+
+                <button
+                className="button"
+                onClick={() =>
+                    redirectToUrl(
+                    "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
+                    )
+                }
+                >Academic Calendar</button>
+
+                <button
+                className="button"
+                onClick={() =>
+                    redirectToUrl(
+                    "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
+                    )
+                }
+                >Syllabus</button>
+       </div>
     </div>
   );
 };

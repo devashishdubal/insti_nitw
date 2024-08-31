@@ -27,7 +27,6 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 import Academics from "./components/academics/academics";
 import Resources from "./components/academics/resources";
-import Quicklinks from "./components/academics/quicklinks";
 import Questionsdoubt from './components/academics/doubtforum/questionsdoubt/questionsdoubt';
 import QuestionCarddoubt from './components/academics/doubtforum/questionsdoubt/question_carddoubt';
 import AskQuestiondoubt from './components/academics/doubtforum/questionsdoubt/askQuestiondoubt';
@@ -196,7 +195,6 @@ const App = React.memo(() => {
           }
         >
         <Route path="resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
-        <Route path="quicklinks" element={<ProtectedRoute><Quicklinks /></ProtectedRoute>} />
         <Route path="doubtforum/questionsdoubt/questionsdoubt/:course" element={<Questionsdoubt/>} /> {/*welcome to cse forum*/}
         <Route path="doubtforum/questionsdoubt/askQuestiondoubt/:course" element={<AskQuestiondoubt/>} /> {/* ask a question */}
         <Route path="doubtforum/answerssdoubt/answersdoubt/:id/:course" element={<Answersdoubt/>} />

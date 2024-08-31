@@ -22,7 +22,7 @@ const resources = () => {
                 <h2>Previous Year Question Papers</h2>
 
                 <button
-                    className="buttons"
+                    className="half-buttons"
                     onClick={() =>
                         redirectToUrl(
                             "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"

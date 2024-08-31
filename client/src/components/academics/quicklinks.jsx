@@ -27,7 +27,7 @@ const Quicklinks = () =>{
                     "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
                     )
                 }
-                >2023-2024 Odd Semester</button>
+                >Odd Semester</button>
 
                 <button
                 className="buttons"
@@ -36,7 +36,7 @@ const Quicklinks = () =>{
                     "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
                     )
                 }
-                >2023-2024 Even Semester</button>
+                >Even Semester</button>
             </diV>
 
             <diV className = "section">
@@ -48,7 +48,7 @@ const Quicklinks = () =>{
                     "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
                     )
                 }
-                >Syllabus(WEF 2020)</button>
+                >Syllabus</button>
             </diV>
 
             <diV className = "section">
@@ -60,40 +60,8 @@ const Quicklinks = () =>{
                     "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
                     )
                 }
-                >1st Year</button>
-
-<button
-                className="buttons"
-                onClick={() =>
-                    redirectToUrl(
-                    "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
-                    )
-                }
-                >2nd,3rd,4th Year</button>
+                >Time Table</button>
             </diV>
-
-            <diV className = "section">
-                <h2>Placements & Internships</h2>
-
-                <button
-                className="buttons"
-                onClick={() =>
-                    redirectToUrl(
-                    "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
-                    )
-                }
-                >Placement Stats</button>
-
-                <button
-                className="buttons"
-                onClick={() =>
-                    redirectToUrl(
-                    "https://nitw.ac.in/api/static/files/Civil_Engineering_2023-10-9-15-57-18.pdf"
-                    )
-                }
-                >Internship Stats</button>
-            </diV>
-
         </div>
     )
 }

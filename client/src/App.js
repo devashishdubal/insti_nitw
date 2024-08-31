@@ -27,7 +27,7 @@ import AskQuestionForm from "./components/forum/questions/askQuestion";
 import Answers from "./components/forum/answers/answers";
 import ClubAdmin from './components/club-admin/clubAdmin';
 import ClubLogin from './pages/ClubLogin/ClubLogin';
-import PYQ from './components/pyqs/pyqs';
+import PreviousPapers from './components/pyqs/PreviousPapers';
 import { BrowserRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -111,7 +111,7 @@ const App = React.memo(() => {
           <Route path="feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="academics" element={<h1>Academics</h1>} />
-          <Route path="pyqs" element={<ProtectedRoute><PYQ /></ProtectedRoute>} />
+          <Route path="previous_papers" element={<ProtectedRoute><PreviousPapers /></ProtectedRoute>} />
           <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Route>
         <Route

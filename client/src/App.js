@@ -28,11 +28,9 @@ import Answers from "./components/forum/answers/answers";
 import Academics from "./components/academics/academics";
 import Resources from "./components/academics/resources";
 import Quicklinks from "./components/academics/quicklinks";
-import Notices from './components/academics/notices';
 import Questionsdoubt from './components/academics/doubtforum/questionsdoubt/questionsdoubt';
 import QuestionCarddoubt from './components/academics/doubtforum/questionsdoubt/question_carddoubt';
 import AskQuestiondoubt from './components/academics/doubtforum/questionsdoubt/askQuestiondoubt';
-import Things from './components/academics/Things';
 import Answersdoubt from './components/academics/doubtforum/answersdoubt/answersdoubt';
 import { BrowserRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -199,7 +197,6 @@ const App = React.memo(() => {
         >
         <Route path="resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
         <Route path="quicklinks" element={<ProtectedRoute><Quicklinks /></ProtectedRoute>} />
-        <Route path="notices" element={<ProtectedRoute><Notices /></ProtectedRoute>} />
         <Route path="doubtforum/questionsdoubt/questionsdoubt/:course" element={<Questionsdoubt/>} /> {/*welcome to cse forum*/}
         <Route path="doubtforum/questionsdoubt/askQuestiondoubt/:course" element={<AskQuestiondoubt/>} /> {/* ask a question */}
         <Route path="doubtforum/answerssdoubt/answersdoubt/:id/:course" element={<Answersdoubt/>} />

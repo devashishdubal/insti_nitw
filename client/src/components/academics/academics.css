@@ -1,38 +1,107 @@
-.toggles {
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f4f7f8; /* Light background for the entire page */
+    min-height: 100vh; /* Ensure the page takes full viewport height */
+}
+
+.dropdown-container {
+    position: relative; /* Ensure the dropdown menu is positioned relative to this container */
+    margin-bottom: 10px; /* Spacing between dropdowns */
+    width: 100%; /* Ensure full width */
+    max-width: 400px; /* Limit the width of dropdowns */
+}
+
+.dropdown-button {
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Limit the width */
+    height: 45px;
+    background-color: #e9eff1; /* Slightly different shade for better visual appeal */
+    border-radius: 25px; /* Slightly more rounded corners */
+    margin: 5px 0; /* Vertical margin */
+    cursor: pointer;
+    border: 1px solid #ddd; /* Border for better separation */
+    outline: none;
+    position: relative; /* Position relative for arrow positioning */
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.dropdown-button:hover {
+    background-color: #dbe7e9; /* Slightly darker on hover */
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+.arrow {
+    margin-left: 10px;
+    font-size: 12px; /* Adjust size if needed */
+    vertical-align: middle; /* Align vertically with text */
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position below the button */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure menu is on top */
+    max-height: 250px;
+    overflow-y: auto; /* Scroll if too many items */
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 12px 15px; /* Slightly more padding for better touch target */
+    background-color: #fff;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px; /* Adjust font size if needed */
+}
+
+.dropdown-item:hover {
+    background-color: #f2f4f7; /* Slightly lighter on hover */
+}
+
+.dropdown-item.active {
+    background-color: #cce5ff; /* Lighter blue for active item */
+    font-weight: bold;
+}
+
+.non-toggles {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%; /* Ensure it stretches to the container width */
+    max-width: 400px; /* Limit the width */
 }
 
-.upper, .lower {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
-
-.toggle-button{
+.button {
     text-align: center;
-    width: 120px;
-    height: 40px;
-    background-color: rgb(243, 247, 247);
-    border-radius: 30px; 
-    margin-left: 5px;
-    margin-right: 5px;
-    
+    width: 200px;
+    height: 35px;
+    background-color: #f4f5fa;
+    border-radius: 30px;
+    padding: 2px 8px;
+    margin-top: 7px;   
+    margin-left: 7px;
 }
 
-.toggle-button:hover {
+.button:hover,
+.button:hover {
     font-weight: bold;
     cursor: pointer;
+    background-color: #7dafccd0;
     transform: scale(1.05);
     transition: 0.2s;
 }
-
-.toggle-button.active {
-    background-color:  #7dafccd0;
-    font-weight: bold; /* You can adjust this based on your design */
-}
-
-
-

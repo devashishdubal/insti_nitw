@@ -32,8 +32,16 @@ const Post = ({ eventId, eventName, eventImage, eventOrganizer, eventOrganizerLo
                 });
             })
             .catch((error) => {
-                console.log(data);
-                console.log(error)
+                toast.error(error.response.data.message, {
+                    duration: 1000,
+                    position: 'top-right',
+                    style: { marginTop: 70 },
+                    className: '',
+                    ariaProps: {
+                        role: 'status',
+                        'aria-live': 'polite',
+                    },
+                });
                 //alert("Error! Please check input fields");
             });
     }

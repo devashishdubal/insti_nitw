@@ -1,13 +1,38 @@
+/* The line `const { google } = require("googleapis");` is importing the `google` object from the
+`googleapis` library in Node.js. This object contains various Google APIs that can be used in the
+code, such as the Calendar API in this case. By destructuring the `google` object from the
+`googleapis` library, the code can access the functionalities provided by the Google APIs easily. */
 const { google } = require("googleapis");
+/* The line `const { OAuth2 } = google.auth;` is destructuring the `OAuth2` class from the `auth`
+property of the `google` object. This allows the code to directly access the `OAuth2` class provided
+by the Google APIs without having to reference it through the `google.auth` path every time. By
+using destructuring, the `OAuth2` class can be used more conveniently within the code for handling
+OAuth2 authentication. */
 const { OAuth2 } = google.auth;
 
+/**
+ * The function `createOAuth2Client` creates an OAuth2 client with the provided access token.
+ * @param accessToken - The `accessToken` parameter in the `createOAuth2Client` function is used to set
+ * the access token for the OAuth2 client. This access token is required for making authenticated
+ * requests to Google APIs on behalf of a user. If the `accessToken` is provided, it is used to set the
+ * credentials
+ * @returns The function `createOAuth2Client` returns an OAuth2 client object configured with the
+ * provided access token.
+ */
 function createOAuth2Client(accessToken) {
+    /* This line of code is creating a new instance of the OAuth2 client by initializing it with the
+    Google client ID, Google client secret, and the redirect URI. Here's a breakdown of the
+    parameters: */
     const oAuth2Client = new OAuth2(
         process.env.GOOGLE_CLIENT_ID,
         process.env.GOOGLE_CLIENT_SECRET,
         "http://localhost:8000/auth/google/callback"
     );
 
+   /* This block of code is checking if an `accessToken` is provided as a parameter to the
+   `createOAuth2Client` function. If an `accessToken` is provided (meaning it is truthy), then it
+   sets the credentials of the OAuth2 client with the provided access token using the
+   `setCredentials` method. */
     if (accessToken) {
         oAuth2Client.setCredentials({
             access_token: accessToken,
@@ -20,8 +45,12 @@ function createOAuth2Client(accessToken) {
 }
 
 async function createEvent(auth, eventDetails) {
+    /* The line `const calendar = google.calendar({ version: 'v3', auth });` is creating an instance of
+    the Google Calendar API with a specific version ('v3') and authentication credentials provided
+    through the `auth` parameter. */
     const calendar = google.calendar({ version: 'v3', auth });
 
+    /// Creating an event object
     const event = {
         summary: 'Reminder',            // Event title
         location: 'NITW Campus',          // Event location
@@ -44,7 +73,11 @@ async function createEvent(auth, eventDetails) {
         },
     };
 
+   /* This block of code is handling the creation of a new event in the Google Calendar using the
+   `calendar.events.insert` method. Here's a breakdown of what's happening: */
     try {
+        /* This code snippet is using the `calendar.events.insert` method to create a new event in the
+        Google Calendar. Here's a breakdown of what each parameter in the method call is doing: */
         const response = await calendar.events.insert({
             auth: auth,
             calendarId: 'primary',  // Use primary calendar
@@ -56,6 +89,7 @@ async function createEvent(auth, eventDetails) {
     }
 }
 
+/// Exporting functions for other modules to use
 module.exports = {
     createOAuth2Client, createEvent
 };

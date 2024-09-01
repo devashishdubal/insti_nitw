@@ -7,11 +7,26 @@
 
 .collapsible-card-edonec {
     background-color: white;
-    border-radius: 8px 8px 0px 0px;
+    border: 1px solid silver;
+    border-radius: 12px;
+    box-shadow: 0px 0px 0px;
+}
+
+.collapsible-card-edonec:hover {
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.collapsible-card-edonec .collapsible-card-edonec {
+    /* background-color: #90c5cd65; */
 }
 
 .collapsible-header-edonec {
     display: flex;
+    border-radius: 12px;
+}
+
+.collapsible-content-edonec {
+    border-bottom: 0px !important;
 }
 
 .collapsible-icon-button-edonec {

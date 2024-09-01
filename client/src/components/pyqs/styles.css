@@ -1,0 +1,28 @@
+#pyqs {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.collapsible-card-edonec {
+    background-color: white;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.collapsible-header-edonec {
+    display: flex;
+}
+
+.collapsible-icon-button-edonec {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.collapsible-content-padding-edonec {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

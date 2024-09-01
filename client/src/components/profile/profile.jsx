@@ -226,7 +226,9 @@ const Profile = () => {
             )
           }
           <h4>Roll Number: {userData.rollNo}</h4>
+          <h4>Course: {userData.course}</h4>
           <h4>Branch: {userData.branch}</h4>
+          <h4>Year: {userData.yearOfStudy}</h4>
           <h4>Email: {userData.email}</h4>
           {(openEdit) ? 
             (<textarea onChange={(e) => setAboutMe(e.target.value)}>{userData.aboutMe}</textarea>) : (<p>About: {userData.aboutMe}</p>)

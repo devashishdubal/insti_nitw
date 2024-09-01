@@ -56,7 +56,12 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    // changed to object Id reference
+    yearOfStudy: {
+        type: Number
+    },
+    course: {
+        type: String
+    },
     subscribedTo: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
@@ -77,7 +82,6 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
     }],
-    // ownerOf, adminOf arrays (so extra button is visible)
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -8,7 +8,11 @@
     overflow-y: auto; /* Add this to enable vertical scrollbar */
     overflow-x: auto; 
 }
-
+.club-admin-container .admins{
+    border-width: 2px;
+    border-color: black;
+    
+}
 .club-admin-container .allEvents {
     display: flex;
     flex-wrap: wrap; /* Allows items to wrap to the next line */
@@ -27,6 +31,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
   
 .club-admin-container .search-bar {
@@ -49,5 +54,26 @@
     border: none;
     cursor: pointer;
 }
-
   
+.club-admin-container .club-details {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.club-admin-container .club-details .club-details-sub{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.club-admin-container .club-details .club-details-sub .club-details-sub-sub{
+    padding: 2px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}

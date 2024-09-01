@@ -3,6 +3,7 @@ import axios from "axios";
 import "./clubLogin.css"; // Import your CSS file
 
 export default function ClubLogin() {
+    const [clubName,setClubName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -11,6 +12,7 @@ export default function ClubLogin() {
 
         try {
             const response = await axios.post("http://localhost:8000/club/login", {
+                clubName,
                 email,
                 password,
             }, { withCredentials: true });
@@ -28,7 +30,17 @@ export default function ClubLogin() {
         <form className="login-form" onSubmit={handleSubmit}>
             <h3>Club Sign In</h3>
             <div className="form-group">
-                <label>Club email address</label>
+                <label>Club Name</label>
+                <input 
+                    type="name"
+                    className="form-control"
+                    placeholder="Enter club name"
+                    value={clubName}
+                    onChange={(e) => setClubName(e.target.value)}
+                />
+            </div>
+            <div className="form-group">
+                <label>Your email address</label>
                 <input
                     type="email"
                     className="form-control"

@@ -1,16 +1,44 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const Club = require('./models/Clubs');
+const User = require('./models/User')
 
 module.exports = function () {
     passport.use('club-local', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
-    }, async (email, password, done) => {
+        passReqToCallback: true
+    }, async (req, email, password, done) => {
         try {
-            const club = await Club.findOne({ clubEmail: email });
+            const clubName = req.body.clubName;
+            let club;
+            let status = null;
+            // console.log(clubName)
+            const user1 = await User.findOne({email: email});
+            club = await Club.findOne({ clubName: clubName });
+            // console.log(club)
+            if (!status) {
+                // console.log(club.clubOwners.includes(user1._id))
+                if (club.clubOwners.includes(user1._id)) {
+                    status = "owner";
+                }
+                
+            }
+            if (!status) {
+                // console.log(club.clubAdmins.includes(user1._id))
+                if ((club.clubAdmins.includes(user1._id))){
+                    status = "admin";
+                }
+            }
+            if (!status){
+                // console.log(club.clubMembers.includes(user1._id))
+                if ((club.clubMembers.includes(user1._id)) ){
+                    status = "member";
+                }
+            }
+            // console.log(status);
 
-            if (!club) {
+            if (!status) {
                 // User not found
                 return done(null, false, { message: "Incorrect credentials!" });
             }
@@ -23,7 +51,7 @@ module.exports = function () {
             }
 
             // Authentication successful
-            return done(null, { role: false, user: club });
+            return done(null, { role: false, user: {club:club, status:status} });
         } catch (err) {
             console.error("Error during authentication:", err);
             return done(err); // Pass the error to indicate authentication failure

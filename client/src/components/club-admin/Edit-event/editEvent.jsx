@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import './editeventCSS.css'
 
 const EditEvent = () => {
     const navigate = useNavigate();
@@ -109,6 +110,7 @@ const EditEvent = () => {
 
     return (
         <>
+            <div className='editeventWrapper'>
             <p className='title'>Edit Event</p>
             <div className='main-form'>
                 <input value={title}
@@ -167,7 +169,9 @@ const EditEvent = () => {
                 </div>
                 <Toaster />
             </div>
+            </div>
         </>
+        
     )
 }
 

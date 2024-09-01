@@ -18,7 +18,7 @@ const PreviousPapers = () => {
                     <tr>
                         <td>2023-24</td>
                         <td>Sujit Das</td>
-                        <a href="https://drive.google.com/drive/folders/1jepPYUjCehGrWX1y3cNY2oP68IrR8bvD" target="_blank">
+                        <a href="https://drive.google.com/uc?export=download&id=1rI9gBYhyJUMqB0yS60W9SvCa7aWu5Ou-">
                             <td>Download</td>
                         </a>
                     </tr>

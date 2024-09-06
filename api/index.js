@@ -40,6 +40,7 @@ const userRoute = require("./routes/users")
 const eventRoute = require("./routes/events")
 const forumRoute = require("./routes/forum")
 const feedRoute = require("./routes/feed")
+const pyqRoute = require("./routes/pyq");
 //const notificationsRoute = require("./routes/notifications")
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
 dotenv.config();
@@ -188,6 +189,7 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/events", eventRoute);
 app.use("/api/v1/forum", forumRoute);
 app.use("/api/v1/feed/", feedRoute);
+app.use("/api/v1/pyq/", pyqRoute);
 
 passportSetup();
 passportClubSetup();

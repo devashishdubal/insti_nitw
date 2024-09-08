@@ -50,59 +50,90 @@ module.exports = function () {
         using OAuth 2.0. */
         scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
     },
-    /* The `async (accessToken, refreshToken, profile, done) => {` function is defining an asynchronous
-    callback function that is used as the callback handler when a user successfully authenticates
-    with Google using OAuth 2.0. Here's a breakdown of what this function is doing: */
-    async (accessToken, refreshToken, profile, done) => {
-        const allowedDomain = 'student.nitw.ac.in'; // Only students of NITW are allowed to access this website
-        /* `const userEmail = profile.emails[0].value;` is extracting the email address of the
-        authenticated user from the `profile` object obtained during the Google OAuth 2.0
-        authentication process. You can refer to the structure of the 'profile' object online.*/
-        const userEmail = profile.emails[0].value;
+        /* The `async (accessToken, refreshToken, profile, done) => {` function is defining an asynchronous
+        callback function that is used as the callback handler when a user successfully authenticates
+        with Google using OAuth 2.0. Here's a breakdown of what this function is doing: */
+        async (accessToken, refreshToken, profile, done) => {
+            const allowedDomain = 'student.nitw.ac.in'; // Only students of NITW are allowed to access this website
+            /* `const userEmail = profile.emails[0].value;` is extracting the email address of the
+            authenticated user from the `profile` object obtained during the Google OAuth 2.0
+            authentication process. You can refer to the structure of the 'profile' object online.*/
+            const userEmail = profile.emails[0].value;
 
-        // Check if user already exists in your database
-        if (userEmail.endsWith(`@${allowedDomain}`)) { /// Checks if the email used for login is a student email
-            let rollNo = userEmail.slice(2, userEmail.indexOf('@')); /// Extracts roll number from email
-            /* As we know, all NITW Emails have a certain format. The roll number of the students is typically
-            written from the 2nd index all the way until the '@' character.
-            */
+            // Check if user already exists in your database
+            if (userEmail.endsWith(`@${allowedDomain}`)) { /// Checks if the email used for login is a student email
+                let rollNo = userEmail.slice(2, userEmail.indexOf('@')); /// Extracts roll number from email
+                /* As we know, all NITW Emails have a certain format. The roll number of the students is typically
+                written from the 2nd index all the way until the '@' character.
+                */
 
-            // These are basic JS split operations to extract information from profile. Refer
-            // to profile structure online
-            let username = userEmail.split("@")[0];
-            let firstname = profile.displayName.split(" ")[0]
-            let lastname = profile.displayName.split(" ")[1]
-            let photoURL = profile.photos[0].value;
+                // Extract year of study, course, and branch from the rollNo
+                const yearOfStudy = 24 - parseInt(rollNo.slice(0, 2)) + 1; // Assuming 24xx represents the year of admission
 
-            // This is to check if the User already exists online
-            const userExists = await User.findOne({ userId: profile.id });
-            if (userExists) {
-                /* The line `return done(null, {role: true, user: userExists, accessToken:
-                accessToken})` is a part of the callback function used in the Google OAuth 2.0
-                authentication strategy when a user successfully authenticates with Google. It
-                signifies the end of the async function and the control is passed onto the next
-                function */
-                return done(null, {role: true, user: userExists, accessToken: accessToken})
+                const branchCode = rollNo.slice(2, 5);  // 3rd to 5th characters represent the branch
+                const courseCode = rollNo.charAt(5);   // 6th character represents the course
+
+                // Mapping branch codes to branch names
+                const branchMap = {
+                    "csb": "Computer Science and Engineering",
+                    "ecb": "Electronics and Communication Engineering",
+                    "eeb": "Electrical and Electronics Engineering",
+                    // Add more mappings as needed
+                };
+
+                // Mapping course codes to course names
+                const courseMap = {
+                    "0": "B.Tech",
+                    "1": "M.Tech",
+                    // Add more mappings as needed
+                };
+
+                const branch = branchMap[branchCode] || "Unknown Branch";
+                const course = courseMap[courseCode] || "Unknown Course";
+
+
+                // These are basic JS split operations to extract information from profile. Refer
+                // to profile structure online
+                let username = userEmail.split("@")[0];
+                let firstname = profile.displayName.split(" ")[0]
+                let lastname = profile.displayName.split(" ")[1]
+                let photoURL = profile.photos[0].value;
+
+                // This is to check if the User already exists online
+                const userExists = await User.findOne({ userId: profile.id });
+                if (userExists) {
+                    /* The line `return done(null, {role: true, user: userExists, accessToken:
+                    accessToken})` is a part of the callback function used in the Google OAuth 2.0
+                    authentication strategy when a user successfully authenticates with Google. It
+                    signifies the end of the async function and the control is passed onto the next
+                    function */
+                    userExists.yearOfStudy = yearOfStudy;
+                    userExists.branch = branch;
+                    userExists.course = course;
+                    return done(null, { role: true, user: userExists, accessToken: accessToken })
+                }
+
+                /// Creates a new User object
+                const newUser = new User({
+                    userId: profile.id,
+                    username: username,
+                    firstName: firstname,
+                    lastName: lastname,
+                    email: userEmail,
+                    rollNo: rollNo,
+                    profilePic: photoURL,
+                    yearOfStudy: yearOfStudy,
+                    branch: branch,
+                    course: course,
+                });
+
+                /// The new user is saved in the table
+                await newUser.save();
+                return done(null, { role: true, user: newUser, accessToken: accessToken })
+            } else {
+                return done(null, false, { message: "Please login with only student email" })
             }
-            
-            /// Creates a new User object
-            const newUser = new User({
-                userId: profile.id,
-                username: username,
-                firstName: firstname,
-                lastName: lastname,
-                email: userEmail,
-                rollNo: rollNo,
-                profilePic: photoURL,
-            });
-            
-            /// The new user is saved in the table
-            await newUser.save();
-            return done(null, {role: true, user: newUser, accessToken: accessToken})
-        } else {
-            return done(null, false, {message: "Please login with only student email"})
-        }
-    }));
+        }));
 
     // Serialize user to store in session
     passport.serializeUser((user, done) => {

@@ -56,10 +56,12 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    accessToken: {
-        type: String,
+    yearOfStudy: {
+        type: Number
     },
-    // changed to object Id reference
+    course: {
+        type: String
+    },
     subscribedTo: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
@@ -80,7 +82,6 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Club'
     }],
-    // ownerOf, adminOf arrays (so extra button is visible)
 });
 
 module.exports = mongoose.model("User", userSchema);

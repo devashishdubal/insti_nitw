@@ -30,6 +30,11 @@ import ClubLogin from './pages/ClubLogin/ClubLogin';
 import { BrowserRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+/*
+dv22csb0f38@student.nitw.ac.in
+12345678
+*/
+
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
   const location = useLocation();

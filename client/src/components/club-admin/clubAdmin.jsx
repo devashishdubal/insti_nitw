@@ -11,7 +11,7 @@ chetankar65@gmail.com
 12345678
 */
 
-const ClubAdmin2 = () => {
+const ClubAdmin = () => {
   const [status,setStatus] = useState("member");
   const [adminSearch, setAdminSearch] = useState('');
   const [memberSearch, setMemberSearch] = useState('');
@@ -375,4 +375,4 @@ const ClubAdmin2 = () => {
   );
 };
 
-export default ClubAdmin2;
+export default ClubAdmin;

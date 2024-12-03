@@ -10,8 +10,25 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.post_card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
 .post_card_top {
-    width: 100%;
+    background: linear-gradient(to right, #4684A0, #73C8A9);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    /* width: 100%; */
+}
+
+.post_card_top img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .post_card_content {

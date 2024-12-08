@@ -17,145 +17,176 @@
 
 .post_card_top {
     background: linear-gradient(to right, #4684A0, #73C8A9);
-    padding: 10px 20px;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #ffffff;
-    /* width: 100%; */
 }
 
 .post_card_top img {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
 }
 
 .post_card_content {
-    width: 100%;
-}
-
-.post_card_top_right button {
-    border: none;
-    background-color: #4684A0;
-    border-radius: 0px 20px;
-}
-
-.controlButtons {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 15px;
-}
-
-.enabled_btns {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    height: 50%;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-.disabled_btns {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    height: 50%;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-.controlButtons .disabled {
-    border: none;
-    background-color: rgb(12, 157, 230);
-    color: white;
-    border-radius: 0px;
-}
-
-.controlButtons button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: #4684A0;
-    color: white;
-    padding: 5px 15px;
-    font-size: 15px;
-    border-radius: 15px;
-    gap: 10px;
-}
-
-.controlButtons .enabled:hover {
-    background-color: #226584;
-}
-
-.post_card_top_left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-}
-
-.post_card_top_left p {
-    font-size: large;
-    font-weight: 500;
-}
-
-.post_card_top_left img {
-    width: 50px;
-    height: 50px;
-    border-radius: 20px;
-}
-
-.post_card_content {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .post_card_center_left {
-    width: 100%;
-    flex: 1;
+    flex: 1 1 50%; /* Allow image to take 50% of the width */
 }
 
 .post_card_center_left img {
-    object-fit: cover;
-    overflow: hidden;
     width: 100%;
-    height: 100%;
-    border-radius: 0px 0px 0px 20px;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .post_card_center_right {
-    flex: 2;
-    padding: 10px;
+    flex: 1 1 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-.post_card_top_right button {
-    border-radius: 0px 20px 0px 0px;
-    color: white;
-    height: 100%;
+    justify-content:center;
+    gap:0.5rem;
 }
 
 .post_text {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-bottom: 1rem;
 }
 
-.post_card_top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #d3e4ec;
-    border-radius: 0px 20px 0px 0px;
+.post_text .post_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
 }
 
-.post_card_center_right .post_title {
-    font-size: 25px;
-    font-weight: 500;
+.post_text .post_description {
+    font-size: 1rem;
+    color: #666;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+.manage-subscriptions-btn {
+    background-color: #4684A0; /* Use the same color as other enabled buttons */
+    color: #fff; /* Ensure the text is readable */
+    border: none;
+    border-radius: 20px; /* Consistent with other buttons */
+    padding: 0.5rem 1rem; /* Maintain spacing similar to other buttons */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease; /* Smooth hover effect */
+    align-self: flex-end;
+}
+
+.manage-subscriptions-btn:hover {
+    background-color: #36627a;
+    transform: scale(1.05);
+}
+
+.controlButtons {
+    display: flex; /* Use flexbox for alignment */
+    justify-content:center; /* Add spacing between buttons in their respective groups */
+    margin-top: 1rem; /* Add some spacing above the button group */
+    gap: 1rem;
+}
+
+.controlButtons .enabled-buttons {
+    display: flex; /* Use flexbox for the enabled buttons group */
+    gap: 0.5rem; /* Smaller spacing between enabled buttons */
+}
+
+/* Disabled buttons group styling */
+.controlButtons .disabled-buttons {
+    display: flex; /* Use flexbox for the disabled buttons group */
+    gap: 0.5rem; /* Optional: Slightly larger spacing between disabled buttons */
+}
+
+/* Enabled buttons group styling */
+.controlButtons .enabled {
+    background-color: #4684A0;
+    color: white;
+    padding:0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.controlButtons .enabled:hover {
+    background-color: #36627a;
+    transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Disabled buttons group styling */
+.controlButtons .disabled {
+    background-color:transparent;
+    color:#666; /* Dark gray text */
+    font-weight: 700;
+    border:none; 
+    padding: 0;
+    cursor:default;
+    opacity:1; /* Faded appearance */
+    text-align: center;
+    font-size: 0.9rem;
+    border-radius:0;
+}
+
+/* Disabled buttons hover state - no interaction */
+.controlButtons .disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 725px) {
+    .post_card {
+        width: 100%; /* Full width for smaller screens */
+        /* flex-direction: column; Stack elements vertically */
+    }
+
+    .post_card_center {
+        flex-direction: column; /* Stack the image and text vertically */
+    }
+
+    .post_card_center_left,
+    .post_card_center_right {
+        flex: 1 1 100%; /* Take full width on small screens */
+    }
+
+    .post_card_center_right {
+        text-align: center; /* Center-align text */
+    }
+
+    .manage-subscriptions-btn {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        padding: 0.4rem 0.8rem;
+    }
+
+    .post_text .post_title {
+        font-size: 1.2rem;
+    }
+
+    .post_text .post_description {
+        font-size: 0.9rem;
+    }
+
+    .controlButtons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .controlButtons .enabled-buttons,
+    .controlButtons .disabled-buttons {
+        width:auto; /* Take up full width */
+        justify-content: center;
+    }
 }

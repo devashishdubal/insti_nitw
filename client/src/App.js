@@ -30,11 +30,6 @@ import ClubLogin from './pages/ClubLogin/ClubLogin';
 import { BrowserRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-/*
-dv22csb0f38@student.nitw.ac.in
-12345678
-*/
-
 const App = React.memo(() => {
   const { currentUser, userDetails } = useContext(AuthContext);
   const location = useLocation();
@@ -86,12 +81,12 @@ const App = React.memo(() => {
         <Route path="/">
           <Route index element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />
         </Route>
-        <Route path="/clubAdmin" element={<ProtectedClubRoute><ClubAdmin/></ProtectedClubRoute>} />
-        <Route path="/clubLogin" element={<ProtectedRouteLogin><ClubLogin/></ProtectedRouteLogin>} />
-        {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
-        <Route path="/profile/:userId" element={<ViewProfile />} />
-        <Route path="/clubs/edit_event/:id" element={<ProtectedClubRoute><EditEvent /></ProtectedClubRoute>} />
-        <Route path="/clubs/create_event/" element={<ProtectedClubRoute><CreateEvent /></ProtectedClubRoute>} />
+          <Route path="/clubAdmin" element={<ProtectedClubRoute><ClubAdmin/></ProtectedClubRoute>} />
+          <Route path="/clubLogin" element={<ProtectedRouteLogin><ClubLogin/></ProtectedRouteLogin>} />
+          {/*<Route path="login" element={<ProtectedRouteLogin><LoginWithGoogle /></ProtectedRouteLogin>} />*/}
+          <Route path="/profile/:userId" element={<ViewProfile />} />
+          <Route path="/clubs/edit_event/:id" element={<ProtectedClubRoute><EditEvent /></ProtectedClubRoute>} />
+          <Route path="/clubs/create_event/" element={<ProtectedClubRoute><CreateEvent /></ProtectedClubRoute>} />
         <Route
           path="students"
           element={

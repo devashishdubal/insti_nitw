@@ -140,7 +140,7 @@ router.get("/collegeEvents/:date", async (req, res) => {
         }
 
         // Assuming 'Event' is the model for your events
-        const events = await Event.find({ eventDateTime: { $gte: dateObject, $lt: new Date(dateObject.getTime() + 24 * 60 * 60 * 1000) } }).populate('eventOrganizer');;
+        const events = await Event.find({ eventDateTime: { $gte: dateObject, $lt: new Date(dateObject.getTime() + 24 * 60 * 60 * 1000) } }).populate('eventOrganizer');
         //const events = await Event.find({});
         return res.status(200).send(events);
     } catch (error) {
@@ -174,7 +174,7 @@ router.get("/getCustomEvents/:userId/:date", async(req, res) => {
         startDate.setHours(0, 0, 0, 0);  
         const endDate = new Date(date);
         endDate.setHours(23, 59, 59, 999);
-
+        
         const userEvents = await CustomEvent.find({
             userId: userId,
             eventDateTime: { $gte: startDate, $lte: endDate }
@@ -185,5 +185,66 @@ router.get("/getCustomEvents/:userId/:date", async(req, res) => {
         return res.status(500).send("Internal server error")
     }
 })
+
+
+router.get("/getEventMonthWise/:userId/:date", async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const date = new Date(req.params.date);
+
+        if (isNaN(date)) {
+            return res.status(400).send("Invalid date format");
+        }
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
+
+        // Define start and end of the month
+        const startDate = new Date(year, month, 1);
+        const endDate = new Date(year, month + 1, 0);
+        startDate.setHours(0, 0, 0, 0);  
+        endDate.setHours(23, 59, 59, 999);
+
+        // Fetch user-specific events
+        const userEvents = await CustomEvent.find({
+            userId: userId,
+            eventDateTime: { $gte: startDate, $lte: endDate }
+        });
+
+        // Fetch all events
+        const allevents = await Event.find({
+            eventDateTime: { $gte: startDate, $lte: endDate }
+        });
+
+        // Collect all unique event dates from both userEvents and allevents
+        const uniqueDates = new Set();
+
+        // Function to extract the date from eventDateTime
+        const extractDate = (event) => {
+            const eventDate = new Date(event.eventDateTime);
+            return eventDate.toISOString().split('T')[0];  // Format as "YYYY-MM-DD"
+        };
+
+        // Add user events dates
+        userEvents.forEach(event => {
+            uniqueDates.add(extractDate(event));
+        });
+
+        // Add all other events dates
+        allevents.forEach(event => {
+            uniqueDates.add(extractDate(event));
+        });
+
+        // Convert Set to an array
+        const datesArray = Array.from(uniqueDates);
+
+        // Return the array of unique event dates
+        return res.status(200).json({ eventDates: datesArray });
+    } catch (error) {
+        console.error("Error fetching events: ", error);
+        return res.status(500).send("Internal server error");
+    }
+});
+
 
 module.exports = router;

@@ -44,7 +44,7 @@ const CustomEvents = ({ dateSelected }) => {
                 data
             );
       
-            console.log(response.data);
+            // console.log(response.data);
             toast.success('Custom event added to your calendar!', {
                 duration: 3000,
                 position: 'top-right',
@@ -91,7 +91,7 @@ const CustomEvents = ({ dateSelected }) => {
                         <label for="time" className="desc">Time:</label>
                         <input type="time" id="time" name="time" onChange={(e) => setTime(e.target.value)}/>
                     </div>
-                    <button class="submit" type="submit" onClick={createCustomEvent}>Add</button>
+                    <button className="submit" type="submit" onClick={createCustomEvent}>Add</button>
                     <Toaster/>
                 </div>
             </div>

@@ -13,7 +13,7 @@ const CalendarPage = () => {
     }
     const handleClick = (date1) => {
         setDateSelected(date1);
-        console.log(dateSelected)
+        // console.log(dateSelected)
     };
     // useEffect(() => {
     //   console.log(dateSelected);

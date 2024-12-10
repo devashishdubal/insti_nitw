@@ -24,6 +24,7 @@
     padding: 20px;
     border-radius: 20px;
     border-color: black;
+    background-color: #9bced4;
 }
 
 .calendar-wrapper .individualEvent .eventTitle {
@@ -46,6 +47,18 @@
     border-radius: 50%;
 }
 
-.calender {}
+.calender {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
 
-.event {}
+.event {
+    width: 40%;
+    font-family: "Delius", cursive;
+    /* background-color: #9bced4; */
+}
+
+.event-date{
+    margin-top: 26px;
+}

@@ -18,7 +18,7 @@
     color: white;
     padding: 5px 14px;
     border-radius: 30px;
-    background-color: #000000;
+    background-color: #326176;
 }
 /* 
 .custom-wrapper .desc {
@@ -97,4 +97,8 @@ input[type="text"], input[type="time"]{
     background-color: rgba(0, 0, 0, 0.729);
     transform: scale(1.05);
     transition: 0.2s;
+}
+
+.custom-wrapper .submit{
+    background-color: #326176;
 }

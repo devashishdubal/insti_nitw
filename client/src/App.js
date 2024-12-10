@@ -1,32 +1,32 @@
-import React from 'react'
-import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle";
-import ViewProfile from "./pages/ViewProfile/ViewProfile"
+import React from 'react';
+import LoginWithGoogle from "./pages/Authentication/LoginWithGoogle.jsx";
+import ViewProfile from "./pages/ViewProfile/ViewProfile.jsx";
 import { Link, Outlet } from "react-router-dom";
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { AuthContextProvider, AuthContext } from "./Context/AuthContext"
+import { AuthContextProvider, AuthContext } from "./Context/AuthContext";
 import { useContext, memo } from "react";
-import Topbar from "./components/topbar/Topbar";
-import StudentSidebar from "./components/sidebar/student_sidebar";
-import Questions from "./components/forum/questions/questions";
-import Feed from "./components/feed/feed";
-import Calendar from "./layout/CalenderLayout";
-import ClubList from "./components/clubs/NITW-clubs/clubList";
-import ClubsSidebar from "./components/sidebar/clubs_sidebar";
-import Recentevent from "./components/clubs/recent-events/Recentevent";
-import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent";
-import CreateEvent from "./components/club-admin/Create-event/createEvent";
-import EditEvent from "./components/club-admin/Edit-event/editEvent";
-import FoodSidebar from "./components/sidebar/food_sidebar";
-import Places from "./components/food/places_to_eat/Places";
-import Menu from "./components/food/mess/menu";
-import "./App.css"
-import Profile from "./components/profile/profile";
-import AskQuestionForm from "./components/forum/questions/askQuestion";
-import Answers from "./components/forum/answers/answers";
-import ClubAdmin from './components/club-admin/clubAdmin';
-import ClubLogin from './pages/ClubLogin/ClubLogin';
+import Topbar from "./components/topbar/Topbar.jsx";
+import StudentSidebar from "./components/sidebar/student_sidebar.jsx";
+import Questions from "./components/forum/questions/questions.jsx";
+import Feed from "./components/feed/feed.jsx";
+import Calendar from "./layout/CalenderLayout.jsx";
+import ClubList from "./components/clubs/NITW-clubs/clubList.jsx";
+import ClubsSidebar from "./components/sidebar/clubs_sidebar.jsx";
+import Recentevent from "./components/clubs/recent-events/Recentevent.jsx";
+import UpcomingEvents from "./components/clubs/upcoming-events/Upcomingevent.jsx";
+import CreateEvent from "./components/club-admin/Create-event/createEvent.jsx";
+import EditEvent from "./components/club-admin/Edit-event/editEvent.jsx";
+import FoodSidebar from "./components/sidebar/food_sidebar.jsx";
+import Places from "./components/food/places_to_eat/Places.jsx";
+import Menu from "./components/food/mess/menu.jsx";
+import "./App.css";
+import Profile from "./components/profile/profile.jsx";
+import AskQuestionForm from "./components/forum/questions/askQuestion.jsx";
+import Answers from "./components/forum/answers/answers.jsx";
+import ClubAdmin from './components/club-admin/clubAdmin.jsx';
+import ClubLogin from './pages/ClubLogin/ClubLogin.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -35,11 +35,11 @@ const App = React.memo(() => {
   const location = useLocation();
   const ProtectedRoute = ({ children }) => {
     if (userDetails === null) {
-      return <Navigate to="/" />
+      return <Navigate to="/" />;
     }
     
     if (currentUser === true) return children
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 
   const ProtectedRouteLogin = ({ children }) => {
@@ -48,7 +48,7 @@ const App = React.memo(() => {
     }
 
     if (userDetails !== null && currentUser === false) {
-      return <Navigate to="/clubAdmin" />
+      return <Navigate to="/clubAdmin" />;
     }
   
     return children;

@@ -27,7 +27,7 @@ const CreateEvent = () => {
         console.log(e)
         const file = e.target.elements.posterImage.files[0];
         const date = new Date().getTime();
-        const storageRef = ref(storage, `${userDetails._id + date}`);
+        const storageRef = ref(storage, `${userDetails.club._id + date}`);
         setLoading(true);
         if (title.length === 0 || description.length === 0 || venue.length === 0
             || date.length === 0 || time.length === 0) {
@@ -90,7 +90,7 @@ const CreateEvent = () => {
             eventDateTime: dateToBeSubmitted,
             registerable: isChecked,
             registrationLink: registerLink,
-            eventOrganizer: `${userDetails._id}`,
+            eventOrganizer: `${userDetails.club._id}`,
             eventImage: image,
             targetYear: []
         }

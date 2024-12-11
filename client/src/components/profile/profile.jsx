@@ -416,12 +416,11 @@ const Profile = () => {
          
         
 
-            {openEdit ? <button id="savebutton" onClick={handleCopyLink}>
+            {openEdit ? <button id="savebutton" onClick={() => setOpenEdit(!openEdit)}>
             <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 24 24" width="28" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <line x1="18" y1="6" x2="6" y2="18"/>
   <line x1="6" y1="6" x2="18" y2="18"/>
 </svg>
-
 
             Cancel</button> : <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 0 24 24" width="36" style={{fill: "black", cursor:"pointer",marginRight:"3rem"}} onClick={() => setOpenEdit(!openEdit)}>
   <path d="M0 0h24v24H0V0z" fill="none"/>
